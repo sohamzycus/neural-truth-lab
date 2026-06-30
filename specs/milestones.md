@@ -127,10 +127,10 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] All items in `lab2.md` acceptance criteria pass
-- [ ] Models 1 & 2 similar boundaries; Model 3 curves
-- [ ] Weight collapse animation plays correctly
-- [ ] W product numerically computed and displayed
+- [x] All items in `lab2.md` acceptance criteria pass
+- [x] Models 1 & 2 similar boundaries; Model 3 curves (verify in browser)
+- [x] Weight collapse animation plays correctly
+- [x] W product numerically computed and displayed
 
 ### Estimated Scope
 

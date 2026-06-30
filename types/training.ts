@@ -7,6 +7,8 @@ export interface EpochSnapshot {
   decisionGrid?: Float32Array;
   embeddings?: Float32Array;
   confusionMatrix?: number[][];
+  weightMatrices?: number[][][];
+  combinedWeights?: number[][];
 }
 
 export interface TrainingConfig {

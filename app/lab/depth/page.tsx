@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LabShell } from "@/components/layout/lab-shell";
-import { Section } from "@/components/layout/section";
+import { DepthLabClient } from "@/components/labs/depth-lab-client";
 
 export const metadata: Metadata = {
   title: "Depth",
@@ -15,17 +15,7 @@ export default function DepthLabPage(): React.ReactElement {
       subtitle="Compare 1 linear layer, 5 linear layers, and 5 ReLU layers on the same data."
       accentClass="text-[var(--lab-depth)]"
     >
-      <Section id="claim" eyebrow="Claim" title="The experiment">
-        <div className="glass-panel border-l-4 border-l-[var(--lab-depth)] p-8">
-          <p className="text-xl font-medium leading-relaxed text-[var(--text-primary)] md:text-2xl">
-            Stacking linear layers does not add expressive power. Five linear
-            layers collapse into one.
-          </p>
-        </div>
-        <p className="mt-8 text-[var(--text-muted)]">
-          Weight collapse visualization coming in Milestone 4.
-        </p>
-      </Section>
+      <DepthLabClient />
     </LabShell>
   );
 }
