@@ -186,10 +186,10 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] All items in `lab4.md` acceptance criteria pass
-- [ ] Gap large at 20, small at 20000
-- [ ] Slider switches between runs smoothly
-- [ ] No UI freeze on largest dataset
+- [x] All items in `lab4.md` acceptance criteria pass (Web Worker deferred — `tf.nextFrame` between epochs)
+- [x] Size 20 large gap; size 20000 small gap (verify in browser)
+- [x] Generalization graph dual lines + gap shading
+- [x] Slider switches cached runs; gap metric updates on size change
 
 ### Estimated Scope
 

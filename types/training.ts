@@ -19,6 +19,29 @@ export interface EmbeddingSnapshot {
   embeddings: Float32Array;
 }
 
+export interface GeneralizationSnapshot {
+  epoch: number;
+  trainLoss: number;
+  valLoss: number;
+  trainAccuracy: number;
+  valAccuracy: number;
+  decisionGrid?: Float32Array;
+}
+
+export interface GeneralizationRun {
+  size: number;
+  history: GeneralizationSnapshot[];
+  dataset: {
+    trainFeatures: Float32Array;
+    trainLabels: Float32Array;
+    valFeatures: Float32Array;
+    valLabels: Float32Array;
+    trainCount: number;
+    valCount: number;
+    totalSize: number;
+  };
+}
+
 export interface TrainingConfig {
   epochs: number;
   learningRate: number;
