@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { LABS, SITE } from "@/lib/constants";
-import { Section } from "@/components/layout/section";
-import { LabCard } from "@/components/landing/lab-card";
+import { SITE } from "@/lib/constants";
+import { LabCardsSection } from "@/components/landing/lab-cards-section";
 
 export const metadata: Metadata = {
   title: "Labs",
@@ -10,20 +9,12 @@ export const metadata: Metadata = {
 
 export default function LabsPage(): React.ReactElement {
   return (
-    <Section
+    <LabCardsSection
       eyebrow="Experiments"
       title="All labs"
-      className="min-h-[60vh]"
-    >
-      <p className="mb-10 max-w-2xl text-[var(--text-secondary)]">
-        Four interactive experiments. Each lab proves one fundamental truth of deep
-        learning through live training and visual proof.
-      </p>
-      <div className="grid gap-6 sm:grid-cols-2">
-        {LABS.map((lab) => (
-          <LabCard key={lab.id} lab={lab} />
-        ))}
-      </div>
-    </Section>
+      description="Four interactive experiments. Each lab proves one fundamental truth of deep learning through live training and visual proof."
+      columns="two"
+      className="min-h-[60vh] py-16 md:py-24"
+    />
   );
 }

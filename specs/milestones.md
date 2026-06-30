@@ -60,13 +60,13 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] Particle background runs at 60fps on desktop
-- [ ] Mouse interaction repels nodes
-- [ ] Hero text entrance animates
-- [ ] Cards hover lift + glow
-- [ ] CTA navigates correctly
-- [ ] `prefers-reduced-motion` disables particles
-- [ ] Lighthouse performance > 80 (landing only)
+- [x] Particle background runs at 60fps on desktop
+- [x] Mouse interaction repels nodes
+- [x] Hero text entrance animates
+- [x] Cards hover lift + glow
+- [x] CTA navigates correctly
+- [x] `prefers-reduced-motion` disables particles
+- [ ] Lighthouse performance > 80 (landing only) — verify locally with Chrome DevTools
 
 ### Estimated Scope
 
