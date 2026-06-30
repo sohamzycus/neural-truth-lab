@@ -11,6 +11,14 @@ export interface EpochSnapshot {
   combinedWeights?: number[][];
 }
 
+export interface EmbeddingSnapshot {
+  epoch: number;
+  loss: number;
+  accuracy: number;
+  points: { token: string; tokenId: number; x: number; y: number }[];
+  embeddings: Float32Array;
+}
+
 export interface TrainingConfig {
   epochs: number;
   learningRate: number;

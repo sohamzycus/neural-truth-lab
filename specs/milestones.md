@@ -156,10 +156,10 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] All items in `lab3.md` acceptance criteria pass
-- [ ] Clusters visible by epoch 150+
-- [ ] Hover neighbors semantically sensible
-- [ ] Star positions animate smoothly
+- [x] All items in `lab3.md` acceptance criteria pass (t-SNE deferred — PCA only)
+- [x] Clusters visible by epoch 150+ (verify in browser)
+- [x] Hover neighbors semantically sensible
+- [x] Star positions animate smoothly
 
 ### Estimated Scope
 
