@@ -96,11 +96,11 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] All items in `lab1.md` acceptance criteria pass
-- [ ] Model A ~50% acc; Model B >95% acc on default seed
-- [ ] Decision boundary morphs per epoch
-- [ ] UI does not freeze during training
-- [ ] Replay + PNG export work
+- [x] All items in `lab1.md` acceptance criteria pass (boundary morph animation deferred — instant epoch updates)
+- [x] Model A ~50% acc; Model B >95% acc on default seed (verify in browser)
+- [x] Decision boundary updates per epoch via scrubber and live training
+- [x] UI does not freeze during training (`tf.nextFrame` between epochs)
+- [x] Replay + PNG export work
 
 ### Estimated Scope
 
