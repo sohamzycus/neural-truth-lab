@@ -23,8 +23,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 1. Connect the GitHub repo (`sohamzycus/neural-truth-lab`).
 2. Build settings are read from `netlify.toml`:
-   - **Build command:** `npm run build`
-   - **Plugin:** `@netlify/plugin-nextjs`
+   - **Build command:** `npm ci && npm run build`
+   - **Plugin:** `@netlify/plugin-nextjs` v5 (installed as devDependency)
+   - **Node:** 20 (see `.nvmrc`)
 3. Optional env var:
    - `NEXT_PUBLIC_SITE_URL` — canonical URL for Open Graph metadata (e.g. `https://your-site.netlify.app`)
 
