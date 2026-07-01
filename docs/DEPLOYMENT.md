@@ -22,14 +22,18 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Netlify
 
 1. Connect the GitHub repo (`sohamzycus/neural-truth-lab`).
-2. Build settings are read from `netlify.toml`:
+2. **Clear UI overrides** (Site configuration → Build & deploy → Build settings):
+   - **Publish directory:** leave **empty** (do not set `/` or `.`) — `netlify.toml` sets `.next`
+   - **Build command:** leave **empty** — uses `netlify.toml`
+   - **Plugins:** remove any manually installed `@netlify/plugin-nextjs` v4 from the Netlify UI; Netlify auto-enables the v5 runtime for Next.js 15
+3. Build settings from `netlify.toml`:
    - **Build command:** `npm ci && npm run build`
-   - **Plugin:** `@netlify/plugin-nextjs` v5 (installed as devDependency)
+   - **Publish:** `.next`
    - **Node:** 20 (see `.nvmrc`)
-3. Optional env var:
+4. Optional env var:
    - `NEXT_PUBLIC_SITE_URL` — canonical URL for Open Graph metadata (e.g. `https://your-site.netlify.app`)
 
-Netlify auto-installs the Next.js plugin when declared in `netlify.toml`.
+After the first deploy, trigger **Clear cache and deploy site** if a prior build cached bad settings.
 
 ## GitHub Actions
 
