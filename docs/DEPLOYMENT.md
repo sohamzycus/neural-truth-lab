@@ -35,6 +35,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 After the first deploy, trigger **Clear cache and deploy site** if a prior build cached bad settings.
 
+Build command in `netlify.toml` runs `npm ci --include=dev` explicitly so `next` is present even when Netlify skips its default install step.
+
 ## GitHub Actions
 
 CI runs on every push/PR to `main`:

@@ -3,11 +3,9 @@
 # Do NOT set "Publish directory" or "Build command" in the Netlify UI (leave blank).
 
 [build]
-  command = "npm run build"
+  command = "npm ci --include=dev --no-audit --no-fund && npm run build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
-  # Install devDependencies (TypeScript, Tailwind, ESLint) required for next build
-  NPM_CONFIG_PRODUCTION = "false"
-  NPM_FLAGS = "--no-audit --no-fund"
+  NPM_VERSION = "10.8.2"

@@ -9,7 +9,7 @@
     "dev": "next dev",
     "dev:clean": "rm -rf .next && next dev",
     "dev:turbo": "next dev --turbopack",
-    "build": "node ./node_modules/next/dist/bin/next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
