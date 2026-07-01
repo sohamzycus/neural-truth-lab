@@ -81,3 +81,46 @@ export const cardItem = {
     transition: { duration: 0.5, ease: motionTokens.ease.default },
   },
 };
+
+export const listStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.28 },
+  },
+};
+
+export const listItem = {
+  hidden: { opacity: 0, x: -16 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, ease: motionTokens.ease.default },
+  },
+};
+
+export const headerReveal = {
+  hidden: { opacity: 0, y: -12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: motionTokens.ease.default },
+  },
+};
+
+export const logoPulse = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: motionTokens.ease.bounce },
+  },
+};
+
+export const labShellReveal = {
+  hidden: { opacity: 0, y: -6 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: motionTokens.ease.default },
+  },
+};

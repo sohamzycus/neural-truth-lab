@@ -1,21 +1,25 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SITE } from "@/lib/constants";
 
 const STACK = [
   "Next.js",
   "TensorFlow.js",
   "Framer Motion",
-  "D3",
-  "Three.js",
 ] as const;
 
-export function Footer(): React.ReactElement {
+export function Footer(): React.ReactElement | null {
+  const pathname = usePathname();
+  if (pathname.startsWith("/lab/")) return null;
+
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--background-elevated)]">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-semibold text-[var(--text-primary)]">{SITE.name}</p>
+            <p className="font-display font-semibold text-[var(--text-primary)]">{SITE.name}</p>
             <p className="mt-1 text-sm text-[var(--text-secondary)]">
               Built with TensorFlow.js — all training runs in your browser.
             </p>

@@ -1,30 +1,30 @@
+"use client";
+
+import { ExpandableViz } from "@/components/visualization/expandable-viz";
+
 interface ConfusionMatrixProps {
   matrix: number[][] | undefined;
   label?: string;
+  compact?: boolean;
+  expandable?: boolean;
 }
 
-export function ConfusionMatrix({
+function MatrixGrid({
   matrix,
-  label,
-}: ConfusionMatrixProps): React.ReactElement {
-  const data = matrix ?? [
-    [0, 0],
-    [0, 0],
-  ];
-  const max = Math.max(...data.flat(), 1);
+  compact,
+}: {
+  matrix: number[][];
+  compact?: boolean;
+}): React.ReactElement {
+  const max = Math.max(...matrix.flat(), 1);
 
   return (
-    <div className="glass-panel p-4">
-      {label && (
-        <p className="mb-3 text-sm font-medium text-[var(--text-secondary)]">
-          {label}
-        </p>
-      )}
+    <>
       <div className="grid grid-cols-2 gap-1">
-        {data.flat().map((val, i) => (
+        {matrix.flat().map((val, i) => (
           <div
             key={i}
-            className="flex aspect-square items-center justify-center rounded-lg font-mono text-sm"
+            className={`flex items-center justify-center rounded-lg font-mono ${compact ? "aspect-square text-xs" : "aspect-square text-sm"}`}
             style={{
               background: `rgba(99, 102, 241, ${0.1 + (val / max) * 0.5})`,
             }}
@@ -37,6 +37,44 @@ export function ConfusionMatrix({
         <span>Pred 0</span>
         <span>Pred 1</span>
       </div>
+    </>
+  );
+}
+
+export function ConfusionMatrix({
+  matrix,
+  label,
+  compact = false,
+  expandable = false,
+}: ConfusionMatrixProps): React.ReactElement {
+  const data = matrix ?? [
+    [0, 0],
+    [0, 0],
+  ];
+  const hasData = matrix !== undefined;
+
+  const panel = (
+    <div className={`glass-panel ${compact ? "p-2" : "p-4"}`}>
+      {!expandable && label ? (
+        <p className="mb-2 text-xs font-medium text-[var(--text-secondary)] sm:text-sm">{label}</p>
+      ) : null}
+      <MatrixGrid matrix={data} compact={compact} />
     </div>
+  );
+
+  if (!expandable) return panel;
+
+  return (
+    <ExpandableViz
+      label={label}
+      disabled={!hasData}
+      expandedChildren={
+        <div className="glass-panel mx-auto max-w-xs p-6">
+          <MatrixGrid matrix={data} />
+        </div>
+      }
+    >
+      {panel}
+    </ExpandableViz>
   );
 }

@@ -217,14 +217,14 @@ M1 Foundation ──► M2 Landing ──► M3 Lab1 ──► M4 Lab2 ──►
 
 ### Acceptance Gate
 
-- [ ] All labs completable end-to-end
-- [ ] Keyboard shortcuts work (documented in `?` dialog)
-- [ ] `prefers-reduced-motion` fully supported
-- [ ] Lighthouse: Performance > 75, Accessibility > 90
-- [ ] CI green on push
-- [ ] Netlify deploy succeeds
-- [ ] README documents local dev + deploy
-- [ ] No console errors in production build
+- [x] All labs completable end-to-end
+- [x] Keyboard shortcuts work (documented in `?` dialog)
+- [x] `prefers-reduced-motion` fully supported
+- [ ] Lighthouse: Performance > 75, Accessibility > 90 — verify locally with Chrome DevTools
+- [x] CI green on push (GitHub Actions workflow)
+- [ ] Netlify deploy succeeds — verify after connect
+- [x] README documents local dev + deploy
+- [x] No console errors in production build
 
 ### Estimated Scope
 

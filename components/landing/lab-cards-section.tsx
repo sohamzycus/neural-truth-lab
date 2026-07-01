@@ -37,10 +37,10 @@ export function LabCardsSection({
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[var(--text-muted)]">
+          <p className="mb-2 font-mono text-xs font-medium uppercase tracking-widest text-[var(--text-muted)]">
             {eyebrow}
           </p>
-          <h2 className="text-2xl font-semibold tracking-tight text-[var(--text-primary)] md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--text-primary)] md:text-3xl">
             {title}
           </h2>
           {description && (

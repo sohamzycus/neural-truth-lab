@@ -9,7 +9,7 @@ export default function HomePage(): React.ReactElement {
         eyebrow="Four truths"
         title="Choose your experiment"
         columns="four"
-        className="border-t border-[var(--border)] bg-[var(--background-elevated)] py-16 md:py-24"
+        className="border-t border-[var(--border)] bg-[var(--background)] py-12 md:py-16"
       />
     </>
   );

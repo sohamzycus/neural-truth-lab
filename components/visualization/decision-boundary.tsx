@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { getGridConfig } from "@/training/metrics";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ZoomIn, X } from "lucide-react";
+import { drawDecisionBoundary } from "@/lib/draw-decision-boundary";
+import { cn } from "@/lib/utils";
 
 interface DecisionBoundaryProps {
   grid: Float32Array | null;
@@ -10,6 +12,36 @@ interface DecisionBoundaryProps {
   sampleCount: number;
   label?: string;
   className?: string;
+  compact?: boolean;
+  expandable?: boolean;
+}
+
+function useBoundaryPaint(
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  data: DrawData,
+  active: boolean
+): void {
+  const paint = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !active) return;
+    drawDecisionBoundary(canvas, data);
+  }, [canvasRef, data, active]);
+
+  useEffect(() => {
+    paint();
+    const canvas = canvasRef.current;
+    if (!canvas || !active) return;
+    const ro = new ResizeObserver(() => paint());
+    ro.observe(canvas);
+    return () => ro.disconnect();
+  }, [paint, canvasRef, active]);
+}
+
+interface DrawData {
+  grid: Float32Array | null;
+  features: Float32Array;
+  labels: Float32Array;
+  sampleCount: number;
 }
 
 export function DecisionBoundary({
@@ -19,106 +51,105 @@ export function DecisionBoundary({
   sampleCount,
   label,
   className,
+  compact = false,
+  expandable = false,
 }: DecisionBoundaryProps): React.ReactElement {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { gridSize, bounds } = getGridConfig();
+  const expandedCanvasRef = useRef<HTMLCanvasElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [expanded, setExpanded] = useState(false);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  const data: DrawData = { grid, features, labels, sampleCount };
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const size = canvas.clientWidth;
-    canvas.width = size * dpr;
-    canvas.height = size * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  useBoundaryPaint(canvasRef, data, true);
+  useBoundaryPaint(expandedCanvasRef, data, expanded);
 
-    const w = size;
-    const h = size;
+  const openExpanded = (): void => {
+    if (!expandable || !grid) return;
+    setExpanded(true);
+    dialogRef.current?.showModal();
+  };
 
-    const toX = (v: number): number => ((v + bounds) / (2 * bounds)) * w;
-    const toY = (v: number): number => h - ((v + bounds) / (2 * bounds)) * h;
+  const closeExpanded = (): void => {
+    setExpanded(false);
+    dialogRef.current?.close();
+  };
 
-    ctx.fillStyle = "#0a0a0f";
-    ctx.fillRect(0, 0, w, h);
-
-    if (grid) {
-      const cellW = w / gridSize;
-      const cellH = h / gridSize;
-      for (let row = 0; row < gridSize; row++) {
-        for (let col = 0; col < gridSize; col++) {
-          const p = grid[row * gridSize + col];
-          const r = Math.round(99 + p * 80);
-          const g = Math.round(102 - p * 40);
-          const b = Math.round(241 - p * 100);
-          const a = 0.25 + Math.abs(p - 0.5) * 0.35;
-          ctx.fillStyle = `rgba(${r},${g},${b},${a})`;
-          ctx.fillRect(col * cellW, row * cellH, cellW + 1, cellH + 1);
-        }
-      }
-    }
-
-    for (let i = 0; i < sampleCount; i++) {
-      const x = features[i * 2];
-      const y = features[i * 2 + 1];
-      const isOuter = labels[i] >= 0.5;
-      ctx.beginPath();
-      ctx.arc(toX(x), toY(y), 3, 0, Math.PI * 2);
-      ctx.fillStyle = isOuter ? "#f97316" : "#6366f1";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.3)";
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-    }
-
-    if (grid) {
-      ctx.strokeStyle = "rgba(255,255,255,0.35)";
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      let started = false;
-      const step = (2 * bounds) / (gridSize - 1);
-      for (let row = 0; row < gridSize; row++) {
-        for (let col = 0; col < gridSize; col++) {
-          const p = grid[row * gridSize + col];
-          const px = -bounds + col * step;
-          const py = -bounds + row * step;
-          const onBoundary =
-            p >= 0.48 &&
-            p <= 0.52 &&
-            (col === 0 ||
-              col === gridSize - 1 ||
-              row === 0 ||
-              row === gridSize - 1 ||
-              Math.abs(grid[row * gridSize + col - 1] - 0.5) > 0.05 ||
-              Math.abs(grid[row * gridSize + col + 1] - 0.5) > 0.05);
-          if (onBoundary) {
-            if (!started) {
-              ctx.moveTo(toX(px), toY(py));
-              started = true;
-            } else {
-              ctx.lineTo(toX(px), toY(py));
-            }
-          }
-        }
-      }
-      ctx.stroke();
-    }
-  }, [grid, features, labels, sampleCount, gridSize, bounds]);
+  const canvasClass = cn(
+    "w-full rounded-lg border border-[var(--border)] bg-[var(--viz-canvas-bg)]",
+    compact ? "lab-viz-canvas-compact" : "lab-viz-canvas aspect-square"
+  );
 
   return (
     <div className={className}>
-      {label && (
-        <p className="mb-2 text-sm font-medium text-[var(--text-secondary)]">
+      {label ? (
+        <p className="mb-1.5 text-xs font-medium text-[var(--text-secondary)] sm:text-sm">
           {label}
         </p>
+      ) : null}
+
+      {expandable ? (
+        <button
+          type="button"
+          onClick={openExpanded}
+          disabled={!grid}
+          className={cn(
+            "group relative w-full text-left",
+            !grid && "cursor-default"
+          )}
+          aria-label={label ? `Expand ${label}` : "Expand decision boundary"}
+        >
+          <canvas
+            ref={canvasRef}
+            className={cn(canvasClass, grid && "cursor-zoom-in")}
+            aria-hidden
+          />
+          {grid ? (
+            <span className="pointer-events-none absolute inset-0 flex items-end justify-end rounded-lg bg-gradient-to-t from-stone-900/25 via-transparent to-transparent p-2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+              <span className="flex items-center gap-1 rounded-md bg-white/95 px-2 py-1 text-[10px] font-medium text-stone-800 shadow-sm">
+                <ZoomIn className="h-3 w-3" />
+                Expand
+              </span>
+            </span>
+          ) : null}
+        </button>
+      ) : (
+        <canvas
+          ref={canvasRef}
+          className={canvasClass}
+          aria-label={label ?? "Decision boundary visualization"}
+        />
       )}
-      <canvas
-        ref={canvasRef}
-        className="aspect-square w-full rounded-xl border border-[var(--border)] bg-[var(--background-elevated)]"
-        aria-label={label ?? "Decision boundary visualization"}
-      />
+
+      {expandable ? (
+        <dialog
+          ref={dialogRef}
+          onClose={closeExpanded}
+          className="max-h-[95vh] w-[min(100%,42rem)] max-w-[calc(100vw-1.5rem)] rounded-xl border border-[var(--border)] bg-[var(--background-elevated)] p-0 text-[var(--text-primary)] shadow-2xl backdrop:bg-stone-900/40 backdrop:backdrop-blur-sm"
+          aria-label={label ?? "Expanded decision boundary"}
+        >
+          <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3">
+            <p className="text-sm font-semibold">{label ?? "Decision boundary"}</p>
+            <button
+              type="button"
+              onClick={closeExpanded}
+              className="rounded-lg border border-[var(--border)] p-1.5 text-[var(--text-muted)] hover:bg-[var(--surface)] hover:text-[var(--text-primary)]"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="p-4">
+            <canvas
+              ref={expandedCanvasRef}
+              className="lab-viz-canvas-expanded aspect-square w-full rounded-lg border border-[var(--border)] bg-[var(--viz-canvas-bg)]"
+            />
+            <p className="mt-2 text-center text-xs text-[var(--text-muted)]">
+              Esc to close · click backdrop to dismiss
+            </p>
+          </div>
+        </dialog>
+      ) : null}
     </div>
   );
 }

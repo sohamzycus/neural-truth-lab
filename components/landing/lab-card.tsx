@@ -44,7 +44,7 @@ export function LabCard({ lab }: LabCardProps): React.ReactElement {
         className="h-full"
         whileHover={{
           y: -4,
-          boxShadow: `0 12px 40px ${GLOW[lab.id]}, 0 8px 32px rgba(0,0,0,0.4)`,
+          boxShadow: `0 8px 24px ${GLOW[lab.id]}, 0 2px 8px rgba(28,25,23,0.08)`,
         }}
         transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
       >
@@ -69,7 +69,7 @@ export function LabCard({ lab }: LabCardProps): React.ReactElement {
           <p className="text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">
             Lab {String(lab.number).padStart(2, "0")}
           </p>
-          <h3 className="mt-1 text-lg font-semibold text-[var(--text-primary)]">
+          <h3 className="font-display mt-1 text-lg font-semibold text-[var(--text-primary)]">
             {lab.title}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">

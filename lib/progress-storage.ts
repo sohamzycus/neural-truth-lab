@@ -1,4 +1,5 @@
 import type { LabId } from "@/lib/constants";
+import { checkTruthSeeker, unlockAchievement } from "@/lib/achievements";
 
 const STORAGE_KEY = "ntl-progress";
 
@@ -38,6 +39,11 @@ export function markLabComplete(labId: LabId): UserProgress {
     lastVisitedLab: labId,
   };
   saveProgress(next);
+  if (next.completedLabs.length === 1) unlockAchievement("first_truth");
+  checkTruthSeeker(next.completedLabs);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("ntl-progress"));
+  }
   return next;
 }
 

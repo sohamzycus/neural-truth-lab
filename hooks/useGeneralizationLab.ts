@@ -15,16 +15,26 @@ import {
 } from "@/training/models/large-mlp";
 import { computeDecisionGrid } from "@/training/metrics";
 import { markLabComplete } from "@/lib/progress-storage";
+import { unlockAchievement } from "@/lib/achievements";
+import {
+  GENERALIZATION_EPOCHS,
+  GENERALIZATION_SNAPSHOT_EVERY,
+} from "@/lib/lab-demos";
 import type { GeneralizationRun, GeneralizationSnapshot } from "@/types/training";
-
-const EPOCHS = 150;
 
 export type TrainingStatus = "idle" | "training" | "complete";
 
-function readHist(history: tf.History, key: string): number {
-  const values = history.history[key];
-  const v = values?.[0];
+function readLogs(logs: tf.Logs | undefined, key: string): number {
+  const v = logs?.[key];
   return typeof v === "number" ? v : 0;
+}
+
+function epochsForSize(size: DatasetSize): number {
+  return GENERALIZATION_EPOCHS[size] ?? 40;
+}
+
+function batchSizeFor(trainCount: number): number {
+  return Math.min(128, Math.max(4, Math.floor(trainCount / 4)));
 }
 
 export function useGeneralizationLab(): {
@@ -35,13 +45,16 @@ export function useGeneralizationLab(): {
   runs: Partial<Record<DatasetSize, GeneralizationRun>>;
   snapshot: GeneralizationSnapshot | null;
   currentEpoch: number;
+  maxEpochForRun: number;
   status: TrainingStatus;
   tfReady: boolean;
   trainingLabel: string;
   seed: number;
   setSeed: (seed: number) => void;
   setCurrentEpoch: (epoch: number) => void;
+  trainCurrentSize: () => Promise<void>;
   trainAllSizes: () => Promise<void>;
+  stopTraining: () => void;
   reset: () => void;
   replaySizes: () => void;
   stopReplay: () => void;
@@ -53,6 +66,7 @@ export function useGeneralizationLab(): {
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [currentEpoch, setCurrentEpoch] = useState(0);
+  const [maxEpochForRun, setMaxEpochForRun] = useState(0);
   const [status, setStatus] = useState<TrainingStatus>("idle");
   const [tfReady, setTfReady] = useState(false);
   const [trainingLabel, setTrainingLabel] = useState("");
@@ -90,37 +104,64 @@ export function useGeneralizationLab(): {
         dataset.valCount
       );
 
-      const batchSize = Math.max(1, Math.min(32, Math.floor(dataset.trainCount / 2)));
+      const maxEpochs = epochsForSize(size);
+      const batchSize = batchSizeFor(dataset.trainCount);
       const history: GeneralizationSnapshot[] = [];
 
+      setMaxEpochForRun(maxEpochs);
+
       try {
-        for (let epoch = 1; epoch <= EPOCHS; epoch++) {
-          if (!trainingRef.current) break;
+        await model.fit(trainX, trainY, {
+          epochs: maxEpochs,
+          batchSize,
+          shuffle: true,
+          validationData: [valX, valY],
+          verbose: 0,
+          callbacks: {
+            onEpochEnd: (epoch, logs) => {
+              if (!trainingRef.current) return;
 
-          const hist = await model.fit(trainX, trainY, {
-            epochs: 1,
-            batchSize,
-            shuffle: true,
-            validationData: [valX, valY],
-            verbose: 0,
-          });
+              const epochNum = epoch + 1;
+              const snap: GeneralizationSnapshot = {
+                epoch: epochNum,
+                trainLoss: readLogs(logs, "loss"),
+                valLoss: readLogs(logs, "val_loss"),
+                trainAccuracy:
+                  readLogs(logs, "accuracy") || readLogs(logs, "acc"),
+                valAccuracy:
+                  readLogs(logs, "val_accuracy") || readLogs(logs, "val_acc"),
+              };
 
+              if (
+                epochNum % GENERALIZATION_SNAPSHOT_EVERY === 0 ||
+                epochNum === maxEpochs
+              ) {
+                if (epochNum === maxEpochs) {
+                  snap.decisionGrid = computeDecisionGrid(model);
+                }
+                history.push(snap);
+              }
+
+              void tf.nextFrame().then(() => {
+                setCurrentEpoch(epochNum);
+                setTrainingLabel(
+                  `${sizeLabel(size)} · epoch ${epochNum}/${maxEpochs}`
+                );
+              });
+            },
+          },
+        });
+
+        if (history.length === 0 || history[history.length - 1].epoch !== maxEpochs) {
           const snap: GeneralizationSnapshot = {
-            epoch,
-            trainLoss: readHist(hist, "loss"),
-            valLoss: readHist(hist, "val_loss"),
-            trainAccuracy:
-              readHist(hist, "accuracy") || readHist(hist, "acc"),
-            valAccuracy:
-              readHist(hist, "val_accuracy") || readHist(hist, "val_acc"),
+            epoch: maxEpochs,
+            trainLoss: history.at(-1)?.trainLoss ?? 0,
+            valLoss: history.at(-1)?.valLoss ?? 0,
+            trainAccuracy: history.at(-1)?.trainAccuracy ?? 0,
+            valAccuracy: history.at(-1)?.valAccuracy ?? 0,
+            decisionGrid: computeDecisionGrid(model),
           };
-
-          if (epoch === EPOCHS) {
-            snap.decisionGrid = computeDecisionGrid(model);
-          }
-
           history.push(snap);
-          await tf.nextFrame();
         }
       } finally {
         trainX.dispose();
@@ -135,37 +176,78 @@ export function useGeneralizationLab(): {
     []
   );
 
-  const trainAllSizes = useCallback(async () => {
-    if (!tfReady || trainingRef.current) return;
-    trainingRef.current = true;
-    setRuns({});
-    setStatus("training");
-    setCurrentEpoch(0);
+  const finishRun = useCallback(
+    (
+      size: DatasetSize,
+      run: GeneralizationRun,
+      nextRuns: Partial<Record<DatasetSize, GeneralizationRun>>
+    ): void => {
+      nextRuns[size] = run;
+      setRuns({ ...nextRuns });
+      setSelectedIndex(DATASET_SIZES.indexOf(size));
+      setCurrentEpoch(run.history[run.history.length - 1]?.epoch ?? 0);
 
-    const nextRuns: Partial<Record<DatasetSize, GeneralizationRun>> = {};
-
-    try {
-      for (const size of DATASET_SIZES) {
-        if (!trainingRef.current) break;
-        setTrainingLabel(
-          `Training ${sizeLabel(size)} dataset (${size.toLocaleString()} samples)…`
-        );
-        const run = await trainSize(size, seed);
-        nextRuns[size] = run;
-        setRuns({ ...nextRuns });
-        setSelectedIndex(DATASET_SIZES.indexOf(size));
-        setCurrentEpoch(EPOCHS);
+      if (size === 20) {
+        const last = run.history[run.history.length - 1];
+        if (last && last.valLoss - last.trainLoss > 0.3) {
+          unlockAchievement("memorizer");
+        }
       }
+    },
+    []
+  );
 
-      if (trainingRef.current) {
-        markLabComplete("generalization");
-        setStatus("complete");
+  const trainSizes = useCallback(
+    async (sizes: DatasetSize[], replaceRuns = false): Promise<void> => {
+      if (!tfReady || trainingRef.current) return;
+      trainingRef.current = true;
+      setStatus("training");
+
+      const nextRuns: Partial<Record<DatasetSize, GeneralizationRun>> = replaceRuns
+        ? {}
+        : { ...runs };
+
+      try {
+        for (const size of sizes) {
+          if (!trainingRef.current) break;
+          setTrainingLabel(
+            `Starting ${sizeLabel(size)} (${size.toLocaleString()} samples)…`
+          );
+          const run = await trainSize(size, seed);
+          finishRun(size, run, nextRuns);
+        }
+
+        if (trainingRef.current) {
+          const trained = sizes.every((s) => nextRuns[s]);
+          if (trained && sizes.length === DATASET_SIZES.length) {
+            unlockAchievement("scientist");
+            markLabComplete("generalization");
+            setStatus("complete");
+          }
+          setTrainingLabel("");
+        }
+      } finally {
+        trainingRef.current = false;
         setTrainingLabel("");
+        setStatus((prev) => (prev === "training" ? "idle" : prev));
       }
-    } finally {
-      trainingRef.current = false;
-    }
-  }, [seed, tfReady, trainSize]);
+    },
+    [tfReady, runs, seed, trainSize, finishRun]
+  );
+
+  const trainCurrentSize = useCallback(async () => {
+    await trainSizes([selectedSize], false);
+  }, [trainSizes, selectedSize]);
+
+  const trainAllSizes = useCallback(async () => {
+    setCurrentEpoch(0);
+    await trainSizes([...DATASET_SIZES], true);
+  }, [trainSizes]);
+
+  const stopTraining = useCallback(() => {
+    trainingRef.current = false;
+    setTrainingLabel("Stopping…");
+  }, []);
 
   const reset = useCallback(() => {
     trainingRef.current = false;
@@ -173,6 +255,7 @@ export function useGeneralizationLab(): {
     setIsReplaying(false);
     setRuns({});
     setCurrentEpoch(0);
+    setMaxEpochForRun(0);
     setSelectedIndex(0);
     setStatus("idle");
     setTrainingLabel("");
@@ -204,7 +287,8 @@ export function useGeneralizationLab(): {
     setIsReplaying(true);
     let i = 0;
     setSelectedIndex(0);
-    setCurrentEpoch(EPOCHS);
+    const last = runs[DATASET_SIZES[0]]?.history.at(-1)?.epoch ?? 0;
+    setCurrentEpoch(last);
     replayRef.current = setInterval(() => {
       i += 1;
       if (i >= DATASET_SIZES.length) {
@@ -213,7 +297,8 @@ export function useGeneralizationLab(): {
         return;
       }
       setSelectedIndex(i);
-      setCurrentEpoch(EPOCHS);
+      const ep = runs[DATASET_SIZES[i]]?.history.at(-1)?.epoch ?? 0;
+      setCurrentEpoch(ep);
     }, 2000);
   }, [runs]);
 
@@ -227,19 +312,23 @@ export function useGeneralizationLab(): {
     selectedIndex,
     setSelectedIndex: (index: number) => {
       setSelectedIndex(index);
-      setCurrentEpoch(EPOCHS);
+      const ep = runs[DATASET_SIZES[index]]?.history.at(-1)?.epoch ?? 0;
+      setCurrentEpoch(ep);
     },
     run,
     runs,
     snapshot,
     currentEpoch,
+    maxEpochForRun,
     status,
     tfReady,
     trainingLabel,
     seed,
     setSeed,
     setCurrentEpoch,
+    trainCurrentSize,
     trainAllSizes,
+    stopTraining,
     reset,
     replaySizes,
     stopReplay,

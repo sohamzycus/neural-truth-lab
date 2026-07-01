@@ -1,71 +1,71 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { NetworkLayer } from "@/lib/lab-schematics";
 
 interface NeuralNetworkViewProps {
-  collapsed?: boolean;
-  layerCount?: number;
-  hiddenUnits?: number;
+  layers: NetworkLayer[];
+  caption?: string;
+  accentColor?: string;
+  compact?: boolean;
 }
 
 export function NeuralNetworkView({
-  collapsed = false,
-  layerCount = 5,
-  hiddenUnits = 8,
+  layers,
+  caption,
+  accentColor = "var(--lab-depth)",
+  compact = false,
 }: NeuralNetworkViewProps): React.ReactElement {
-  const layers = collapsed
-    ? [{ inputs: 2, units: 1, label: "≡ 1 layer" }]
-    : [
-        { inputs: 2, units: hiddenUnits, label: "W₁" },
-        ...Array.from({ length: layerCount - 2 }, (_, i) => ({
-          inputs: hiddenUnits,
-          units: hiddenUnits,
-          label: `W${i + 2}`,
-        })),
-        { inputs: hiddenUnits, units: 1, label: `W${layerCount}` },
-      ];
+  const dot = compact ? "h-2 w-2" : "h-2.5 w-2.5";
+  const maxDots = compact ? 5 : 6;
 
   return (
-    <div className="glass-panel p-6">
-      <p className="mb-4 text-sm font-medium text-[var(--text-primary)]">
-        Network schematic
-      </p>
-      <div className="flex items-center justify-center gap-2 overflow-x-auto py-4 md:gap-4">
+    <div className={compact ? "rounded-lg border border-[var(--border)] bg-[var(--background-elevated)] p-3" : "glass-panel p-6"}>
+      {!compact ? (
+        <p className="mb-2 text-xs font-medium text-[var(--text-primary)]">
+          Network schematic
+        </p>
+      ) : null}
+      <div className="flex items-center justify-center gap-1.5 overflow-x-auto scrollbar-hide py-2 md:gap-2">
         {layers.map((layer, li) => (
           <motion.div
-            key={`${collapsed}-${li}`}
-            className="flex flex-col items-center gap-2"
+            key={`${layer.label}-${li}`}
+            className="flex flex-col items-center gap-1"
             layout
             initial={false}
-            animate={{
-              scale: collapsed ? 1.05 : 1,
-              opacity: 1,
-            }}
             transition={{ type: "spring", stiffness: 260, damping: 24 }}
           >
-            <div className="flex flex-col items-center gap-1">
-              {Array.from({ length: Math.min(layer.units, 6) }).map((_, ni) => (
+            <div className="flex flex-col items-center gap-0.5">
+              {Array.from({ length: Math.min(layer.units, maxDots) }).map((_, ni) => (
                 <div
                   key={ni}
-                  className="h-2.5 w-2.5 rounded-full bg-[var(--lab-depth)] shadow-[0_0_8px_rgba(6,182,212,0.5)]"
+                  className={`${dot} rounded-full`}
+                  style={{
+                    background: accentColor,
+                    boxShadow: `0 0 6px color-mix(in srgb, ${accentColor} 50%, transparent)`,
+                  }}
                 />
               ))}
-              {layer.units > 6 && (
-                <span className="text-[10px] text-[var(--text-muted)]">+{layer.units - 6}</span>
-              )}
+              {layer.units > maxDots ? (
+                <span className="text-[9px] text-[var(--text-muted)]">
+                  +{layer.units - maxDots}
+                </span>
+              ) : null}
             </div>
-            <span className="font-mono text-[10px] text-[var(--text-muted)]">{layer.label}</span>
-            {li < layers.length - 1 && (
-              <span className="hidden text-[var(--text-muted)] md:inline">→</span>
-            )}
+            <span className="font-mono text-[9px] text-[var(--text-muted)]">
+              {layer.label}
+            </span>
+            {li < layers.length - 1 ? (
+              <span className="hidden text-[10px] text-[var(--text-muted)] sm:inline">→</span>
+            ) : null}
           </motion.div>
         ))}
       </div>
-      <p className="mt-2 text-center text-xs text-[var(--text-muted)]">
-        {collapsed
-          ? "Five linear layers collapse into one transformation"
-          : `${layerCount} weight matrices — linear stack`}
-      </p>
+      {caption ? (
+        <p className="mt-1.5 text-center text-[10px] leading-snug text-[var(--text-muted)]">
+          {caption}
+        </p>
+      ) : null}
     </div>
   );
 }

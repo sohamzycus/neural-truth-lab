@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { ExpandableViz } from "@/components/visualization/expandable-viz";
 interface Series {
   id: string;
   label: string;
@@ -13,18 +15,23 @@ interface TripleMetricChartProps {
   currentEpoch: number;
   formatValue?: (v: number) => string;
   maxY?: number;
+  compact?: boolean;
+  expandable?: boolean;
 }
 
-export function TripleMetricChart({
+function TripleChartBody({
   title,
   series,
   currentEpoch,
   formatValue = (v) => v.toFixed(3),
   maxY,
+  compact,
 }: TripleMetricChartProps): React.ReactElement {
   const width = 400;
-  const height = 160;
-  const pad = { top: 16, right: 16, bottom: 28, left: 44 };
+  const height = compact ? 110 : 160;
+  const pad = compact
+    ? { top: 10, right: 12, bottom: 22, left: 36 }
+    : { top: 16, right: 16, bottom: 28, left: 44 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
 
@@ -48,8 +55,7 @@ export function TripleMetricChart({
     pts.map((p, i) => `${i === 0 ? "M" : "L"}${toX(p.epoch)},${toY(p.value)}`).join(" ");
 
   return (
-    <div className="glass-panel p-4">
-      <p className="mb-3 text-sm font-medium text-[var(--text-primary)]">{title}</p>
+    <>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label={title}>
         {[0, 0.25, 0.5, 0.75, 1].map((t) => {
           const y = pad.top + plotH * (1 - t);
@@ -79,7 +85,7 @@ export function TripleMetricChart({
           />
         )}
       </svg>
-      <div className="mt-2 flex flex-wrap gap-3 text-xs text-[var(--text-muted)]">
+      <div className={cn("flex flex-wrap gap-3 text-xs text-[var(--text-muted)]", compact ? "mt-1 gap-2" : "mt-2")}>
         {series.map((s) => (
           <span key={s.id} className="flex items-center gap-1.5">
             <span className="h-0.5 w-4" style={{ background: s.color }} />
@@ -87,6 +93,56 @@ export function TripleMetricChart({
           </span>
         ))}
       </div>
+    </>
+  );
+}
+
+export function TripleMetricChart({
+  title,
+  series,
+  currentEpoch,
+  formatValue = (v) => v.toFixed(3),
+  maxY,
+  compact = false,
+  expandable = false,
+}: TripleMetricChartProps): React.ReactElement {
+  const hasData = series.some((s) => s.history.length > 1);
+  const panel = (
+    <div className={cn("glass-panel", compact ? "p-2" : "p-4")}>
+      {!expandable ? (
+        <p className={cn("font-medium text-[var(--text-primary)]", compact ? "mb-1 text-xs" : "mb-3 text-sm")}>
+          {title}
+        </p>
+      ) : null}
+      <TripleChartBody
+        title={title}
+        series={series}
+        currentEpoch={currentEpoch}
+        formatValue={formatValue}
+        maxY={maxY}
+        compact={compact}
+      />
     </div>
+  );
+
+  if (!expandable) return panel;
+
+  return (
+    <ExpandableViz
+      label={title}
+      disabled={!hasData}
+      expandedChildren={
+        <div className="glass-panel p-4">
+          <TripleChartBody
+            title={title}
+            series={series}
+            currentEpoch={currentEpoch}
+            maxY={maxY}
+          />
+        </div>
+      }
+    >
+      {panel}
+    </ExpandableViz>
   );
 }

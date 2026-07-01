@@ -1,25 +1,28 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Play, RotateCcw, Download, Loader2 } from "lucide-react";
+import { Play, RotateCcw, Download, Loader2, Square } from "lucide-react";
 import { useGeneralizationLab } from "@/hooks/useGeneralizationLab";
 import { GeneralizationGraph } from "@/components/visualization/generalization-graph";
 import { DecisionBoundary } from "@/components/visualization/decision-boundary";
+import { ExpandableViz } from "@/components/visualization/expandable-viz";
 import { EpochSlider } from "@/components/visualization/epoch-slider";
 import {
   DATASET_SIZES,
   sizeLabel,
 } from "@/datasets/noisy-classification";
-import { Section } from "@/components/layout/section";
+import { LAB_DEMOS } from "@/lib/lab-demos";
+import { generalizationSchematic, LAB_SCHEMATIC_ACCENT } from "@/lib/lab-schematics";
+import { LabWorkspace } from "@/components/layout/lab-workspace";
+import { LabStat } from "@/components/labs/lab-stat";
+import { LabSidebarPanel } from "@/components/labs/lab-sidebar-panel";
+import { LabSchematicPanel } from "@/components/labs/lab-schematic-panel";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
-const THEORY_CHIPS = [
-  "Train loss = fit on seen data",
-  "Val loss = fit on unseen data",
-  "Gap = val loss − train loss",
-  "More data → gap shrinks",
+const THEORY = [
+  "Tiny data → train loss drops, val loss stays high.",
+  "Gap = val loss − train loss measures memorization.",
+  "More samples force the true boundary, not the noise.",
 ] as const;
 
 const SIZE_LABELS = DATASET_SIZES.map((s) => `${sizeLabel(s)} (${s})`);
@@ -37,6 +40,10 @@ export function GeneralizationLab(): React.ReactElement {
     value: s.valLoss,
   })) ?? [];
 
+  const gap20 = lab.runs[20]?.history.at(-1);
+  const gap20val =
+    gap20 ? Math.max(0, gap20.valLoss - gap20.trainLoss) : undefined;
+
   const downloadPng = (): void => {
     const svg = graphRef.current?.querySelector("svg");
     if (!svg) return;
@@ -48,7 +55,7 @@ export function GeneralizationLab(): React.ReactElement {
     if (!ctx) return;
     const img = new Image();
     img.onload = () => {
-      ctx.fillStyle = "#0a0a0f";
+      ctx.fillStyle = "#fafaf9";
       ctx.fillRect(0, 0, 960, 400);
       ctx.drawImage(img, 0, 0, 960, 400);
       const link = document.createElement("a");
@@ -62,9 +69,7 @@ export function GeneralizationLab(): React.ReactElement {
   const combinedFeatures = lab.run
     ? (() => {
         const d = lab.run.dataset;
-        const f = new Float32Array(
-          (d.trainCount + d.valCount) * 2
-        );
+        const f = new Float32Array((d.trainCount + d.valCount) * 2);
         const l = new Float32Array(d.trainCount + d.valCount);
         f.set(d.trainFeatures, 0);
         f.set(d.valFeatures, d.trainCount * 2);
@@ -74,193 +79,210 @@ export function GeneralizationLab(): React.ReactElement {
       })()
     : null;
 
+  const lossGraph = lab.run ? (
+    <GeneralizationGraph
+      trainHistory={trainLoss}
+      valHistory={valLoss}
+      currentEpoch={lab.currentEpoch}
+    />
+  ) : (
+    <div className="flex h-32 items-center justify-center text-xs text-[var(--text-muted)]">
+      {lab.tfReady ? "Train to plot train vs validation loss" : "Loading TensorFlow.js…"}
+    </div>
+  );
+
   return (
-    <>
-      <Section id="claim" eyebrow="Claim" title="The experiment">
-        <div className="glass-panel border-l-4 border-l-[var(--lab-generalization)] p-8">
-          <p className="text-xl font-medium leading-relaxed text-[var(--text-primary)] md:text-2xl">
-            More data closes the gap between what a model memorizes and what it
-            truly learns.
-          </p>
-        </div>
-      </Section>
-
-      <Section id="theory" eyebrow="Theory" title="Generalization gap">
-        <div className="flex flex-wrap gap-3">
-          {THEORY_CHIPS.map((chip) => (
-            <span
-              key={chip}
-              className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--text-secondary)]"
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
-      </Section>
-
-      <Section id="experiment" eyebrow="Experiment" title="Dataset size arena">
-        <div className="mb-6 flex flex-wrap items-center gap-3">
-          <Button
-            onClick={() => void lab.trainAllSizes()}
-            disabled={lab.status === "training" || !lab.tfReady}
-          >
-            {lab.status === "training" ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Training…
-              </>
-            ) : (
-              <>
-                <Play className="h-4 w-4" />
-                Train All Sizes
-              </>
-            )}
-          </Button>
-          <Button variant="secondary" onClick={lab.reset} disabled={lab.status === "training"}>
-            <RotateCcw className="h-4 w-4" />
-            Reset
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={lab.isReplaying ? lab.stopReplay : lab.replaySizes}
-            disabled={Object.keys(lab.runs).length < 2}
-          >
-            {lab.isReplaying ? "Stop" : "Animate sizes"}
-          </Button>
-          <Button variant="ghost" onClick={downloadPng} disabled={!lab.run}>
-            <Download className="h-4 w-4" />
-            PNG
-          </Button>
-        </div>
-
-        {lab.trainingLabel && (
-          <p className="mb-4 text-sm text-[var(--lab-generalization)]">{lab.trainingLabel}</p>
-        )}
-
-        <div className="mb-8 glass-panel p-4">
-          <label className="text-xs text-[var(--text-muted)]">Training set size</label>
-          <input
-            type="range"
-            min={0}
-            max={DATASET_SIZES.length - 1}
-            step={1}
-            value={lab.selectedIndex}
-            disabled={lab.status === "training" || !lab.run}
-            onChange={(e) => lab.setSelectedIndex(Number(e.target.value))}
-            className="mt-2 w-full accent-[var(--lab-generalization)]"
+    <LabWorkspace
+      labId="generalization"
+      experiment="Generalization"
+      accentClass="text-[var(--lab-generalization)]"
+      demo={LAB_DEMOS.generalization}
+      problem="A large model on tiny data memorizes noise instead of the boundary."
+      solution="Scale training data — the generalization gap shrinks as the model is forced to learn structure, not individual points."
+      stats={
+        <>
+          <LabStat
+            size="sm"
+            label="Gap"
+            value={lab.gap.toFixed(3)}
+            hint="val − train"
+            accent
           />
-          <div className="mt-2 flex justify-between text-xs text-[var(--text-muted)]">
-            {SIZE_LABELS.map((l) => (
-              <span key={l}>{l}</span>
-            ))}
-          </div>
-          <div className="mt-4">
-            <label className="text-xs text-[var(--text-muted)]">Seed</label>
-            <input
-              type="number"
-              value={lab.seed}
-              disabled={lab.status === "training"}
-              onChange={(e) => lab.setSeed(Number(e.target.value) || 42)}
-              className="mt-1 w-full max-w-xs rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 font-mono text-sm"
-            />
-          </div>
-        </div>
-
-        <div className="mb-6 grid gap-4 sm:grid-cols-3">
-          <motion.div
-            key={lab.selectedSize}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass-panel p-6 sm:col-span-1"
-          >
-            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">
-              Generalization gap
-            </p>
-            <p className="mt-2 font-mono text-4xl font-semibold text-[var(--lab-generalization)]">
-              {lab.gap.toFixed(3)}
-            </p>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              val loss − train loss
-            </p>
-          </motion.div>
-          {lab.snapshot && (
+          <LabStat
+            size="sm"
+            label="Gap @20"
+            value={gap20val === undefined ? "—" : gap20val.toFixed(3)}
+          />
+          {lab.snapshot ? (
             <>
-              <div className="glass-panel p-4 font-mono text-sm">
-                <span className="text-[var(--text-muted)]">Train acc · </span>
-                {(lab.snapshot.trainAccuracy * 100).toFixed(1)}%
-              </div>
-              <div className="glass-panel p-4 font-mono text-sm">
-                <span className="text-[var(--text-muted)]">Val acc · </span>
-                {(lab.snapshot.valAccuracy * 100).toFixed(1)}%
-              </div>
+              <LabStat
+                size="sm"
+                label="Train"
+                value={`${(lab.snapshot.trainAccuracy * 100).toFixed(0)}%`}
+              />
+              <LabStat
+                size="sm"
+                label="Val"
+                value={`${(lab.snapshot.valAccuracy * 100).toFixed(0)}%`}
+              />
             </>
-          )}
-        </div>
-
-        <div ref={graphRef} className="mb-6">
-          {lab.run ? (
-            <GeneralizationGraph
-              trainHistory={trainLoss}
-              valHistory={valLoss}
-              currentEpoch={lab.currentEpoch}
-            />
-          ) : (
-            <div className="glass-panel flex h-48 items-center justify-center text-[var(--text-muted)]">
-              {lab.tfReady
-                ? "Train all sizes to compare generalization gaps"
-                : "Loading TensorFlow.js…"}
+          ) : null}
+        </>
+      }
+      sidebar={
+        <>
+          <LabSidebarPanel title="Run experiment">
+            <div className="flex flex-col gap-2">
+              <Button
+                className="w-full"
+                onClick={() => void lab.trainCurrentSize()}
+                disabled={lab.status === "training" || !lab.tfReady}
+              >
+                {lab.status === "training" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {lab.trainingLabel || "Training…"}
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4" />
+                    Train {sizeLabel(lab.selectedSize)} (N={lab.selectedSize})
+                  </>
+                )}
+              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="flex-1"
+                  onClick={() => void lab.trainAllSizes()}
+                  disabled={lab.status === "training" || !lab.tfReady}
+                >
+                  Train all 4
+                </Button>
+                {lab.status === "training" ? (
+                  <Button variant="secondary" size="sm" onClick={lab.stopTraining} aria-label="Stop">
+                    <Square className="h-3 w-3 fill-current" />
+                  </Button>
+                ) : null}
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  onClick={lab.reset}
+                  disabled={lab.status === "training"}
+                  aria-label="Reset"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={lab.isReplaying ? lab.stopReplay : lab.replaySizes}
+                  disabled={Object.keys(lab.runs).length < 2}
+                >
+                  {lab.isReplaying ? "Stop" : "Replay"}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={downloadPng}
+                  disabled={!lab.run}
+                  aria-label="Download PNG"
+                >
+                  <Download className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-          )}
-        </div>
+          </LabSidebarPanel>
 
-        {combinedFeatures && lab.snapshot?.decisionGrid && (
+          <LabSidebarPanel title="Dataset size">
+            <input
+              type="range"
+              min={0}
+              max={DATASET_SIZES.length - 1}
+              step={1}
+              value={lab.selectedIndex}
+              disabled={lab.status === "training" || !lab.run}
+              onChange={(e) => lab.setSelectedIndex(Number(e.target.value))}
+              className="w-full accent-[var(--lab-generalization)]"
+            />
+            <div className="mt-1 flex justify-between text-[10px] text-[var(--text-muted)]">
+              {SIZE_LABELS.map((l) => (
+                <span key={l}>{l.split(" ")[0]}</span>
+              ))}
+            </div>
+          </LabSidebarPanel>
+
+          <LabSidebarPanel title="Timeline">
+            <EpochSlider
+              epoch={lab.currentEpoch}
+              maxEpoch={
+                lab.run?.history.at(-1)?.epoch ?? lab.maxEpochForRun ?? 0
+              }
+              onChange={lab.setCurrentEpoch}
+              disabled={!lab.run || lab.status === "training"}
+            />
+          </LabSidebarPanel>
+
+          <LabSidebarPanel title="Network schematic">
+            <LabSchematicPanel
+              {...generalizationSchematic()}
+              accentColor={LAB_SCHEMATIC_ACCENT.generalization}
+            />
+          </LabSidebarPanel>
+
+          <LabSidebarPanel title="Why this matters">
+            <ul className="space-y-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+              {THEORY.map((t) => (
+                <li key={t} className="flex gap-2">
+                  <span className="text-[var(--lab-generalization)]">→</span>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </LabSidebarPanel>
+        </>
+      }
+      insight={
+        lab.status === "complete" ? (
+          <p className="rounded-lg border border-[var(--lab-generalization)]/25 bg-[var(--lab-generalization)]/5 px-3 py-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text-primary)]">Proof: </span>
+            At N=20 the model memorizes; as N grows, train and val losses converge.
+          </p>
+        ) : (
+          <p className="text-xs text-[var(--text-muted)]">
+            Train sizes · click loss curve or boundary to expand
+          </p>
+        )
+      }
+    >
+      <div className="grid gap-2 sm:grid-cols-2">
+        <ExpandableViz
+          label="Train vs validation loss"
+          disabled={!lab.run}
+          contentClassName="rounded-lg border border-[var(--border)] bg-[var(--background-elevated)] p-2"
+        >
+          <div ref={graphRef}>{lossGraph}</div>
+        </ExpandableViz>
+
+        {combinedFeatures ? (
           <DecisionBoundary
-            grid={lab.snapshot.decisionGrid}
+            compact
+            expandable
+            grid={lab.snapshot?.decisionGrid ?? null}
             features={combinedFeatures.features}
             labels={combinedFeatures.labels}
             sampleCount={combinedFeatures.count}
-            label={`Decision boundary — ${sizeLabel(lab.selectedSize)} (${lab.selectedSize} samples)`}
+            label={`Boundary · N=${lab.selectedSize}`}
           />
+        ) : (
+          <ExpandableViz label="Decision boundary" disabled>
+            <div className="lab-viz-canvas-compact flex aspect-square items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--viz-canvas-bg)] text-xs text-[var(--text-muted)]">
+              Train to see boundary
+            </div>
+          </ExpandableViz>
         )}
-      </Section>
-
-      <Section id="results" eyebrow="Results" title="Epoch timeline">
-        <EpochSlider
-          epoch={lab.currentEpoch}
-          maxEpoch={lab.run?.history.length ? 150 : 0}
-          onChange={lab.setCurrentEpoch}
-          disabled={!lab.run || lab.status === "training"}
-        />
-      </Section>
-
-      <Section id="insight" eyebrow="Insight" title="Key takeaway">
-        <AnimatePresence>
-          {lab.status === "complete" && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className={cn(
-                "glass-panel border-l-4 border-l-[var(--lab-generalization)] p-8",
-                "shadow-[0_0_40px_rgba(16,185,129,0.15)]"
-              )}
-            >
-              <p className="text-xl font-medium text-[var(--text-primary)] md:text-2xl">
-                As data grows, the gap closes.
-              </p>
-              <p className="mt-3 text-[var(--text-secondary)]">
-                Small data invites memorization. Large data forces generalization.
-                The gap between train and validation loss tells you which regime
-                you&apos;re in.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {lab.status !== "complete" && (
-          <p className="text-sm text-[var(--text-muted)]">
-            Train all four sizes to reveal the key insight.
-          </p>
-        )}
-      </Section>
-    </>
+      </div>
+    </LabWorkspace>
   );
 }

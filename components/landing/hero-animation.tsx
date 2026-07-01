@@ -106,7 +106,7 @@ export function HeroAnimation(): React.ReactElement {
           const edgeDist = Math.hypot(edx, edy);
           if (edgeDist < connectionDistance) {
             const alpha = (1 - edgeDist / connectionDistance) * 0.35;
-            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+            ctx.strokeStyle = `rgba(29, 78, 216, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -118,7 +118,7 @@ export function HeroAnimation(): React.ReactElement {
 
       for (const node of nodes) {
         const pulse = 0.5 + 0.5 * Math.sin(time * 0.002 + node.phase);
-        ctx.fillStyle = `rgba(139, 92, 246, ${0.35 + pulse * 0.45})`;
+        ctx.fillStyle = `rgba(15, 118, 110, ${0.3 + pulse * 0.4})`;
         ctx.beginPath();
         ctx.arc(node.x, node.y, 2 + pulse * 0.5, 0, Math.PI * 2);
         ctx.fill();
@@ -156,7 +156,7 @@ export function HeroAnimation(): React.ReactElement {
   if (reducedMotion) {
     return (
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.15)_0%,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(29,78,216,0.08)_0%,transparent_70%)]"
         aria-hidden
       />
     );
