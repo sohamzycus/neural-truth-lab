@@ -1,10 +1,9 @@
-# Next.js 15 on Netlify — see https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
-#
-# Do NOT set "Publish directory" or "Build command" in the Netlify UI (leave blank).
+# Static Next.js export — no Next.js runtime plugin required.
+# In Netlify UI: leave Build command and Publish directory BLANK (this file wins).
 
 [build]
-  command = "bash scripts/netlify-build.sh"
-  publish = ".next"
+  command = "npm run build"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "20"

@@ -1,10 +1,10 @@
 # Deployment Guide
 
-Neural Truth Lab is a static-friendly Next.js 15 app with client-side TensorFlow.js training. Deploy to Netlify (recommended) or any Node host that supports Next.js.
+Neural Truth Lab is a **static Next.js export** — TensorFlow.js runs entirely in the browser. Deploy to any static host; Netlify is the default.
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 20+ (see `.nvmrc`)
 - npm 10+
 
 ## Local production build
@@ -14,46 +14,50 @@ npm ci
 npm run typecheck
 npm run lint
 npm run build
-npm run start
+npx serve out
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints).
 
-## Netlify
+## Netlify (recommended)
 
-1. Connect the GitHub repo (`sohamzycus/neural-truth-lab`).
-2. **Clear UI overrides** (Site configuration → Build & deploy → Build settings):
-   - **Publish directory:** leave **empty** (do not set `/` or `.`) — `netlify.toml` sets `.next`
-   - **Build command:** leave **empty** — uses `netlify.toml`
-   - **Plugins:** remove any manually installed `@netlify/plugin-nextjs` v4 from the Netlify UI; Netlify auto-enables the v5 runtime for Next.js 15
-3. Build settings from `netlify.toml`:
-   - **Build command:** `npm ci && npm run build`
-   - **Publish:** `.next`
-   - **Node:** 20 (see `.nvmrc`)
-4. Optional env var:
-   - `NEXT_PUBLIC_SITE_URL` — canonical URL for Open Graph metadata (e.g. `https://your-site.netlify.app`)
+### One-time site setup
 
-After the first deploy, trigger **Clear cache and deploy site** if a prior build cached bad settings.
+1. [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import from Git** → `sohamzycus/neural-truth-lab`
+2. **Site configuration → Build & deploy → Build settings**
+   - **Build command:** leave **empty**
+   - **Publish directory:** leave **empty**
+   - (Both are read from `netlify.toml`; UI values like `/` or `.` will break deploys.)
+3. **Site configuration → Environment variables** (optional):
+   - `NEXT_PUBLIC_SITE_URL` = `https://your-site.netlify.app`
+4. Deploy. After the first success, set the env var if needed and redeploy once.
 
-Build command in `netlify.toml` runs `npm ci --include=dev` explicitly so `next` is present even when Netlify skips its default install step.
+### What `netlify.toml` does
+
+| Setting | Value |
+|---------|--------|
+| Build command | `npm run build` |
+| Publish directory | `out` |
+| Node | 20 |
+
+Netlify runs `npm install` automatically, then `npm run build`, which writes static files to `out/`. **No** `@netlify/plugin-nextjs` is required.
+
+### If a deploy fails
+
+1. **Deploys → Trigger deploy → Clear cache and deploy site**
+2. Confirm UI build settings are empty (see above)
+3. Check the log for `npm install` completing before `next build`
 
 ## GitHub Actions
 
-CI runs on every push/PR to `main`:
+CI on every push/PR to `main`: typecheck, lint, build. See [`.github/workflows/ci.yml`](../.github/workflows/ci.yml).
 
-- `npm run typecheck`
-- `npm run lint`
-- `npm run build`
+## Manual checklist
 
-See [`.github/workflows/ci.yml`](../.github/workflows/ci.yml).
-
-## Manual checklist before deploy
-
-- [ ] All four labs train end-to-end in production build
+- [ ] All four labs train end-to-end on the deployed URL
 - [ ] No console errors on landing and lab pages
-- [ ] `prefers-reduced-motion` disables heavy animations
-- [ ] Lighthouse Accessibility ≥ 90 (Chrome DevTools)
+- [ ] Lighthouse Accessibility ≥ 90
 
 ## Architecture
 
-See [`docs/ARCHITECTURE.md`](./ARCHITECTURE.md) and [`specs/architecture.md`](../specs/architecture.md).
+See [`docs/ARCHITECTURE.md`](./ARCHITECTURE.md).
