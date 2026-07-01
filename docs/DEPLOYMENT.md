@@ -36,11 +36,11 @@ Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints)
 
 | Setting | Value |
 |---------|--------|
-| Build command | `npm run netlify` (installs deps, then static export) |
+| Build command | `bash scripts/netlify-build.sh` (or leave UI empty) |
 | Publish directory | `out` |
 | Node | 20 |
 
-Netlify runs `npm run netlify`, which runs `npm install` then exports to `out/`. Netlify’s automatic install step is unreliable on this project, so install is bundled into the build script.
+Netlify runs the build script, which wipes `node_modules`, runs `npm ci`, then `next build` → `out/`. Netlify’s automatic install is disabled via `NPM_FLAGS=--version` because it often leaves `next` missing.
 
 ### If a deploy fails
 

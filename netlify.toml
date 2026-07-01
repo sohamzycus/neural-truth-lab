@@ -6,3 +6,5 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # ponytail: noop Netlify's auto npm install; our script runs npm ci instead
+  NPM_FLAGS = "--version"

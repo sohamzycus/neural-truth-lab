@@ -29,4 +29,4 @@ fi
 
 # NODE_ENV=development during build breaks static export (Html/404 prerender error).
 unset NODE_ENV
-node node_modules/next/dist/bin/next build
+npm run build
