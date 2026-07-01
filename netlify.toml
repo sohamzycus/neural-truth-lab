@@ -6,5 +6,6 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # ponytail: noop Netlify's auto npm install; our script runs npm ci instead
-  NPM_FLAGS = "--version"
+  # npm 10.8.x + Node 20 can hang with "Exit handler never called" on large installs
+  NPM_VERSION = "10.6.0"
+  NODE_OPTIONS = "--no-network-family-autoselection"

@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints)
 | Publish directory | `out` |
 | Node | 20 |
 
-Netlify runs the build script, which wipes `node_modules`, runs `npm ci`, then `next build` → `out/`. Netlify’s automatic install is disabled via `NPM_FLAGS=--version` because it often leaves `next` missing.
+Netlify runs `npm install` (cached), then the build script verifies `next` exists and exports to `out/`. If installs fail with "Exit handler never called", `netlify.toml` pins npm 10.6.0 and sets `NODE_OPTIONS=--no-network-family-autoselection`.
 
 ### If a deploy fails
 
