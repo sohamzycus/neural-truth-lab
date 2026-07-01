@@ -1,10 +1,8 @@
 # Static Next.js export. Netlify UI: leave Build command + Publish directory EMPTY.
-# ponytail: netlify script runs npm install because Netlify often skips/fails its own install step.
 
 [build]
-  command = "npm run netlify"
+  command = "bash scripts/netlify-build.sh"
   publish = "out"
 
 [build.environment]
   NODE_VERSION = "20"
-  NODE_ENV = "development"
