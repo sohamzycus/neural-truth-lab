@@ -1,12 +1,13 @@
 # Next.js 15 on Netlify — see https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
 #
-# Do NOT set "Publish directory" in the Netlify UI (leave blank). A UI value
-# of "/" overrides this file and breaks the Next.js runtime.
+# Do NOT set "Publish directory" or "Build command" in the Netlify UI (leave blank).
 
 [build]
-  command = "npm ci && npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
+  # Install devDependencies (TypeScript, Tailwind, ESLint) required for next build
+  NPM_CONFIG_PRODUCTION = "false"
   NPM_FLAGS = "--no-audit --no-fund"
