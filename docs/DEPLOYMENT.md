@@ -4,7 +4,7 @@ Neural Truth Lab is a static-friendly Next.js 15 app with client-side TensorFlow
 
 ## Prerequisites
 
-- Node.js 22+
+- Node.js 20+
 - npm 10+
 
 ## Local production build
