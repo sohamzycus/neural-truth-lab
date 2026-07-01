@@ -10,6 +10,8 @@
     "dev:clean": "rm -rf .next && next dev",
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
+    "build:netlify": "node ./node_modules/next/dist/bin/next build",
+    "netlify": "npm install --no-audit --no-fund && npm run build:netlify",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

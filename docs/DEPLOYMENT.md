@@ -36,11 +36,11 @@ Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints)
 
 | Setting | Value |
 |---------|--------|
-| Build command | `npm run build` |
+| Build command | `npm run netlify` (installs deps, then static export) |
 | Publish directory | `out` |
 | Node | 20 |
 
-Netlify runs `npm install` automatically, then `npm run build`, which writes static files to `out/`. **No** `@netlify/plugin-nextjs` is required.
+Netlify runs `npm run netlify`, which runs `npm install` then exports to `out/`. Netlify’s automatic install step is unreliable on this project, so install is bundled into the build script.
 
 ### If a deploy fails
 

@@ -1,9 +1,10 @@
-# Static Next.js export — no Next.js runtime plugin required.
-# In Netlify UI: leave Build command and Publish directory BLANK (this file wins).
+# Static Next.js export. Netlify UI: leave Build command + Publish directory EMPTY.
+# ponytail: netlify script runs npm install because Netlify often skips/fails its own install step.
 
 [build]
-  command = "npm run build"
+  command = "npm run netlify"
   publish = "out"
 
 [build.environment]
   NODE_VERSION = "20"
+  NODE_ENV = "development"
