@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints)
 | Publish directory | `out` |
 | Node | 20 |
 
-Netlify runs `npm install` (cached), then the build script verifies `next` exists and exports to `out/`. If installs fail with "Exit handler never called", `netlify.toml` pins npm 10.6.0 and sets `NODE_OPTIONS=--no-network-family-autoselection`.
+Netlify detects `yarn.lock` and runs `yarn install` (not npm). The build script verifies `next` exists, then `yarn build` → `out/`.
 
 ### If a deploy fails
 
