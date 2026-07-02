@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#fafaf9" rx="16"/>
+  <rect x="1" y="1" width="798" height="478" fill="none" stroke="#e7e5e4" rx="16"/>
+  <text x="200" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">N=20</text>
+  <text x="600" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">N=2000</text>
+  <line x1="400" y1="80" x2="400" y2="440" stroke="#d6d3d1" stroke-width="2"/>
+  <rect x="100" y="200" width="200" height="100" fill="#047857" opacity="0.08"/>
+  <path d="M 60 380 L 160 280 L 220 220 L 280 180" fill="none" stroke="#047857" stroke-width="4"/>
+  <path d="M 60 380 L 160 320 L 220 272 L 280 244" fill="none" stroke="#b91c1c" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="200" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#57534e">train down, val up</text>
+  <path d="M 460 360 L 560 300 L 620 272 L 740 248" fill="none" stroke="#047857" stroke-width="4"/>
+  <path d="M 460 368 L 560 312 L 620 288 L 740 272" fill="none" stroke="#b91c1c" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="600" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#57534e">train ~ val</text>
+  <text x="400" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#57534e">Neural Truth Lab - Generalization</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#fafaf9" rx="16"/>
+  <rect x="1" y="1" width="798" height="478" fill="none" stroke="#e7e5e4" rx="16"/>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">Next-token to clusters</text>
+  <circle cx="180" cy="180" r="56" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="220" cy="220" r="56" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="400" cy="280" r="56" fill="none" stroke="#15803d" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="440" cy="320" r="56" fill="none" stroke="#15803d" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="620" cy="160" r="56" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="580" cy="200" r="56" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+  <circle cx="168" cy="172" r="10" fill="#1d4ed8"/>
+  <circle cx="196" cy="188" r="10" fill="#1d4ed8"/>
+  <circle cx="212" cy="208" r="10" fill="#1d4ed8"/>
+  <circle cx="188" cy="212" r="10" fill="#1d4ed8"/>
+  <circle cx="388" cy="272" r="10" fill="#15803d"/>
+  <circle cx="416" cy="288" r="10" fill="#15803d"/>
+  <circle cx="428" cy="312" r="10" fill="#15803d"/>
+  <circle cx="404" cy="328" r="10" fill="#15803d"/>
+  <circle cx="608" cy="152" r="10" fill="#b45309"/>
+  <circle cx="636" cy="168" r="10" fill="#b45309"/>
+  <circle cx="572" cy="192" r="10" fill="#b45309"/>
+  <circle cx="596" cy="216" r="10" fill="#b45309"/>
+  <text x="180" y="260" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#1d4ed8">animals</text>
+  <text x="420" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#15803d">fruit</text>
+  <text x="600" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#b45309">verbs</text>
+  <text x="400" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#57534e">Neural Truth Lab - Embeddings</text>
+</svg>

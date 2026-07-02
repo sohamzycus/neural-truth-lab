@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#fafaf9" rx="16"/>
+  <rect x="1" y="1" width="798" height="478" fill="none" stroke="#e7e5e4" rx="16"/>
+  <text x="200" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">Linear</text>
+  <text x="600" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">+ ReLU</text>
+  <line x1="400" y1="80" x2="400" y2="440" stroke="#d6d3d1" stroke-width="2"/>
+  <circle cx="200" cy="200" r="72" fill="none" stroke="#c2410c" stroke-width="3" opacity="0.5"/>
+  <circle cx="200" cy="320" r="72" fill="none" stroke="#c2410c" stroke-width="3" opacity="0.5"/>
+  <line x1="80" y1="380" x2="320" y2="140" stroke="#a8a29e" stroke-width="4"/>
+  <circle cx="600" cy="200" r="72" fill="none" stroke="#c2410c" stroke-width="3" opacity="0.5"/>
+  <circle cx="600" cy="320" r="72" fill="none" stroke="#c2410c" stroke-width="3" opacity="0.5"/>
+  <path d="M 460 260 Q 600 140, 740 260 Q 600 380, 460 260" fill="none" stroke="#c2410c" stroke-width="4"/>
+  <text x="400" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#57534e">Neural Truth Lab - Activations</text>
+</svg>

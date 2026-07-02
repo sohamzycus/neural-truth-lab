@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#fafaf9" rx="16"/>
+  <rect x="1" y="1" width="798" height="478" fill="none" stroke="#e7e5e4" rx="16"/>
+  <text x="200" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">5x linear</text>
+  <text x="600" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#78716c">5x + ReLU</text>
+  <line x1="400" y1="80" x2="400" y2="440" stroke="#d6d3d1" stroke-width="2"/>
+  <rect x="184" y="160" width="32" height="160" rx="4" fill="#0e7490" opacity="0.45"/>
+  <line x1="100" y1="360" x2="300" y2="160" stroke="#a8a29e" stroke-width="4"/>
+  <text x="200" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#57534e">W5..W1 = one matrix</text>
+  <rect x="508" y="160" width="32" height="48" rx="4" fill="#0e7490" opacity="0.25"/>
+  <rect x="548" y="172" width="32" height="48" rx="4" fill="#0e7490" opacity="0.33"/>
+  <rect x="588" y="184" width="32" height="48" rx="4" fill="#0e7490" opacity="0.41"/>
+  <rect x="628" y="196" width="32" height="48" rx="4" fill="#0e7490" opacity="0.49"/>
+  <rect x="668" y="208" width="32" height="48" rx="4" fill="#0e7490" opacity="0.57"/>
+  <circle cx="524" cy="220" r="8" fill="#0e7490"/>
+  <circle cx="564" cy="232" r="8" fill="#0e7490"/>
+  <circle cx="604" cy="244" r="8" fill="#0e7490"/>
+  <circle cx="644" cy="256" r="8" fill="#0e7490"/>
+  <circle cx="684" cy="268" r="8" fill="#0e7490"/>
+  <path d="M 472 280 Q 600 200, 728 280" fill="none" stroke="#0e7490" stroke-width="4"/>
+  <text x="400" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#57534e">Neural Truth Lab - Depth</text>
+</svg>
