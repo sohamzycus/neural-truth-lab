@@ -10,3 +10,5 @@
   YARN_VERSION = "1.22.22"
   YARN_FLAGS = "--network-timeout 600000"
   NODE_OPTIONS = "--no-network-family-autoselection"
+  NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
+  YARN_REGISTRY = "https://registry.npmjs.org/"

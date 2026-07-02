@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints)
 | Publish directory | `out` |
 | Node | 20 |
 
-Netlify detects `yarn.lock` and runs `yarn install` (not npm). The build script verifies `next` exists, then `yarn build` → `out/`.
+Netlify detects `yarn.lock` and runs `yarn install` (not npm). Project `.npmrc` / `.yarnrc` pin `registry.npmjs.org` so lockfiles never point at a private registry (e.g. corporate Nexus) that Netlify cannot reach.
 
 ### If a deploy fails
 
