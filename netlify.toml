@@ -1,8 +1,8 @@
-# Default Netlify config for sama-bpe-tokenizer (repo root build).
-# For session1/Neural Truth Lab, set Base directory to `session1` in Netlify UI.
+# Repo-root fallback when Netlify has NO base directory set.
+# Prefer: set Base directory to session2/web and leave UI build fields empty.
 
 [build]
-  command = "cd session2/web && npm ci && npm run build"
+  command = "bash session2/web/scripts/netlify-build.sh"
   publish = "session2/web/dist"
 
 [build.environment]
