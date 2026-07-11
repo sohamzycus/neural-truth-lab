@@ -1,6 +1,12 @@
+# SamaBPE static Vite app. Netlify UI: leave Build command + Publish directory EMPTY.
+# Set Base directory to session2/web when importing from GitHub.
+
 [build]
-  publish = "dist"
   command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
