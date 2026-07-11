@@ -2,11 +2,12 @@
 # Prefer repo-root netlify.toml with build.base = "session2/web" and empty UI base directory.
 
 [build]
-  command = "bash scripts/netlify-build.sh"
+  command = "npm install --no-audit --no-fund && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
 
 [[redirects]]
   from = "/*"
