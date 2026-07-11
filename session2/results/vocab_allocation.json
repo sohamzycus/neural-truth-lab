@@ -1,7 +1,9 @@
 {
-  "shared": 2500,
-  "en": 7500,
-  "hi": 0,
-  "te": 0,
-  "bn": 0
+  "special": 2,
+  "latin": 479,
+  "neutral": 52,
+  "devanagari": 2608,
+  "telugu": 2993,
+  "bengali": 2789,
+  "shared": 1077
 }

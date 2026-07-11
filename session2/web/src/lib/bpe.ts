@@ -128,6 +128,14 @@ export function detectScript(char: string): string {
   return "other";
 }
 
+export function graphemeCount(token: string): number {
+  if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+    const seg = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    return [...seg.segment(token)].length;
+  }
+  return [...token].length;
+}
+
 export function scriptAttribution(token: string): string {
   const scripts = new Set(
     [...token].filter((c) => !/\s/.test(c)).map(detectScript)

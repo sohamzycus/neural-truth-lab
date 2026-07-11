@@ -1,3 +1,11 @@
+export interface TokenizerData {
+  version: string;
+  pretokenization: "whitespace" | "character" | "grapheme";
+  special_tokens: Record<string, number>;
+  vocab: Record<string, number>;
+  merges: string[][];
+}
+
 export interface LanguageStat {
   lang: string;
   label: string;
@@ -6,10 +14,14 @@ export interface LanguageStat {
   tokens: number;
   fertility: number;
   rank: number;
+  distance_from_best?: number;
+  distance_from_worst?: number;
 }
 
 export interface Stats {
   generated_at: string;
+  source?: string;
+  verified: boolean;
   winning_strategy: string;
   vocabulary_size: number;
   vocab_budget: number;
@@ -20,25 +32,36 @@ export interface Stats {
   x_max: number;
   max_min_gap: number;
   score: number;
-  english_constraint: {
-    max_allowed: number;
-    actual: number;
-    pass: boolean;
-  };
-  vocab_allocation: Record<string, number>;
+  english_constraint: { max_allowed: number; actual: number; pass: boolean };
+  vocab_constraint?: { max_allowed: number; actual: number; pass: boolean };
   tokenizer_sha256: string;
+  corpus_hashes?: Record<string, string>;
+  vocab_allocation?: Record<string, number>;
+  vocab_attribution?: Record<string, number>;
+  trust?: {
+    english_lte_1_2: boolean;
+    vocabulary_lte_10000: boolean;
+    one_deterministic_tokenizer: boolean;
+    scores_independently_reproducible: boolean;
+  };
 }
 
 export interface StrategyRow {
-  strategy: string;
-  vocabulary_size: number;
-  en_fertility: number;
-  hi_fertility: number;
-  te_fertility: number;
-  bn_fertility: number;
-  max_min_gap: number;
+  id: string;
+  name: string;
+  implemented: boolean;
+  verified: boolean;
+  winner: boolean;
+  vocabularySize: number;
+  fertility: Record<string, number>;
+  gap: number;
   score: number;
-  english_pass: boolean;
+  englishConstraintPassed: boolean;
+}
+
+export interface StrategyComparison {
+  strategies: StrategyRow[];
+  legacy?: unknown[];
 }
 
 export interface OptTraceStep {
@@ -61,14 +84,6 @@ export interface RejectedMerge {
   reason: string;
 }
 
-export interface TokenizerData {
-  version: string;
-  pretokenization: "whitespace" | "character" | "grapheme";
-  special_tokens: Record<string, number>;
-  vocab: Record<string, number>;
-  merges: string[][];
-}
-
 export interface SweepCurves {
   per_language: Record<string, Array<{ vocab_size: number; fertility: number }>>;
   allocation_sweep: Array<{
@@ -84,3 +99,10 @@ export async function loadJson<T>(path: string): Promise<T> {
   if (!res.ok) throw new Error(`Failed to load ${path}`);
   return res.json() as Promise<T>;
 }
+
+export const LANG_DISPLAY: Record<string, { label: string; native: string }> = {
+  en: { label: "English", native: "ENGLISH" },
+  hi: { label: "Hindi", native: "हिन्दी" },
+  te: { label: "Telugu", native: "తెలుగు" },
+  bn: { label: "Bengali", native: "বাংলা" },
+};

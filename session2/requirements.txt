@@ -1,0 +1,4 @@
+# SamaBPE Python dependencies (also installable via pip install -e ".[dev]")
+regex>=2024.0.0
+requests>=2.31.0
+pytest>=8.0.0

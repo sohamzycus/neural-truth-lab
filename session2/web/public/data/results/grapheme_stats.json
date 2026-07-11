@@ -1,26 +1,38 @@
 {
   "en": {
     "total_graphemes": 65327,
-    "integrity_ratio": 1.0,
+    "total_code_points": 65327,
+    "token_boundaries": 20742,
+    "boundaries_inside_cluster": 0,
     "split_clusters": 0,
-    "total_code_points": 65327
+    "integrity_pct": 100.0,
+    "language": "en"
   },
   "hi": {
     "total_graphemes": 28889,
-    "integrity_ratio": 1.0,
-    "split_clusters": 0,
-    "total_code_points": 43796
+    "total_code_points": 43796,
+    "token_boundaries": 18738,
+    "boundaries_inside_cluster": 675,
+    "split_clusters": 643,
+    "integrity_pct": 96.3979,
+    "language": "hi"
   },
   "te": {
     "total_graphemes": 11874,
-    "integrity_ratio": 1.0,
-    "split_clusters": 0,
-    "total_code_points": 20012
+    "total_code_points": 20012,
+    "token_boundaries": 5773,
+    "boundaries_inside_cluster": 244,
+    "split_clusters": 244,
+    "integrity_pct": 95.7742,
+    "language": "te"
   },
   "bn": {
     "total_graphemes": 31135,
-    "integrity_ratio": 1.0,
-    "split_clusters": 0,
-    "total_code_points": 46434
+    "total_code_points": 46434,
+    "token_boundaries": 16944,
+    "boundaries_inside_cluster": 913,
+    "split_clusters": 868,
+    "integrity_pct": 94.612,
+    "language": "bn"
   }
 }

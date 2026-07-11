@@ -1,45 +1,53 @@
 import { useEffect, useState } from "react";
-import { BPEEncoder, codePoints, scriptAttribution } from "./lib/bpe";
+import { BPEEncoder, codePoints, scriptAttribution, graphemeCount } from "./lib/bpe";
 import { loadJson } from "./types";
-import type { Stats, StrategyRow, OptTraceStep, RejectedMerge, SweepCurves } from "./types";
+import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves } from "./types";
+import { HeroNarrative } from "./components/HeroNarrative";
 import {
-  Hero,
-  Scoreboard,
-  FairnessRace,
-  TokenEconomy,
-  StrategyArena,
-  RejectedGraveyard,
-  ReproduceSection,
-  Downloads,
-  BudgetSimulator,
-} from "./components/Sections";
+  SectionChallenge, SectionWhyFairness, SectionScoreboard, SectionPipeline,
+  SectionStrategyArena, SectionFairnessRace, SectionTokenEconomy,
+  SectionRejected, SectionGrapheme, SectionReproduce, SectionDownloads, BudgetSimulator,
+} from "./components/StorySections";
+
+const PRESETS = [
+  "India भारत భారతదేశం ভারত",
+  "India is a diverse country.",
+  "भारत एक विविध देश है।",
+  "భారతదేశం వైవిధ్యభరితమైన దేశం.",
+  "ভারত একটি বৈচিত্র্যময় দেশ।",
+];
 
 export default function App() {
   const [stats, setStats] = useState<Stats | null>(null);
-  const [strategies, setStrategies] = useState<StrategyRow[]>([]);
+  const [strategies, setStrategies] = useState<StrategyComparison | null>(null);
   const [trace, setTrace] = useState<OptTraceStep[]>([]);
   const [rejected, setRejected] = useState<RejectedMerge[]>([]);
   const [curves, setCurves] = useState<SweepCurves | null>(null);
+  const [grapheme, setGrapheme] = useState<Record<string, { integrity_pct: number; split_clusters: number; total_graphemes: number }> | null>(null);
   const [encoder, setEncoder] = useState<BPEEncoder | null>(null);
-  const [playText, setPlayText] = useState("India भारत భారతదేశం ভারত");
+  const [playText, setPlayText] = useState(PRESETS[0]);
   const [selectedToken, setSelectedToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
       loadJson<Stats>("/data/results/stats.json"),
-      loadJson<StrategyRow[]>("/data/results/strategy_comparison.json"),
+      loadJson<StrategyComparison | StrategyComparison["strategies"]>("/data/results/strategy_comparison.json").then((d) =>
+        Array.isArray(d) ? { strategies: d as unknown as StrategyComparison["strategies"] } : d
+      ),
       loadJson<OptTraceStep[]>("/data/results/optimization_trace.json"),
       loadJson<RejectedMerge[]>("/data/results/rejected_merges.json"),
       loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json"),
+      loadJson<typeof grapheme>("/data/results/grapheme_stats.json"),
       BPEEncoder.load(),
     ])
-      .then(([s, st, tr, rj, cu, enc]) => {
+      .then(([s, st, tr, rj, cu, gr, enc]) => {
         setStats(s);
         setStrategies(st);
         setTrace(tr);
         setRejected(rj);
         setCurves(cu);
+        setGrapheme(gr);
         setEncoder(enc);
       })
       .catch((e) => setError(String(e)));
@@ -48,27 +56,42 @@ export default function App() {
   const tokens = encoder ? encoder.encode(playText) : [];
   const ids = encoder ? encoder.encodeIds(playText) : [];
   const vocabEntries = encoder?.getVocabEntries() ?? [];
+  const alloc = stats?.vocab_attribution ?? stats?.vocab_allocation ?? {};
 
   return (
     <div className="min-h-screen pb-20">
       {error && (
-        <div className="bg-[var(--color-saffron)]/20 p-4 text-center text-sm">
-          Artefacts not found — run the training pipeline first. ({error})
+        <div className="bg-[var(--color-saffron)]/20 p-4 text-center text-sm" role="alert">
+          Artefacts not found — run <code>python scripts/verify.py</code> first. ({error})
         </div>
       )}
-      <Hero stats={stats} />
-      <Scoreboard stats={stats} />
-      <FairnessRace trace={trace} />
-      <TokenEconomy allocation={stats?.vocab_allocation ?? {}} />
-      <BudgetSimulator curves={curves} actualAlloc={stats?.vocab_allocation ?? {}} />
 
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <h2 className="text-2xl">Tokenizer Playground</h2>
+      <HeroNarrative stats={stats} />
+      <SectionChallenge />
+      <SectionWhyFairness />
+      <SectionScoreboard stats={stats} />
+      <SectionPipeline />
+      <SectionStrategyArena data={strategies} winner={stats?.winning_strategy ?? ""} />
+      <SectionFairnessRace trace={trace} />
+      <SectionTokenEconomy allocation={alloc} />
+      <BudgetSimulator curves={curves} actualAlloc={alloc} />
+
+      <section className="mx-auto max-w-6xl px-4 py-12" id="playground">
+        <h2 className="text-2xl font-bold">Tokenizer Playground</h2>
+        <p className="text-sm text-[var(--color-ink)]/60">Same final tokenizer for all scripts — no language routing.</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {PRESETS.map((p) => (
+            <button key={p} type="button" className="btn text-xs" onClick={() => setPlayText(p)}>
+              {p.slice(0, 24)}{p.length > 24 ? "…" : ""}
+            </button>
+          ))}
+        </div>
         <textarea
           className="card mt-4 w-full font-mono text-sm"
-          rows={4}
+          rows={3}
           value={playText}
           onChange={(e) => setPlayText(e.target.value)}
+          aria-label="Tokenizer input"
         />
         {encoder && (
           <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -76,12 +99,7 @@ export default function App() {
               <div className="text-sm font-semibold">Tokens ({tokens.length})</div>
               <div className="mt-2 flex flex-wrap gap-1 font-mono text-xs">
                 {tokens.map((t, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className="rounded border border-[var(--color-indigo)]/20 bg-white/50 px-1 hover:bg-[var(--color-indigo)]/10"
-                    onClick={() => setSelectedToken(t)}
-                  >
+                  <button key={i} type="button" className="rounded border border-[var(--color-indigo)]/20 bg-white/50 px-1 hover:bg-[var(--color-indigo)]/10" onClick={() => setSelectedToken(t)}>
                     {t.replace("</w>", "·")}
                   </button>
                 ))}
@@ -90,7 +108,7 @@ export default function App() {
             </div>
             <div className="card">
               <div className="text-sm font-semibold">Script attribution</div>
-              <ul className="mt-2 space-y-1 font-mono text-xs">
+              <ul className="mt-2 max-h-40 overflow-y-auto space-y-1 font-mono text-xs">
                 {tokens.map((t, i) => (
                   <li key={i}>{t.replace("</w>", "")} → {scriptAttribution(t)}</li>
                 ))}
@@ -100,19 +118,14 @@ export default function App() {
         )}
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <h2 className="text-2xl">Token Microscope</h2>
+      <section className="mx-auto max-w-6xl px-4 py-12" id="microscope">
+        <h2 className="text-2xl font-bold">Token Microscope</h2>
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <div className="card max-h-64 overflow-y-auto">
             <div className="text-sm font-semibold">Vocabulary ({vocabEntries.length})</div>
             <div className="mt-2 space-y-1 font-mono text-xs">
-              {vocabEntries.slice(0, 200).map(({ token, id }) => (
-                <button
-                  key={id}
-                  type="button"
-                  className={`block w-full text-left hover:bg-white/50 ${selectedToken === token ? "bg-[var(--color-saffron)]/20" : ""}`}
-                  onClick={() => setSelectedToken(token)}
-                >
+              {vocabEntries.slice(0, 150).map(({ token, id }) => (
+                <button key={id} type="button" className={`block w-full text-left hover:bg-white/50 ${selectedToken === token ? "bg-[var(--color-saffron)]/20" : ""}`} onClick={() => setSelectedToken(token)}>
                   {id}: {token.replace("</w>", "·")}
                 </button>
               ))}
@@ -121,26 +134,29 @@ export default function App() {
           {selectedToken && (
             <div className="card font-mono text-sm">
               <div className="font-serif text-lg font-semibold">{selectedToken}</div>
-              <dl className="mt-2 space-y-1">
-                <div>ID: {encoder?.getVocabEntries().find((e) => e.token === selectedToken)?.id}</div>
+              <dl className="mt-2 space-y-1 text-xs">
+                <div>ID: {encoder?.getVocabEntries().find((e) => e.token === selectedToken)?.id ?? "Not available"}</div>
+                <div>Escaped: {JSON.stringify(selectedToken)}</div>
                 <div>Code points: {codePoints(selectedToken).join(" ")}</div>
                 <div>Script: {scriptAttribution(selectedToken)}</div>
                 <div>Code-point length: {selectedToken.length}</div>
-                <div>Grapheme length: {[...selectedToken].length}</div>
+                <div>Grapheme length: {graphemeCount(selectedToken)}</div>
+                <div>Merge ancestry: Not available</div>
+                <div>Frequency: Not available</div>
               </dl>
             </div>
           )}
         </div>
       </section>
 
-      <StrategyArena rows={strategies} winner={stats?.winning_strategy ?? ""} />
-      <RejectedGraveyard items={rejected} />
-      <ReproduceSection />
-      <Downloads />
+      <SectionRejected items={rejected} />
+      <SectionGrapheme stats={grapheme} />
+      <SectionReproduce stats={stats} />
+      <SectionDownloads />
 
-      <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-sm text-[var(--color-ink)]/50">
-        <p>Formula: X = tokens / word_units · Score = 1000 / (X_max − X_min)</p>
-        <p className="mt-1">All headline metrics loaded from measured results/stats.json</p>
+      <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-[var(--color-ink)]/50">
+        <p>Official metric: X = tokens ÷ word units · Verified self-score = 1000 ÷ (X<sub>max</sub> − X<sub>min</sub>)</p>
+        <p className="mt-1">All headline metrics loaded from <code>results/stats.json</code> generated by <code>scripts/verify.py</code></p>
       </footer>
     </div>
   );

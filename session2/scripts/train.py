@@ -24,7 +24,8 @@ from samabpe.strategies import (
     train_score_directed_adaptive,
 )
 from samabpe.sweeps import run_sweeps
-from samabpe.unicode_utils import grapheme_integrity_score
+from samabpe.unicode_utils import grapheme_integrity_for_language, vocab_script_attribution
+from samabpe.vocab_roi import compute_vocab_roi
 from samabpe.word_units import count_word_units
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,6 +36,50 @@ PUBLIC = ROOT / "web" / "public" / "data"
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+STRATEGY_META = {
+    "shared_vanilla": ("shared-vanilla-bpe", "Shared Vanilla BPE"),
+    "allocated_monolingual": ("allocated-monolingual-bpe", "Allocated Monolingual BPE"),
+    "weighted_shared": ("weighted-shared-bpe", "Weighted Shared BPE"),
+    "grapheme_aware": ("grapheme-aware-bpe", "Grapheme-Aware BPE"),
+    "score_directed_adaptive": ("score-directed-adaptive-bpe", "Score-Directed Adaptive BPE"),
+}
+
+
+def _strategy_entry(name: str, res, *, winner: bool = False) -> dict:
+    sid, label = STRATEGY_META.get(name, (name, name))
+    return {
+        "id": sid,
+        "name": label,
+        "implemented": True,
+        "verified": True,
+        "winner": winner,
+        "vocabularySize": res.tokenizer.vocab_size,
+        "fertility": {
+            "en": res.fertilities["en"],
+            "hi": res.fertilities["hi"],
+            "te": res.fertilities["te"],
+            "bn": res.fertilities["bn"],
+        },
+        "gap": res.metrics["max_min_gap"],
+        "score": res.metrics["score"],
+        "englishConstraintPassed": res.fertilities["en"] <= EN_MAX_FERTILITY,
+    }
+
+
+def build_legacy_entry(name: str, res) -> dict:
+    return {
+        "strategy": name,
+        "vocabulary_size": res.tokenizer.vocab_size,
+        "en_fertility": res.fertilities["en"],
+        "hi_fertility": res.fertilities["hi"],
+        "te_fertility": res.fertilities["te"],
+        "bn_fertility": res.fertilities["bn"],
+        "max_min_gap": res.metrics["max_min_gap"],
+        "score": res.metrics["score"],
+        "english_pass": res.fertilities["en"] <= EN_MAX_FERTILITY,
+    }
 
 
 def optimize_allocation(corpora: dict[str, str]) -> dict[str, int]:
@@ -113,7 +158,8 @@ def main() -> None:
         raise SystemExit("Run scripts/fetch_corpora.py first")
 
     # Benchmark all strategies
-    comparison = []
+    comparison_new: list[dict] = []
+    comparison_legacy: list[dict] = []
     best_name = ""
     best_score = -1.0
     winner_tok: BPETokenizer | None = None
@@ -129,18 +175,9 @@ def main() -> None:
             winner_alloc = {"shared": 2, **alloc}
         else:
             res = fn(corpora)
-        entry = {
-            "strategy": name,
-            "vocabulary_size": res.tokenizer.vocab_size,
-            "en_fertility": res.fertilities["en"],
-            "hi_fertility": res.fertilities["hi"],
-            "te_fertility": res.fertilities["te"],
-            "bn_fertility": res.fertilities["bn"],
-            "max_min_gap": res.metrics["max_min_gap"],
-            "score": res.metrics["score"],
-            "english_pass": res.fertilities["en"] <= EN_MAX_FERTILITY,
-        }
-        comparison.append(entry)
+        entry = build_legacy_entry(name, res)
+        comparison_legacy.append(entry)
+        comparison_new.append(_strategy_entry(name, res))
         if res.fertilities["en"] <= EN_MAX_FERTILITY and res.metrics["score"] > best_score:
             best_score = res.metrics["score"]
             best_name = name
@@ -149,18 +186,9 @@ def main() -> None:
 
     print("Training score_directed_adaptive...")
     sda_res, opt_trace, rejected = train_score_directed_adaptive(corpora, vocab_size=VOCAB_BUDGET)
-    sda_entry = {
-        "strategy": "score_directed_adaptive",
-        "vocabulary_size": sda_res.tokenizer.vocab_size,
-        "en_fertility": sda_res.fertilities["en"],
-        "hi_fertility": sda_res.fertilities["hi"],
-        "te_fertility": sda_res.fertilities["te"],
-        "bn_fertility": sda_res.fertilities["bn"],
-        "max_min_gap": sda_res.metrics["max_min_gap"],
-        "score": sda_res.metrics["score"],
-        "english_pass": sda_res.fertilities["en"] <= EN_MAX_FERTILITY,
-    }
-    comparison.append(sda_entry)
+    sda_entry = build_legacy_entry("score_directed_adaptive", sda_res)
+    comparison_legacy.append(sda_entry)
+    comparison_new.append(_strategy_entry("score_directed_adaptive", sda_res))
     if sda_res.fertilities["en"] <= EN_MAX_FERTILITY and sda_res.metrics["score"] > best_score:
         best_score = sda_res.metrics["score"]
         best_name = "score_directed_adaptive"
@@ -191,24 +219,42 @@ def main() -> None:
     sweep_path = RESULTS / "vocab_sweep_curves.json"
     run_sweeps(DATA, out_path=sweep_path)
 
-    # Grapheme stats
-    gstats = {lang: grapheme_integrity_score(corpora[lang]) for lang in LANGS}
+    # Mark winner in strategy comparison
+    winner_id = STRATEGY_META.get(best_name, (best_name,))[0]
+    for s in comparison_new:
+        s["winner"] = s["id"] == winner_id
+
+    # Grapheme stats (measured)
+    gstats = {
+        lang: grapheme_integrity_for_language(winner_tok, corpora[lang], lang)
+        for lang in LANGS
+    }
     (RESULTS / "grapheme_stats.json").write_text(json.dumps(gstats, indent=2), encoding="utf-8")
 
-    stats = build_stats(
-        best_name,
-        winner_tok,
-        corpora,
-        {
-            "vocab_allocation": winner_alloc,
-            "tokenizer_sha256": sha256_file(tok_path),
-        },
-    )
-    (RESULTS / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
-    (RESULTS / "strategy_comparison.json").write_text(json.dumps(comparison, indent=2), encoding="utf-8")
+    vocab_attr = vocab_script_attribution(winner_tok)
+    (RESULTS / "vocab_allocation.json").write_text(json.dumps(vocab_attr, indent=2), encoding="utf-8")
+
+    roi = compute_vocab_roi(winner_tok, corpora)
+    (RESULTS / "vocab_roi.json").write_text(json.dumps(roi, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # Parity corpus
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from generate_parity_corpus import generate as gen_parity
+    gen_parity(RESULTS / "parity_corpus.json")
+
+    strategy_out = {"strategies": comparison_new, "legacy": comparison_legacy}
+    (RESULTS / "strategy_comparison.json").write_text(json.dumps(strategy_out, indent=2), encoding="utf-8")
     (RESULTS / "optimization_trace.json").write_text(json.dumps(opt_trace, indent=2), encoding="utf-8")
     (RESULTS / "rejected_merges.json").write_text(json.dumps(rejected, indent=2, ensure_ascii=False), encoding="utf-8")
-    (RESULTS / "vocab_allocation.json").write_text(json.dumps(winner_alloc, indent=2), encoding="utf-8")
+
+    # Authoritative stats via verify
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "verify.py")], check=True)
+    stats = json.loads((RESULTS / "stats.json").read_text(encoding="utf-8"))
+    stats["winning_strategy"] = best_name
+    stats["vocab_attribution"] = vocab_attr
+    (RESULTS / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
+    (PUBLIC / "results" / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
 
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -240,7 +286,10 @@ def main() -> None:
         "vocab_sweep_curves.json",
         "tokenizer.json",
         "vocab.json",
+        "vocab_roi.json",
+        "parity_corpus.json",
         "manifest.sha256.json",
+        "verification_manifest.json",
     ]:
         src = RESULTS / name
         if src.exists():

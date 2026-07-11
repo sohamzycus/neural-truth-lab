@@ -1,0 +1,456 @@
+{
+  "definition": "Vocabulary ROI = estimated evaluation tokens saved / token slots used for that word",
+  "top_opportunities": [
+    {
+      "word": "{{citation}}:",
+      "language": "bn",
+      "frequency": 13,
+      "token_count": 8,
+      "char_length": 13,
+      "tokens_saved_estimate": 65,
+      "roi_estimate": 8.125
+    },
+    {
+      "word": "భారతదేశం",
+      "language": "te",
+      "frequency": 19,
+      "token_count": 6,
+      "char_length": 8,
+      "tokens_saved_estimate": 38,
+      "roi_estimate": 6.333333333333333
+    },
+    {
+      "word": "আইএসবিএন",
+      "language": "bn",
+      "frequency": 38,
+      "token_count": 7,
+      "char_length": 8,
+      "tokens_saved_estimate": 38,
+      "roi_estimate": 5.428571428571429
+    },
+    {
+      "word": "(সাহায্য)",
+      "language": "bn",
+      "frequency": 19,
+      "token_count": 7,
+      "char_length": 9,
+      "tokens_saved_estimate": 38,
+      "roi_estimate": 5.428571428571429
+    },
+    {
+      "word": "భారతదేశంలో",
+      "language": "te",
+      "frequency": 12,
+      "token_count": 7,
+      "char_length": 10,
+      "tokens_saved_estimate": 36,
+      "roi_estimate": 5.142857142857143
+    },
+    {
+      "word": "क्षेत्र",
+      "language": "hi",
+      "frequency": 21,
+      "token_count": 6,
+      "char_length": 7,
+      "tokens_saved_estimate": 21,
+      "roi_estimate": 3.5
+    },
+    {
+      "word": "million",
+      "language": "en",
+      "frequency": 17,
+      "token_count": 6,
+      "char_length": 7,
+      "tokens_saved_estimate": 17,
+      "roi_estimate": 2.8333333333333335
+    },
+    {
+      "word": "భారతదేశానికి",
+      "language": "te",
+      "frequency": 5,
+      "token_count": 9,
+      "char_length": 12,
+      "tokens_saved_estimate": 15,
+      "roi_estimate": 1.6666666666666667
+    },
+    {
+      "word": "వచ్చింది.",
+      "language": "te",
+      "frequency": 10,
+      "token_count": 8,
+      "char_length": 9,
+      "tokens_saved_estimate": 10,
+      "roi_estimate": 1.25
+    },
+    {
+      "word": "ప్రాంతాలు",
+      "language": "te",
+      "frequency": 5,
+      "token_count": 7,
+      "char_length": 9,
+      "tokens_saved_estimate": 10,
+      "roi_estimate": 1.4285714285714286
+    },
+    {
+      "word": "మార్గాలు",
+      "language": "te",
+      "frequency": 9,
+      "token_count": 7,
+      "char_length": 8,
+      "tokens_saved_estimate": 9,
+      "roi_estimate": 1.2857142857142858
+    },
+    {
+      "word": "భారతదేశ",
+      "language": "te",
+      "frequency": 8,
+      "token_count": 6,
+      "char_length": 7,
+      "tokens_saved_estimate": 8,
+      "roi_estimate": 1.3333333333333333
+    },
+    {
+      "word": "the",
+      "language": "en",
+      "frequency": 698,
+      "token_count": 6,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "and",
+      "language": "en",
+      "frequency": 387,
+      "token_count": 6,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "of",
+      "language": "en",
+      "frequency": 383,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "in",
+      "language": "en",
+      "frequency": 248,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "to",
+      "language": "en",
+      "frequency": 180,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "a",
+      "language": "en",
+      "frequency": 161,
+      "token_count": 6,
+      "char_length": 1,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "India",
+      "language": "en",
+      "frequency": 134,
+      "token_count": 6,
+      "char_length": 5,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "The",
+      "language": "en",
+      "frequency": 109,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "is",
+      "language": "en",
+      "frequency": 99,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "by",
+      "language": "en",
+      "frequency": 99,
+      "token_count": 7,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "Indian",
+      "language": "en",
+      "frequency": 89,
+      "token_count": 7,
+      "char_length": 6,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "was",
+      "language": "en",
+      "frequency": 74,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "with",
+      "language": "en",
+      "frequency": 71,
+      "token_count": 7,
+      "char_length": 4,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "===",
+      "language": "en",
+      "frequency": 66,
+      "token_count": 6,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "as",
+      "language": "en",
+      "frequency": 63,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "from",
+      "language": "en",
+      "frequency": 56,
+      "token_count": 7,
+      "char_length": 4,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "has",
+      "language": "en",
+      "frequency": 56,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "In",
+      "language": "en",
+      "frequency": 53,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "which",
+      "language": "en",
+      "frequency": 50,
+      "token_count": 7,
+      "char_length": 5,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "or",
+      "language": "en",
+      "frequency": 48,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "for",
+      "language": "en",
+      "frequency": 46,
+      "token_count": 6,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "its",
+      "language": "en",
+      "frequency": 43,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "India's",
+      "language": "en",
+      "frequency": 43,
+      "token_count": 8,
+      "char_length": 7,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "on",
+      "language": "en",
+      "frequency": 40,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "were",
+      "language": "en",
+      "frequency": 40,
+      "token_count": 8,
+      "char_length": 4,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "are",
+      "language": "en",
+      "frequency": 34,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "an",
+      "language": "en",
+      "frequency": 32,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "into",
+      "language": "en",
+      "frequency": 29,
+      "token_count": 7,
+      "char_length": 4,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "India,",
+      "language": "en",
+      "frequency": 28,
+      "token_count": 7,
+      "char_length": 6,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "at",
+      "language": "en",
+      "frequency": 25,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "==",
+      "language": "en",
+      "frequency": 24,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "first",
+      "language": "en",
+      "frequency": 23,
+      "token_count": 7,
+      "char_length": 5,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "India.",
+      "language": "en",
+      "frequency": 21,
+      "token_count": 7,
+      "char_length": 6,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "became",
+      "language": "en",
+      "frequency": 21,
+      "token_count": 8,
+      "char_length": 6,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "during",
+      "language": "en",
+      "frequency": 21,
+      "token_count": 8,
+      "char_length": 6,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "be",
+      "language": "en",
+      "frequency": 21,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "it",
+      "language": "en",
+      "frequency": 20,
+      "token_count": 6,
+      "char_length": 2,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    },
+    {
+      "word": "but",
+      "language": "en",
+      "frequency": 20,
+      "token_count": 7,
+      "char_length": 3,
+      "tokens_saved_estimate": 0,
+      "roi_estimate": 0.0
+    }
+  ],
+  "worst_language": "en"
+}

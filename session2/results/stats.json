@@ -1,6 +1,8 @@
 {
-  "generated_at": "2026-07-11T03:19:08.233592+00:00",
-  "winning_strategy": "weighted_shared",
+  "generated_at": "2026-07-11T04:31:09.228062+00:00",
+  "source": "scripts/verify.py",
+  "verified": true,
+  "winning_strategy": "weighted-shared-bpe",
   "vocabulary_size": 10000,
   "vocab_budget": 10000,
   "languages": [
@@ -11,34 +13,42 @@
       "word_units": 10121,
       "tokens": 10622,
       "fertility": 1.0495010374468925,
-      "rank": 1
+      "rank": 1,
+      "distance_from_best": 0.0,
+      "distance_from_worst": 0.6054770464604338
     },
     {
       "lang": "hi",
-      "label": "हिन्दी",
+      "label": "Hindi",
       "characters": 43796,
       "word_units": 8078,
       "tokens": 10672,
       "fertility": 1.321119088883387,
-      "rank": 3
+      "rank": 3,
+      "distance_from_best": 0.27161805143649453,
+      "distance_from_worst": 0.33385899502393923
     },
     {
       "lang": "te",
-      "label": "తెలుగు",
+      "label": "Telugu",
       "characters": 20012,
       "word_units": 2511,
       "tokens": 3271,
       "fertility": 1.302668259657507,
-      "rank": 2
+      "rank": 2,
+      "distance_from_best": 0.2531672222106145,
+      "distance_from_worst": 0.35230982424981927
     },
     {
       "lang": "bn",
-      "label": "বাংলা",
+      "label": "Bengali",
       "characters": 46434,
       "word_units": 6388,
       "tokens": 10572,
       "fertility": 1.6549780839073263,
-      "rank": 4
+      "rank": 4,
+      "distance_from_best": 0.6054770464604338,
+      "distance_from_worst": 0.0
     }
   ],
   "fertilities": {
@@ -62,12 +72,40 @@
     "actual": 1.0495010374468925,
     "pass": true
   },
-  "vocab_allocation": {
-    "shared": 2500,
-    "en": 7500,
-    "hi": 0,
-    "te": 0,
-    "bn": 0
+  "vocab_constraint": {
+    "max_allowed": 10000,
+    "actual": 10000,
+    "pass": true
   },
-  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda"
+  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "corpus_hashes": {
+    "en": "d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341",
+    "hi": "903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd",
+    "te": "b5f601e0f0ee541b82af265a07e3657130e32550d550086179289db44fce3a46",
+    "bn": "5a81fc4e6785196ef37c2bc52040c5dd0ae1c1040a462d428d6441044d604a8e"
+  },
+  "trust": {
+    "english_lte_1_2": true,
+    "vocabulary_lte_10000": true,
+    "one_deterministic_tokenizer": true,
+    "scores_independently_reproducible": true
+  },
+  "vocab_allocation": {
+    "special": 2,
+    "latin": 479,
+    "neutral": 52,
+    "devanagari": 2608,
+    "telugu": 2993,
+    "bengali": 2789,
+    "shared": 1077
+  },
+  "vocab_attribution": {
+    "special": 2,
+    "latin": 479,
+    "neutral": 52,
+    "devanagari": 2608,
+    "telugu": 2993,
+    "bengali": 2789,
+    "shared": 1077
+  }
 }

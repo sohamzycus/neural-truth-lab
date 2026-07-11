@@ -1,0 +1,418 @@
+[
+  {
+    "id": 0,
+    "text": "India is a country."
+  },
+  {
+    "id": 1,
+    "text": "The quick brown fox jumps over the lazy dog."
+  },
+  {
+    "id": 2,
+    "text": "Tokenization matters for NLP."
+  },
+  {
+    "id": 3,
+    "text": "Hello world"
+  },
+  {
+    "id": 4,
+    "text": "New\nline\ttab"
+  },
+  {
+    "id": 5,
+    "text": "  repeated   whitespace  "
+  },
+  {
+    "id": 6,
+    "text": "Price: $42.50"
+  },
+  {
+    "id": 7,
+    "text": "Visit https://example.com/path"
+  },
+  {
+    "id": 8,
+    "text": "Email test@example.org"
+  },
+  {
+    "id": 9,
+    "text": "Numbers 1234567890"
+  },
+  {
+    "id": 10,
+    "text": "भारत एक देश है।"
+  },
+  {
+    "id": 11,
+    "text": "हिन्दी भाषा"
+  },
+  {
+    "id": 12,
+    "text": "दिल्ली भारत की राजधानी है"
+  },
+  {
+    "id": 13,
+    "text": "कृष्णा"
+  },
+  {
+    "id": 14,
+    "text": "संयुक्त"
+  },
+  {
+    "id": 15,
+    "text": "భారతదేశం ఒక దేశం."
+  },
+  {
+    "id": 16,
+    "text": "తెలుగు భాష"
+  },
+  {
+    "id": 17,
+    "text": "హైదరాబాద్"
+  },
+  {
+    "id": 18,
+    "text": "క్ష"
+  },
+  {
+    "id": 19,
+    "text": "ভারত একটি দেশ।"
+  },
+  {
+    "id": 20,
+    "text": "বাংলা ভাষা"
+  },
+  {
+    "id": 21,
+    "text": "কলকাতা"
+  },
+  {
+    "id": 22,
+    "text": "জ্ঞান"
+  },
+  {
+    "id": 23,
+    "text": "India भारत భారతదేశం ভারত"
+  },
+  {
+    "id": 24,
+    "text": "India is a diverse country."
+  },
+  {
+    "id": 25,
+    "text": "भारत एक विविध देश है।"
+  },
+  {
+    "id": 26,
+    "text": "భారతదేశం వైవిధ్యభరితమైన దేశం."
+  },
+  {
+    "id": 27,
+    "text": "ভারত একটি বৈচিত্র্যময় দেশ।"
+  },
+  {
+    "id": 28,
+    "text": "EN हिन्दी తెలుగు বাংলা mix"
+  },
+  {
+    "id": 29,
+    "text": "Flag 🇮🇳 India"
+  },
+  {
+    "id": 30,
+    "text": "Math ∑∫∂"
+  },
+  {
+    "id": 31,
+    "text": "Quote \"test\" and 'apostrophe'"
+  },
+  {
+    "id": 32,
+    "text": "क‍ष"
+  },
+  {
+    "id": 33,
+    "text": "क‌ष"
+  },
+  {
+    "id": 34,
+    "text": "word0 भारत word0 భారత word0 ভারত"
+  },
+  {
+    "id": 35,
+    "text": "word1 भारत word1 భారత word1 ভারত"
+  },
+  {
+    "id": 36,
+    "text": "word2 भारत word2 భారత word2 ভারত"
+  },
+  {
+    "id": 37,
+    "text": "word3 भारत word3 భారత word3 ভারত"
+  },
+  {
+    "id": 38,
+    "text": "word4 भारत word4 భారత word4 ভারত"
+  },
+  {
+    "id": 39,
+    "text": "word5 भारत word5 భారత word5 ভারত"
+  },
+  {
+    "id": 40,
+    "text": "word6 भारत word6 భారత word6 ভারত"
+  },
+  {
+    "id": 41,
+    "text": "word7 भारत word7 భారత word7 ভারত"
+  },
+  {
+    "id": 42,
+    "text": "word8 भारत word8 భారత word8 ভারত"
+  },
+  {
+    "id": 43,
+    "text": "word9 भारत word9 భారత word9 ভারত"
+  },
+  {
+    "id": 44,
+    "text": "word10 भारत word10 భారత word10 ভারত"
+  },
+  {
+    "id": 45,
+    "text": "word11 भारत word11 భారత word11 ভারত"
+  },
+  {
+    "id": 46,
+    "text": "word12 भारत word12 భారత word12 ভারত"
+  },
+  {
+    "id": 47,
+    "text": "word13 भारत word13 భారత word13 ভারত"
+  },
+  {
+    "id": 48,
+    "text": "word14 भारत word14 భారత word14 ভারত"
+  },
+  {
+    "id": 49,
+    "text": "word15 भारत word15 భారత word15 ভারত"
+  },
+  {
+    "id": 50,
+    "text": "word16 भारत word16 భారత word16 ভারত"
+  },
+  {
+    "id": 51,
+    "text": "word17 भारत word17 భారత word17 ভারত"
+  },
+  {
+    "id": 52,
+    "text": "word18 भारत word18 భారత word18 ভারত"
+  },
+  {
+    "id": 53,
+    "text": "word19 भारत word19 భారత word19 ভারত"
+  },
+  {
+    "id": 54,
+    "text": "word20 भारत word20 భారత word20 ভারত"
+  },
+  {
+    "id": 55,
+    "text": "word21 भारत word21 భారత word21 ভারত"
+  },
+  {
+    "id": 56,
+    "text": "word22 भारत word22 భారత word22 ভারত"
+  },
+  {
+    "id": 57,
+    "text": "word23 भारत word23 భారత word23 ভারত"
+  },
+  {
+    "id": 58,
+    "text": "word24 भारत word24 భారత word24 ভারত"
+  },
+  {
+    "id": 59,
+    "text": "word25 भारत word25 భారత word25 ভারত"
+  },
+  {
+    "id": 60,
+    "text": "word26 भारत word26 భారత word26 ভারত"
+  },
+  {
+    "id": 61,
+    "text": "word27 भारत word27 భారత word27 ভারত"
+  },
+  {
+    "id": 62,
+    "text": "word28 भारत word28 భారత word28 ভারত"
+  },
+  {
+    "id": 63,
+    "text": "word29 भारत word29 భారత word29 ভারত"
+  },
+  {
+    "id": 64,
+    "text": "word30 भारत word30 భారత word30 ভারত"
+  },
+  {
+    "id": 65,
+    "text": "word31 भारत word31 భారత word31 ভারত"
+  },
+  {
+    "id": 66,
+    "text": "word32 भारत word32 భారత word32 ভারত"
+  },
+  {
+    "id": 67,
+    "text": "word33 भारत word33 భారత word33 ভারত"
+  },
+  {
+    "id": 68,
+    "text": "word34 भारत word34 భారత word34 ভারত"
+  },
+  {
+    "id": 69,
+    "text": "word35 भारत word35 భారత word35 ভারত"
+  },
+  {
+    "id": 70,
+    "text": "word36 भारत word36 భారత word36 ভারত"
+  },
+  {
+    "id": 71,
+    "text": "word37 भारत word37 భారత word37 ভারত"
+  },
+  {
+    "id": 72,
+    "text": "word38 भारत word38 భారత word38 ভারত"
+  },
+  {
+    "id": 73,
+    "text": "word39 भारत word39 భారత word39 ভারত"
+  },
+  {
+    "id": 74,
+    "text": "word40 भारत word40 భారత word40 ভারত"
+  },
+  {
+    "id": 75,
+    "text": "word41 भारत word41 భారత word41 ভারত"
+  },
+  {
+    "id": 76,
+    "text": "word42 भारत word42 భారత word42 ভারত"
+  },
+  {
+    "id": 77,
+    "text": "word43 भारत word43 భారత word43 ভারত"
+  },
+  {
+    "id": 78,
+    "text": "word44 भारत word44 భారత word44 ভারত"
+  },
+  {
+    "id": 79,
+    "text": "word45 भारत word45 భారత word45 ভারত"
+  },
+  {
+    "id": 80,
+    "text": "word46 भारत word46 భారత word46 ভারত"
+  },
+  {
+    "id": 81,
+    "text": "word47 भारत word47 భారత word47 ভারত"
+  },
+  {
+    "id": 82,
+    "text": "word48 भारत word48 భారత word48 ভারত"
+  },
+  {
+    "id": 83,
+    "text": "word49 भारत word49 భారత word49 ভারত"
+  },
+  {
+    "id": 84,
+    "text": "word50 भारत word50 భారత word50 ভারত"
+  },
+  {
+    "id": 85,
+    "text": "word51 भारत word51 భారత word51 ভারত"
+  },
+  {
+    "id": 86,
+    "text": "word52 भारत word52 భారత word52 ভারত"
+  },
+  {
+    "id": 87,
+    "text": "word53 भारत word53 భారత word53 ভারত"
+  },
+  {
+    "id": 88,
+    "text": "word54 भारत word54 భారత word54 ভারত"
+  },
+  {
+    "id": 89,
+    "text": "word55 भारत word55 భారత word55 ভারত"
+  },
+  {
+    "id": 90,
+    "text": "word56 भारत word56 భారత word56 ভারত"
+  },
+  {
+    "id": 91,
+    "text": "word57 भारत word57 భారత word57 ভারত"
+  },
+  {
+    "id": 92,
+    "text": "word58 भारत word58 భారత word58 ভারত"
+  },
+  {
+    "id": 93,
+    "text": "word59 भारत word59 భారత word59 ভারত"
+  },
+  {
+    "id": 94,
+    "text": "word60 भारत word60 భారత word60 ভারত"
+  },
+  {
+    "id": 95,
+    "text": "word61 भारत word61 భారత word61 ভারত"
+  },
+  {
+    "id": 96,
+    "text": "word62 भारत word62 భారత word62 ভারত"
+  },
+  {
+    "id": 97,
+    "text": "word63 भारत word63 భారత word63 ভারত"
+  },
+  {
+    "id": 98,
+    "text": "word64 भारत word64 భారత word64 ভারত"
+  },
+  {
+    "id": 99,
+    "text": "word65 भारत word65 భారత word65 ভারত"
+  },
+  {
+    "id": 100,
+    "text": "word66 भारत word66 భారత word66 ভারত"
+  },
+  {
+    "id": 101,
+    "text": "word67 भारत word67 భారత word67 ভারত"
+  },
+  {
+    "id": 102,
+    "text": "word68 भारत word68 భారత word68 ভারত"
+  },
+  {
+    "id": 103,
+    "text": "word69 भारत word69 భారత word69 ভারত"
+  }
+]
