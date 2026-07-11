@@ -15,7 +15,9 @@
       },
       "gap": 0.7228637175432799,
       "score": 1383.3866270098515,
-      "englishConstraintPassed": false
+      "englishConstraintPassed": false,
+      "evidenceType": "MEASURED",
+      "evidenceNote": "Train-arena snapshot from scripts/train.py; not the authoritative final score."
     },
     {
       "id": "allocated-monolingual-bpe",
@@ -32,24 +34,29 @@
       },
       "gap": 5.079967085639312,
       "score": 196.85166914307877,
-      "englishConstraintPassed": false
+      "englishConstraintPassed": false,
+      "evidenceType": "MEASURED",
+      "evidenceNote": "Train-arena snapshot from scripts/train.py; not the authoritative final score."
     },
     {
       "id": "weighted-shared-bpe",
       "name": "Weighted Shared BPE",
       "implemented": true,
       "verified": true,
-      "winner": true,
+      "winner": false,
       "vocabularySize": 10000,
       "fertility": {
-        "en": 1.15393735796858,
+        "en": 1.0495010374468925,
         "hi": 1.321119088883387,
-        "te": 1.318199920350458,
-        "bn": 1.6534126487163432
+        "te": 1.302668259657507,
+        "bn": 1.6549780839073263
       },
-      "gap": 0.4994752907477631,
-      "score": 2002.1010418811763,
-      "englishConstraintPassed": true
+      "gap": 0.6054770464604338,
+      "score": 1651.590272242215,
+      "englishConstraintPassed": true,
+      "evidenceType": "MEASURED",
+      "evidenceNote": "Train-arena snapshot from scripts/train.py; not the authoritative final score.",
+      "trainArenaNote": "Default train.py run (en_bootstrap=7500 era); final artefact tuned separately."
     },
     {
       "id": "grapheme-aware-bpe",
@@ -66,7 +73,9 @@
       },
       "gap": 2.8783428487570757,
       "score": 347.4221288238194,
-      "englishConstraintPassed": false
+      "englishConstraintPassed": false,
+      "evidenceType": "MEASURED",
+      "evidenceNote": "Train-arena snapshot from scripts/train.py; not the authoritative final score."
     },
     {
       "id": "score-directed-adaptive-bpe",
@@ -83,7 +92,9 @@
       },
       "gap": 0.6059633506580395,
       "score": 1650.2648203295803,
-      "englishConstraintPassed": true
+      "englishConstraintPassed": true,
+      "evidenceType": "MEASURED",
+      "evidenceNote": "Train-arena snapshot from scripts/train.py; not the authoritative final score."
     }
   ],
   "legacy": [
@@ -112,12 +123,12 @@
     {
       "strategy": "weighted_shared",
       "vocabulary_size": 10000,
-      "en_fertility": 1.15393735796858,
+      "en_fertility": 1.0495010374468925,
       "hi_fertility": 1.321119088883387,
-      "te_fertility": 1.318199920350458,
-      "bn_fertility": 1.6534126487163432,
-      "max_min_gap": 0.4994752907477631,
-      "score": 2002.1010418811763,
+      "te_fertility": 1.302668259657507,
+      "bn_fertility": 1.6549780839073263,
+      "max_min_gap": 0.6054770464604338,
+      "score": 1651.590272242215,
       "english_pass": true
     },
     {

@@ -282,7 +282,7 @@ export function SectionGrapheme({ stats }: { stats: Record<string, { integrity_p
 export function SectionReproduce({ stats }: { stats: Stats | null }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10" id="reproduce">
-      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Verify every number</h2>
+      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Don&apos;t trust the dashboard. Reproduce it.</h2>
       <ol className="mt-4 list-decimal space-y-2 pl-5 text-base text-[var(--color-ink)]/80">
         <li>Clone <code className="text-sm">github.com/sohamzycus/neural-truth-lab</code></li>
         <li><code className="text-sm">cd session2 && pip install -r requirements.txt</code></li>

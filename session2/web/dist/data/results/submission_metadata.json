@@ -1,0 +1,8 @@
+{
+  "winning_strategy_id": "weighted-shared-bpe",
+  "winning_strategy_name": "Weighted Shared BPE",
+  "implementation": "python/samabpe/strategies.py::train_weighted_shared",
+  "en_bootstrap": 6400,
+  "authoritative_metrics": "results/stats.json",
+  "train_arena_metrics": "results/strategy_comparison.json"
+}

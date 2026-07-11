@@ -46,47 +46,10 @@ SYNC_TO_PUBLIC = (
     "score_landscape.json",
     "token_distribution.json",
     "vocab_allocation.json",
+    "authenticity_audit.json",
+    "strategy_evidence_registry.json",
+    "submission_metadata.json",
 )
-
-
-def _patch_strategy_comparison_winner(result) -> None:
-    path = RESULTS / "strategy_comparison.json"
-    if not path.exists():
-        return
-    data = json.loads(path.read_text(encoding="utf-8"))
-    fert = result.fertilities
-    for s in data.get("strategies", []):
-        if s.get("winner"):
-            s["fertility"] = dict(fert)
-            s["gap"] = result.max_min_gap
-            s["score"] = result.score
-            s["englishConstraintPassed"] = result.english_pass
-            s["vocabularySize"] = result.vocabulary_size
-    for leg in data.get("legacy", []):
-        if leg.get("strategy") == "weighted_shared":
-            leg.update({
-                "en_fertility": fert["en"],
-                "hi_fertility": fert["hi"],
-                "te_fertility": fert["te"],
-                "bn_fertility": fert["bn"],
-                "max_min_gap": result.max_min_gap,
-                "score": result.score,
-                "english_pass": result.english_pass,
-                "vocabulary_size": result.vocabulary_size,
-            })
-    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
-
-
-def _read_winning_strategy() -> str | None:
-    path = RESULTS / "strategy_comparison.json"
-    if not path.exists():
-        return None
-    data = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(data, dict) and "strategies" in data:
-        for s in data["strategies"]:
-            if s.get("winner"):
-                return s.get("id")
-    return None
 
 
 def main() -> int:
@@ -95,7 +58,7 @@ def main() -> int:
         print("ERROR: results/tokenizer.json not found. Run scripts/train.py first.")
         return 1
 
-    result = run_verification(tok_path, DATA, winning_strategy=_read_winning_strategy())
+    result = run_verification(tok_path, DATA, winning_strategy="weighted-shared-bpe")
     print_report(result)
 
     RESULTS.mkdir(parents=True, exist_ok=True)
@@ -139,8 +102,6 @@ def main() -> int:
     (RESULTS / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
     (RESULTS / "verification_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     (RESULTS / "verification.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-
-    _patch_strategy_comparison_winner(result)
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
     for name in SYNC_TO_PUBLIC:

@@ -1,0 +1,130 @@
+{
+  "strategies": [
+    {
+      "id": "shared-vanilla-bpe",
+      "name": "Shared Vanilla BPE",
+      "implementation": "python/samabpe/strategies.py::train_shared_vanilla",
+      "question": "What happens when all four languages compete for one shared vocabulary?",
+      "evidence_file": "results/strategy_comparison.json",
+      "implemented": true,
+      "measured": true,
+      "evidence_type": "MEASURED",
+      "verified_final_submission": false,
+      "vocabulary_size": 10000,
+      "fertilities": {
+        "en": 1.5339393340578995,
+        "hi": 1.3400594206486753,
+        "te": 2.0629231381919553,
+        "bn": 1.6783030682529743
+      },
+      "gap": 0.7228637175432799,
+      "score": 1383.3866270098515,
+      "english_constraint_pass": false,
+      "train_arena_winner_flag": false
+    },
+    {
+      "id": "allocated-monolingual-bpe",
+      "name": "Allocated Monolingual BPE",
+      "implementation": "python/samabpe/strategies.py::train_allocated_monolingual",
+      "question": "What changes when vocabulary capacity is explicitly allocated across languages?",
+      "evidence_file": "results/strategy_comparison.json",
+      "implemented": true,
+      "measured": true,
+      "evidence_type": "MEASURED",
+      "verified_final_submission": false,
+      "vocabulary_size": 9487,
+      "fertilities": {
+        "en": 2.534927378717518,
+        "hi": 5.29796979450359,
+        "te": 7.61489446435683,
+        "bn": 6.832028804007514
+      },
+      "gap": 5.079967085639312,
+      "score": 196.85166914307877,
+      "english_constraint_pass": false,
+      "train_arena_winner_flag": false
+    },
+    {
+      "id": "weighted-shared-bpe",
+      "name": "Weighted Shared BPE",
+      "implementation": "python/samabpe/strategies.py::train_weighted_shared",
+      "question": "Can adjusted corpus exposure improve the multilingual min\u2013max spread?",
+      "evidence_file": "results/strategy_comparison.json",
+      "final_submission_evidence": "results/stats.json",
+      "implemented": true,
+      "measured": true,
+      "evidence_type": "MEASURED",
+      "verified_final_submission": true,
+      "vocabulary_size": 10000,
+      "fertilities": {
+        "en": 1.0495010374468925,
+        "hi": 1.321119088883387,
+        "te": 1.302668259657507,
+        "bn": 1.6549780839073263
+      },
+      "gap": 0.6054770464604338,
+      "score": 1651.590272242215,
+      "english_constraint_pass": true,
+      "train_arena_winner_flag": false,
+      "final_verified": {
+        "evidence_type": "VERIFIED",
+        "evidence_file": "results/stats.json",
+        "score": 2002.1010418811763,
+        "gap": 0.4994752907477631,
+        "fertilities": {
+          "en": 1.15393735796858,
+          "hi": 1.321119088883387,
+          "te": 1.318199920350458,
+          "bn": 1.6534126487163432
+        },
+        "tokenizer_sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
+        "note": "Final submitted artefact is Weighted Shared BPE (en_bootstrap=6400). Train-arena snapshot in strategy_comparison.json may differ."
+      }
+    },
+    {
+      "id": "grapheme-aware-bpe",
+      "name": "Grapheme-Aware BPE",
+      "implementation": "python/samabpe/strategies.py::train_grapheme_aware",
+      "question": "Does respecting script-level writing structure change tokenization behaviour?",
+      "evidence_file": "results/strategy_comparison.json",
+      "implemented": true,
+      "measured": true,
+      "evidence_type": "MEASURED",
+      "verified_final_submission": false,
+      "vocabulary_size": 2418,
+      "fertilities": {
+        "en": 6.454599347890524,
+        "hi": 3.5762564991334487,
+        "te": 4.728793309438471,
+        "bn": 4.873982467125861
+      },
+      "gap": 2.8783428487570757,
+      "score": 347.4221288238194,
+      "english_constraint_pass": false,
+      "train_arena_winner_flag": false
+    },
+    {
+      "id": "score-directed-adaptive-bpe",
+      "name": "Score-Directed Adaptive BPE",
+      "implementation": "python/samabpe/strategies.py::train_score_directed_adaptive",
+      "question": "Can the assignment objective itself influence vocabulary decisions?",
+      "evidence_file": "results/strategy_comparison.json",
+      "implemented": true,
+      "measured": true,
+      "evidence_type": "MEASURED",
+      "verified_final_submission": false,
+      "vocabulary_size": 10000,
+      "fertilities": {
+        "en": 1.0497974508447783,
+        "hi": 1.3218618469918297,
+        "te": 1.2839506172839505,
+        "bn": 1.6557608015028178
+      },
+      "gap": 0.6059633506580395,
+      "score": 1650.2648203295803,
+      "english_constraint_pass": true,
+      "train_arena_winner_flag": false
+    }
+  ],
+  "authoritative_final": "results/stats.json"
+}

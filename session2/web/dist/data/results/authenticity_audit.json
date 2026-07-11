@@ -1,0 +1,100 @@
+{
+  "generated_by": "scripts/authenticity_audit.py",
+  "authoritative_chain": [
+    "data/frozen/*.txt",
+    "results/tokenizer.json",
+    "scripts/verify.py",
+    "results/stats.json",
+    "README.md + web UI"
+  ],
+  "verified_result": {
+    "vocabulary_size": 10000,
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.318199920350458,
+      "bn": 1.6534126487163432
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.6534126487163432,
+    "gap": 0.4994752907477631,
+    "score": 2002.1010418811763,
+    "english_pass": true,
+    "vocab_pass": true,
+    "tokenizer_sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
+    "winning_strategy": "weighted-shared-bpe"
+  },
+  "claims": [
+    {
+      "claim_id": "score",
+      "claim_text": "Verified assignment score",
+      "where": "stats.json / UI hero",
+      "evidence_source": "scripts/verify.py",
+      "evidence_type": "VERIFIED",
+      "actual_value": 2002.1010418811763,
+      "consistent": true,
+      "action_required": null
+    },
+    {
+      "claim_id": "gap",
+      "claim_text": "Min\u2013max fertility spread on frozen corpora",
+      "where": "stats.json / UI",
+      "evidence_source": "scripts/verify.py",
+      "evidence_type": "VERIFIED",
+      "actual_value": 0.4994752907477631,
+      "consistent": true,
+      "action_required": null
+    },
+    {
+      "claim_id": "en_constraint",
+      "claim_text": "English X \u2264 1.2",
+      "where": "stats.json / UI trust strip",
+      "evidence_source": "scripts/verify.py",
+      "evidence_type": "VERIFIED",
+      "actual_value": true,
+      "consistent": true,
+      "action_required": null
+    },
+    {
+      "claim_id": "one_tokenizer",
+      "claim_text": "One tokenizer, no language routing",
+      "where": "one_tokenizer_proof.json",
+      "evidence_source": "scripts/final_analysis.py",
+      "evidence_type": "VERIFIED",
+      "actual_value": null,
+      "consistent": true,
+      "action_required": null
+    },
+    {
+      "claim_id": "download_identity",
+      "claim_text": "Downloadable tokenizer byte-identical to scored artefact",
+      "where": "artefact_proof.json",
+      "evidence_source": "scripts/verify.py",
+      "evidence_type": "VERIFIED",
+      "actual_value": null,
+      "consistent": true,
+      "action_required": null
+    },
+    {
+      "claim_id": "strategy_table_drift",
+      "claim_text": "strategy_comparison weighted-shared score matches final verified score",
+      "where": "strategy_comparison.json",
+      "evidence_source": "scripts/train.py",
+      "evidence_type": "MEASURED",
+      "actual_value": 1651.590272242215,
+      "consistent": false,
+      "action_required": "Fix or relabel"
+    },
+    {
+      "claim_id": "roi",
+      "claim_text": "Score ROI candidates",
+      "where": "score_roi_candidates.json",
+      "evidence_source": "scripts/score_optimization.py",
+      "evidence_type": "PREDICTED",
+      "actual_value": null,
+      "consistent": true,
+      "action_required": null
+    }
+  ],
+  "issues_found": 1
+}
