@@ -1,0 +1,17 @@
+pyproject.toml
+python/samabpe/__init__.py
+python/samabpe/bpe.py
+python/samabpe/corpus.py
+python/samabpe/scoring.py
+python/samabpe/strategies.py
+python/samabpe/sweeps.py
+python/samabpe/unicode_utils.py
+python/samabpe/word_units.py
+python/samabpe.egg-info/PKG-INFO
+python/samabpe.egg-info/SOURCES.txt
+python/samabpe.egg-info/dependency_links.txt
+python/samabpe.egg-info/requires.txt
+python/samabpe.egg-info/top_level.txt
+python/tests/test_bpe.py
+python/tests/test_scoring.py
+python/tests/test_word_units.py

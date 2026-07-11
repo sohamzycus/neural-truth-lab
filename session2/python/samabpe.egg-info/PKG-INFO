@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: samabpe
+Version: 1.0.0
+Summary: SamaBPE — The Fair Tokenizer Lab
+Requires-Python: >=3.11
+Requires-Dist: regex>=2024.0.0
+Requires-Dist: requests>=2.31.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"

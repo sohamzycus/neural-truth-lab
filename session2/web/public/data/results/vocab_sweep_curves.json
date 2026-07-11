@@ -1,0 +1,158 @@
+{
+  "per_language": {
+    "en": [
+      {
+        "vocab_size": 1000,
+        "tokens": 30486,
+        "word_units": 10121,
+        "fertility": 3.012152949313309
+      },
+      {
+        "vocab_size": 2000,
+        "tokens": 25218,
+        "word_units": 10121,
+        "fertility": 2.4916510226262227
+      },
+      {
+        "vocab_size": 5000,
+        "tokens": 19703,
+        "word_units": 10121,
+        "fertility": 1.9467443928465566
+      },
+      {
+        "vocab_size": 10000,
+        "tokens": 15525,
+        "word_units": 10121,
+        "fertility": 1.5339393340578995
+      }
+    ],
+    "hi": [
+      {
+        "vocab_size": 1000,
+        "tokens": 23099,
+        "word_units": 8078,
+        "fertility": 2.859494924486259
+      },
+      {
+        "vocab_size": 2000,
+        "tokens": 18545,
+        "word_units": 8078,
+        "fertility": 2.295741520178262
+      },
+      {
+        "vocab_size": 5000,
+        "tokens": 13520,
+        "word_units": 8078,
+        "fertility": 1.6736816043575142
+      },
+      {
+        "vocab_size": 10000,
+        "tokens": 10825,
+        "word_units": 8078,
+        "fertility": 1.3400594206486753
+      }
+    ],
+    "te": [
+      {
+        "vocab_size": 1000,
+        "tokens": 12720,
+        "word_units": 2511,
+        "fertility": 5.0657108721624855
+      },
+      {
+        "vocab_size": 2000,
+        "tokens": 9942,
+        "word_units": 2511,
+        "fertility": 3.959378733572282
+      },
+      {
+        "vocab_size": 5000,
+        "tokens": 7121,
+        "word_units": 2511,
+        "fertility": 2.835921943448825
+      },
+      {
+        "vocab_size": 10000,
+        "tokens": 5180,
+        "word_units": 2511,
+        "fertility": 2.0629231381919553
+      }
+    ],
+    "bn": [
+      {
+        "vocab_size": 1000,
+        "tokens": 25553,
+        "word_units": 6388,
+        "fertility": 4.000156543519099
+      },
+      {
+        "vocab_size": 2000,
+        "tokens": 20127,
+        "word_units": 6388,
+        "fertility": 3.1507514088916717
+      },
+      {
+        "vocab_size": 5000,
+        "tokens": 14165,
+        "word_units": 6388,
+        "fertility": 2.2174389480275516
+      },
+      {
+        "vocab_size": 10000,
+        "tokens": 10721,
+        "word_units": 6388,
+        "fertility": 1.6783030682529743
+      }
+    ]
+  },
+  "allocation_sweep": [
+    {
+      "allocation": {
+        "en": 2000,
+        "hi": 2666,
+        "te": 2666,
+        "bn": 2666
+      },
+      "fertilities": {
+        "en": 2.5289991107598064,
+        "hi": 5.29796979450359,
+        "te": 7.61489446435683,
+        "bn": 6.832028804007514
+      },
+      "score": 196.62221309621427,
+      "gap": 5.0858953535970235
+    },
+    {
+      "allocation": {
+        "en": 2500,
+        "hi": 2499,
+        "te": 2499,
+        "bn": 2500
+      },
+      "fertilities": {
+        "en": 2.534927378717518,
+        "hi": 5.29796979450359,
+        "te": 7.61489446435683,
+        "bn": 6.832028804007514
+      },
+      "score": 196.85166914307877,
+      "gap": 5.079967085639312
+    },
+    {
+      "allocation": {
+        "en": 3000,
+        "hi": 2332,
+        "te": 2332,
+        "bn": 2334
+      },
+      "fertilities": {
+        "en": 2.531370417942891,
+        "hi": 5.29796979450359,
+        "te": 7.61489446435683,
+        "bn": 6.832028804007514
+      },
+      "score": 196.71393129445863,
+      "gap": 5.083524046413939
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "verified": true,
+  "vocabulary_size": 10000,
+  "languages": {
+    "en": {
+      "characters": 65327,
+      "word_units": 10121,
+      "tokens": 10622,
+      "fertility": 1.0495010374468925
+    },
+    "hi": {
+      "characters": 43796,
+      "word_units": 8078,
+      "tokens": 10672,
+      "fertility": 1.321119088883387
+    },
+    "te": {
+      "characters": 20012,
+      "word_units": 2511,
+      "tokens": 3271,
+      "fertility": 1.302668259657507
+    },
+    "bn": {
+      "characters": 46434,
+      "word_units": 6388,
+      "tokens": 10572,
+      "fertility": 1.6549780839073263
+    }
+  },
+  "sorted_x": [
+    1.0495010374468925,
+    1.302668259657507,
+    1.321119088883387,
+    1.6549780839073263
+  ],
+  "x_min": 1.0495010374468925,
+  "x_max": 1.6549780839073263,
+  "max_min_gap": 0.6054770464604338,
+  "score": 1651.590272242215,
+  "english_constraint_pass": true,
+  "vocab_constraint_pass": true
+}

@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-07-11T03:19:08.233592+00:00",
+  "winning_strategy": "weighted_shared",
+  "vocabulary_size": 10000,
+  "vocab_budget": 10000,
+  "languages": [
+    {
+      "lang": "en",
+      "label": "English",
+      "characters": 65327,
+      "word_units": 10121,
+      "tokens": 10622,
+      "fertility": 1.0495010374468925,
+      "rank": 1
+    },
+    {
+      "lang": "hi",
+      "label": "हिन्दी",
+      "characters": 43796,
+      "word_units": 8078,
+      "tokens": 10672,
+      "fertility": 1.321119088883387,
+      "rank": 3
+    },
+    {
+      "lang": "te",
+      "label": "తెలుగు",
+      "characters": 20012,
+      "word_units": 2511,
+      "tokens": 3271,
+      "fertility": 1.302668259657507,
+      "rank": 2
+    },
+    {
+      "lang": "bn",
+      "label": "বাংলা",
+      "characters": 46434,
+      "word_units": 6388,
+      "tokens": 10572,
+      "fertility": 1.6549780839073263,
+      "rank": 4
+    }
+  ],
+  "fertilities": {
+    "en": 1.0495010374468925,
+    "hi": 1.321119088883387,
+    "te": 1.302668259657507,
+    "bn": 1.6549780839073263
+  },
+  "sorted_x": [
+    1.0495010374468925,
+    1.302668259657507,
+    1.321119088883387,
+    1.6549780839073263
+  ],
+  "x_min": 1.0495010374468925,
+  "x_max": 1.6549780839073263,
+  "max_min_gap": 0.6054770464604338,
+  "score": 1651.590272242215,
+  "english_constraint": {
+    "max_allowed": 1.2,
+    "actual": 1.0495010374468925,
+    "pass": true
+  },
+  "vocab_allocation": {
+    "shared": 2500,
+    "en": 7500,
+    "hi": 0,
+    "te": 0,
+    "bn": 0
+  },
+  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda"
+}
