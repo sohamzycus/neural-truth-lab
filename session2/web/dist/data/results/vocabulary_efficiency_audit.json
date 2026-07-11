@@ -1,8 +1,8 @@
 {
   "vocabulary_size": 10000,
-  "merge_count": 17062,
-  "unused_count": 3255,
-  "low_usage_count": 5315,
+  "merge_count": 15562,
+  "unused_count": 3212,
+  "low_usage_count": 5339,
   "unused_sample": [
     {
       "id": 0,
@@ -16,14 +16,6 @@
       "id": 1,
       "token": "<pad>",
       "script": "special",
-      "total_usage": 0,
-      "used": false,
-      "languages": []
-    },
-    {
-      "id": 11,
-      "token": "c",
-      "script": "latin",
       "total_usage": 0,
       "used": false,
       "languages": []
@@ -53,24 +45,8 @@
       "languages": []
     },
     {
-      "id": 54,
-      "token": "J",
-      "script": "latin",
-      "total_usage": 0,
-      "used": false,
-      "languages": []
-    },
-    {
       "id": 56,
       "token": "Z",
-      "script": "latin",
-      "total_usage": 0,
-      "used": false,
-      "languages": []
-    },
-    {
-      "id": 61,
-      "token": "U",
       "script": "latin",
       "total_usage": 0,
       "used": false,
@@ -144,14 +120,6 @@
       "id": 78,
       "token": "ς",
       "script": "other",
-      "total_usage": 0,
-      "used": false,
-      "languages": []
-    },
-    {
-      "id": 80,
-      "token": "[",
-      "script": "latin",
       "total_usage": 0,
       "used": false,
       "languages": []
@@ -243,19 +211,41 @@
       "total_usage": 0,
       "used": false,
       "languages": []
+    },
+    {
+      "id": 94,
+      "token": "ṣ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 95,
+      "token": "ṭ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 96,
+      "token": "ī",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 97,
+      "token": "ṇ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
     }
   ],
   "low_usage_sample": [
-    {
-      "id": 2,
-      "token": "I",
-      "script": "latin",
-      "total_usage": 1,
-      "used": true,
-      "languages": [
-        "te"
-      ]
-    },
     {
       "id": 3,
       "token": "n",
@@ -268,28 +258,8 @@
       ]
     },
     {
-      "id": 4,
-      "token": "d",
-      "script": "latin",
-      "total_usage": 1,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
       "id": 9,
       "token": "o",
-      "script": "latin",
-      "total_usage": 1,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
-      "id": 10,
-      "token": "f",
       "script": "latin",
       "total_usage": 1,
       "used": true,
@@ -318,16 +288,6 @@
       ]
     },
     {
-      "id": 15,
-      "token": "h",
-      "script": "latin",
-      "total_usage": 2,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
       "id": 19,
       "token": "u",
       "script": "latin",
@@ -335,16 +295,6 @@
       "used": true,
       "languages": [
         "te",
-        "bn"
-      ]
-    },
-    {
-      "id": 20,
-      "token": "b",
-      "script": "latin",
-      "total_usage": 1,
-      "used": true,
-      "languages": [
         "bn"
       ]
     },
@@ -379,16 +329,6 @@
       ]
     },
     {
-      "id": 28,
-      "token": "g",
-      "script": "latin",
-      "total_usage": 1,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
       "id": 29,
       "token": "m",
       "script": "latin",
@@ -409,16 +349,6 @@
       ]
     },
     {
-      "id": 37,
-      "token": "O",
-      "script": "latin",
-      "total_usage": 3,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
       "id": 39,
       "token": "k",
       "script": "latin",
@@ -429,39 +359,8 @@
       ]
     },
     {
-      "id": 42,
-      "token": "N",
-      "script": "latin",
-      "total_usage": 2,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
-      "id": 48,
-      "token": "V",
-      "script": "latin",
-      "total_usage": 3,
-      "used": true,
-      "languages": [
-        "te",
-        "bn"
-      ]
-    },
-    {
       "id": 52,
       "token": "x",
-      "script": "latin",
-      "total_usage": 2,
-      "used": true,
-      "languages": [
-        "bn"
-      ]
-    },
-    {
-      "id": 55,
-      "token": "G",
       "script": "latin",
       "total_usage": 2,
       "used": true,
@@ -477,6 +376,16 @@
       "used": true,
       "languages": [
         "bn"
+      ]
+    },
+    {
+      "id": 61,
+      "token": "U",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "en"
       ]
     },
     {
@@ -524,13 +433,13 @@
       ]
     },
     {
-      "id": 90,
-      "token": "Y",
+      "id": 80,
+      "token": "[",
       "script": "latin",
-      "total_usage": 3,
+      "total_usage": 1,
       "used": true,
       "languages": [
-        "bn"
+        "en"
       ]
     },
     {
@@ -551,6 +460,96 @@
       "used": true,
       "languages": [
         "bn"
+      ]
+    },
+    {
+      "id": 105,
+      "token": "Ś",
+      "script": "other",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 110,
+      "token": "ा",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 122,
+      "token": "्",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 132,
+      "token": "ऑ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 137,
+      "token": "ष",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 145,
+      "token": "ै",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 147,
+      "token": "ौ",
+      "script": "devanagari",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 149,
+      "token": "ृ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 151,
+      "token": "ँ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
       ]
     }
   ],
@@ -575,9 +574,10 @@
       "id": 2,
       "token": "I",
       "script": "latin",
-      "total_usage": 1,
+      "total_usage": 7,
       "used": true,
       "languages": [
+        "en",
         "te"
       ]
     },
@@ -596,9 +596,10 @@
       "id": 4,
       "token": "d",
       "script": "latin",
-      "total_usage": 1,
+      "total_usage": 20,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -616,9 +617,10 @@
       "id": 6,
       "token": "a",
       "script": "latin",
-      "total_usage": 4,
+      "total_usage": 9,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -637,9 +639,10 @@
       "id": 8,
       "token": "</w>",
       "script": "special",
-      "total_usage": 34,
+      "total_usage": 42,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "te",
         "bn"
@@ -659,9 +662,10 @@
       "id": 10,
       "token": "f",
       "script": "latin",
-      "total_usage": 1,
+      "total_usage": 18,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -669,9 +673,11 @@
       "id": 11,
       "token": "c",
       "script": "latin",
-      "total_usage": 0,
-      "used": false,
-      "languages": []
+      "total_usage": 28,
+      "used": true,
+      "languages": [
+        "en"
+      ]
     },
     {
       "id": 12,
@@ -705,9 +711,10 @@
       "id": 15,
       "token": "h",
       "script": "latin",
-      "total_usage": 2,
+      "total_usage": 17,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -715,9 +722,10 @@
       "id": 16,
       "token": "e",
       "script": "latin",
-      "total_usage": 4,
+      "total_usage": 9,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "bn"
       ]
@@ -726,9 +734,10 @@
       "id": 17,
       "token": "R",
       "script": "latin",
-      "total_usage": 7,
+      "total_usage": 21,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "bn"
       ]
@@ -756,9 +765,10 @@
       "id": 20,
       "token": "b",
       "script": "latin",
-      "total_usage": 1,
+      "total_usage": 22,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -786,9 +796,10 @@
       "id": 23,
       "token": "S",
       "script": "latin",
-      "total_usage": 10,
+      "total_usage": 22,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -796,7 +807,7 @@
       "id": 24,
       "token": "A",
       "script": "latin",
-      "total_usage": 18,
+      "total_usage": 19,
       "used": true,
       "languages": [
         "en",
@@ -831,7 +842,7 @@
       "id": 27,
       "token": "-",
       "script": "latin",
-      "total_usage": 57,
+      "total_usage": 61,
       "used": true,
       "languages": [
         "en",
@@ -844,9 +855,10 @@
       "id": 28,
       "token": "g",
       "script": "latin",
-      "total_usage": 1,
+      "total_usage": 14,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -898,7 +910,7 @@
       "id": 33,
       "token": "4",
       "script": "latin",
-      "total_usage": 10,
+      "total_usage": 11,
       "used": true,
       "languages": [
         "en",
@@ -935,7 +947,7 @@
       "id": 36,
       "token": "B",
       "script": "latin",
-      "total_usage": 30,
+      "total_usage": 27,
       "used": true,
       "languages": [
         "en",
@@ -947,9 +959,10 @@
       "id": 37,
       "token": "O",
       "script": "latin",
-      "total_usage": 3,
+      "total_usage": 11,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -957,9 +970,10 @@
       "id": 38,
       "token": "P",
       "script": "latin",
-      "total_usage": 12,
+      "total_usage": 34,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "bn"
       ]
@@ -986,7 +1000,7 @@
       "id": 41,
       "token": "C",
       "script": "latin",
-      "total_usage": 21,
+      "total_usage": 20,
       "used": true,
       "languages": [
         "en",
@@ -998,9 +1012,10 @@
       "id": 42,
       "token": "N",
       "script": "latin",
-      "total_usage": 2,
+      "total_usage": 15,
       "used": true,
       "languages": [
+        "en",
         "bn"
       ]
     },
@@ -1008,9 +1023,10 @@
       "id": 43,
       "token": "M",
       "script": "latin",
-      "total_usage": 6,
+      "total_usage": 18,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "bn"
       ]
@@ -1019,9 +1035,10 @@
       "id": 44,
       "token": "L",
       "script": "latin",
-      "total_usage": 6,
+      "total_usage": 11,
       "used": true,
       "languages": [
+        "en",
         "hi",
         "bn"
       ]
@@ -1030,9 +1047,10 @@
       "id": 45,
       "token": "T",
       "script": "latin",
-      "total_usage": 5,
+      "total_usage": 20,
       "used": true,
       "languages": [
+        "en",
         "te",
         "bn"
       ]
@@ -1052,7 +1070,7 @@
       "id": 47,
       "token": "0",
       "script": "latin",
-      "total_usage": 7,
+      "total_usage": 8,
       "used": true,
       "languages": [
         "en",
@@ -1064,9 +1082,10 @@
       "id": 48,
       "token": "V",
       "script": "latin",
-      "total_usage": 3,
+      "total_usage": 8,
       "used": true,
       "languages": [
+        "en",
         "te",
         "bn"
       ]

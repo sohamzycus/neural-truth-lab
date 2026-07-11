@@ -136,13 +136,15 @@ def train_weighted_shared(
     corpora: dict[str, str],
     weights: dict[str, float] | None = None,
     vocab_size: int = VOCAB_BUDGET,
+    en_bootstrap: int = 6000,
+    pretokenization: PretokenMode = "whitespace",
 ) -> StrategyResult:
     weights = weights or {"en": 1.0, "hi": 2.0, "te": 2.5, "bn": 2.5}
     pooled = "\n".join(corpora[l] for l in LANGS)
-    # English-seeded shared BPE with Indic-weighted continuation
-    en_seed = BPETokenizer.train(corpora["en"], 7500, pretokenization="whitespace")
+    bootstrap = min(en_bootstrap, vocab_size - 100)
+    en_seed = BPETokenizer.train(corpora["en"], bootstrap, pretokenization=pretokenization)
     pair_weights: Counter[tuple[str, str]] = Counter()
-    base = BPETokenizer(pretokenization="whitespace")
+    base = BPETokenizer(pretokenization=pretokenization)
     for lang in LANGS:
         w = weights.get(lang, 1.0)
         for pt in base.pretokenize(corpora[lang]):
@@ -152,7 +154,7 @@ def train_weighted_shared(
     tok = BPETokenizer.train(
         pooled,
         vocab_size,
-        pretokenization="whitespace",
+        pretokenization=pretokenization,
         pair_weights=pair_weights,
         seed_merges=en_seed.merges,
     )
@@ -162,7 +164,13 @@ def train_weighted_shared(
         tokenizer=tok,
         fertilities=fert,
         metrics=compute_score(fert),
-        vocab_allocation={"shared": max(0, tok.vocab_size - 7500), "en": min(7500, tok.vocab_size), "hi": 0, "te": 0, "bn": 0},
+        vocab_allocation={
+            "shared": max(0, tok.vocab_size - bootstrap),
+            "en": min(bootstrap, tok.vocab_size),
+            "hi": 0,
+            "te": 0,
+            "bn": 0,
+        },
     )
 
 

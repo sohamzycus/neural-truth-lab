@@ -1,0 +1,1108 @@
+{
+  "vocabulary_size": 10000,
+  "merge_count": 15562,
+  "unused_count": 3212,
+  "low_usage_count": 5339,
+  "unused_sample": [
+    {
+      "id": 0,
+      "token": "<unk>",
+      "script": "special",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 1,
+      "token": "<pad>",
+      "script": "special",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 12,
+      "token": "l",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 18,
+      "token": "p",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 40,
+      "token": ";",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 56,
+      "token": "Z",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 64,
+      "token": "q",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 66,
+      "token": "=",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 71,
+      "token": "Ἰ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 72,
+      "token": "ν",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 73,
+      "token": "δ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 74,
+      "token": "ί",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 75,
+      "token": "α",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 77,
+      "token": "ό",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 78,
+      "token": "ς",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 81,
+      "token": "ˈ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 82,
+      "token": "ʱ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 83,
+      "token": "ː",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 84,
+      "token": "ɾ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 85,
+      "token": "ə",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 86,
+      "token": "]",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 87,
+      "token": "ɦ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 88,
+      "token": "ɪ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 89,
+      "token": "ʊ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 92,
+      "token": "–",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 93,
+      "token": "—",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 94,
+      "token": "ṣ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 95,
+      "token": "ṭ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 96,
+      "token": "ī",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 97,
+      "token": "ṇ",
+      "script": "other",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    }
+  ],
+  "low_usage_sample": [
+    {
+      "id": 3,
+      "token": "n",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 9,
+      "token": "o",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 13,
+      "token": "y",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 14,
+      "token": "t",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 19,
+      "token": "u",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 21,
+      "token": "s",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 22,
+      "token": "r",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 26,
+      "token": "v",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 29,
+      "token": "m",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 30,
+      "token": "w",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 39,
+      "token": "k",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 52,
+      "token": "x",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 57,
+      "token": "j",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 61,
+      "token": "U",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "id": 63,
+      "token": "%",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 69,
+      "token": ":",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 76,
+      "token": ")",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 79,
+      "token": "ā",
+      "script": "other",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 80,
+      "token": "[",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "id": 91,
+      "token": "z",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 99,
+      "token": "°",
+      "script": "other",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 105,
+      "token": "Ś",
+      "script": "other",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 110,
+      "token": "ा",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 122,
+      "token": "्",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 132,
+      "token": "ऑ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 137,
+      "token": "ष",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 145,
+      "token": "ै",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 147,
+      "token": "ौ",
+      "script": "devanagari",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 149,
+      "token": "ृ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 151,
+      "token": "ँ",
+      "script": "devanagari",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    }
+  ],
+  "entries_sample": [
+    {
+      "id": 0,
+      "token": "<unk>",
+      "script": "special",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 1,
+      "token": "<pad>",
+      "script": "special",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 2,
+      "token": "I",
+      "script": "latin",
+      "total_usage": 7,
+      "used": true,
+      "languages": [
+        "en",
+        "te"
+      ]
+    },
+    {
+      "id": 3,
+      "token": "n",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 4,
+      "token": "d",
+      "script": "latin",
+      "total_usage": 20,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 5,
+      "token": "i",
+      "script": "latin",
+      "total_usage": 4,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 6,
+      "token": "a",
+      "script": "latin",
+      "total_usage": 9,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 7,
+      "token": ",",
+      "script": "latin",
+      "total_usage": 5,
+      "used": true,
+      "languages": [
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 8,
+      "token": "</w>",
+      "script": "special",
+      "total_usage": 42,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 9,
+      "token": "o",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 10,
+      "token": "f",
+      "script": "latin",
+      "total_usage": 18,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 11,
+      "token": "c",
+      "script": "latin",
+      "total_usage": 28,
+      "used": true,
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "id": 12,
+      "token": "l",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 13,
+      "token": "y",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 14,
+      "token": "t",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 15,
+      "token": "h",
+      "script": "latin",
+      "total_usage": 17,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 16,
+      "token": "e",
+      "script": "latin",
+      "total_usage": 9,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 17,
+      "token": "R",
+      "script": "latin",
+      "total_usage": 21,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 18,
+      "token": "p",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 19,
+      "token": "u",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 20,
+      "token": "b",
+      "script": "latin",
+      "total_usage": 22,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 21,
+      "token": "s",
+      "script": "latin",
+      "total_usage": 3,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 22,
+      "token": "r",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 23,
+      "token": "S",
+      "script": "latin",
+      "total_usage": 22,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 24,
+      "token": "A",
+      "script": "latin",
+      "total_usage": 19,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 25,
+      "token": ".",
+      "script": "latin",
+      "total_usage": 5,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 26,
+      "token": "v",
+      "script": "latin",
+      "total_usage": 2,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 27,
+      "token": "-",
+      "script": "latin",
+      "total_usage": 61,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 28,
+      "token": "g",
+      "script": "latin",
+      "total_usage": 14,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 29,
+      "token": "m",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 30,
+      "token": "w",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "hi"
+      ]
+    },
+    {
+      "id": 31,
+      "token": "1",
+      "script": "latin",
+      "total_usage": 23,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te"
+      ]
+    },
+    {
+      "id": 32,
+      "token": "9",
+      "script": "latin",
+      "total_usage": 10,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te"
+      ]
+    },
+    {
+      "id": 33,
+      "token": "4",
+      "script": "latin",
+      "total_usage": 11,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te"
+      ]
+    },
+    {
+      "id": 34,
+      "token": "7",
+      "script": "latin",
+      "total_usage": 14,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 35,
+      "token": "'",
+      "script": "latin",
+      "total_usage": 6,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 36,
+      "token": "B",
+      "script": "latin",
+      "total_usage": 27,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 37,
+      "token": "O",
+      "script": "latin",
+      "total_usage": 11,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 38,
+      "token": "P",
+      "script": "latin",
+      "total_usage": 34,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 39,
+      "token": "k",
+      "script": "latin",
+      "total_usage": 1,
+      "used": true,
+      "languages": [
+        "bn"
+      ]
+    },
+    {
+      "id": 40,
+      "token": ";",
+      "script": "latin",
+      "total_usage": 0,
+      "used": false,
+      "languages": []
+    },
+    {
+      "id": 41,
+      "token": "C",
+      "script": "latin",
+      "total_usage": 20,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 42,
+      "token": "N",
+      "script": "latin",
+      "total_usage": 15,
+      "used": true,
+      "languages": [
+        "en",
+        "bn"
+      ]
+    },
+    {
+      "id": 43,
+      "token": "M",
+      "script": "latin",
+      "total_usage": 18,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 44,
+      "token": "L",
+      "script": "latin",
+      "total_usage": 11,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "bn"
+      ]
+    },
+    {
+      "id": 45,
+      "token": "T",
+      "script": "latin",
+      "total_usage": 20,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 46,
+      "token": "5",
+      "script": "latin",
+      "total_usage": 15,
+      "used": true,
+      "languages": [
+        "en",
+        "te"
+      ]
+    },
+    {
+      "id": 47,
+      "token": "0",
+      "script": "latin",
+      "total_usage": 8,
+      "used": true,
+      "languages": [
+        "en",
+        "hi",
+        "te"
+      ]
+    },
+    {
+      "id": 48,
+      "token": "V",
+      "script": "latin",
+      "total_usage": 8,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    },
+    {
+      "id": 49,
+      "token": "E",
+      "script": "latin",
+      "total_usage": 9,
+      "used": true,
+      "languages": [
+        "en",
+        "te",
+        "bn"
+      ]
+    }
+  ],
+  "note": "Removal requires respecting BPE merge dependencies — audit is informational",
+  "title": "THE 10,000-TOKEN ECONOMY"
+}

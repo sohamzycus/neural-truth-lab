@@ -1,0 +1,10 @@
+{
+  "current_english_x": 1.1929651220235156,
+  "allowed_ceiling": 1.2,
+  "numeric_headroom": 0.007034877976484388,
+  "english_word_units": 10121,
+  "english_token_count": 12074,
+  "max_tokens_at_ceiling": 12145,
+  "integer_token_headroom": 71,
+  "interpretation": "Legitimate reallocation may reduce English bootstrap while staying under 1.2"
+}

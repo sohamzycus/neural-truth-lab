@@ -1,0 +1,104 @@
+[
+  {
+    "name": "local_weights_1",
+    "vocabulary_size": 10000,
+    "merge_count": 14562,
+    "token_counts": {
+      "en": 13031,
+      "hi": 10671,
+      "te": 3356,
+      "bn": 10549
+    },
+    "fertilities": {
+      "en": 1.2875209959490168,
+      "hi": 1.3209952958653133,
+      "te": 1.3365193150139387,
+      "bn": 1.651377582968065
+    },
+    "x_min": 1.2875209959490168,
+    "x_max": 1.651377582968065,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.3638565870190482,
+    "score": 2748.3355686718655,
+    "english_pass": false,
+    "vocab_pass": true,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 2.5
+    },
+    "en_bootstrap": 5000,
+    "runtime_sec": 109.5,
+    "accepted": false
+  },
+  {
+    "name": "local_weights_2",
+    "vocabulary_size": 10000,
+    "merge_count": 14562,
+    "token_counts": {
+      "en": 13031,
+      "hi": 10680,
+      "te": 3385,
+      "bn": 10563
+    },
+    "fertilities": {
+      "en": 1.2875209959490168,
+      "hi": 1.3221094330279772,
+      "te": 1.348068498606133,
+      "bn": 1.6535691922354414
+    },
+    "x_min": 1.2875209959490168,
+    "x_max": 1.6535691922354414,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.3660481962864246,
+    "score": 2731.880692611096,
+    "english_pass": false,
+    "vocab_pass": true,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 4.0
+    },
+    "en_bootstrap": 5000,
+    "runtime_sec": 111.1,
+    "accepted": false
+  },
+  {
+    "name": "local_weights_3",
+    "vocabulary_size": 10000,
+    "merge_count": 14562,
+    "token_counts": {
+      "en": 13031,
+      "hi": 10684,
+      "te": 3403,
+      "bn": 10563
+    },
+    "fertilities": {
+      "en": 1.2875209959490168,
+      "hi": 1.3226046051002724,
+      "te": 1.355236957387495,
+      "bn": 1.6535691922354414
+    },
+    "x_min": 1.2875209959490168,
+    "x_max": 1.6535691922354414,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.3660481962864246,
+    "score": 2731.880692611096,
+    "english_pass": false,
+    "vocab_pass": true,
+    "weights": {
+      "en": 1.0,
+      "hi": 3.0,
+      "te": 3.5,
+      "bn": 4.5
+    },
+    "en_bootstrap": 5000,
+    "runtime_sec": 112.2,
+    "accepted": false
+  }
+]

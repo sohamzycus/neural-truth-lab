@@ -1,0 +1,110 @@
+[
+  {
+    "name": "byte_whitespace_vanilla",
+    "vocabulary_size": 10000,
+    "merge_count": 9671,
+    "token_counts": {
+      "en": 15525,
+      "hi": 10825,
+      "te": 5180,
+      "bn": 10721
+    },
+    "fertilities": {
+      "en": 1.5339393340578995,
+      "hi": 1.3400594206486753,
+      "te": 2.0629231381919553,
+      "bn": 1.6783030682529743
+    },
+    "x_min": 1.3400594206486753,
+    "x_max": 2.0629231381919553,
+    "x_min_language": "hi",
+    "x_max_language": "te",
+    "gap": 0.7228637175432799,
+    "score": 1383.3866270098515,
+    "english_pass": false,
+    "vocab_pass": true,
+    "pretokenization": "whitespace",
+    "runtime_sec": 102.0
+  },
+  {
+    "name": "byte_whitespace_weighted",
+    "vocabulary_size": 10000,
+    "merge_count": 17062,
+    "token_counts": {
+      "en": 10622,
+      "hi": 10672,
+      "te": 3271,
+      "bn": 10572
+    },
+    "fertilities": {
+      "en": 1.0495010374468925,
+      "hi": 1.321119088883387,
+      "te": 1.302668259657507,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.0495010374468925,
+    "x_max": 1.6549780839073263,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.6054770464604338,
+    "score": 1651.590272242215,
+    "english_pass": true,
+    "vocab_pass": true,
+    "pretokenization": "whitespace",
+    "runtime_sec": 104.2
+  },
+  {
+    "name": "character_weighted",
+    "vocabulary_size": 331,
+    "merge_count": 0,
+    "token_counts": {
+      "en": 65327,
+      "hi": 43796,
+      "te": 20012,
+      "bn": 46434
+    },
+    "fertilities": {
+      "en": 6.454599347890524,
+      "hi": 5.421639019559297,
+      "te": 7.969733174034249,
+      "bn": 7.2689417658108955
+    },
+    "x_min": 5.421639019559297,
+    "x_max": 7.969733174034249,
+    "x_min_language": "hi",
+    "x_max_language": "te",
+    "gap": 2.548094154474952,
+    "score": 392.4501762400751,
+    "english_pass": false,
+    "vocab_pass": true,
+    "pretokenization": "character",
+    "runtime_sec": 0.1
+  },
+  {
+    "name": "grapheme_aware",
+    "vocabulary_size": 2418,
+    "merge_count": 2087,
+    "token_counts": {
+      "en": 65327,
+      "hi": 28889,
+      "te": 11874,
+      "bn": 31135
+    },
+    "fertilities": {
+      "en": 6.454599347890524,
+      "hi": 3.5762564991334487,
+      "te": 4.728793309438471,
+      "bn": 4.873982467125861
+    },
+    "x_min": 3.5762564991334487,
+    "x_max": 6.454599347890524,
+    "x_min_language": "hi",
+    "x_max_language": "en",
+    "gap": 2.8783428487570757,
+    "score": 347.4221288238194,
+    "english_pass": false,
+    "vocab_pass": true,
+    "pretokenization": "grapheme",
+    "runtime_sec": 1.9
+  }
+]

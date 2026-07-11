@@ -1,0 +1,4 @@
+{
+  "note": "Individual candidates tested in bootstrap/representation/local sweeps; pair beam not run (bounded budget)",
+  "candidates_tested": 13
+}

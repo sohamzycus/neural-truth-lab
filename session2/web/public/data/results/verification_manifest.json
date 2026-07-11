@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-07-11T10:11:11.312788+00:00",
+  "verified_at": "2026-07-11T10:49:59.479958+00:00",
   "verified": true,
   "formula": {
     "fertility": "tokens / word_units",
@@ -15,17 +15,17 @@
   "results": {
     "vocabulary_size": 10000,
     "sorted_x": [
-      1.0495010374468925,
-      1.302668259657507,
+      1.1929651220235156,
+      1.3197929111907607,
       1.321119088883387,
-      1.6549780839073263
+      1.6530995616781465
     ],
-    "x_min": 1.0495010374468925,
-    "x_max": 1.6549780839073263,
-    "max_min_gap": 0.6054770464604338,
-    "score": 1651.590272242215
+    "x_min": 1.1929651220235156,
+    "x_max": 1.6530995616781465,
+    "max_min_gap": 0.46013443965463097,
+    "score": 2173.2778810266473
   },
-  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "tokenizer_sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
   "corpus_hashes": {
     "en": "d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341",
     "hi": "903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd",
@@ -34,17 +34,17 @@
   },
   "artefact_proof": {
     "scored_tokenizer_path": "results/tokenizer.json",
-    "scored_tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+    "scored_tokenizer_sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
     "vocabulary_size_from_loaded_artefact": 10000,
     "download_copies": [
       {
         "path": "web/public/data/results/tokenizer.json",
-        "sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+        "sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
         "byte_identical_to_scored": true
       },
       {
         "path": "web/dist/data/results/tokenizer.json",
-        "sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+        "sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
         "byte_identical_to_scored": true
       }
     ],

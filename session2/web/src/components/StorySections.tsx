@@ -213,15 +213,16 @@ export function SectionTokenEconomy({ allocation }: { allocation: Record<string,
 export function SectionRejected({ items }: { items: RejectedMerge[] }) {
   if (!items.length) {
     return (
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-2xl font-bold">Rejected Merges Graveyard</h2>
+      <section className="mx-auto max-w-6xl px-4 py-10" id="rejected">
+        <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Rejected for balance</h2>
         <p className="mt-2 text-sm text-[var(--color-ink)]/60">No rejected merge records in current optimization trace.</p>
       </section>
     );
   }
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
-      <h2 className="text-2xl font-bold">Rejected Merges Graveyard</h2>
+    <section className="mx-auto max-w-6xl px-4 py-10" id="rejected">
+      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Rejected for balance</h2>
+      <p className="mt-2 text-sm text-[var(--color-ink)]/65">MEASURED — locally good compression, globally bad fairness.</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {items.slice(0, 12).map((r, i) => (
           <div key={i} className="card font-mono text-xs">

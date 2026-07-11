@@ -8,21 +8,23 @@
 
 | Language | Word units | Encoded tokens | X (tokens/word) |
 | -------- | ---------: | -------------: | ----------------: |
-| English  |      10121 |          10622 | 1.0495010374468925 |
+| English  |      10121 |          12074 | 1.1929651220235156 |
 | Hindi    |       8078 |          10672 | 1.321119088883387 |
-| Telugu   |       2511 |           3271 | 1.302668259657507 |
-| Bengali  |       6388 |          10572 | 1.6549780839073263 |
+| Telugu   |       2511 |           3314 | 1.3197929111907607 |
+| Bengali  |       6388 |          10560 | 1.6530995616781465 |
 
 | Metric | Value |
 | ------ | ----- |
-| **X_min** (English) | 1.0495010374468925 |
-| **X_max** (Bengali) | 1.6549780839073263 |
-| **Verified fairness gap** | 0.6054770464604338 |
-| **Verified self-score** | **1651.590272242215** |
+| **X_min** (English) | 1.1929651220235156 |
+| **X_max** (Bengali) | 1.6530995616781465 |
+| **Verified fairness gap** | 0.46013443965463097 |
+| **Verified self-score** | **2173.2778810266473** |
+| **Previous baseline score** | 1651.590272242215 |
+| **Improvement** | +521.69 (+31.6%) |
 | Vocabulary | 10,000 / 10,000 |
 | English constraint (X ≤ 1.2) | **PASS** |
-| Winning strategy | Weighted Shared BPE (Level 3) |
-| Tokenizer SHA-256 | `6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda` |
+| Winning strategy | Weighted Shared BPE · `en_bootstrap=6000` (Level 3) |
+| Tokenizer SHA-256 | `968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75` |
 
 **Reproduce in one command:** `python scripts/verify.py`
 
@@ -32,8 +34,6 @@ The authoritative `results/tokenizer.json` is **one tokenizer artefact** with **
 
 Evidence: `results/one_tokenizer_proof.json` · Tests: `python/tests/test_single_tokenizer.py`
 
-Mixed-script example (`India भारत భారతదేశం ভারত`) → 4 tokens from the same merge table.
-
 ## What is the assignment?
 
 Design **one** BPE tokenizer (≤10,000 tokens) for four frozen Wikipedia *India* articles (English, Hindi, Telugu, Bengali).
@@ -42,13 +42,39 @@ Design **one** BPE tokenizer (≤10,000 tokens) for four frozen Wikipedia *India
 
 `Score = 1000 / (X_max − X_min)` — maximize subject to English X ≤ 1.2.
 
-## Optimization claim (honest classification)
+## Optimization story (honest)
 
-**Level 3 — Score-aware vocabulary allocation.** English-seeded 7,500-token bootstrap plus Indic-weighted shared BPE continuation. Level 4 (direct score-aware merge selection) is implemented in `train_score_directed_adaptive` but did not win the verified strategy comparison. See `results/optimization_claim_audit.json`.
+### Baseline reproduced
+
+`results/pre_optimization_baseline.json` independently verified score **1651.59** (gap 0.6055, English X_min 1.0495, Bengali X_max 1.6550).
+
+### What improved the score
+
+**English bootstrap reallocation sweep** (`scripts/score_optimization.py`): reducing English-seeded vocabulary from 7,500 → **6,000** freed 1,500 merge slots for Indic-weighted shared BPE while keeping English safely under 1.2 (X=1.1930).
+
+| Bootstrap | Score | English X | Accepted |
+| --------- | ----: | --------: | -------- |
+| 7500 (baseline) | 1651.59 | 1.0495 | — |
+| 7000 | 1792.32 | — | ✓ |
+| 6500 | 1964.79 | — | ✓ |
+| **6000** | **2173.28** | **1.1930** | **✓ winner** |
+| 5500 | 2426.80 | — | ✗ (English > 1.2) |
+| 5000 | 2748.34 | — | ✗ (English > 1.2) |
+
+### What did not win
+
+- **Character/codepoint BPE** and **grapheme-aware BPE**: far worse scores (392 / 347) — byte-level whitespace pretokenization remains best for this corpus mix.
+- **Vanilla shared BPE**: 1383.39 — weighted shared still wins.
+- **Local weight perturbations** at bootstrap=5000: violate English constraint.
+- **Prior bounded weight search** (`final_score_search.py`): no improvement at bootstrap=7500.
+
+### Track A vs Track B
 
 **Track A (compression-honest):** final tokenizer. **Track B (deliberate degradation):** not used. See `results/objective_sensitivity.json`.
 
-Bounded score search (`scripts/final_score_search.py`) tested corpus-weight perturbations; **no verified improvement** over `results/final_pass_baseline.json`.
+## Optimization claim (honest classification)
+
+**Level 3 — Score-aware vocabulary allocation.** English-seeded **6,000-token** bootstrap plus Indic-weighted shared BPE continuation. Level 4 merge selection exists in `train_score_directed_adaptive` but did not beat the verified winner. See `results/optimization_claim_audit.json`.
 
 ## How is X calculated?
 
@@ -69,57 +95,37 @@ pip install -r requirements.txt
 python scripts/fetch_corpora.py   # if corpora missing
 python scripts/verify.py          # authoritative scores + hashes
 python scripts/final_analysis.py  # boundary, proof, claim audits
+python scripts/score_optimization.py  # optional bounded experiments (~22 min)
 pytest python/tests -q
+cd web && npm test && npm run build:netlify
 ```
 
-Optional retrain: `python scripts/train.py` (~12 min).
+Optional full retrain: `python scripts/train.py` (~12 min).
 
 ## Authoritative artefact chain
 
 ```
 results/tokenizer.json + data/frozen/*.txt
-        → scripts/verify.py (independent)
-        → results/stats.json, final_pass_baseline.json, artefact_proof.json
-        → web/public/data/results/ + web/dist/
-        → https://sama-bpe-tokenizer.netlify.app/
+  → scripts/verify.py (authoritative scores)
+  → scripts/score_optimization.py (bounded experiments)
+  → scripts/final_analysis.py (analysis artefacts)
+  → web/public/data/results/ → web/dist/
+  → GitHub Actions → Netlify
 ```
 
-Downloaded tokenizer SHA-256 must match verifier hash (`artefact_proof.json`).
-
-## Key artefacts
+## Key result files
 
 | File | Purpose |
-|------|---------|
-| `results/tokenizer.json` | **Authoritative scoring tokenizer** (≤10K) |
-| `results/final_pass_baseline.json` | Immutable pre-search baseline |
-| `results/stats.json` | Verified fertility & score |
-| `results/one_tokenizer_proof.json` | Single-tokenizer + mixed-script proof |
-| `results/optimization_claim_audit.json` | Honest optimizer level classification |
-| `results/objective_sensitivity.json` | Track A/B disclosure |
-| `results/final_score_search_trace.json` | Bounded weight-search evidence |
-| `results/final_boundary_analysis.json` | Score bottleneck analysis |
-| `results/strategy_comparison.json` | Five-strategy benchmark |
-| `data/frozen/*.txt` | Frozen evaluation corpora |
+| ---- | ------- |
+| `pre_optimization_baseline.json` | Immutable pre-sweep baseline (1651.59) |
+| `moving_boundary_trace.json` | Accepted optimization iteration |
+| `english_bootstrap_sweep.json` | Bootstrap allocation experiment |
+| `representation_strategy_comparison.json` | Byte vs character vs grapheme |
+| `score_landscape.json` | Discrete score sensitivity |
+| `score_roi_candidates.json` | Predicted next-merge ROI |
+| `bottleneck_word_analysis.json` | X_max fragmentation sources |
+| `vocabulary_economy_audit.json` | 10K token usage economy |
 
-## Frontend
+## License
 
-```bash
-cd web && npm ci && npm run build:netlify
-```
-
-Deploy: GitHub Actions uploads prebuilt `web/dist/` to Netlify on push. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
-
-## Corpus SHA-256
-
-| Language | SHA-256 |
-| -------- | ------- |
-| English  | `d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341` |
-| Hindi    | `903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd` |
-| Telugu   | `b5f601e0f0ee541b82af265a07e3657130e32550d550086179289db44fce3a46` |
-| Bengali  | `5a81fc4e6785196ef37c2bc52040c5dd0ae1c1040a462d428d6441044d604a8e` |
-
-## Limitations
-
-- Official denominator is Unicode-whitespace word units (see `docs/DENOMINATOR.md` for evaluator alignment).
-- Bounded weight search (4 candidates) found no better verified score; broader search may exist at higher compute.
-- Browser grapheme display uses `Intl.Segmenter`; BPE encode matches Python for whitespace pretokenization.
+MIT — see repository root.

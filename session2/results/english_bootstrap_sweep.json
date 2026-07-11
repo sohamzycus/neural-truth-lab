@@ -1,0 +1,176 @@
+[
+  {
+    "name": "weighted_shared_bootstrap_7500",
+    "vocabulary_size": 10000,
+    "merge_count": 17062,
+    "token_counts": {
+      "en": 10622,
+      "hi": 10672,
+      "te": 3271,
+      "bn": 10572
+    },
+    "fertilities": {
+      "en": 1.0495010374468925,
+      "hi": 1.321119088883387,
+      "te": 1.302668259657507,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.0495010374468925,
+    "x_max": 1.6549780839073263,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.6054770464604338,
+    "score": 1651.590272242215,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 7500,
+    "runtime_sec": 103.2,
+    "status": "MATERIALIZED",
+    "accepted": false
+  },
+  {
+    "name": "weighted_shared_bootstrap_7000",
+    "vocabulary_size": 10000,
+    "merge_count": 16562,
+    "token_counts": {
+      "en": 11100,
+      "hi": 10672,
+      "te": 3291,
+      "bn": 10570
+    },
+    "fertilities": {
+      "en": 1.0967295721766623,
+      "hi": 1.321119088883387,
+      "te": 1.3106332138590202,
+      "bn": 1.6546649968691296
+    },
+    "x_min": 1.0967295721766623,
+    "x_max": 1.6546649968691296,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5579354246924673,
+    "score": 1792.322114250404,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 7000,
+    "runtime_sec": 109.2,
+    "status": "MATERIALIZED",
+    "accepted": true
+  },
+  {
+    "name": "weighted_shared_bootstrap_6500",
+    "vocabulary_size": 10000,
+    "merge_count": 16062,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10672,
+      "te": 3306,
+      "bn": 10562
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.321119088883387,
+      "te": 1.3166069295101552,
+      "bn": 1.6534126487163432
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.6534126487163432,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5089605194801017,
+    "score": 1964.7889408425833,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "runtime_sec": 113.2,
+    "status": "MATERIALIZED",
+    "accepted": true
+  },
+  {
+    "name": "weighted_shared_bootstrap_6000",
+    "vocabulary_size": 10000,
+    "merge_count": 15562,
+    "token_counts": {
+      "en": 12074,
+      "hi": 10672,
+      "te": 3314,
+      "bn": 10560
+    },
+    "fertilities": {
+      "en": 1.1929651220235156,
+      "hi": 1.321119088883387,
+      "te": 1.3197929111907607,
+      "bn": 1.6530995616781465
+    },
+    "x_min": 1.1929651220235156,
+    "x_max": 1.6530995616781465,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.46013443965463097,
+    "score": 2173.2778810266473,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6000,
+    "runtime_sec": 114.6,
+    "status": "MATERIALIZED",
+    "accepted": true
+  },
+  {
+    "name": "weighted_shared_bootstrap_5500",
+    "vocabulary_size": 10000,
+    "merge_count": 15062,
+    "token_counts": {
+      "en": 12551,
+      "hi": 10671,
+      "te": 3336,
+      "bn": 10554
+    },
+    "fertilities": {
+      "en": 1.2400948522873234,
+      "hi": 1.3209952958653133,
+      "te": 1.3285543608124253,
+      "bn": 1.6521603005635566
+    },
+    "x_min": 1.2400948522873234,
+    "x_max": 1.6521603005635566,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.41206544827623315,
+    "score": 2426.7989567755208,
+    "english_pass": false,
+    "vocab_pass": true,
+    "en_bootstrap": 5500,
+    "runtime_sec": 115.1,
+    "status": "MATERIALIZED",
+    "accepted": false
+  },
+  {
+    "name": "weighted_shared_bootstrap_5000",
+    "vocabulary_size": 10000,
+    "merge_count": 14562,
+    "token_counts": {
+      "en": 13031,
+      "hi": 10671,
+      "te": 3356,
+      "bn": 10549
+    },
+    "fertilities": {
+      "en": 1.2875209959490168,
+      "hi": 1.3209952958653133,
+      "te": 1.3365193150139387,
+      "bn": 1.651377582968065
+    },
+    "x_min": 1.2875209959490168,
+    "x_max": 1.651377582968065,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.3638565870190482,
+    "score": 2748.3355686718655,
+    "english_pass": false,
+    "vocab_pass": true,
+    "en_bootstrap": 5000,
+    "runtime_sec": 116.6,
+    "status": "MATERIALIZED",
+    "accepted": false
+  }
+]

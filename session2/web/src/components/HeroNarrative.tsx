@@ -11,9 +11,11 @@ type ProofData = {
 export function HeroNarrative({
   stats,
   proof,
+  sensitivity,
 }: {
   stats: Stats | null;
   proof?: ProofData | null;
+  sensitivity?: { baseline_score?: number; improved?: boolean; best_track_a_score?: number } | null;
 }) {
   if (!stats) {
     return (
@@ -125,6 +127,12 @@ export function HeroNarrative({
             <p className="mt-2 text-sm text-[var(--color-ink)]/65">
               1000 ÷ {stats.max_min_gap.toFixed(4)}
             </p>
+            {sensitivity?.improved && sensitivity.baseline_score && (
+              <p className="mt-2 text-sm font-medium text-[var(--color-leaf)]">
+                {sensitivity.baseline_score.toFixed(2)} → {stats.score.toFixed(2)} · +
+                {(((stats.score - sensitivity.baseline_score) / sensitivity.baseline_score) * 100).toFixed(1)}%
+              </p>
+            )}
           </div>
 
           <details className="mt-1 max-w-xl text-center text-sm text-[var(--color-ink)]/70">
@@ -185,6 +193,7 @@ export function HeroNarrative({
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <a href="#optimizer" className="btn">Explore optimizer</a>
           <a href="#playground" className="btn">Try the tokenizer</a>
           <a href="#reproduce" className="btn">Verify my score</a>
           <a href="/data/results/tokenizer.json" download className="btn">Download tokenizer</a>

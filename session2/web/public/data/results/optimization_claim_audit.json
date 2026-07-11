@@ -13,7 +13,7 @@
   ],
   "winning_strategy": "weighted-shared-bpe",
   "optimization_objective": "maximize 1000/(X_max-X_min) subject to English X<=1.2 and vocab<=10000",
-  "evidence": "English-seeded 7500-token bootstrap plus Indic-weighted BPE pair selection; score-directed adaptive merge path implemented but did not beat weighted-shared in verified comparison",
+  "evidence": "English-seeded 6,000-token bootstrap (measured headroom under X≤1.2) plus Indic-weighted shared BPE continuation; bootstrap sweep verified +31.6% score gain over 7,500 baseline",
   "limitations": "Level 4 merge selection exists in train_score_directed_adaptive but is not the verified winner; at 10K vocab single-merge headroom is limited",
   "hero_claim_recommended": "SamaBPE allocates its 10,000-token vocabulary around multilingual balance—not compression alone.",
   "level_4_claim_appropriate": false

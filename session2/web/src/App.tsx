@@ -4,8 +4,11 @@ import { loadJson } from "./types";
 import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves } from "./types";
 import { HeroNarrative } from "./components/HeroNarrative";
 import {
+  SectionBottleneck, SectionOptimizerNextMove, SectionMovingBoundary, SectionTokenEconomyStory,
+} from "./components/OptimizerStory";
+import {
   SectionChallenge, SectionWhyFairness, SectionScoreboard, SectionPipeline,
-  SectionStrategyArena, SectionFairnessRace, SectionTokenEconomy,
+  SectionStrategyArena, SectionFairnessRace,
   SectionRejected, SectionGrapheme, SectionReproduce, SectionDownloads, BudgetSimulator,
 } from "./components/StorySections";
 
@@ -27,6 +30,12 @@ export default function App() {
   const [encoder, setEncoder] = useState<BPEEncoder | null>(null);
   const [playText, setPlayText] = useState(PRESETS[0]);
   const [selectedToken, setSelectedToken] = useState<string | null>(null);
+  const [sensitivity, setSensitivity] = useState<{ baseline_score?: number; improved?: boolean; best_track_a_score?: number } | null>(null);
+  const [landscape, setLandscape] = useState<Record<string, unknown> | null>(null);
+  const [roi, setRoi] = useState<{ candidates?: Array<Record<string, unknown>> } | null>(null);
+  const [bottleneck, setBottleneck] = useState<Record<string, unknown> | null>(null);
+  const [movingTrace, setMovingTrace] = useState<Array<Record<string, unknown>> | null>(null);
+  const [headroom, setHeadroom] = useState<Record<string, unknown> | null>(null);
   const [proof, setProof] = useState<{
     claim?: string;
     mixed_script_highlight?: { input: string; tokens: string[]; token_count: number };
@@ -44,9 +53,15 @@ export default function App() {
       loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json"),
       loadJson<typeof grapheme>("/data/results/grapheme_stats.json"),
       loadJson<typeof proof>("/data/results/one_tokenizer_proof.json").catch(() => null),
+      loadJson<typeof sensitivity>("/data/results/objective_sensitivity.json").catch(() => null),
+      loadJson<typeof landscape>("/data/results/score_landscape.json").catch(() => null),
+      loadJson<typeof roi>("/data/results/score_roi_candidates.json").catch(() => null),
+      loadJson<typeof bottleneck>("/data/results/bottleneck_word_analysis.json").catch(() => null),
+      loadJson<typeof movingTrace>("/data/results/moving_boundary_trace.json").catch(() => null),
+      loadJson<typeof headroom>("/data/results/english_headroom_analysis.json").catch(() => null),
       BPEEncoder.load(),
     ])
-      .then(([s, st, tr, rj, cu, gr, pr, enc]) => {
+      .then(([s, st, tr, rj, cu, gr, pr, sens, land, roiData, bn, mt, hr, enc]) => {
         setStats(s);
         setStrategies(st);
         setTrace(tr);
@@ -54,6 +69,12 @@ export default function App() {
         setCurves(cu);
         setGrapheme(gr);
         setProof(pr);
+        setSensitivity(sens);
+        setLandscape(land);
+        setRoi(roiData);
+        setBottleneck(bn);
+        setMovingTrace(mt);
+        setHeadroom(hr);
         setEncoder(enc);
       })
       .catch((e) => setError(String(e)));
@@ -72,13 +93,17 @@ export default function App() {
         </div>
       )}
 
-      <HeroNarrative stats={stats} proof={proof} />
+      <HeroNarrative stats={stats} proof={proof} sensitivity={sensitivity} />
+      <SectionBottleneck stats={stats} landscape={landscape as never} bottleneck={bottleneck as never} />
+      <SectionOptimizerNextMove roi={roi as never} />
+      <SectionMovingBoundary trace={movingTrace as never} sensitivity={sensitivity} />
       <SectionReproduce stats={stats} />
       <SectionStrategyArena data={strategies} winner={stats?.winning_strategy ?? ""} />
-      <SectionFairnessRace trace={trace} />
-      <SectionTokenEconomy allocation={alloc} />
-      <SectionPipeline />
+      <SectionTokenEconomyStory stats={stats} headroom={headroom as never} />
+      <SectionRejected items={rejected} />
       <div className="opacity-75">
+        <SectionFairnessRace trace={trace} />
+        <SectionPipeline />
         <SectionChallenge />
         <SectionWhyFairness />
         <SectionScoreboard stats={stats} />
@@ -157,7 +182,6 @@ export default function App() {
         </div>
       </section>
 
-      <SectionRejected items={rejected} />
       <div className="opacity-80">
         <SectionGrapheme stats={grapheme} />
         <BudgetSimulator curves={curves} actualAlloc={alloc} />

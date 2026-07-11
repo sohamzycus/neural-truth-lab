@@ -29,6 +29,7 @@ FINAL_PASS_BASELINE = RESULTS / "final_pass_baseline.json"
 
 SYNC_TO_PUBLIC = (
     "stats.json",
+    "tokenizer.json",
     "verification_manifest.json",
     "artefact_proof.json",
     "final_pass_baseline.json",

@@ -1288,23 +1288,6 @@
       "script": "bengali"
     },
     {
-      "word": "California",
-      "frequency": 1,
-      "tokenization": [
-        "C",
-        "al",
-        "i",
-        "for",
-        "ni",
-        "a</w>"
-      ],
-      "tokens_per_occurrence": 6,
-      "total_token_contribution": 6,
-      "total_overhead": 5,
-      "grapheme_count": 10,
-      "script": "latin"
-    },
-    {
       "word": "০-৭৬১৯-৩৩৭২-৭",
       "frequency": 1,
       "tokenization": [
@@ -1719,6 +1702,22 @@
       "total_token_contribution": 5,
       "total_overhead": 4,
       "grapheme_count": 15,
+      "script": "bengali"
+    },
+    {
+      "word": "কমিউনিস্ট",
+      "frequency": 1,
+      "tokenization": [
+        "ক",
+        "মি",
+        "উ",
+        "নি",
+        "স্ট</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 9,
       "script": "bengali"
     }
   ],

@@ -1,0 +1,45 @@
+[
+  {
+    "iteration": 0,
+    "status": "VERIFIED",
+    "description": "pre_optimization_baseline",
+    "score": 1651.590272242215,
+    "gap": 0.6054770464604338,
+    "x_max_language": "bn"
+  },
+  {
+    "iteration": 1,
+    "status": "MATERIALIZED",
+    "accepted": true,
+    "description": "weighted_shared_bootstrap_6000",
+    "previous_score": 1651.590272242215,
+    "new_score": 2173.2778810266473,
+    "boundary_transition": false,
+    "name": "weighted_shared_bootstrap_6000",
+    "vocabulary_size": 10000,
+    "merge_count": 15562,
+    "token_counts": {
+      "en": 12074,
+      "hi": 10672,
+      "te": 3314,
+      "bn": 10560
+    },
+    "fertilities": {
+      "en": 1.1929651220235156,
+      "hi": 1.321119088883387,
+      "te": 1.3197929111907607,
+      "bn": 1.6530995616781465
+    },
+    "x_min": 1.1929651220235156,
+    "x_max": 1.6530995616781465,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.46013443965463097,
+    "score": 2173.2778810266473,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6000,
+    "runtime_sec": 114.6,
+    "tokenizer_sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75"
+  }
+]

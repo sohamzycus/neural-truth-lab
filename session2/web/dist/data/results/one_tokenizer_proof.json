@@ -1,9 +1,9 @@
 {
   "verified": true,
   "claim": "ONE TOKENIZER · FOUR LANGUAGES · NO LANGUAGE ROUTING",
-  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "tokenizer_sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
   "vocabulary_size": 10000,
-  "merge_count": 17062,
+  "merge_count": 15562,
   "same_artefact_for_all": true,
   "runtime_routing_detected": false,
   "deterministic_rerun": true,
@@ -19,7 +19,7 @@
     "token_ids": [
       0,
       1141,
-      2071,
+      2074,
       1520
     ],
     "deterministic": true
@@ -27,15 +27,17 @@
   "samples": [
     {
       "input": "India is a diverse country.",
-      "token_count": 5,
+      "token_count": 6,
       "tokens": [
         "India</w>",
         "is</w>",
         "a</w>",
         "diverse</w>",
-        "country.</w>"
+        "countr",
+        "y.</w>"
       ],
       "token_ids": [
+        0,
         0,
         0,
         0,
@@ -80,13 +82,13 @@
         "దేశం.</w>"
       ],
       "token_ids": [
-        2071,
-        5889,
+        2074,
+        5909,
         191,
         490,
         194,
-        2428,
-        6124
+        2434,
+        6144
       ],
       "deterministic": true
     },
@@ -102,8 +104,8 @@
       "token_ids": [
         1520,
         1659,
-        6681,
-        5110
+        6701,
+        5121
       ],
       "deterministic": true
     },
@@ -119,7 +121,7 @@
       "token_ids": [
         0,
         1141,
-        2071,
+        2074,
         1520
       ],
       "deterministic": true
