@@ -1,0 +1,57 @@
+{
+  "baseline": {
+    "fertilities": {
+      "en": 1.0495010374468925,
+      "hi": 1.321119088883387,
+      "te": 1.302668259657507,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.0495010374468925,
+    "x_max": 1.6549780839073263,
+    "max_min_gap": 0.6054770464604338,
+    "score": 1651.590272242215,
+    "x_max_language": "bn"
+  },
+  "track": "A_compression_honest",
+  "definition": "PREDICTED impact from single-merge fertility estimate; VERIFIED only after full tokenizer rebuild",
+  "candidates": [
+    {
+      "language_focus": "bn",
+      "word": "[bn corpus aggregate]",
+      "article_frequency": 6388,
+      "current_fertility": 1.6549780839073263,
+      "gap_above_x_min": 0.6054770464604338,
+      "evaluation_tokens_saved_potential": 38,
+      "vocabulary_slots_consumed": 0,
+      "roi_per_slot": null,
+      "status": "MEASURED",
+      "note": "language-level gap contribution; slot count requires verified merge experiment"
+    },
+    {
+      "language_focus": "hi",
+      "word": "[hi corpus aggregate]",
+      "article_frequency": 8078,
+      "current_fertility": 1.321119088883387,
+      "gap_above_x_min": 0.27161805143649453,
+      "evaluation_tokens_saved_potential": 21,
+      "vocabulary_slots_consumed": 0,
+      "roi_per_slot": null,
+      "status": "MEASURED",
+      "note": "language-level gap contribution; slot count requires verified merge experiment"
+    },
+    {
+      "language_focus": "te",
+      "word": "[te corpus aggregate]",
+      "article_frequency": 2511,
+      "current_fertility": 1.302668259657507,
+      "gap_above_x_min": 0.2531672222106145,
+      "evaluation_tokens_saved_potential": 6,
+      "vocabulary_slots_consumed": 0,
+      "roi_per_slot": null,
+      "status": "MEASURED",
+      "note": "language-level gap contribution; slot count requires verified merge experiment"
+    }
+  ],
+  "verified_candidates": [],
+  "note": "At 10K vocab most frequent pair merges already absorbed; word-level headroom is limited"
+}

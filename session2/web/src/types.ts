@@ -44,6 +44,11 @@ export interface Stats {
     one_deterministic_tokenizer: boolean;
     scores_independently_reproducible: boolean;
   };
+  optimization_audit?: {
+    hero_claim_recommended?: string;
+    highest_implemented_level?: number;
+    deliberate_degradation_used?: boolean;
+  };
 }
 
 export interface StrategyRow {
@@ -100,9 +105,9 @@ export async function loadJson<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export const LANG_DISPLAY: Record<string, { label: string; native: string }> = {
-  en: { label: "English", native: "ENGLISH" },
-  hi: { label: "Hindi", native: "हिन्दी" },
-  te: { label: "Telugu", native: "తెలుగు" },
-  bn: { label: "Bengali", native: "বাংলা" },
+export const LANG_DISPLAY: Record<string, { label: string; native: string; fontClass: string }> = {
+  en: { label: "English", native: "ENGLISH", fontClass: "" },
+  hi: { label: "Hindi", native: "हिन्दी", fontClass: "font-devanagari" },
+  te: { label: "Telugu", native: "తెలుగు", fontClass: "font-telugu" },
+  bn: { label: "Bengali", native: "বাংলা", fontClass: "font-bengali" },
 };

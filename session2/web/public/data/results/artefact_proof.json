@@ -1,0 +1,18 @@
+{
+  "scored_tokenizer_path": "results/tokenizer.json",
+  "scored_tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "vocabulary_size_from_loaded_artefact": 10000,
+  "download_copies": [
+    {
+      "path": "web/public/data/results/tokenizer.json",
+      "sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+      "byte_identical_to_scored": true
+    },
+    {
+      "path": "web/dist/data/results/tokenizer.json",
+      "sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+      "byte_identical_to_scored": true
+    }
+  ],
+  "all_copies_byte_identical": true
+}

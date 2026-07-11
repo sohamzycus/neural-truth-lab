@@ -101,6 +101,67 @@ def run_verification(
     )
 
 
+def to_baseline_json(result: VerifyResult, tokenizer_path: Path) -> dict:
+    """Immutable baseline snapshot — full precision, no rounding."""
+    x_by_lang = {lm["lang"]: lm["fertility"] for lm in result.languages}
+    tok_by_lang = {lm["lang"]: lm["tokens"] for lm in result.languages}
+    wu_by_lang = {lm["lang"]: lm["word_units"] for lm in result.languages}
+    return {
+        "immutable": True,
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+        "source": "scripts/verify.py",
+        "tokenizer_path": str(tokenizer_path.resolve()),
+        "tokenizer_sha256": result.tokenizer_sha256,
+        "vocabulary_size": result.vocabulary_size,
+        "word_units": wu_by_lang,
+        "encoded_tokens": tok_by_lang,
+        "fertilities": x_by_lang,
+        "sorted_x": result.sorted_x,
+        "x_min": result.x_min,
+        "x_max": result.x_max,
+        "x_min_language": min(x_by_lang, key=x_by_lang.get),
+        "x_max_language": max(x_by_lang, key=x_by_lang.get),
+        "max_min_gap": result.max_min_gap,
+        "score": result.score,
+        "english_constraint": {
+            "max_allowed": EN_MAX_FERTILITY,
+            "actual": result.fertilities["en"],
+            "pass": result.english_pass,
+        },
+        "vocab_constraint": {
+            "max_allowed": VOCAB_BUDGET,
+            "actual": result.vocabulary_size,
+            "pass": result.vocab_pass,
+        },
+        "corpus_hashes": result.corpus_hashes,
+    }
+
+
+def to_artefact_proof(result: VerifyResult, tokenizer_path: Path, root: Path) -> dict:
+    """Prove downloadable tokenizer is byte-identical to scored artefact."""
+    scored_path = tokenizer_path.resolve()
+    download_paths = [
+        root / "web" / "public" / "data" / "results" / "tokenizer.json",
+        root / "web" / "dist" / "data" / "results" / "tokenizer.json",
+    ]
+    copies: list[dict] = []
+    for p in download_paths:
+        if p.exists():
+            h = sha256_file(p)
+            copies.append({
+                "path": str(p.relative_to(root)),
+                "sha256": h,
+                "byte_identical_to_scored": h == result.tokenizer_sha256,
+            })
+    return {
+        "scored_tokenizer_path": str(scored_path.relative_to(root)),
+        "scored_tokenizer_sha256": result.tokenizer_sha256,
+        "vocabulary_size_from_loaded_artefact": result.vocabulary_size,
+        "download_copies": copies,
+        "all_copies_byte_identical": all(c["byte_identical_to_scored"] for c in copies) if copies else None,
+    }
+
+
 def to_stats_json(result: VerifyResult) -> dict:
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),

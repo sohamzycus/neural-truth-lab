@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T04:31:09.228062+00:00",
+  "generated_at": "2026-07-11T09:07:27.306326+00:00",
   "source": "scripts/verify.py",
   "verified": true,
   "winning_strategy": "weighted-shared-bpe",
@@ -107,5 +107,20 @@
     "telugu": 2993,
     "bengali": 2789,
     "shared": 1077
+  },
+  "optimization_audit": {
+    "winning_strategy": "weighted-shared-bpe",
+    "highest_implemented_level": 3,
+    "level_descriptions": {
+      "1": "Balanced corpus sampling",
+      "2": "Adaptive weighting",
+      "3": "Score-aware vocabulary allocation",
+      "4": "Direct score-aware merge selection"
+    },
+    "deliberate_degradation_used": false,
+    "track_a_primary": true,
+    "track_b_explored": false,
+    "hero_claim_appropriate": false,
+    "hero_claim_recommended": "SamaBPE allocates its 10,000-token vocabulary around multilingual balance—not compression alone."
   }
 }

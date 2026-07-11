@@ -15,12 +15,15 @@ from samabpe.verify_core import (
     print_report,
     to_stats_json,
     to_verification_manifest,
+    to_baseline_json,
+    to_artefact_proof,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "frozen"
 RESULTS = ROOT / "results"
 PUBLIC = ROOT / "web" / "public" / "data" / "results"
+BASELINE_PATH = RESULTS / "baseline_verification.json"
 
 
 def _read_winning_strategy() -> str | None:
@@ -45,25 +48,43 @@ def main() -> int:
     print_report(result)
 
     RESULTS.mkdir(parents=True, exist_ok=True)
+
+    # Immutable baseline — written once only
+    if not BASELINE_PATH.exists():
+        baseline = to_baseline_json(result, tok_path)
+        BASELINE_PATH.write_text(json.dumps(baseline, indent=2), encoding="utf-8")
+        print(f"\nBaseline recorded → {BASELINE_PATH.name}")
+
+    artefact = to_artefact_proof(result, tok_path, ROOT)
+    (RESULTS / "artefact_proof.json").write_text(json.dumps(artefact, indent=2), encoding="utf-8")
+
     stats = to_stats_json(result)
     manifest = to_verification_manifest(result)
+    manifest["artefact_proof"] = artefact
 
-    # Load vocab allocation from training artefact if present (non-score metadata)
     alloc_path = RESULTS / "vocab_allocation.json"
     if alloc_path.exists():
         stats["vocab_allocation"] = json.loads(alloc_path.read_text(encoding="utf-8"))
         stats["vocab_attribution"] = json.loads(alloc_path.read_text(encoding="utf-8"))
+
+    audit_path = RESULTS / "optimization_audit.json"
+    if audit_path.exists():
+        stats["optimization_audit"] = json.loads(audit_path.read_text(encoding="utf-8"))
 
     (RESULTS / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
     (RESULTS / "verification_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     (RESULTS / "verification.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
-    (PUBLIC / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
-    (PUBLIC / "verification_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    for name in ("stats.json", "verification_manifest.json", "artefact_proof.json"):
+        src = RESULTS / name
+        if src.exists():
+            (PUBLIC / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
 
     assert result.vocab_pass, f"Vocabulary {result.vocabulary_size} exceeds {VOCAB_BUDGET}"
     assert result.english_pass, f"English fertility {result.fertilities['en']} exceeds {EN_MAX_FERTILITY}"
+    if artefact.get("all_copies_byte_identical") is False:
+        print("WARNING: Download copy SHA-256 mismatch — run npm run build:netlify and sync dist")
     print("\nAll assertions passed.")
     return 0
 

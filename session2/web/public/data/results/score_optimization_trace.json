@@ -1,0 +1,1631 @@
+[
+  {
+    "iteration": 0,
+    "strategy": "baseline",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 10622,
+      "hi": 10672,
+      "te": 3271,
+      "bn": 10572
+    },
+    "fertilities": {
+      "en": 1.0495010374468925,
+      "hi": 1.321119088883387,
+      "te": 1.302668259657507,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.0495010374468925,
+    "x_max": 1.6549780839073263,
+    "gap": 0.6054770464604338,
+    "score": 1651.590272242215,
+    "english_constraint": true,
+    "reason": "immutable baseline",
+    "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda"
+  },
+  {
+    "iteration": 0,
+    "strategy": "english_seed_7500",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7500,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.265907402822481,
+      "te": 7.5559538032656315,
+      "bn": 6.733719474013776
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "english_seed_7500"
+  },
+  {
+    "iteration": 1,
+    "strategy": "merge ('े', '</w>') -> े</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7501,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.149541965833127,
+      "te": 7.5559538032656315,
+      "bn": 6.733719474013776
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('े', '</w>') -> े</w>"
+  },
+  {
+    "iteration": 2,
+    "strategy": "merge ('র', '</w>') -> র</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7502,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.149541965833127,
+      "te": 7.5559538032656315,
+      "bn": 6.597683155917345
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('র', '</w>') -> র</w>"
+  },
+  {
+    "iteration": 3,
+    "strategy": "merge ('ा', '</w>') -> ा</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7503,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.046917553849963,
+      "te": 7.5559538032656315,
+      "bn": 6.597683155917345
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('ा', '</w>') -> ा</w>"
+  },
+  {
+    "iteration": 4,
+    "strategy": "merge ('।', '</w>') -> ।</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7504,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.000371379054221,
+      "te": 7.5559538032656315,
+      "bn": 6.530995616781465
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('।', '</w>') -> ।</w>"
+  },
+  {
+    "iteration": 5,
+    "strategy": "merge ('ं', '</w>') -> ं</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7505,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.911487992077247,
+      "te": 7.5559538032656315,
+      "bn": 6.530995616781465
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('ं', '</w>') -> ं</w>"
+  },
+  {
+    "iteration": 6,
+    "strategy": "merge ('ে', '</w>') -> ে</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7506,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.911487992077247,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('ে', '</w>') -> ে</w>"
+  },
+  {
+    "iteration": 7,
+    "strategy": "merge ('ी', '</w>') -> ी</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7507,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.82842287694974,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('ी', '</w>') -> ी</w>"
+  },
+  {
+    "iteration": 8,
+    "strategy": "merge ('र', '</w>') -> र</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7508,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('र', '</w>') -> र</w>"
+  },
+  {
+    "iteration": 9,
+    "strategy": "merge ('য', '়') -> য়",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7509,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.32498434564809
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('য', '়') -> য়"
+  },
+  {
+    "iteration": 10,
+    "strategy": "merge ('্', 'র') -> ্র",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7510,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.229179711959925
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('্', 'র') -> ্র"
+  },
+  {
+    "iteration": 11,
+    "strategy": "merge ('া', 'র') -> ার",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7511,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.144176581089543
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('া', 'র') -> ার"
+  },
+  {
+    "iteration": 12,
+    "strategy": "merge ('্', 'য') -> ্য",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7512,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('্', 'য') -> ্য"
+  },
+  {
+    "iteration": 13,
+    "strategy": "merge ('क', 'े</w>') -> के</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7513,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.692250557068581,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('क', 'े</w>') -> के</w>"
+  },
+  {
+    "iteration": 14,
+    "strategy": "merge ('्', 'र') -> ्र",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7514,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.636791284971528,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('्', 'र') -> ्र"
+  },
+  {
+    "iteration": 15,
+    "strategy": "merge ('ा', 'र') -> ार",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7515,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.582446150037138,
+      "te": 7.5559538032656315,
+      "bn": 6.06386975579211
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.5559538032656315,
+    "gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "english_constraint": true,
+    "reason": "merge ('ा', 'र') -> ार"
+  },
+  {
+    "iteration": 16,
+    "strategy": "merge ('ు', '</w>') -> ు</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7516,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.582446150037138,
+      "te": 7.424930306650737,
+      "bn": 6.06386975579211
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.424930306650737,
+    "gap": 6.368908174450361,
+    "score": 157.01278344875814,
+    "english_constraint": true,
+    "reason": "merge ('ు', '</w>') -> ు</w>"
+  },
+  {
+    "iteration": 17,
+    "strategy": "merge ('त', '</w>') -> त</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7517,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.424930306650737,
+      "bn": 6.06386975579211
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.424930306650737,
+    "gap": 6.368908174450361,
+    "score": 157.01278344875814,
+    "english_constraint": true,
+    "reason": "merge ('त', '</w>') -> त</w>"
+  },
+  {
+    "iteration": 18,
+    "strategy": "merge ('్', 'ర') -> ్ర",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7518,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.303464755077658,
+      "bn": 6.06386975579211
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('్', 'ర') -> ్ర"
+  },
+  {
+    "iteration": 19,
+    "strategy": "merge ('ে', 'র</w>') -> ের</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7519,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('ে', 'র</w>') -> ের</w>"
+  },
+  {
+    "iteration": 20,
+    "strategy": "merge ('म', 'े') -> मे",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7520,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.4799455310720475,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('म', 'े') -> मे"
+  },
+  {
+    "iteration": 21,
+    "strategy": "merge ('मे', 'ं</w>') -> में</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7521,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.433894528348601,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('मे', 'ं</w>') -> में</w>"
+  },
+  {
+    "iteration": 22,
+    "strategy": "merge ('ি', '</w>') -> ি</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7522,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.433894528348601,
+      "te": 7.303464755077658,
+      "bn": 5.944896681277395
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('ি', '</w>') -> ি</w>"
+  },
+  {
+    "iteration": 23,
+    "strategy": "merge ('ह', 'ै') -> है",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7523,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.392423867293885,
+      "te": 7.303464755077658,
+      "bn": 5.944896681277395
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('ह', 'ै') -> है"
+  },
+  {
+    "iteration": 24,
+    "strategy": "merge ('্', 'ত') -> ্ত",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7524,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.392423867293885,
+      "te": 7.303464755077658,
+      "bn": 5.894802755165936
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('্', 'ত') -> ্ত"
+  },
+  {
+    "iteration": 25,
+    "strategy": "merge ('्', 'य') -> ्य",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7525,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.303464755077658,
+      "bn": 5.894802755165936
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('्', 'य') -> ्य"
+  },
+  {
+    "iteration": 26,
+    "strategy": "merge ('া', '</w>') -> া</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7526,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.303464755077658,
+      "bn": 5.84815278647464
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.303464755077658,
+    "gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "english_constraint": true,
+    "reason": "merge ('া', '</w>') -> া</w>"
+  },
+  {
+    "iteration": 27,
+    "strategy": "merge ('ా', 'ర') -> ార",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7527,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.195141377937077,
+      "bn": 5.84815278647464
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('ా', 'ర') -> ార"
+  },
+  {
+    "iteration": 28,
+    "strategy": "merge ('ভ', 'ার') -> ভার",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7528,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.195141377937077,
+      "bn": 5.8030682529743265
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('ভ', 'ার') -> ভার"
+  },
+  {
+    "iteration": 29,
+    "strategy": "merge ('न', '</w>') -> न</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7529,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.8030682529743265
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('न', '</w>') -> न</w>"
+  },
+  {
+    "iteration": 30,
+    "strategy": "merge ('ভার', 'ত') -> ভারত",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7530,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.758609893550407
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('ভার', 'ত') -> ভারত"
+  },
+  {
+    "iteration": 31,
+    "strategy": "merge ('ব', 'ি') -> বি",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7531,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.714151534126487
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('ব', 'ি') -> বি"
+  },
+  {
+    "iteration": 32,
+    "strategy": "merge ('া', 'ন') -> ান",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7532,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.669693174702568
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.195141377937077,
+    "gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "english_constraint": true,
+    "reason": "merge ('া', 'ন') -> ান"
+  },
+  {
+    "iteration": 33,
+    "strategy": "merge ('ా', 'ల') -> ాల",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7533,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.098765432098766,
+      "bn": 5.669693174702568
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('ా', 'ల') -> ాల"
+  },
+  {
+    "iteration": 34,
+    "strategy": "merge ('क', '</w>') -> क</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7534,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.282743253280515,
+      "te": 7.098765432098766,
+      "bn": 5.669693174702568
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('क', '</w>') -> क</w>"
+  },
+  {
+    "iteration": 35,
+    "strategy": "merge ('भ', 'ार') -> भार",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7535,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.248823966328299,
+      "te": 7.098765432098766,
+      "bn": 5.669536631183469
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('भ', 'ार') -> भार"
+  },
+  {
+    "iteration": 36,
+    "strategy": "merge ('र', '्') -> र्",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7536,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.669536631183469
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('र', '्') -> र्"
+  },
+  {
+    "iteration": 37,
+    "strategy": "merge ('প', '্র') -> প্র",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7537,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.628835316217908
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('প', '্র') -> প্র"
+  },
+  {
+    "iteration": 38,
+    "strategy": "merge ('য়', '</w>') -> য়</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7538,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.589699436443332
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('য়', '</w>') -> য়</w>"
+  },
+  {
+    "iteration": 39,
+    "strategy": "merge ('ও', '</w>') -> ও</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7539,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.551189730745147
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('ও', '</w>') -> ও</w>"
+  },
+  {
+    "iteration": 40,
+    "strategy": "merge ('র', '্') -> র্",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7540,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.51299311208516
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.098765432098766,
+    "gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "english_constraint": true,
+    "reason": "merge ('র', '্') -> র্"
+  },
+  {
+    "iteration": 41,
+    "strategy": "merge ('ి', '</w>') -> ి</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7541,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.017124651533254,
+      "bn": 5.51299311208516
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ి', '</w>') -> ి</w>"
+  },
+  {
+    "iteration": 42,
+    "strategy": "merge ('ি', 'ক') -> িক",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7542,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ি', 'ক') -> িক"
+  },
+  {
+    "iteration": 43,
+    "strategy": "merge ('ि', 'य') -> िय",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7543,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.1886605595444415,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ि', 'य') -> िय"
+  },
+  {
+    "iteration": 44,
+    "strategy": "merge ('ो', 'ं</w>') -> ों</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7544,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.16142609556821,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ो', 'ं</w>') -> ों</w>"
+  },
+  {
+    "iteration": 45,
+    "strategy": "merge ('औ', 'र</w>') -> और</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7545,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.134686803664273,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('औ', 'र</w>') -> और</w>"
+  },
+  {
+    "iteration": 46,
+    "strategy": "merge ('स', '्') -> स्",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7546,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.108690269868779,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('स', '्') -> स्"
+  },
+  {
+    "iteration": 47,
+    "strategy": "merge ('क', 'ी</w>') -> की</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7547,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.0828175290913595,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('क', 'ी</w>') -> की</w>"
+  },
+  {
+    "iteration": 48,
+    "strategy": "merge ('प', '्र') -> प्र",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7548,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.057935132458529,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('प', '्र') -> प्र"
+  },
+  {
+    "iteration": 49,
+    "strategy": "merge ('भार', 'त</w>') -> भारत</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7549,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.033176528843773,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('भार', 'त</w>') -> भारत</w>"
+  },
+  {
+    "iteration": 50,
+    "strategy": "merge ('ি', 'ত') -> িত",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7550,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.033176528843773,
+      "te": 7.017124651533254,
+      "bn": 5.443957420162805
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ি', 'ত') -> িত"
+  },
+  {
+    "iteration": 51,
+    "strategy": "merge ('क', 'ा</w>') -> का</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7551,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 7.017124651533254,
+      "bn": 5.443957420162805
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('क', 'ा</w>') -> का</w>"
+  },
+  {
+    "iteration": 52,
+    "strategy": "merge ('ন', '</w>') -> ন</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7552,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 7.017124651533254,
+      "bn": 5.413274890419537
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 7.017124651533254,
+    "gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "english_constraint": true,
+    "reason": "merge ('ন', '</w>') -> ন</w>"
+  },
+  {
+    "iteration": 53,
+    "strategy": "merge ('ో', '</w>') -> ో</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7553,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.9494225408203905,
+      "bn": 5.413274890419537
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.9494225408203905,
+    "gap": 5.893400408620015,
+    "score": 169.68132668151046,
+    "english_constraint": true,
+    "reason": "merge ('ో', '</w>') -> ో</w>"
+  },
+  {
+    "iteration": 54,
+    "strategy": "merge ('স', 'া') -> সা",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7554,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.9494225408203905,
+      "bn": 5.382905447714465
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.9494225408203905,
+    "gap": 5.893400408620015,
+    "score": 169.68132668151046,
+    "english_constraint": true,
+    "reason": "merge ('স', 'া') -> সা"
+  },
+  {
+    "iteration": 55,
+    "strategy": "merge ('ా', '</w>') -> ా</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7555,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.882915173237754,
+      "bn": 5.382905447714465
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.882915173237754,
+    "gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "english_constraint": true,
+    "reason": "merge ('ా', '</w>') -> ా</w>"
+  },
+  {
+    "iteration": 56,
+    "strategy": "merge ('া', 'র</w>') -> ার</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7556,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.882915173237754,
+      "bn": 5.353788353162179
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.882915173237754,
+    "gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "english_constraint": true,
+    "reason": "merge ('া', 'র</w>') -> ার</w>"
+  },
+  {
+    "iteration": 57,
+    "strategy": "merge ('य', '</w>') -> य</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7557,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.882915173237754,
+      "bn": 5.353788353162179
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.882915173237754,
+    "gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "english_constraint": true,
+    "reason": "merge ('य', '</w>') -> य</w>"
+  },
+  {
+    "iteration": 58,
+    "strategy": "merge ('స', '్') -> స్",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7558,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.81800079649542,
+      "bn": 5.353788353162179
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('స', '్') -> స్"
+  },
+  {
+    "iteration": 59,
+    "strategy": "merge ('ব', 'া') -> বা",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7559,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.81800079649542,
+      "bn": 5.326549780839073
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('ব', 'া') -> বা"
+  },
+  {
+    "iteration": 60,
+    "strategy": "merge ('स', 'े</w>') -> से</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7560,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.96496657588512,
+      "te": 6.81800079649542,
+      "bn": 5.326549780839073
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('स', 'े</w>') -> से</w>"
+  },
+  {
+    "iteration": 61,
+    "strategy": "merge ('ক', '্') -> ক্",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7561,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.96496657588512,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('ক', '্') -> ক্"
+  },
+  {
+    "iteration": 62,
+    "strategy": "merge ('ो', '</w>') -> ो</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7562,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9440455558306513,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('ो', '</w>') -> ो</w>"
+  },
+  {
+    "iteration": 63,
+    "strategy": "merge ('क', '्') -> क्",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7563,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9233721218123296,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.81800079649542,
+    "gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "english_constraint": true,
+    "reason": "merge ('क', '्') -> क्"
+  },
+  {
+    "iteration": 64,
+    "strategy": "merge ('్', 'య') -> ్య",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7564,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9233721218123296,
+      "te": 6.756670649143768,
+      "bn": 5.299624295554164
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.756670649143768,
+    "gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "english_constraint": true,
+    "reason": "merge ('్', 'య') -> ్య"
+  },
+  {
+    "iteration": 65,
+    "strategy": "merge ('र', 'ा') -> रा",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7565,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9031938598663034,
+      "te": 6.756670649143768,
+      "bn": 5.299624295554164
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.756670649143768,
+    "gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "english_constraint": true,
+    "reason": "merge ('र', 'ा') -> रा"
+  },
+  {
+    "iteration": 66,
+    "strategy": "merge ('স', '্') -> স্",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7566,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9031938598663034,
+      "te": 6.756670649143768,
+      "bn": 5.2742642454602375
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.756670649143768,
+    "gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "english_constraint": true,
+    "reason": "merge ('স', '্') -> স্"
+  },
+  {
+    "iteration": 67,
+    "strategy": "merge ('व', 'ि') -> वि",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7567,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.756670649143768,
+      "bn": 5.2742642454602375
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.756670649143768,
+    "gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "english_constraint": true,
+    "reason": "merge ('व', 'ि') -> वि"
+  },
+  {
+    "iteration": 68,
+    "strategy": "merge ('ం', '</w>') -> ం</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7568,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.698924731182796,
+      "bn": 5.2742642454602375
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.698924731182796,
+    "gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "english_constraint": true,
+    "reason": "merge ('ం', '</w>') -> ం</w>"
+  },
+  {
+    "iteration": 69,
+    "strategy": "merge ('ক্', 'ষ') -> ক্ষ",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7569,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.698924731182796,
+      "bn": 5.249686912961804
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.698924731182796,
+    "gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "english_constraint": true,
+    "reason": "merge ('ক্', 'ষ') -> ক্ষ"
+  },
+  {
+    "iteration": 70,
+    "strategy": "merge ('न', 'े</w>') -> ने</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7570,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.698924731182796,
+      "bn": 5.249686912961804
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.698924731182796,
+    "gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "english_constraint": true,
+    "reason": "merge ('न', 'े</w>') -> ने</w>"
+  },
+  {
+    "iteration": 71,
+    "strategy": "merge ('న', '్') -> న్",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7571,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.643568299482278,
+      "bn": 5.249686912961804
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.643568299482278,
+    "gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "english_constraint": true,
+    "reason": "merge ('న', '్') -> న్"
+  },
+  {
+    "iteration": 72,
+    "strategy": "merge ('িক', '</w>') -> িক</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7572,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.643568299482278,
+      "bn": 5.225422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.643568299482278,
+    "gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "english_constraint": true,
+    "reason": "merge ('িক', '</w>') -> িক</w>"
+  },
+  {
+    "iteration": 73,
+    "strategy": "merge ('है', '।</w>') -> है।</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7573,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.643568299482278,
+      "bn": 5.225422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.643568299482278,
+    "gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "english_constraint": true,
+    "reason": "merge ('है', '।</w>') -> है।</w>"
+  },
+  {
+    "iteration": 74,
+    "strategy": "merge ('న', '</w>') -> న</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7574,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.225422667501565
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.5902031063321385,
+    "gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "english_constraint": true,
+    "reason": "merge ('న', '</w>') -> న</w>"
+  },
+  {
+    "iteration": 75,
+    "strategy": "merge ('ন', '্') -> ন্",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7575,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.201628052598623
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.5902031063321385,
+    "gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "english_constraint": true,
+    "reason": "merge ('ন', '্') -> ন্"
+  },
+  {
+    "iteration": 76,
+    "strategy": "merge ('ী', 'য়</w>') -> ীয়</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7576,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.178146524733876
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.5902031063321385,
+    "gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "english_constraint": true,
+    "reason": "merge ('ী', 'য়</w>') -> ীয়</w>"
+  },
+  {
+    "iteration": 77,
+    "strategy": "merge ('ం', 'ద') -> ంద",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7577,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.537236160892075,
+      "bn": 5.178146524733876
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.537236160892075,
+    "gap": 5.481214028691699,
+    "score": 182.44133412150083,
+    "english_constraint": true,
+    "reason": "merge ('ం', 'ద') -> ంద"
+  },
+  {
+    "iteration": 78,
+    "strategy": "merge ('ప', '్ర') -> ప్ర",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7578,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.484667463162086,
+      "bn": 5.178146524733876
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.484667463162086,
+    "gap": 5.428645330961711,
+    "score": 184.20801858183745,
+    "english_constraint": true,
+    "reason": "merge ('ప', '్ర') -> ప్ర"
+  },
+  {
+    "iteration": 79,
+    "strategy": "merge ('ద', 'ే') -> దే",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7579,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.432497013142174,
+      "bn": 5.178146524733876
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.432497013142174,
+    "gap": 5.376474880941799,
+    "score": 185.99547512901793,
+    "english_constraint": true,
+    "reason": "merge ('ద', 'ే') -> దే"
+  },
+  {
+    "iteration": 80,
+    "strategy": "merge ('ल', '</w>') -> ल</w>",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 7580,
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.827308739787076,
+      "te": 6.432497013142174,
+      "bn": 5.178146524733876
+    },
+    "x_min": 1.0560221322003756,
+    "x_max": 6.432497013142174,
+    "gap": 5.376474880941799,
+    "score": 185.99547512901793,
+    "english_constraint": true,
+    "reason": "merge ('ल', '</w>') -> ल</w>"
+  },
+  {
+    "iteration": 80,
+    "strategy": "indic_weighted_fill",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 10000,
+    "fertilities": {
+      "en": 1.0497974508447783,
+      "hi": 1.3218618469918297,
+      "te": 1.2839506172839505,
+      "bn": 1.6557608015028178
+    },
+    "x_min": 1.0497974508447783,
+    "x_max": 1.6557608015028178,
+    "gap": 0.6059633506580395,
+    "score": 1650.2648203295803,
+    "english_constraint": true,
+    "reason": "indic_weighted_fill"
+  },
+  {
+    "iteration": 80,
+    "strategy": "final",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 10000,
+    "fertilities": {
+      "en": 1.0497974508447783,
+      "hi": 1.3218618469918297,
+      "te": 1.2839506172839505,
+      "bn": 1.6557608015028178
+    },
+    "x_min": 1.0497974508447783,
+    "x_max": 1.6557608015028178,
+    "gap": 0.6059633506580395,
+    "score": 1650.2648203295803,
+    "english_constraint": true,
+    "reason": "final"
+  },
+  {
+    "iteration": 84,
+    "strategy": "final_samabpe",
+    "status": "VERIFIED",
+    "accepted": true,
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 10622,
+      "hi": 10672,
+      "te": 3271,
+      "bn": 10572
+    },
+    "fertilities": {
+      "en": 1.0495010374468925,
+      "hi": 1.321119088883387,
+      "te": 1.302668259657507,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.0495010374468925,
+    "x_max": 1.6549780839073263,
+    "gap": 0.6054770464604338,
+    "score": 1651.590272242215,
+    "english_constraint": true,
+    "reason": "authoritative final tokenizer",
+    "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda"
+  }
+]
