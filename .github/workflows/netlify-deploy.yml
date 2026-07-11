@@ -1,0 +1,32 @@
+name: Deploy SamaBPE to Netlify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'session2/web/**'
+      - 'session2/results/**'
+      - '.github/workflows/netlify-deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session2/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify prebuilt dist
+        run: test -f dist/index.html && test -d dist/data/results
+
+      - name: Deploy to Netlify
+        uses: nwtgbt/actions-netlify@v2.1
+        with:
+          publish-dir: './session2/web/dist'
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: ${{ github.event.head_commit.message }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
