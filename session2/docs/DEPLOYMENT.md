@@ -4,12 +4,13 @@ Static Vite/React app. All metrics ship in `public/data/` (no Python on Netlify)
 
 ## Netlify (GitHub)
 
-1. [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import from Git** → `sohamzycus/neural-truth-lab`
+1. [app.netlify.com](https://app.netlify.com) → site **sama-bpe-tokenizer** (or import `sohamzycus/neural-truth-lab`)
 2. **Site configuration → Build & deploy → Build settings**
-   - **Base directory:** `session2/web`
-   - **Build command:** leave **empty** (uses `netlify.toml`)
-   - **Publish directory:** leave **empty**
-3. Deploy. Suggested site name: `samabpe` → `https://samabpe.netlify.app`
+   - **Base directory:** leave **empty** (repo-root `netlify.toml` sets `build.base = "session2/web"`)
+   - **Build command / Publish directory:** leave **empty** (uses `netlify.toml`)
+3. Deploy. URL: `https://sama-bpe-tokenizer.netlify.app`
+
+If build fails with “No such file or directory” for `session2/web/scripts/...`, the UI base directory is set **and** conflicts with root `netlify.toml` — clear the UI base directory field.
 
 ## Local
 

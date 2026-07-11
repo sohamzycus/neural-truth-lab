@@ -1,6 +1,5 @@
-# SamaBPE static Vite app.
-# Netlify UI: leave Build command + Publish directory EMPTY.
-# Base directory: session2/web
+# SamaBPE static Vite app (used when Netlify UI base directory = session2/web only).
+# Prefer repo-root netlify.toml with build.base = "session2/web" and empty UI base directory.
 
 [build]
   command = "bash scripts/netlify-build.sh"
