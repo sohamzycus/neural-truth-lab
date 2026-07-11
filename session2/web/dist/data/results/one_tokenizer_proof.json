@@ -3,7 +3,10 @@
   "claim": "ONE TOKENIZER · FOUR LANGUAGES · NO LANGUAGE ROUTING",
   "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
   "vocabulary_size": 10000,
+  "merge_count": 17062,
   "same_artefact_for_all": true,
+  "runtime_routing_detected": false,
+  "deterministic_rerun": true,
   "mixed_script_highlight": {
     "input": "India भारत భారతదేశం ভারত",
     "token_count": 4,

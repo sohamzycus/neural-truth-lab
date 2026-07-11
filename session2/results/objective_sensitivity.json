@@ -1,0 +1,11 @@
+{
+  "track_a_primary": true,
+  "track_b_explored": false,
+  "deliberate_degradation_in_final_tokenizer": false,
+  "best_track_a_score": 1651.590272242215,
+  "baseline_track_a_score": 1651.590272242215,
+  "best_track_b_score": null,
+  "track_b_note": "Not executed — compression-honest Track A is the authoritative submission",
+  "bounded_search_performed": true,
+  "bounded_search_improved_score": false
+}

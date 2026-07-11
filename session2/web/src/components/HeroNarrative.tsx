@@ -140,7 +140,8 @@ export function HeroNarrative({
         </div>
 
         <p className="mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-[var(--color-ink)]/70">
-          When equivalent content requires more tokens in one language, that language consumes more of
+          <span className="font-medium text-[var(--color-ink)]/85">Why this matters:</span>{" "}
+          when equivalent content requires more tokens in one language, that language consumes more of
           the available token window and requires more token-level processing.
         </p>
 

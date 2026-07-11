@@ -1,79 +1,72 @@
-# Final Optimization Pass — Completion Report
+# Final Submission Hardening — Completion Report
 
 ## 1. Executive result
 
-The verified score was **not improved** by the final boundary-aware weight search. The pre-final baseline tokenizer (weighted shared BPE, score **1651.59**) remains the authoritative submission. Four corpus-weight perturbations were materialized and freshly verified; none beat the baseline without violating constraints. All constraints still pass. The final tokenizer is byte-identical to the pre-final baseline.
+The verified score did **not** improve during this pass. Baseline and final score are both **1651.590272242215**. The fairness gap is unchanged at **0.6054770464604338**. No constraints regressed. Deliberate degradation was **not** used (Track A only). The final tokenizer is independently reproducible via `python scripts/verify.py`.
 
 ## 2. Baseline vs final
 
-| Metric | Pre-final baseline | Final | Change |
-|--------|-------------------|-------|--------|
+| Metric | Baseline | Final | Change |
+| ------ | -------: | ----: | -----: |
 | Vocabulary size | 10,000 | 10,000 | 0 |
 | English tokens | 10,622 | 10,622 | 0 |
-| English X | 1.0495 | 1.0495 | 0 |
+| English X | 1.0495010374468925 | 1.0495010374468925 | 0 |
 | Hindi tokens | 10,672 | 10,672 | 0 |
-| Hindi X | 1.3211 | 1.3211 | 0 |
+| Hindi X | 1.321119088883387 | 1.321119088883387 | 0 |
 | Telugu tokens | 3,271 | 3,271 | 0 |
-| Telugu X | 1.3027 | 1.3027 | 0 |
+| Telugu X | 1.302668259657507 | 1.302668259657507 | 0 |
 | Bengali tokens | 10,572 | 10,572 | 0 |
-| Bengali X | 1.6550 | 1.6550 | 0 |
-| Fairness gap | 0.605477 | 0.605477 | 0 |
-| Verified self-score | 1651.59 | 1651.59 | 0 |
+| Bengali X | 1.6549780839073263 | 1.6549780839073263 | 0 |
+| Fairness gap | 0.6054770464604338 | 0.6054770464604338 | 0 |
+| Verified self-score | 1651.590272242215 | 1651.590272242215 | 0 |
 
-## 3. Score search evidence
+## 3. Score optimization evidence
 
 - **Initial X_min / X_max:** English / Bengali
-- **Final X_min / X_max:** English / Bengali (unchanged)
-- **Algorithms attempted:** corpus weight perturbation (4 materialized candidates)
-- **Candidates accepted:** 0
-- **Best individual improvement:** none (baseline retained)
+- **Final X_min / X_max:** English / Bengali
+- **Techniques attempted:** corpus-weight perturbation (4 materialized candidates)
+- **Accepted candidates:** 0
 - **Boundary transitions:** none
-- **Vocabulary ROI:** guided analysis; no verified merge rebuild accepted
-- **Deliberate degradation explored:** no (Track B not used)
-- **Deliberate degradation in final tokenizer:** NO
+- **Vocabulary ROI:** guided analysis; no verified merge accepted
+- **Deliberate degradation explored:** NO
+- **In final tokenizer:** NO
 
 ## 4. Final verified result
 
 - **Tokenizer:** `results/tokenizer.json`
-- **Vocabulary:** 10,000
-- **Score:** 1651.590272242215
-- **Gap:** 0.6054770464604338
-- **English constraint:** PASS (X ≤ 1.2)
-- **One-tokenizer proof:** VERIFIED (`one_tokenizer_proof.json`)
-- **Mixed-script:** VERIFIED
+- **Score:** 1651.590272242215 · **Gap:** 0.6054770464604338
+- **Constraints:** English PASS · Vocabulary PASS
+- **One-tokenizer:** VERIFIED · **Mixed-script:** VERIFIED
 
-## 5. Optimization claim
+## 5. One-tokenizer proof
 
-**Level 3** — Score-aware vocabulary allocation via weighted shared BPE with English seed and Indic pair weighting. Level 4 (direct score-aware merge selection) is implemented in `train_score_directed_adaptive` but did not win the verified strategy comparison.
+- One artefact: YES · One vocabulary: YES · One encoding function: YES
+- Runtime language routing: NO · Deterministic rerun: PASS · Mixed-script: PASS
 
-## 6. Authenticity proof
+## 6. Optimization claim classification
 
-- **Tokenizer SHA-256:** `6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda`
-- **Verification:** `python scripts/verify.py`
-- **Download hash match:** verified via `artefact_proof.json`
+**Level 3** — `train_weighted_shared` in `python/samabpe/strategies.py`. Level 4 implemented but not winning.
 
-## 7. UI changes
+## 7. Authenticity proof
 
-- Manrope primary UI font; Noto Devanagari/Telugu/Bengali for script labels
-- Hero: clamp() typography, tabular numerals, X_min/X_max labels
-- Denominator expandable near score
-- One-tokenizer mixed-script proof in hero
-- Strategy arena: Vanilla vs Final foregrounded
-- Verification section compact; grapheme/budget sim demoted
+- Tokenizer SHA-256: `6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda`
+- Verification: `python scripts/verify.py`
+- Frontend download hash matches: YES (`artefact_proof.json`)
 
-## 8. Tests executed
+## 8. UI changes
+
+Manrope + Noto fonts; hero shows four ratios → gap → score → proof; denominator expandable; strategy arena foregrounds Vanilla vs Final; secondary sections demoted.
+
+## 9. Tests executed
 
 | Command | Result |
 |---------|--------|
-| `pytest python/tests -q` | PASS (29) |
-| `npm test` (web) | PASS (3) |
+| `pytest python/tests -q` | PASS |
+| `npm test` | PASS |
 | `npm run build:netlify` | PASS |
 | `python scripts/verify.py` | PASS |
 | `python scripts/final_analysis.py` | PASS |
-| `python scripts/final_score_search.py` | PASS (no improvement) |
 
-## 9. Remaining risks
+## 10. Remaining risks
 
-- Weight grid is local (4 points); broader search may find marginal gains at high compute cost
-- At 10K vocab, single-merge ROI headroom is limited per `score_roi_candidates.json`
-- Denominator interpretation remains documented in `docs/DENOMINATOR.md` for evaluator alignment
+Bounded 4-point weight grid may miss marginal gains; denominator documented in `docs/DENOMINATOR.md`.

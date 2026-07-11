@@ -17,7 +17,7 @@ from samabpe.verify_core import run_verification, sha256_file
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 DATA = ROOT / "data" / "frozen"
-BASELINE = RESULTS / "pre_final_baseline.json"
+BASELINE = RESULTS / "final_pass_baseline.json"
 
 # ponytail: 4-point local grid — full 8-point grid ~15min; expand offline if needed
 WEIGHT_GRID = [

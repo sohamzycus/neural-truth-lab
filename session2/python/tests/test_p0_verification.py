@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 TOK = ROOT / "results" / "tokenizer.json"
 DATA = ROOT / "data" / "frozen"
 BASELINE = ROOT / "results" / "baseline_verification.json"
+FINAL_PASS = ROOT / "results" / "final_pass_baseline.json"
 
 
 def test_vocab_size_from_loaded_artefact():
@@ -40,6 +41,15 @@ def test_baseline_immutable_when_present():
     assert b.get("immutable") is True
     assert "tokenizer_sha256" in b
     assert b["score"] == pytest.approx(1000.0 / b["max_min_gap"], rel=0, abs=1e-9)
+
+
+def test_final_pass_baseline_immutable():
+    if not FINAL_PASS.exists():
+        pytest.skip("final_pass_baseline not recorded")
+    b = json.loads(FINAL_PASS.read_text(encoding="utf-8"))
+    assert b.get("immutable") is True
+    assert b["vocabulary_size"] <= 10_000
+    assert b["english_constraint"]["pass"] is True
 
 
 def test_scored_tokenizer_byte_identity():

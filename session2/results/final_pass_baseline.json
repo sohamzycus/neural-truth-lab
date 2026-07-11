@@ -1,0 +1,55 @@
+{
+  "immutable": true,
+  "recorded_at": "2026-07-11T10:10:54.090000+00:00",
+  "source": "scripts/verify.py",
+  "tokenizer_path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/tokenizer.json",
+  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "vocabulary_size": 10000,
+  "word_units": {
+    "en": 10121,
+    "hi": 8078,
+    "te": 2511,
+    "bn": 6388
+  },
+  "encoded_tokens": {
+    "en": 10622,
+    "hi": 10672,
+    "te": 3271,
+    "bn": 10572
+  },
+  "fertilities": {
+    "en": 1.0495010374468925,
+    "hi": 1.321119088883387,
+    "te": 1.302668259657507,
+    "bn": 1.6549780839073263
+  },
+  "sorted_x": [
+    1.0495010374468925,
+    1.302668259657507,
+    1.321119088883387,
+    1.6549780839073263
+  ],
+  "x_min": 1.0495010374468925,
+  "x_max": 1.6549780839073263,
+  "x_min_language": "en",
+  "x_max_language": "bn",
+  "max_min_gap": 0.6054770464604338,
+  "score": 1651.590272242215,
+  "english_constraint": {
+    "max_allowed": 1.2,
+    "actual": 1.0495010374468925,
+    "pass": true
+  },
+  "vocab_constraint": {
+    "max_allowed": 10000,
+    "actual": 10000,
+    "pass": true
+  },
+  "corpus_hashes": {
+    "en": "d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341",
+    "hi": "903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd",
+    "te": "b5f601e0f0ee541b82af265a07e3657130e32550d550086179289db44fce3a46",
+    "bn": "5a81fc4e6785196ef37c2bc52040c5dd0ae1c1040a462d428d6441044d604a8e"
+  },
+  "label": "final_submission_hardening_pass"
+}
