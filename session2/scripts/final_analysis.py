@@ -165,20 +165,20 @@ def optimization_claim_audit() -> dict:
     }
 
 
-def objective_sensitivity(baseline_score: float, search_summary: dict | None) -> dict:
+def objective_sensitivity(baseline_score: float, search_summary: dict | None, current_score: float) -> dict:
     pre_opt_path = RESULTS / "pre_optimization_baseline.json"
     pre_score = baseline_score
     if pre_opt_path.exists():
         pre_score = json.loads(pre_opt_path.read_text(encoding="utf-8")).get("score", baseline_score)
     search_improved = search_summary.get("improved", False) if search_summary else False
-    search_best = search_summary.get("best_score", baseline_score) if search_summary else baseline_score
+    search_best = search_summary.get("best_score", current_score) if search_summary else current_score
     opt_path = RESULTS / "moving_boundary_trace.json"
     opt_improved = False
     if opt_path.exists():
         trace = json.loads(opt_path.read_text(encoding="utf-8"))
         opt_improved = any(t.get("accepted") for t in trace)
-    improved = search_improved or opt_improved or baseline_score > pre_score + 1e-9
-    best = max(baseline_score, search_best)
+    improved = search_improved or opt_improved or current_score > pre_score + 1e-9
+    best = current_score if improved else max(current_score, search_best)
     return {
         "track_a_primary": True,
         "track_b_explored": False,
@@ -246,7 +246,7 @@ def main() -> int:
         "english_headroom_analysis.json": headroom,
         "one_tokenizer_proof.json": one_tokenizer_proof(tok, tok_path),
         "optimization_claim_audit.json": optimization_claim_audit(),
-        "objective_sensitivity.json": objective_sensitivity(baseline_score, search_summary),
+        "objective_sensitivity.json": objective_sensitivity(baseline_score, search_summary, result.score),
         # legacy aliases kept for prior tooling
         "boundary_analysis.json": boundary,
         "score_target_ladder.json": ladder,
