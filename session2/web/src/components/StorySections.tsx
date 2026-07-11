@@ -109,37 +109,56 @@ export function SectionPipeline() {
 export function SectionStrategyArena({ data, winner }: { data: StrategyComparison | null; winner: string }) {
   const rows = data?.strategies ?? [];
   if (!rows.length) return null;
+  const vanilla = rows.find((r) => r.id.includes("vanilla") || r.name.toLowerCase().includes("vanilla"));
+  const finalRow = rows.find((r) => r.winner || r.id === winner);
+  const others = rows.filter((r) => r !== vanilla && r !== finalRow);
+  const highlight = [vanilla, finalRow].filter(Boolean) as typeof rows;
+
+  const renderRow = (r: (typeof rows)[0], bold?: boolean) => (
+    <tr key={r.id} className={`border-b ${r.winner ? "bg-[var(--color-saffron)]/10" : ""} ${bold ? "text-base" : ""}`}>
+      <td className="p-2 font-medium">{r.name}{r.winner ? " ★" : ""}</td>
+      <td className="p-2 tabular-nums">{r.vocabularySize}</td>
+      <td className="p-2 tabular-nums">{r.fertility.en.toFixed(3)}</td>
+      <td className="p-2 tabular-nums">{r.fertility.hi.toFixed(3)}</td>
+      <td className="p-2 tabular-nums">{r.fertility.te.toFixed(3)}</td>
+      <td className="p-2 tabular-nums">{r.fertility.bn.toFixed(3)}</td>
+      <td className="p-2 tabular-nums">{r.gap.toFixed(4)}</td>
+      <td className="p-2 tabular-nums font-semibold">{r.score.toFixed(1)}</td>
+      <td className="p-2">{r.englishConstraintPassed ? "✓" : "✗"}</td>
+      <td className="p-2">{r.verified ? "VERIFIED" : "—"}</td>
+    </tr>
+  );
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12" id="strategies">
-      <h2 className="text-2xl font-bold">Strategy Arena</h2>
+      <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] font-bold">What beat ordinary BPE?</h2>
+      <p className="mt-2 text-base text-[var(--color-ink)]/65">
+        MEASURED strategy comparison — Vanilla BPE vs final SamaBPE foregrounded.
+      </p>
+      {vanilla && finalRow && (
+        <p className="mt-2 text-sm text-[var(--color-ink)]/70">
+          Gap reduced {vanilla.gap.toFixed(4)} → {finalRow.gap.toFixed(4)} · Score{" "}
+          {vanilla.score.toFixed(1)} → <strong>{finalRow.score.toFixed(1)}</strong>
+        </p>
+      )}
       <div className="mt-4 overflow-x-auto">
-        <table className="w-full border-collapse text-xs md:text-sm">
+        <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="border-b text-left">
-              {["Strategy", "Vocab", "EN", "HI", "TE", "BN", "Gap", "Score", "EN≤1.2", "Verified"].map((h) => (
+            <tr className="border-b text-left text-xs uppercase tracking-wide text-[var(--color-ink)]/55">
+              {["Strategy", "Vocab", "EN", "HI", "TE", "BN", "Gap", "Score", "EN≤1.2", "Status"].map((h) => (
                 <th key={h} className="p-2 font-semibold">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rows.map((r) => (
-              <tr key={r.id} className={`border-b ${r.winner ? "bg-[var(--color-saffron)]/10 font-semibold" : ""}`}>
-                <td className="p-2">{r.name}</td>
-                <td className="p-2">{r.vocabularySize}</td>
-                <td className="p-2">{r.fertility.en.toFixed(3)}</td>
-                <td className="p-2">{r.fertility.hi.toFixed(3)}</td>
-                <td className="p-2">{r.fertility.te.toFixed(3)}</td>
-                <td className="p-2">{r.fertility.bn.toFixed(3)}</td>
-                <td className="p-2">{r.gap.toFixed(4)}</td>
-                <td className="p-2">{r.score.toFixed(1)}</td>
-                <td className="p-2">{r.englishConstraintPassed ? "✓" : "✗"}</td>
-                <td className="p-2">{r.verified ? "✓" : "—"}</td>
-              </tr>
-            ))}
+            {highlight.map((r) => renderRow(r, true))}
+            {others.length > 0 && (
+              <tr><td colSpan={10} className="p-2 text-xs uppercase tracking-wide text-[var(--color-ink)]/45">Supporting strategies</td></tr>
+            )}
+            {others.map((r) => renderRow(r))}
           </tbody>
         </table>
       </div>
-      {winner && <p className="mt-3 text-sm">Winner (verified): <strong>{winner}</strong></p>}
     </section>
   );
 }
@@ -220,8 +239,9 @@ export function SectionRejected({ items }: { items: RejectedMerge[] }) {
 export function SectionGrapheme({ stats }: { stats: Record<string, { integrity_pct: number; split_clusters: number; total_graphemes: number }> | null }) {
   if (!stats) return null;
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
-      <h2 className="text-2xl font-bold">Grapheme Integrity</h2>
+    <section className="mx-auto max-w-6xl px-4 py-10 opacity-90" id="grapheme">
+      <h2 className="text-xl font-semibold text-[var(--color-ink)]/80">Grapheme integrity</h2>
+      <p className="text-xs text-[var(--color-ink)]/50">MEASURED · deep dive — supplementary to headline score</p>
       <p className="mt-2 text-sm">What looks like one visible Indic character may contain multiple Unicode code points.</p>
       <div className="mt-4 grid gap-3 md:grid-cols-4">
         {Object.entries(stats).map(([lang, g]) => (
@@ -240,22 +260,24 @@ export function SectionGrapheme({ stats }: { stats: Record<string, { integrity_p
 }
 
 export function SectionReproduce({ stats }: { stats: Stats | null }) {
-  const cmd = `git clone https://github.com/sohamzycus/neural-truth-lab.git
-cd neural-truth-lab/session2
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-python scripts/verify.py`;
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12" id="reproduce">
-      <h2 className="text-2xl font-bold">Reproduce My Score</h2>
-      <pre className="card mt-4 overflow-x-auto font-mono text-xs">{cmd}</pre>
+    <section className="mx-auto max-w-6xl px-4 py-10" id="reproduce">
+      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Verify every number</h2>
+      <ol className="mt-4 list-decimal space-y-2 pl-5 text-base text-[var(--color-ink)]/80">
+        <li>Clone <code className="text-sm">github.com/sohamzycus/neural-truth-lab</code></li>
+        <li><code className="text-sm">cd session2 && pip install -r requirements.txt</code></li>
+        <li>Run <code className="rounded bg-white/60 px-1 font-mono text-sm">python scripts/verify.py</code></li>
+      </ol>
+      <p className="mt-3 text-sm text-[var(--color-ink)]/65">
+        The verifier independently loads the authoritative tokenizer, four frozen corpora, and denominator
+        implementation — then freshly calculates token counts, four X values, gap, score, and hashes.
+      </p>
       {stats && (
         <dl className="card mt-4 space-y-1 font-mono text-xs">
-          <div>Tokenizer SHA-256: {stats.tokenizer_sha256}</div>
+          <div><span className="text-[var(--color-ink)]/50">VERIFIED</span> Tokenizer SHA-256: {stats.tokenizer_sha256}</div>
           {stats.corpus_hashes && Object.entries(stats.corpus_hashes).map(([l, h]) => (
             <div key={l}>{l.toUpperCase()} corpus: {h}</div>
           ))}
-          <div>Denominator: NFC + Unicode whitespace split (see docs/DENOMINATOR.md)</div>
         </dl>
       )}
     </section>

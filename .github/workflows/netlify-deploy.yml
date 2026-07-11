@@ -6,6 +6,8 @@ on:
     paths:
       - 'session2/web/**'
       - 'session2/results/**'
+      - 'session2/python/**'
+      - 'session2/scripts/**'
       - '.github/workflows/netlify-deploy.yml'
 
 jobs:

@@ -24,6 +24,7 @@ DATA = ROOT / "data" / "frozen"
 RESULTS = ROOT / "results"
 PUBLIC = ROOT / "web" / "public" / "data" / "results"
 BASELINE_PATH = RESULTS / "baseline_verification.json"
+PRE_FINAL_BASELINE = RESULTS / "pre_final_baseline.json"
 
 
 def _read_winning_strategy() -> str | None:
@@ -55,6 +56,13 @@ def main() -> int:
         BASELINE_PATH.write_text(json.dumps(baseline, indent=2), encoding="utf-8")
         print(f"\nBaseline recorded → {BASELINE_PATH.name}")
 
+    # Pre-final pass baseline — frozen before final optimization (phase 1)
+    if not PRE_FINAL_BASELINE.exists():
+        pre = to_baseline_json(result, tok_path)
+        pre["label"] = "pre_final_optimization_pass"
+        PRE_FINAL_BASELINE.write_text(json.dumps(pre, indent=2), encoding="utf-8")
+        print(f"Pre-final baseline recorded → {PRE_FINAL_BASELINE.name}")
+
     artefact = to_artefact_proof(result, tok_path, ROOT)
     (RESULTS / "artefact_proof.json").write_text(json.dumps(artefact, indent=2), encoding="utf-8")
 
@@ -76,7 +84,11 @@ def main() -> int:
     (RESULTS / "verification.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
-    for name in ("stats.json", "verification_manifest.json", "artefact_proof.json"):
+    sync_names = (
+        "stats.json", "verification_manifest.json", "artefact_proof.json",
+        "pre_final_baseline.json", "one_tokenizer_proof.json", "boundary_analysis.json",
+    )
+    for name in sync_names:
         src = RESULTS / name
         if src.exists():
             (PUBLIC / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")

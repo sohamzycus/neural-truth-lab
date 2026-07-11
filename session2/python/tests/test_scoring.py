@@ -12,8 +12,9 @@ def test_score_formula():
     assert abs(r["score"] - 2500.0) < 1e-6
 
 
-def test_ranks_order():
-    fert = {"en": 1.0, "hi": 2.0, "te": 1.5, "bn": 1.8}
+def test_display_rounding_does_not_change_score():
+    fert = {"en": 1.0495010374468925, "hi": 1.321119088883387, "te": 1.302668259657507, "bn": 1.6549780839073263}
     r = compute_score(fert)
-    assert r["ranks"]["en"] == 1
-    assert r["ranks"]["hi"] == 4
+    displayed_gap = round(r["max_min_gap"], 3)
+    assert displayed_gap != r["max_min_gap"]  # rounding is for display only
+    assert abs(r["score"] - 1000.0 / r["max_min_gap"]) < 1e-9

@@ -27,6 +27,10 @@ export default function App() {
   const [encoder, setEncoder] = useState<BPEEncoder | null>(null);
   const [playText, setPlayText] = useState(PRESETS[0]);
   const [selectedToken, setSelectedToken] = useState<string | null>(null);
+  const [proof, setProof] = useState<{
+    claim?: string;
+    mixed_script_highlight?: { input: string; tokens: string[]; token_count: number };
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -39,15 +43,17 @@ export default function App() {
       loadJson<RejectedMerge[]>("/data/results/rejected_merges.json"),
       loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json"),
       loadJson<typeof grapheme>("/data/results/grapheme_stats.json"),
+      loadJson<typeof proof>("/data/results/one_tokenizer_proof.json").catch(() => null),
       BPEEncoder.load(),
     ])
-      .then(([s, st, tr, rj, cu, gr, enc]) => {
+      .then(([s, st, tr, rj, cu, gr, pr, enc]) => {
         setStats(s);
         setStrategies(st);
         setTrace(tr);
         setRejected(rj);
         setCurves(cu);
         setGrapheme(gr);
+        setProof(pr);
         setEncoder(enc);
       })
       .catch((e) => setError(String(e)));
@@ -66,15 +72,17 @@ export default function App() {
         </div>
       )}
 
-      <HeroNarrative stats={stats} />
-      <SectionChallenge />
-      <SectionWhyFairness />
-      <SectionScoreboard stats={stats} />
-      <SectionPipeline />
+      <HeroNarrative stats={stats} proof={proof} />
+      <SectionReproduce stats={stats} />
       <SectionStrategyArena data={strategies} winner={stats?.winning_strategy ?? ""} />
       <SectionFairnessRace trace={trace} />
       <SectionTokenEconomy allocation={alloc} />
-      <BudgetSimulator curves={curves} actualAlloc={alloc} />
+      <SectionPipeline />
+      <div className="opacity-75">
+        <SectionChallenge />
+        <SectionWhyFairness />
+        <SectionScoreboard stats={stats} />
+      </div>
 
       <section className="mx-auto max-w-6xl px-4 py-12" id="playground">
         <h2 className="text-2xl font-bold">Tokenizer Playground</h2>
@@ -150,8 +158,10 @@ export default function App() {
       </section>
 
       <SectionRejected items={rejected} />
-      <SectionGrapheme stats={grapheme} />
-      <SectionReproduce stats={stats} />
+      <div className="opacity-80">
+        <SectionGrapheme stats={grapheme} />
+        <BudgetSimulator curves={curves} actualAlloc={alloc} />
+      </div>
       <SectionDownloads />
 
       <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-[var(--color-ink)]/50">

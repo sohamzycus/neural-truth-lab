@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Crimson Pro", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-serif: "Manrope", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-devanagari: "Noto Sans Devanagari", "Crimson Pro", sans-serif;
   --font-telugu: "Noto Sans Telugu", "Crimson Pro", sans-serif;
@@ -15,7 +16,7 @@
 }
 
 body {
-  @apply bg-[var(--color-ivory)] text-[var(--color-ink)] font-serif antialiased;
+  @apply bg-[var(--color-ivory)] text-[var(--color-ink)] font-sans antialiased;
   background-image:
     radial-gradient(circle at 20% 10%, rgba(196, 92, 38, 0.06), transparent 40%),
     radial-gradient(circle at 80% 90%, rgba(44, 62, 107, 0.06), transparent 40%);
@@ -26,6 +27,8 @@ h1, h2, h3 { @apply font-semibold tracking-tight; }
 .font-devanagari { font-family: var(--font-devanagari); }
 .font-telugu { font-family: var(--font-telugu); }
 .font-bengali { font-family: var(--font-bengali); }
+.font-sans { font-family: var(--font-sans); }
+.tabular-nums { font-variant-numeric: tabular-nums; }
 
 .card {
   @apply rounded-lg border border-[var(--color-ink)]/10 bg-[var(--color-parchment)]/60 p-5 shadow-sm;

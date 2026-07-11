@@ -1,0 +1,125 @@
+{
+  "verified": true,
+  "claim": "ONE TOKENIZER · FOUR LANGUAGES · NO LANGUAGE ROUTING",
+  "tokenizer_sha256": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+  "vocabulary_size": 10000,
+  "same_artefact_for_all": true,
+  "mixed_script_highlight": {
+    "input": "India भारत భారతదేశం ভারত",
+    "token_count": 4,
+    "tokens": [
+      "India</w>",
+      "भारत</w>",
+      "భారతదేశం</w>",
+      "ভারত</w>"
+    ],
+    "token_ids": [
+      0,
+      1141,
+      2071,
+      1520
+    ],
+    "deterministic": true
+  },
+  "samples": [
+    {
+      "input": "India is a diverse country.",
+      "token_count": 5,
+      "tokens": [
+        "India</w>",
+        "is</w>",
+        "a</w>",
+        "diverse</w>",
+        "country.</w>"
+      ],
+      "token_ids": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "deterministic": true
+    },
+    {
+      "input": "भारत एक विविध देश है।",
+      "token_count": 7,
+      "tokens": [
+        "भारत</w>",
+        "एक</w>",
+        "वि",
+        "वि",
+        "ध</w>",
+        "देश</w>",
+        "है।</w>"
+      ],
+      "token_ids": [
+        1141,
+        1560,
+        393,
+        393,
+        685,
+        1727,
+        1224
+      ],
+      "deterministic": true
+    },
+    {
+      "input": "భారతదేశం వైవిధ్యభరితమైన దేశం.",
+      "token_count": 7,
+      "tokens": [
+        "భారతదేశం</w>",
+        "వైవిధ్య",
+        "భ",
+        "రి",
+        "త",
+        "మైన</w>",
+        "దేశం.</w>"
+      ],
+      "token_ids": [
+        2071,
+        5889,
+        191,
+        490,
+        194,
+        2428,
+        6124
+      ],
+      "deterministic": true
+    },
+    {
+      "input": "ভারত একটি বৈচিত্র্যময় দেশ।",
+      "token_count": 4,
+      "tokens": [
+        "ভারত</w>",
+        "একটি</w>",
+        "বৈচিত্র্যময়</w>",
+        "দেশ।</w>"
+      ],
+      "token_ids": [
+        1520,
+        1659,
+        6681,
+        5110
+      ],
+      "deterministic": true
+    },
+    {
+      "input": "India भारत భారతదేశం ভারত",
+      "token_count": 4,
+      "tokens": [
+        "India</w>",
+        "भारत</w>",
+        "భారతదేశం</w>",
+        "ভারত</w>"
+      ],
+      "token_ids": [
+        0,
+        1141,
+        2071,
+        1520
+      ],
+      "deterministic": true
+    }
+  ]
+}

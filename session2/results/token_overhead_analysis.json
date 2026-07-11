@@ -1,0 +1,1726 @@
+{
+  "language": "bn",
+  "top_100_by_overhead": [
+    {
+      "word": "অভিজ্ঞানশকুন্তলম্",
+      "frequency": 1,
+      "tokenization": [
+        "অভি",
+        "জ্ঞ",
+        "ান",
+        "শক",
+        "ু",
+        "ন্ত",
+        "ল",
+        "ম্",
+        "</w>"
+      ],
+      "tokens_per_occurrence": 9,
+      "total_token_contribution": 9,
+      "total_overhead": 8,
+      "grapheme_count": 17,
+      "script": "bengali"
+    },
+    {
+      "word": "৮১-২৩০-১৪২৩-৬।",
+      "frequency": 1,
+      "tokenization": [
+        "৮",
+        "১-",
+        "২৩",
+        "০-",
+        "১৪",
+        "২",
+        "৩-",
+        "৬",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 9,
+      "total_token_contribution": 9,
+      "total_overhead": 8,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "মহেঞ্জোদাড়োর",
+      "frequency": 1,
+      "tokenization": [
+        "মহ",
+        "ে",
+        "ঞ্",
+        "জো",
+        "দা",
+        "ড়",
+        "ো",
+        "র</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "কালারিপ্পায়াত্তু,",
+      "frequency": 1,
+      "tokenization": [
+        "কাল",
+        "ারি",
+        "প্",
+        "পা",
+        "য়া",
+        "ত্",
+        "তু",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 18,
+      "script": "bengali"
+    },
+    {
+      "word": "০-২৯৫-৯৮৫০৬-২",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "২",
+        "৯৫",
+        "-",
+        "৯৮",
+        "৫",
+        "০৬",
+        "-২</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "০-০০৬-৩৮৭৮৪-৫",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "০০",
+        "৬",
+        "-৩",
+        "৮৭",
+        "৮",
+        "৪-",
+        "৫</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৮৯৫৭-৭৬২৫-১।",
+      "frequency": 1,
+      "tokenization": [
+        "০-৮",
+        "৯৫",
+        "৭",
+        "-৭",
+        "৬",
+        "২৫",
+        "-১",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "০-০০-৭১১০৬২-৬",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "০",
+        "০-",
+        "৭",
+        "১১",
+        "০৬",
+        "২-",
+        "৬</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "১-৮৫৮৫৬-৩২৯-১",
+      "frequency": 1,
+      "tokenization": [
+        "১-",
+        "৮৫",
+        "৮",
+        "৫৬",
+        "-৩",
+        "২",
+        "৯-",
+        "১</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "১-৪১৭৯-০৬১৯-৭.",
+      "frequency": 1,
+      "tokenization": [
+        "১-",
+        "৪",
+        "১৭",
+        "৯-",
+        "০৬",
+        "১৯",
+        "-৭",
+        ".</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৪১৫-৩৪৮৩৫-৮",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "৪১",
+        "৫",
+        "-৩",
+        "৪৮",
+        "৩৫",
+        "-",
+        "৮</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "০-২৩১-০৫১০৭-৭",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "২৩",
+        "১-",
+        "০",
+        "৫১",
+        "০৭",
+        "-",
+        "৭</w>"
+      ],
+      "tokens_per_occurrence": 8,
+      "total_token_contribution": 8,
+      "total_overhead": 7,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "গৌরবোজ্জ্বল",
+      "frequency": 1,
+      "tokenization": [
+        "গৌ",
+        "র",
+        "বো",
+        "জ্",
+        "জ",
+        "্ব",
+        "ল</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "প্রতীকচিহ্নে",
+      "frequency": 1,
+      "tokenization": [
+        "প্র",
+        "তী",
+        "ক",
+        "চি",
+        "হ",
+        "্ন",
+        "ে</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "(সিপিআই(এম))",
+      "frequency": 1,
+      "tokenization": [
+        "(সি",
+        "পি",
+        "আই",
+        "(",
+        "এম",
+        ")",
+        ")</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 12,
+      "script": "latin"
+    },
+    {
+      "word": "ওয়েস্টমিনিস্টার-ধাঁচের",
+      "frequency": 1,
+      "tokenization": [
+        "ও",
+        "য়ে",
+        "স্ট",
+        "মিনি",
+        "স্ট",
+        "ার",
+        "-ধাঁচের</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 23,
+      "script": "bengali"
+    },
+    {
+      "word": "(ডব্লিউটিও)।",
+      "frequency": 1,
+      "tokenization": [
+        "(ড",
+        "ব্",
+        "লি",
+        "উ",
+        "টি",
+        "ও",
+        ")।</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 12,
+      "script": "latin"
+    },
+    {
+      "word": "অস্ট্রো-এশিয়াটিক",
+      "frequency": 1,
+      "tokenization": [
+        "অ",
+        "স্ট্র",
+        "ো",
+        "-এ",
+        "শি",
+        "য়াট",
+        "িক</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 17,
+      "script": "bengali"
+    },
+    {
+      "word": "তিব্বতি-বর্মী",
+      "frequency": 1,
+      "tokenization": [
+        "তি",
+        "ব",
+        "্ব",
+        "তি",
+        "-বর্",
+        "ম",
+        "ী</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "তেরুককুত্তু",
+      "frequency": 1,
+      "tokenization": [
+        "তে",
+        "রু",
+        "ক",
+        "কু",
+        "ত্",
+        "ত",
+        "ু</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "সালোয়ার-কামিজ",
+      "frequency": 1,
+      "tokenization": [
+        "সা",
+        "লো",
+        "য়ার",
+        "-",
+        "কা",
+        "মি",
+        "জ</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "উৎসাহ-উদ্দীপনার",
+      "frequency": 1,
+      "tokenization": [
+        "উৎ",
+        "সাহ",
+        "-",
+        "উদ্",
+        "দী",
+        "প",
+        "নার</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 15,
+      "script": "bengali"
+    },
+    {
+      "word": "সূর্যকেন্দ্রিকতাবাদ",
+      "frequency": 1,
+      "tokenization": [
+        "স",
+        "ূর",
+        "্য",
+        "কেন্দ্র",
+        "িক",
+        "তা",
+        "বাদ</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 19,
+      "script": "bengali"
+    },
+    {
+      "word": "০৪১৫৩২৯২০৫।",
+      "frequency": 1,
+      "tokenization": [
+        "০৪",
+        "১৫",
+        "৩২",
+        "৯",
+        "২০",
+        "৫",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৩১২-১২৭১৯-৭",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "৩",
+        "১২",
+        "-১",
+        "২৭",
+        "১৯-",
+        "৭</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "৯৭৮-৩-৮৯৯৯৮-০৯৮-১",
+      "frequency": 1,
+      "tokenization": [
+        "৯৭৮-৩-৮",
+        "৯৯",
+        "৯৮",
+        "-০",
+        "৯৮",
+        "-",
+        "১</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 17,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৮৪৪৪-০৮৩৩-৬।",
+      "frequency": 1,
+      "tokenization": [
+        "০-৮",
+        "৪৪",
+        "৪-",
+        "০৮",
+        "৩৩",
+        "-৬",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "Sauptikaparvan",
+      "frequency": 1,
+      "tokenization": [
+        "Sa",
+        "up",
+        "ti",
+        "ka",
+        "par",
+        "v",
+        "an</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 14,
+      "script": "latin"
+    },
+    {
+      "word": "Bandyopadhyay,",
+      "frequency": 1,
+      "tokenization": [
+        "B",
+        "and",
+        "y",
+        "op",
+        "adhy",
+        "a",
+        "y,</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 14,
+      "script": "latin"
+    },
+    {
+      "word": "০-৮৫১৭০-৬৬৯-৬",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "৮৫",
+        "১৭",
+        "০-",
+        "৬৬",
+        "৯-",
+        "৬</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৩৩৩-৯৩৪১০-৫",
+      "frequency": 1,
+      "tokenization": [
+        "০-",
+        "৩৩",
+        "৩-",
+        "৯৩",
+        "৪১",
+        "০-",
+        "৫</w>"
+      ],
+      "tokens_per_occurrence": 7,
+      "total_token_contribution": 7,
+      "total_overhead": 6,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "সহস্রাব্দে",
+      "frequency": 1,
+      "tokenization": [
+        "সহ",
+        "স",
+        "্র",
+        "াব",
+        "্দ",
+        "ে</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "পৃষ্ঠপোষকতায়",
+      "frequency": 1,
+      "tokenization": [
+        "পৃ",
+        "ষ্ঠ",
+        "প",
+        "োষ",
+        "ক",
+        "তায়</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "গণ-অভ্যুত্থান।",
+      "frequency": 1,
+      "tokenization": [
+        "গণ-",
+        "অভ",
+        "্যু",
+        "ত্",
+        "থান",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "দ্রাঘিমাংশে",
+      "frequency": 1,
+      "tokenization": [
+        "দ্র",
+        "াঘ",
+        "ি",
+        "মা",
+        "ংশ",
+        "ে</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "ব্রহ্মপুত্র।",
+      "frequency": 1,
+      "tokenization": [
+        "ব্র",
+        "হ",
+        "্ম",
+        "পু",
+        "ত্র",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "ফেব্রুয়ারি),",
+      "frequency": 1,
+      "tokenization": [
+        "ফে",
+        "ব্র",
+        "ু",
+        "য়ার",
+        "ি",
+        "),</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "শাল-অধ্যুষিত,",
+      "frequency": 1,
+      "tokenization": [
+        "শাল",
+        "-",
+        "অধ",
+        "্য",
+        "ুষ",
+        "িত,</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "অগ্ন্যুৎপাত",
+      "frequency": 1,
+      "tokenization": [
+        "অ",
+        "গ্",
+        "ন",
+        "্যু",
+        "ৎ",
+        "পাত</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "পঞ্চায়েতে",
+      "frequency": 1,
+      "tokenization": [
+        "প",
+        "ঞ্চ",
+        "া",
+        "য়",
+        "েত",
+        "ে</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "ক্যাকটাস—এই",
+      "frequency": 1,
+      "tokenization": [
+        "ক",
+        "্য",
+        "াক",
+        "ট",
+        "াস",
+        "—এই</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "কমনওয়েলথের",
+      "frequency": 1,
+      "tokenization": [
+        "ক",
+        "মন",
+        "ওয়",
+        "েল",
+        "থে",
+        "র</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "অর্গ্যানাইজেশন",
+      "frequency": 1,
+      "tokenization": [
+        "অর্",
+        "গ্য",
+        "ান",
+        "াই",
+        "জ",
+        "েশন</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "পেট্রোলিয়াম,",
+      "frequency": 1,
+      "tokenization": [
+        "পে",
+        "ট্র",
+        "ো",
+        "লিয়",
+        "াম",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "ইঞ্জিনিয়ারিং",
+      "frequency": 1,
+      "tokenization": [
+        "ই",
+        "ঞ্",
+        "জি",
+        "নিয়",
+        "ারি",
+        "ং</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "যোগ্যতাসূচকবলে",
+      "frequency": 1,
+      "tokenization": [
+        "যোগ",
+        "্য",
+        "তা",
+        "সূ",
+        "চক",
+        "বলে</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "জরাথ্রুষ্টবাদী",
+      "frequency": 1,
+      "tokenization": [
+        "জরাথ",
+        "্র",
+        "ুষ",
+        "্ট",
+        "বাদ",
+        "ী</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "মোহিনীআট্টম,",
+      "frequency": 1,
+      "tokenization": [
+        "মো",
+        "হি",
+        "নী",
+        "আট",
+        "্ট",
+        "ম,</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "প্রেমকাহিনিগুলি",
+      "frequency": 1,
+      "tokenization": [
+        "প্র",
+        "েম",
+        "কা",
+        "হি",
+        "নি",
+        "গুলি</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 15,
+      "script": "bengali"
+    },
+    {
+      "word": "কীর্তিসমূহ",
+      "frequency": 1,
+      "tokenization": [
+        "কী",
+        "র্",
+        "তি",
+        "সম",
+        "ূ",
+        "হ</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "কুর্তা-পাজামা",
+      "frequency": 1,
+      "tokenization": [
+        "কু",
+        "র্",
+        "তা-",
+        "পা",
+        "জা",
+        "মা</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "আত্মীয়বর্গের",
+      "frequency": 1,
+      "tokenization": [
+        "আ",
+        "ত্",
+        "মী",
+        "য়",
+        "বর্",
+        "গের</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "সম্মতিক্রমে।",
+      "frequency": 1,
+      "tokenization": [
+        "সম্",
+        "মত",
+        "িক",
+        "্র",
+        "মে",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "স্যাম্পেল",
+      "frequency": 1,
+      "tokenization": [
+        "স",
+        "্য",
+        "াম",
+        "্প",
+        "ে",
+        "ল</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 9,
+      "script": "bengali"
+    },
+    {
+      "word": "লৌহস্তম্ভটি",
+      "frequency": 1,
+      "tokenization": [
+        "ল",
+        "ৌহ",
+        "স্",
+        "তম",
+        "্ভ",
+        "টি</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "জিওস্টেশনারি",
+      "frequency": 1,
+      "tokenization": [
+        "জি",
+        "ও",
+        "স্ট",
+        "েশ",
+        "নার",
+        "ি</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "হ্যাটট্রিকও",
+      "frequency": 1,
+      "tokenization": [
+        "হ",
+        "্য",
+        "াট",
+        "ট্র",
+        "িক",
+        "ও</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "(বিসিসিআই)",
+      "frequency": 1,
+      "tokenization": [
+        "(",
+        "বি",
+        "সি",
+        "সি",
+        "আই",
+        ")</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "latin"
+    },
+    {
+      "word": "(খেলোয়াড়দের",
+      "frequency": 1,
+      "tokenization": [
+        "(",
+        "খে",
+        "লো",
+        "য়া",
+        "ড়",
+        "দের</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "latin"
+    },
+    {
+      "word": "০১৯৫১৬৬৭৮৭।",
+      "frequency": 1,
+      "tokenization": [
+        "০১৯",
+        "৫১",
+        "৬৬",
+        "৭",
+        "৮৭",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৫২১-৪৫৯৭০-২",
+      "frequency": 1,
+      "tokenization": [
+        "০-৫২১",
+        "-",
+        "৪৫",
+        "৯৭",
+        "০-",
+        "২</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৭৬১৯-৯৩৪৪-৪",
+      "frequency": 1,
+      "tokenization": [
+        "০-৭৬",
+        "১৯-",
+        "৯৩",
+        "৪৪",
+        "-",
+        "৪</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "৯৭৮-৩-৮৯৬৬৫-৩৯৩-২",
+      "frequency": 1,
+      "tokenization": [
+        "৯৭৮-৩-৮",
+        "৯৬",
+        "৬৫",
+        "-৩",
+        "৯৩-",
+        "২</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 17,
+      "script": "bengali"
+    },
+    {
+      "word": "Weißensee",
+      "frequency": 1,
+      "tokenization": [
+        "W",
+        "ei",
+        "ß",
+        "en",
+        "se",
+        "e</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 9,
+      "script": "latin"
+    },
+    {
+      "word": "Broadcasting।",
+      "frequency": 1,
+      "tokenization": [
+        "B",
+        "ro",
+        "ad",
+        "cast",
+        "ing",
+        "।</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "latin"
+    },
+    {
+      "word": "Beautiful",
+      "frequency": 1,
+      "tokenization": [
+        "B",
+        "ea",
+        "ut",
+        "i",
+        "ful",
+        "</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 9,
+      "script": "latin"
+    },
+    {
+      "word": "৯৮১২৩৪৫৫৫৮",
+      "frequency": 1,
+      "tokenization": [
+        "৯৮",
+        "১২",
+        "৩",
+        "৪৫",
+        "৫৫",
+        "৮</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "Dissanayake,",
+      "frequency": 1,
+      "tokenization": [
+        "Dis",
+        "s",
+        "an",
+        "ay",
+        "ak",
+        "e,</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 12,
+      "script": "latin"
+    },
+    {
+      "word": "০-১৯-২৮২৩৬১-৮.,",
+      "frequency": 1,
+      "tokenization": [
+        "০-১৯-২৮",
+        "২৩",
+        "৬",
+        "১-",
+        "৮.",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 15,
+      "script": "bengali"
+    },
+    {
+      "word": "Recognition",
+      "frequency": 1,
+      "tokenization": [
+        "R",
+        "ec",
+        "og",
+        "n",
+        "it",
+        "ion</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 11,
+      "script": "latin"
+    },
+    {
+      "word": "Śakuntalā:",
+      "frequency": 1,
+      "tokenization": [
+        "Ś",
+        "ak",
+        "unt",
+        "al",
+        "ā",
+        ":</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "other"
+    },
+    {
+      "word": "০-১৯-২৮৩৯১১-৪.,",
+      "frequency": 1,
+      "tokenization": [
+        "০-১৯-২৮",
+        "৩৯",
+        "১১",
+        "-",
+        "৪.",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 15,
+      "script": "bengali"
+    },
+    {
+      "word": "০-৫২১-৪০২১৬-৬",
+      "frequency": 1,
+      "tokenization": [
+        "০-৫২১",
+        "-৪",
+        "০",
+        "২১",
+        "৬-",
+        "৬</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "California",
+      "frequency": 1,
+      "tokenization": [
+        "C",
+        "al",
+        "i",
+        "for",
+        "ni",
+        "a</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 10,
+      "script": "latin"
+    },
+    {
+      "word": "০-৭৬১৯-৩৩৭২-৭",
+      "frequency": 1,
+      "tokenization": [
+        "০-৭৬",
+        "১৯",
+        "-৩",
+        "৩৭",
+        "২-",
+        "৭</w>"
+      ],
+      "tokens_per_occurrence": 6,
+      "total_token_contribution": 6,
+      "total_overhead": 5,
+      "grapheme_count": 13,
+      "script": "bengali"
+    },
+    {
+      "word": "পুরোদস্তুর",
+      "frequency": 1,
+      "tokenization": [
+        "পুর",
+        "োদ",
+        "স্",
+        "তু",
+        "র</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "US$২,৬০১",
+      "frequency": 1,
+      "tokenization": [
+        "US$",
+        "২",
+        ",৬",
+        "০",
+        "১</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "latin"
+    },
+    {
+      "word": "অমীমাংসিত।",
+      "frequency": 1,
+      "tokenization": [
+        "অ",
+        "মী",
+        "মা",
+        "ংস",
+        "িত।</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "সহনশীলতার",
+      "frequency": 1,
+      "tokenization": [
+        "সহ",
+        "ন",
+        "শী",
+        "ল",
+        "তার</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 9,
+      "script": "bengali"
+    },
+    {
+      "word": "অনিশ্চিত",
+      "frequency": 1,
+      "tokenization": [
+        "অ",
+        "নি",
+        "শ",
+        "্চ",
+        "িত</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "আকিমিনীয়",
+      "frequency": 1,
+      "tokenization": [
+        "আ",
+        "কি",
+        "মি",
+        "নী",
+        "য়</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 9,
+      "script": "bengali"
+    },
+    {
+      "word": "ভীমবেটকা",
+      "frequency": 1,
+      "tokenization": [
+        "ভ",
+        "ীম",
+        "বে",
+        "টক",
+        "া</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "সমাপ্তিকাল",
+      "frequency": 1,
+      "tokenization": [
+        "সমা",
+        "প্ত",
+        "িক",
+        "া",
+        "ল</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "প্রারম্ভিক",
+      "frequency": 1,
+      "tokenization": [
+        "প্র",
+        "ার",
+        "ম্",
+        "ভ",
+        "িক</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "পর্তুগাল,",
+      "frequency": 1,
+      "tokenization": [
+        "পর্",
+        "তু",
+        "গ",
+        "াল",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 9,
+      "script": "bengali"
+    },
+    {
+      "word": "নেদারল্যান্ডস,",
+      "frequency": 1,
+      "tokenization": [
+        "নে",
+        "দার",
+        "ল",
+        "্যান্ড",
+        "স,</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "অসহিষ্ণুতা,",
+      "frequency": 1,
+      "tokenization": [
+        "অস",
+        "হি",
+        "ষ্",
+        "ণু",
+        "তা,</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "বিচ্ছিন্নতাবাদীদের",
+      "frequency": 1,
+      "tokenization": [
+        "বিচ্ছি",
+        "ন্ন",
+        "তা",
+        "বাদী",
+        "দের</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 18,
+      "script": "bengali"
+    },
+    {
+      "word": "ইন্দো-অস্ট্রেলীয়",
+      "frequency": 1,
+      "tokenization": [
+        "ইন্দো",
+        "-অ",
+        "স্ট্র",
+        "েল",
+        "ীয়</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 17,
+      "script": "bengali"
+    },
+    {
+      "word": "আরাবল্লী",
+      "frequency": 1,
+      "tokenization": [
+        "আ",
+        "রা",
+        "ব",
+        "ল্ল",
+        "ী</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "হাইড্রোগ্রাফিক",
+      "frequency": 1,
+      "tokenization": [
+        "হাইড্র",
+        "োগ",
+        "্রা",
+        "ফ",
+        "িক</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 14,
+      "script": "bengali"
+    },
+    {
+      "word": "গোদাবরী,",
+      "frequency": 1,
+      "tokenization": [
+        "গো",
+        "দা",
+        "ব",
+        "রী",
+        ",</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "ক্যাটাবেটিক",
+      "frequency": 1,
+      "tokenization": [
+        "ক্যা",
+        "টা",
+        "বে",
+        "ট",
+        "িক</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 11,
+      "script": "bengali"
+    },
+    {
+      "word": "আবহাওয়াগত",
+      "frequency": 1,
+      "tokenization": [
+        "আব",
+        "হা",
+        "ওয়",
+        "াগ",
+        "ত</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 10,
+      "script": "bengali"
+    },
+    {
+      "word": "সাইক্লোন",
+      "frequency": 1,
+      "tokenization": [
+        "সা",
+        "ই",
+        "ক্",
+        "লো",
+        "ন</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "সপুষ্পক",
+      "frequency": 1,
+      "tokenization": [
+        "স",
+        "পু",
+        "ষ্",
+        "প",
+        "ক</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 7,
+      "script": "bengali"
+    },
+    {
+      "word": "বনাঞ্চলও",
+      "frequency": 1,
+      "tokenization": [
+        "ব",
+        "না",
+        "ঞ্চ",
+        "ল",
+        "ও</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 8,
+      "script": "bengali"
+    },
+    {
+      "word": "বু্দ্ধগয়ায়",
+      "frequency": 1,
+      "tokenization": [
+        "বু",
+        "্",
+        "দ্ধ",
+        "গ",
+        "য়ায়</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "নেটওয়ার্কের",
+      "frequency": 1,
+      "tokenization": [
+        "নে",
+        "টও",
+        "য়ার",
+        "্",
+        "কের</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 12,
+      "script": "bengali"
+    },
+    {
+      "word": "রাজ্য-রাজনীতিতে",
+      "frequency": 1,
+      "tokenization": [
+        "রাজ্য",
+        "-",
+        "রাজন",
+        "ী",
+        "তিতে</w>"
+      ],
+      "tokens_per_occurrence": 5,
+      "total_token_contribution": 5,
+      "total_overhead": 4,
+      "grapheme_count": 15,
+      "script": "bengali"
+    }
+  ],
+  "total_words": 3166
+}

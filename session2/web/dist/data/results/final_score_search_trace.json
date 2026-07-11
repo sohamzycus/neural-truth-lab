@@ -1,0 +1,139 @@
+{
+  "summary": {
+    "track": "A_compression_honest",
+    "deliberate_degradation_used": false,
+    "initial_x_min_language": "en",
+    "initial_x_max_language": "bn",
+    "algorithms_attempted": [
+      "corpus_weight_perturbation"
+    ],
+    "candidates_materialized": 4,
+    "candidates_accepted": 0,
+    "boundary_transitions": [],
+    "baseline_score": 1651.590272242215,
+    "best_score": 1651.590272242215,
+    "improved": false
+  },
+  "trace": [
+    {
+      "candidate_id": "ws_1",
+      "iteration": 1,
+      "change_description": "weighted_shared weights={'en': 1.0, 'hi': 2.0, 'te': 2.5, 'bn': 2.5}",
+      "optimization_technique": "corpus_weight_perturbation",
+      "status": "VERIFIED",
+      "accepted": false,
+      "tokenizer_sha256": null,
+      "vocabulary_size": 10000,
+      "token_counts": {
+        "en": 10622,
+        "hi": 10672,
+        "te": 3271,
+        "bn": 10572
+      },
+      "fertilities": {
+        "en": 1.0495010374468925,
+        "hi": 1.321119088883387,
+        "te": 1.302668259657507,
+        "bn": 1.6549780839073263
+      },
+      "x_min": 1.0495010374468925,
+      "x_max": 1.6549780839073263,
+      "x_min_language": "en",
+      "x_max_language": "bn",
+      "gap": 0.6054770464604338,
+      "score": 1651.590272242215,
+      "english_constraint": true,
+      "reason": "weight grid"
+    },
+    {
+      "candidate_id": "ws_2",
+      "iteration": 2,
+      "change_description": "weighted_shared weights={'en': 1.0, 'hi': 2.5, 'te': 3.0, 'bn': 3.5}",
+      "optimization_technique": "corpus_weight_perturbation",
+      "status": "VERIFIED",
+      "accepted": false,
+      "tokenizer_sha256": null,
+      "vocabulary_size": 10000,
+      "token_counts": {
+        "en": 10622,
+        "hi": 10681,
+        "te": 3296,
+        "bn": 10583
+      },
+      "fertilities": {
+        "en": 1.0495010374468925,
+        "hi": 1.322233226046051,
+        "te": 1.3126244524093986,
+        "bn": 1.6567000626174075
+      },
+      "x_min": 1.0495010374468925,
+      "x_max": 1.6567000626174075,
+      "x_min_language": "en",
+      "x_max_language": "bn",
+      "gap": 0.607199025170515,
+      "score": 1646.9064648435126,
+      "english_constraint": true,
+      "reason": "weight grid"
+    },
+    {
+      "candidate_id": "ws_3",
+      "iteration": 3,
+      "change_description": "weighted_shared weights={'en': 1.0, 'hi': 3.0, 'te': 3.5, 'bn': 4.0}",
+      "optimization_technique": "corpus_weight_perturbation",
+      "status": "VERIFIED",
+      "accepted": false,
+      "tokenizer_sha256": null,
+      "vocabulary_size": 10000,
+      "token_counts": {
+        "en": 10622,
+        "hi": 10685,
+        "te": 3317,
+        "bn": 10586
+      },
+      "fertilities": {
+        "en": 1.0495010374468925,
+        "hi": 1.3227283981183462,
+        "te": 1.3209876543209877,
+        "bn": 1.6571696931747026
+      },
+      "x_min": 1.0495010374468925,
+      "x_max": 1.6571696931747026,
+      "x_min_language": "en",
+      "x_max_language": "bn",
+      "gap": 0.6076686557278101,
+      "score": 1645.6336698859202,
+      "english_constraint": true,
+      "reason": "weight grid"
+    },
+    {
+      "candidate_id": "ws_4",
+      "iteration": 4,
+      "change_description": "weighted_shared weights={'en': 1.0, 'hi': 2.0, 'te': 4.0, 'bn': 4.5}",
+      "optimization_technique": "corpus_weight_perturbation",
+      "status": "VERIFIED",
+      "accepted": false,
+      "tokenizer_sha256": null,
+      "vocabulary_size": 10000,
+      "token_counts": {
+        "en": 10622,
+        "hi": 10672,
+        "te": 3315,
+        "bn": 10586
+      },
+      "fertilities": {
+        "en": 1.0495010374468925,
+        "hi": 1.321119088883387,
+        "te": 1.3201911589008364,
+        "bn": 1.6571696931747026
+      },
+      "x_min": 1.0495010374468925,
+      "x_max": 1.6571696931747026,
+      "x_min_language": "en",
+      "x_max_language": "bn",
+      "gap": 0.6076686557278101,
+      "score": 1645.6336698859202,
+      "english_constraint": true,
+      "reason": "weight grid"
+    }
+  ]
+}
