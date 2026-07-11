@@ -10,4 +10,4 @@ npm ci
 npm run build
 
 test -f dist/index.html
-echo "Build OK: $(du -sh dist | cut -f1)"
+echo "Build OK"
