@@ -21,12 +21,13 @@ jobs:
         run: test -f dist/index.html && test -d dist/data/results
 
       - name: Deploy to Netlify
-        uses: nwtgbt/actions-netlify@v2.1
-        with:
-          publish-dir: './session2/web/dist'
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ github.event.head_commit.message }}
+        run: |
+          cd dist
+          zip -r ../deploy.zip .
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -H "Content-Type: application/zip" \
+               --data-binary @../deploy.zip \
+               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
