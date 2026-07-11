@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-07-11T03:19:08.235817+00:00",
+  "files": {
+    "results/tokenizer.json": "6415894d3bac446b81013a9378a5c2fc8265f1db5947e579e2859bb65fe3ffda",
+    "results/stats.json": "5076ddf474562427fdd01ce1fa737a2a9c4afe8f751160865b089c279be32616",
+    "data/frozen/en_india.txt": "d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341",
+    "data/frozen/hi_india.txt": "903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd",
+    "data/frozen/te_india.txt": "b5f601e0f0ee541b82af265a07e3657130e32550d550086179289db44fce3a46",
+    "data/frozen/bn_india.txt": "5a81fc4e6785196ef37c2bc52040c5dd0ae1c1040a462d428d6441044d604a8e"
+  }
+}

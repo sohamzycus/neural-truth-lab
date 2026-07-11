@@ -1,0 +1,1321 @@
+[
+  {
+    "step": 0,
+    "note": "english_seed_7500",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.265907402822481,
+      "te": 7.5559538032656315,
+      "bn": 6.733719474013776
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7500
+  },
+  {
+    "step": 1,
+    "note": "merge ('\u0947', '</w>') -> \u0947</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.149541965833127,
+      "te": 7.5559538032656315,
+      "bn": 6.733719474013776
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7501,
+    "winning_candidate": "\u0947</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 2,
+    "note": "merge ('\u09b0', '</w>') -> \u09b0</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.149541965833127,
+      "te": 7.5559538032656315,
+      "bn": 6.597683155917345
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7502,
+    "winning_candidate": "\u09b0</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 3,
+    "note": "merge ('\u093e', '</w>') -> \u093e</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.046917553849963,
+      "te": 7.5559538032656315,
+      "bn": 6.597683155917345
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7503,
+    "winning_candidate": "\u093e</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 4,
+    "note": "merge ('\u0964', '</w>') -> \u0964</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 5.000371379054221,
+      "te": 7.5559538032656315,
+      "bn": 6.530995616781465
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7504,
+    "winning_candidate": "\u0964</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 5,
+    "note": "merge ('\u0902', '</w>') -> \u0902</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.911487992077247,
+      "te": 7.5559538032656315,
+      "bn": 6.530995616781465
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7505,
+    "winning_candidate": "\u0902</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 6,
+    "note": "merge ('\u09c7', '</w>') -> \u09c7</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.911487992077247,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7506,
+    "winning_candidate": "\u09c7</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 7,
+    "note": "merge ('\u0940', '</w>') -> \u0940</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.82842287694974,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7507,
+    "winning_candidate": "\u0940</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 8,
+    "note": "merge ('\u0930', '</w>') -> \u0930</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.422824045084534
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7508,
+    "winning_candidate": "\u0930</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 9,
+    "note": "merge ('\u09af', '\u09bc') -> \u09af\u09bc",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.32498434564809
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7509,
+    "winning_candidate": "\u09af\u09bc",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 10,
+    "note": "merge ('\u09cd', '\u09b0') -> \u09cd\u09b0",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.229179711959925
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7510,
+    "winning_candidate": "\u09cd\u09b0",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 11,
+    "note": "merge ('\u09be', '\u09b0') -> \u09be\u09b0",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.144176581089543
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7511,
+    "winning_candidate": "\u09be\u09b0",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 12,
+    "note": "merge ('\u09cd', '\u09af') -> \u09cd\u09af",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.7480812082198565,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7512,
+    "winning_candidate": "\u09cd\u09af",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 13,
+    "note": "merge ('\u0915', '\u0947</w>') -> \u0915\u0947</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.692250557068581,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7513,
+    "winning_candidate": "\u0915\u0947</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 14,
+    "note": "merge ('\u094d', '\u0930') -> \u094d\u0930",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.636791284971528,
+      "te": 7.5559538032656315,
+      "bn": 6.064026299311209
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7514,
+    "winning_candidate": "\u094d\u0930",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 15,
+    "note": "merge ('\u093e', '\u0930') -> \u093e\u0930",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.582446150037138,
+      "te": 7.5559538032656315,
+      "bn": 6.06386975579211
+    },
+    "max_min_gap": 6.499931671065256,
+    "score": 153.84777111604816,
+    "vocab_size": 7515,
+    "winning_candidate": "\u093e\u0930",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 16,
+    "note": "merge ('\u0c41', '</w>') -> \u0c41</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.582446150037138,
+      "te": 7.424930306650737,
+      "bn": 6.06386975579211
+    },
+    "max_min_gap": 6.368908174450361,
+    "score": 157.01278344875814,
+    "vocab_size": 7516,
+    "winning_candidate": "\u0c41</w>",
+    "predicted_score_impact": 3.1650123327099777,
+    "actual_score_impact": 3.1650123327099777
+  },
+  {
+    "step": 17,
+    "note": "merge ('\u0924', '</w>') -> \u0924</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.424930306650737,
+      "bn": 6.06386975579211
+    },
+    "max_min_gap": 6.368908174450361,
+    "score": 157.01278344875814,
+    "vocab_size": 7517,
+    "winning_candidate": "\u0924</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 18,
+    "note": "merge ('\u0c4d', '\u0c30') -> \u0c4d\u0c30",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.303464755077658,
+      "bn": 6.06386975579211
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7518,
+    "winning_candidate": "\u0c4d\u0c30",
+    "predicted_score_impact": 3.0527122051173308,
+    "actual_score_impact": 3.0527122051173308
+  },
+  {
+    "step": 19,
+    "note": "merge ('\u09c7', '\u09b0</w>') -> \u09c7\u09b0</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.530081703391929,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7519,
+    "winning_candidate": "\u09c7\u09b0</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 20,
+    "note": "merge ('\u092e', '\u0947') -> \u092e\u0947",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.4799455310720475,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7520,
+    "winning_candidate": "\u092e\u0947",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 21,
+    "note": "merge ('\u092e\u0947', '\u0902</w>') -> \u092e\u0947\u0902</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.433894528348601,
+      "te": 7.303464755077658,
+      "bn": 5.998747651847213
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7521,
+    "winning_candidate": "\u092e\u0947\u0902</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 22,
+    "note": "merge ('\u09bf', '</w>') -> \u09bf</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.433894528348601,
+      "te": 7.303464755077658,
+      "bn": 5.944896681277395
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7522,
+    "winning_candidate": "\u09bf</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 23,
+    "note": "merge ('\u0939', '\u0948') -> \u0939\u0948",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.392423867293885,
+      "te": 7.303464755077658,
+      "bn": 5.944896681277395
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7523,
+    "winning_candidate": "\u0939\u0948",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 24,
+    "note": "merge ('\u09cd', '\u09a4') -> \u09cd\u09a4",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.392423867293885,
+      "te": 7.303464755077658,
+      "bn": 5.894802755165936
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7524,
+    "winning_candidate": "\u09cd\u09a4",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 25,
+    "note": "merge ('\u094d', '\u092f') -> \u094d\u092f",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.303464755077658,
+      "bn": 5.894802755165936
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7525,
+    "winning_candidate": "\u094d\u092f",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 26,
+    "note": "merge ('\u09be', '</w>') -> \u09be</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.303464755077658,
+      "bn": 5.84815278647464
+    },
+    "max_min_gap": 6.247442622877283,
+    "score": 160.06549565387547,
+    "vocab_size": 7526,
+    "winning_candidate": "\u09be</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 27,
+    "note": "merge ('\u0c3e', '\u0c30') -> \u0c3e\u0c30",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.195141377937077,
+      "bn": 5.84815278647464
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7527,
+    "winning_candidate": "\u0c3e\u0c30",
+    "predicted_score_impact": 2.8243196391647984,
+    "actual_score_impact": 2.8243196391647984
+  },
+  {
+    "step": 28,
+    "note": "merge ('\u09ad', '\u09be\u09b0') -> \u09ad\u09be\u09b0",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.3529338945283484,
+      "te": 7.195141377937077,
+      "bn": 5.8030682529743265
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7528,
+    "winning_candidate": "\u09ad\u09be\u09b0",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 29,
+    "note": "merge ('\u0928', '</w>') -> \u0928</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.8030682529743265
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7529,
+    "winning_candidate": "\u0928</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 30,
+    "note": "merge ('\u09ad\u09be\u09b0', '\u09a4') -> \u09ad\u09be\u09b0\u09a4",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.758609893550407
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7530,
+    "winning_candidate": "\u09ad\u09be\u09b0\u09a4",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 31,
+    "note": "merge ('\u09ac', '\u09bf') -> \u09ac\u09bf",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.714151534126487
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7531,
+    "winning_candidate": "\u09ac\u09bf",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 32,
+    "note": "merge ('\u09be', '\u09a8') -> \u09be\u09a8",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.195141377937077,
+      "bn": 5.669693174702568
+    },
+    "max_min_gap": 6.139119245736701,
+    "score": 162.88981529304027,
+    "vocab_size": 7532,
+    "winning_candidate": "\u09be\u09a8",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 33,
+    "note": "merge ('\u0c3e', '\u0c32') -> \u0c3e\u0c32",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.317405298341174,
+      "te": 7.098765432098766,
+      "bn": 5.669693174702568
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7533,
+    "winning_candidate": "\u0c3e\u0c32",
+    "predicted_score_impact": 2.597935943523936,
+    "actual_score_impact": 2.597935943523936
+  },
+  {
+    "step": 34,
+    "note": "merge ('\u0915', '</w>') -> \u0915</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.282743253280515,
+      "te": 7.098765432098766,
+      "bn": 5.669693174702568
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7534,
+    "winning_candidate": "\u0915</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 35,
+    "note": "merge ('\u092d', '\u093e\u0930') -> \u092d\u093e\u0930",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.248823966328299,
+      "te": 7.098765432098766,
+      "bn": 5.669536631183469
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7535,
+    "winning_candidate": "\u092d\u093e\u0930",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 36,
+    "note": "merge ('\u0930', '\u094d') -> \u0930\u094d",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.669536631183469
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7536,
+    "winning_candidate": "\u0930\u094d",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 37,
+    "note": "merge ('\u09aa', '\u09cd\u09b0') -> \u09aa\u09cd\u09b0",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.628835316217908
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7537,
+    "winning_candidate": "\u09aa\u09cd\u09b0",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 38,
+    "note": "merge ('\u09af\u09bc', '</w>') -> \u09af\u09bc</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.589699436443332
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7538,
+    "winning_candidate": "\u09af\u09bc</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 39,
+    "note": "merge ('\u0993', '</w>') -> \u0993</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.551189730745147
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7539,
+    "winning_candidate": "\u0993</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 40,
+    "note": "merge ('\u09b0', '\u09cd') -> \u09b0\u09cd",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.098765432098766,
+      "bn": 5.51299311208516
+    },
+    "max_min_gap": 6.04274329989839,
+    "score": 165.4877512365642,
+    "vocab_size": 7540,
+    "winning_candidate": "\u09b0\u09cd",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 41,
+    "note": "merge ('\u0c3f', '</w>') -> \u0c3f</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.017124651533254,
+      "bn": 5.51299311208516
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7541,
+    "winning_candidate": "\u0c3f</w>",
+    "predicted_score_impact": 2.266451405787336,
+    "actual_score_impact": 2.266451405787336
+  },
+  {
+    "step": 42,
+    "note": "merge ('\u09bf', '\u0995') -> \u09bf\u0995",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.2166377816291165,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7542,
+    "winning_candidate": "\u09bf\u0995",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 43,
+    "note": "merge ('\u093f', '\u092f') -> \u093f\u092f",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.1886605595444415,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7543,
+    "winning_candidate": "\u093f\u092f",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 44,
+    "note": "merge ('\u094b', '\u0902</w>') -> \u094b\u0902</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.16142609556821,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7544,
+    "winning_candidate": "\u094b\u0902</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 45,
+    "note": "merge ('\u0914', '\u0930</w>') -> \u0914\u0930</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.134686803664273,
+      "te": 7.017124651533254,
+      "bn": 5.475422667501565
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7545,
+    "winning_candidate": "\u0914\u0930</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 46,
+    "note": "merge ('\u0938', '\u094d') -> \u0938\u094d",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.108690269868779,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7546,
+    "winning_candidate": "\u0938\u094d",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 47,
+    "note": "merge ('\u0915', '\u0940</w>') -> \u0915\u0940</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.0828175290913595,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7547,
+    "winning_candidate": "\u0915\u0940</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 48,
+    "note": "merge ('\u092a', '\u094d\u0930') -> \u092a\u094d\u0930",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.057935132458529,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7548,
+    "winning_candidate": "\u092a\u094d\u0930",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 49,
+    "note": "merge ('\u092d\u093e\u0930', '\u0924</w>') -> \u092d\u093e\u0930\u0924</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.033176528843773,
+      "te": 7.017124651533254,
+      "bn": 5.475266123982467
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7549,
+    "winning_candidate": "\u092d\u093e\u0930\u0924</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 50,
+    "note": "merge ('\u09bf', '\u09a4') -> \u09bf\u09a4",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.033176528843773,
+      "te": 7.017124651533254,
+      "bn": 5.443957420162805
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7550,
+    "winning_candidate": "\u09bf\u09a4",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 51,
+    "note": "merge ('\u0915', '\u093e</w>') -> \u0915\u093e</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 7.017124651533254,
+      "bn": 5.443957420162805
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7551,
+    "winning_candidate": "\u0915\u093e</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 52,
+    "note": "merge ('\u09a8', '</w>') -> \u09a8</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 7.017124651533254,
+      "bn": 5.413274890419537
+    },
+    "max_min_gap": 5.961102519332878,
+    "score": 167.75420264235154,
+    "vocab_size": 7552,
+    "winning_candidate": "\u09a8</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 53,
+    "note": "merge ('\u0c4b', '</w>') -> \u0c4b</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.9494225408203905,
+      "bn": 5.413274890419537
+    },
+    "max_min_gap": 5.893400408620015,
+    "score": 169.68132668151046,
+    "vocab_size": 7553,
+    "winning_candidate": "\u0c4b</w>",
+    "predicted_score_impact": 1.9271240391589117,
+    "actual_score_impact": 1.9271240391589117
+  },
+  {
+    "step": 54,
+    "note": "merge ('\u09b8', '\u09be') -> \u09b8\u09be",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.9494225408203905,
+      "bn": 5.382905447714465
+    },
+    "max_min_gap": 5.893400408620015,
+    "score": 169.68132668151046,
+    "vocab_size": 7554,
+    "winning_candidate": "\u09b8\u09be",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 55,
+    "note": "merge ('\u0c3e', '</w>') -> \u0c3e</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.882915173237754,
+      "bn": 5.382905447714465
+    },
+    "max_min_gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "vocab_size": 7555,
+    "winning_candidate": "\u0c3e</w>",
+    "predicted_score_impact": 1.9367196696487952,
+    "actual_score_impact": 1.9367196696487952
+  },
+  {
+    "step": 56,
+    "note": "merge ('\u09be', '\u09b0</w>') -> \u09be\u09b0</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 4.008541718247091,
+      "te": 6.882915173237754,
+      "bn": 5.353788353162179
+    },
+    "max_min_gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "vocab_size": 7556,
+    "winning_candidate": "\u09be\u09b0</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 57,
+    "note": "merge ('\u092f', '</w>') -> \u092f</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.882915173237754,
+      "bn": 5.353788353162179
+    },
+    "max_min_gap": 5.826893041037378,
+    "score": 171.61804635115925,
+    "vocab_size": 7557,
+    "winning_candidate": "\u092f</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 58,
+    "note": "merge ('\u0c38', '\u0c4d') -> \u0c38\u0c4d",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.81800079649542,
+      "bn": 5.353788353162179
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7558,
+    "winning_candidate": "\u0c38\u0c4d",
+    "predicted_score_impact": 1.9334466796373135,
+    "actual_score_impact": 1.9334466796373135
+  },
+  {
+    "step": 59,
+    "note": "merge ('\u09ac', '\u09be') -> \u09ac\u09be",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.986382768011884,
+      "te": 6.81800079649542,
+      "bn": 5.326549780839073
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7559,
+    "winning_candidate": "\u09ac\u09be",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 60,
+    "note": "merge ('\u0938', '\u0947</w>') -> \u0938\u0947</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.96496657588512,
+      "te": 6.81800079649542,
+      "bn": 5.326549780839073
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7560,
+    "winning_candidate": "\u0938\u0947</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 61,
+    "note": "merge ('\u0995', '\u09cd') -> \u0995\u09cd",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.96496657588512,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7561,
+    "winning_candidate": "\u0995\u09cd",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 62,
+    "note": "merge ('\u094b', '</w>') -> \u094b</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9440455558306513,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7562,
+    "winning_candidate": "\u094b</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 63,
+    "note": "merge ('\u0915', '\u094d') -> \u0915\u094d",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9233721218123296,
+      "te": 6.81800079649542,
+      "bn": 5.299624295554164
+    },
+    "max_min_gap": 5.761978664295045,
+    "score": 173.55149303079656,
+    "vocab_size": 7563,
+    "winning_candidate": "\u0915\u094d",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 64,
+    "note": "merge ('\u0c4d', '\u0c2f') -> \u0c4d\u0c2f",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9233721218123296,
+      "te": 6.756670649143768,
+      "bn": 5.299624295554164
+    },
+    "max_min_gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "vocab_size": 7564,
+    "winning_candidate": "\u0c4d\u0c2f",
+    "predicted_score_impact": 1.867145221994008,
+    "actual_score_impact": 1.867145221994008
+  },
+  {
+    "step": 65,
+    "note": "merge ('\u0930', '\u093e') -> \u0930\u093e",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9031938598663034,
+      "te": 6.756670649143768,
+      "bn": 5.299624295554164
+    },
+    "max_min_gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "vocab_size": 7565,
+    "winning_candidate": "\u0930\u093e",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 66,
+    "note": "merge ('\u09b8', '\u09cd') -> \u09b8\u09cd",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.9031938598663034,
+      "te": 6.756670649143768,
+      "bn": 5.2742642454602375
+    },
+    "max_min_gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "vocab_size": 7566,
+    "winning_candidate": "\u09b8\u09cd",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 67,
+    "note": "merge ('\u0935', '\u093f') -> \u0935\u093f",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.756670649143768,
+      "bn": 5.2742642454602375
+    },
+    "max_min_gap": 5.700648516943392,
+    "score": 175.41863825279057,
+    "vocab_size": 7567,
+    "winning_candidate": "\u0935\u093f",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 68,
+    "note": "merge ('\u0c02', '</w>') -> \u0c02</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.698924731182796,
+      "bn": 5.2742642454602375
+    },
+    "max_min_gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "vocab_size": 7568,
+    "winning_candidate": "\u0c02</w>",
+    "predicted_score_impact": 1.795124072351996,
+    "actual_score_impact": 1.795124072351996
+  },
+  {
+    "step": 69,
+    "note": "merge ('\u0995\u09cd', '\u09b7') -> \u0995\u09cd\u09b7",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.88375835602872,
+      "te": 6.698924731182796,
+      "bn": 5.249686912961804
+    },
+    "max_min_gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "vocab_size": 7569,
+    "winning_candidate": "\u0995\u09cd\u09b7",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 70,
+    "note": "merge ('\u0928', '\u0947</w>') -> \u0928\u0947</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.698924731182796,
+      "bn": 5.249686912961804
+    },
+    "max_min_gap": 5.64290259898242,
+    "score": 177.21376232514257,
+    "vocab_size": 7570,
+    "winning_candidate": "\u0928\u0947</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 71,
+    "note": "merge ('\u0c28', '\u0c4d') -> \u0c28\u0c4d",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.643568299482278,
+      "bn": 5.249686912961804
+    },
+    "max_min_gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "vocab_size": 7571,
+    "winning_candidate": "\u0c28\u0c4d",
+    "predicted_score_impact": 1.7556761477848681,
+    "actual_score_impact": 1.7556761477848681
+  },
+  {
+    "step": 72,
+    "note": "merge ('\u09bf\u0995', '</w>') -> \u09bf\u0995</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.864570438227284,
+      "te": 6.643568299482278,
+      "bn": 5.225422667501565
+    },
+    "max_min_gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "vocab_size": 7572,
+    "winning_candidate": "\u09bf\u0995</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 73,
+    "note": "merge ('\u0939\u0948', '\u0964</w>') -> \u0939\u0948\u0964</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.643568299482278,
+      "bn": 5.225422667501565
+    },
+    "max_min_gap": 5.587546167281903,
+    "score": 178.96943847292744,
+    "vocab_size": 7573,
+    "winning_candidate": "\u0939\u0948\u0964</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 74,
+    "note": "merge ('\u0c28', '</w>') -> \u0c28</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.225422667501565
+    },
+    "max_min_gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "vocab_size": 7574,
+    "winning_candidate": "\u0c28</w>",
+    "predicted_score_impact": 1.7257727379575272,
+    "actual_score_impact": 1.7257727379575272
+  },
+  {
+    "step": 75,
+    "note": "merge ('\u09a8', '\u09cd') -> \u09a8\u09cd",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.201628052598623
+    },
+    "max_min_gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "vocab_size": 7575,
+    "winning_candidate": "\u09a8\u09cd",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 76,
+    "note": "merge ('\u09c0', '\u09af\u09bc</w>') -> \u09c0\u09af\u09bc</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.5902031063321385,
+      "bn": 5.178146524733876
+    },
+    "max_min_gap": 5.534180974131763,
+    "score": 180.69521121088496,
+    "vocab_size": 7576,
+    "winning_candidate": "\u09c0\u09af\u09bc</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 77,
+    "note": "merge ('\u0c02', '\u0c26') -> \u0c02\u0c26",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.537236160892075,
+      "bn": 5.178146524733876
+    },
+    "max_min_gap": 5.481214028691699,
+    "score": 182.44133412150083,
+    "vocab_size": 7577,
+    "winning_candidate": "\u0c02\u0c26",
+    "predicted_score_impact": 1.7461229106158669,
+    "actual_score_impact": 1.7461229106158669
+  },
+  {
+    "step": 78,
+    "note": "merge ('\u0c2a', '\u0c4d\u0c30') -> \u0c2a\u0c4d\u0c30",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.484667463162086,
+      "bn": 5.178146524733876
+    },
+    "max_min_gap": 5.428645330961711,
+    "score": 184.20801858183745,
+    "vocab_size": 7578,
+    "winning_candidate": "\u0c2a\u0c4d\u0c30",
+    "predicted_score_impact": 1.76668446033662,
+    "actual_score_impact": 1.76668446033662
+  },
+  {
+    "step": 79,
+    "note": "merge ('\u0c26', '\u0c47') -> \u0c26\u0c47",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.845506313443922,
+      "te": 6.432497013142174,
+      "bn": 5.178146524733876
+    },
+    "max_min_gap": 5.376474880941799,
+    "score": 185.99547512901793,
+    "vocab_size": 7579,
+    "winning_candidate": "\u0c26\u0c47",
+    "predicted_score_impact": 1.7874565471804829,
+    "actual_score_impact": 1.7874565471804829
+  },
+  {
+    "step": 80,
+    "note": "merge ('\u0932', '</w>') -> \u0932</w>",
+    "fertilities": {
+      "en": 1.0560221322003756,
+      "hi": 3.827308739787076,
+      "te": 6.432497013142174,
+      "bn": 5.178146524733876
+    },
+    "max_min_gap": 5.376474880941799,
+    "score": 185.99547512901793,
+    "vocab_size": 7580,
+    "winning_candidate": "\u0932</w>",
+    "predicted_score_impact": 0.0,
+    "actual_score_impact": 0.0
+  },
+  {
+    "step": 80,
+    "note": "indic_weighted_fill",
+    "fertilities": {
+      "en": 1.0497974508447783,
+      "hi": 1.3218618469918297,
+      "te": 1.2839506172839505,
+      "bn": 1.6557608015028178
+    },
+    "max_min_gap": 0.6059633506580395,
+    "score": 1650.2648203295803,
+    "vocab_size": 10000
+  },
+  {
+    "step": 80,
+    "note": "final",
+    "fertilities": {
+      "en": 1.0497974508447783,
+      "hi": 1.3218618469918297,
+      "te": 1.2839506172839505,
+      "bn": 1.6557608015028178
+    },
+    "max_min_gap": 0.6059633506580395,
+    "score": 1650.2648203295803,
+    "vocab_size": 10000
+  }
+]

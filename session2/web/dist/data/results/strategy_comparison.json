@@ -1,0 +1,146 @@
+{
+  "strategies": [
+    {
+      "id": "shared-vanilla-bpe",
+      "name": "Shared Vanilla BPE",
+      "implemented": true,
+      "verified": true,
+      "winner": false,
+      "vocabularySize": 10000,
+      "fertility": {
+        "en": 1.5339393340578995,
+        "hi": 1.3400594206486753,
+        "te": 2.0629231381919553,
+        "bn": 1.6783030682529743
+      },
+      "gap": 0.7228637175432799,
+      "score": 1383.3866270098515,
+      "englishConstraintPassed": false
+    },
+    {
+      "id": "allocated-monolingual-bpe",
+      "name": "Allocated Monolingual BPE",
+      "implemented": true,
+      "verified": true,
+      "winner": false,
+      "vocabularySize": 9487,
+      "fertility": {
+        "en": 2.534927378717518,
+        "hi": 5.29796979450359,
+        "te": 7.61489446435683,
+        "bn": 6.832028804007514
+      },
+      "gap": 5.079967085639312,
+      "score": 196.85166914307877,
+      "englishConstraintPassed": false
+    },
+    {
+      "id": "weighted-shared-bpe",
+      "name": "Weighted Shared BPE",
+      "implemented": true,
+      "verified": true,
+      "winner": true,
+      "vocabularySize": 10000,
+      "fertility": {
+        "en": 1.0495010374468925,
+        "hi": 1.321119088883387,
+        "te": 1.302668259657507,
+        "bn": 1.6549780839073263
+      },
+      "gap": 0.6054770464604338,
+      "score": 1651.590272242215,
+      "englishConstraintPassed": true
+    },
+    {
+      "id": "grapheme-aware-bpe",
+      "name": "Grapheme-Aware BPE",
+      "implemented": true,
+      "verified": true,
+      "winner": false,
+      "vocabularySize": 2418,
+      "fertility": {
+        "en": 6.454599347890524,
+        "hi": 3.5762564991334487,
+        "te": 4.728793309438471,
+        "bn": 4.873982467125861
+      },
+      "gap": 2.8783428487570757,
+      "score": 347.4221288238194,
+      "englishConstraintPassed": false
+    },
+    {
+      "id": "score-directed-adaptive-bpe",
+      "name": "Score-Directed Adaptive BPE",
+      "implemented": true,
+      "verified": true,
+      "winner": false,
+      "vocabularySize": 10000,
+      "fertility": {
+        "en": 1.0497974508447783,
+        "hi": 1.3218618469918297,
+        "te": 1.2839506172839505,
+        "bn": 1.6557608015028178
+      },
+      "gap": 0.6059633506580395,
+      "score": 1650.2648203295803,
+      "englishConstraintPassed": true
+    }
+  ],
+  "legacy": [
+    {
+      "strategy": "shared_vanilla",
+      "vocabulary_size": 10000,
+      "en_fertility": 1.5339393340578995,
+      "hi_fertility": 1.3400594206486753,
+      "te_fertility": 2.0629231381919553,
+      "bn_fertility": 1.6783030682529743,
+      "max_min_gap": 0.7228637175432799,
+      "score": 1383.3866270098515,
+      "english_pass": false
+    },
+    {
+      "strategy": "allocated_monolingual",
+      "vocabulary_size": 9487,
+      "en_fertility": 2.534927378717518,
+      "hi_fertility": 5.29796979450359,
+      "te_fertility": 7.61489446435683,
+      "bn_fertility": 6.832028804007514,
+      "max_min_gap": 5.079967085639312,
+      "score": 196.85166914307877,
+      "english_pass": false
+    },
+    {
+      "strategy": "weighted_shared",
+      "vocabulary_size": 10000,
+      "en_fertility": 1.0495010374468925,
+      "hi_fertility": 1.321119088883387,
+      "te_fertility": 1.302668259657507,
+      "bn_fertility": 1.6549780839073263,
+      "max_min_gap": 0.6054770464604338,
+      "score": 1651.590272242215,
+      "english_pass": true
+    },
+    {
+      "strategy": "grapheme_aware",
+      "vocabulary_size": 2418,
+      "en_fertility": 6.454599347890524,
+      "hi_fertility": 3.5762564991334487,
+      "te_fertility": 4.728793309438471,
+      "bn_fertility": 4.873982467125861,
+      "max_min_gap": 2.8783428487570757,
+      "score": 347.4221288238194,
+      "english_pass": false
+    },
+    {
+      "strategy": "score_directed_adaptive",
+      "vocabulary_size": 10000,
+      "en_fertility": 1.0497974508447783,
+      "hi_fertility": 1.3218618469918297,
+      "te_fertility": 1.2839506172839505,
+      "bn_fertility": 1.6557608015028178,
+      "max_min_gap": 0.6059633506580395,
+      "score": 1650.2648203295803,
+      "english_pass": true
+    }
+  ]
+}

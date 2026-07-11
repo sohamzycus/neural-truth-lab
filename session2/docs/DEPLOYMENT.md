@@ -1,16 +1,16 @@
 # Deployment — SamaBPE
 
-Static Vite/React app. All metrics ship in `public/data/` (no Python on Netlify).
+Static Vite/React app. Metrics ship in `public/data/` and the production bundle in `web/dist/` (committed for Netlify).
 
 ## Netlify (GitHub)
 
-1. [app.netlify.com](https://app.netlify.com) → site **sama-bpe-tokenizer** (or import `sohamzycus/neural-truth-lab`)
-2. **Site configuration → Build & deploy → Build settings**
-   - **Base directory:** leave **empty** (repo-root `netlify.toml` sets `build.base = "session2/web"`)
-   - **Build command / Publish directory:** leave **empty** (uses `netlify.toml`)
-3. Deploy. URL: `https://sama-bpe-tokenizer.netlify.app`
+Netlify’s build image has repeated `npm install` failures (~8 min, then crash). We **commit prebuilt `session2/web/dist/`** and Netlify only publishes it (~seconds, no npm).
 
-If build fails with “No such file or directory” for `session2/web/scripts/...`, the UI base directory is set **and** conflicts with root `netlify.toml` — clear the UI base directory field.
+1. After frontend changes: `cd session2/web && npm run build:netlify`
+2. Commit `dist/` with your changes and push.
+3. [sama-bpe-tokenizer](https://app.netlify.com/projects/sama-bpe-tokenizer) — base directory **empty**, build/publish **empty** (uses `netlify.toml`).
+
+URL: `https://sama-bpe-tokenizer.netlify.app`
 
 ## Local
 

@@ -1,12 +1,11 @@
 # SamaBPE — single source of truth for Netlify (works regardless of UI base-dir setting)
 [build]
   base = "session2/web"
-  command = "npm install --no-audit --no-fund && npm run build"
+  command = "test -f dist/index.html && test -d dist/data/results && echo 'Prebuilt dist OK'"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--no-audit --no-fund"
 
 [[redirects]]
   from = "/*"
