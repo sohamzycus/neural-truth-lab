@@ -1,4 +1,4 @@
-# SamaBPE — The Fair Tokenizer Lab
+# SamaBPE — Multilingual BPE Experiment
 
 **Production:** https://sama-bpe-tokenizer.netlify.app/
 
@@ -84,23 +84,24 @@ Frozen corpora
 
 ## 8. Code map
 
-| File | Responsibility | Why inspect it |
-| ---- | -------------- | -------------- |
-| `scripts/train.py` | Orchestrates strategy arena, selects candidate, exports artefacts | How experiments run |
-| `scripts/verify.py` | Independent score reproduction from tokenizer + corpora | Authoritative verification |
-| `scripts/authenticity_audit.py` | Audits claim consistency across UI/README/artefacts | Claim traceability |
-| `python/samabpe/bpe.py` | Core BPE vocabulary, merges, encoding | Actual tokenizer mechanics |
-| `python/samabpe/strategies.py` | Five training strategies | How designs differ |
-| `python/samabpe/scoring.py` | X, gap, score computation | Assignment metric |
-| `python/samabpe/word_units.py` | Authoritative denominator | What “word unit” means |
-| `python/samabpe/verify_core.py` | Recomputes metrics from artefacts | Verification logic |
-| `python/samabpe/unicode_utils.py` | Script attribution, grapheme checks | Supplementary analysis |
-| `web/src/lib/bpe.ts` | Browser encoder (loads same JSON artefact) | Playground parity |
-| `results/tokenizer.json` | Submitted tokenizer artefact | The actual submission |
-| `results/stats.json` | **Authoritative verified metrics** | Single source of truth for UI |
-| `results/strategy_comparison.json` | Train-arena measured strategy results | Experiment evidence |
-| `results/strategy_evidence_registry.json` | Strategy provenance registry | Evidence types |
-| `python/tests/` | Verification, parity, single-tokenizer tests | Automated checks |
+| File | Responsibility | Key functions/classes | Why it matters |
+| ---- | -------------- | --------------------- | -------------- |
+| `scripts/train.py` | Strategy arena orchestration | `main()`, `build_stats()`, `_strategy_entry()` | Runs all five strategies and exports artefacts |
+| `scripts/verify.py` | Independent verification CLI | `main()` | Authoritative score reproduction |
+| `scripts/authenticity_audit.py` | Claim consistency audit | `build_authenticity_audit()`, `build_strategy_registry()` | Catches stale UI/README metrics |
+| `python/samabpe/bpe.py` | Core BPE | `BPETokenizer` | Vocabulary, merges, encode/decode |
+| `python/samabpe/strategies.py` | Five training strategies | `train_shared_vanilla()`, `train_weighted_shared()`, `train_score_directed_adaptive()` | How each experiment differs |
+| `python/samabpe/scoring.py` | Assignment metric | `compute_score()`, `LanguageMetrics` | X, gap, score formula |
+| `python/samabpe/word_units.py` | Denominator | `count_word_units()`, `normalize_nfc()` | Authoritative word-unit definition |
+| `python/samabpe/verify_core.py` | Verification engine | `run_verification()`, `to_stats_json()` | Recomputes metrics from artefacts |
+| `python/samabpe/corpus.py` | Frozen corpora | `load_frozen()`, `CorpusRecord` | Corpus loading and hashes |
+| `python/samabpe/unicode_utils.py` | Script/grapheme analysis | `script_attribution()`, `grapheme_clusters()` | Supplementary vocabulary analysis |
+| `web/src/lib/bpe.ts` | Browser encoder | `BPEEncoder` | Playground loads same JSON artefact |
+| `results/tokenizer.json` | Submitted tokenizer | — | The actual submission |
+| `results/stats.json` | **Authoritative verified metrics** | — | Single source of truth for UI hero |
+| `results/strategy_comparison.json` | Train-arena measured results | — | Experiment evidence |
+| `results/strategy_evidence_registry.json` | Strategy provenance | — | Evidence types per strategy |
+| `python/tests/` | Automated checks | parity, one-tokenizer, verify | Regression safety |
 
 ## 9. Read the code in five minutes
 

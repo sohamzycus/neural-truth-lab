@@ -182,12 +182,12 @@ export function SectionStrategyArena({
   );
 }
 
-export function SectionFairnessRace({ trace }: { trace: OptTraceStep[] }) {
+export function SectionOptimizationTrace({ trace }: { trace: OptTraceStep[] }) {
   const data = trace.map((t) => ({ step: t.step, en: t.fertilities.en, hi: t.fertilities.hi, te: t.fertilities.te, bn: t.fertilities.bn }));
   if (!data.length) return null;
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
-      <h2 className="text-2xl font-bold">The Fairness Race</h2>
+      <h2 className="text-2xl font-bold">Optimization trace</h2>
       <p className="text-sm text-[var(--color-ink)]/60">MEASURED optimization trace</p>
       <div className="card mt-4 h-72">
         <ResponsiveContainer width="100%" height="100%">
@@ -241,7 +241,7 @@ export function SectionRejected({ items }: { items: RejectedMerge[] }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10" id="rejected">
       <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Rejected for balance</h2>
-      <p className="mt-2 text-sm text-[var(--color-ink)]/65">MEASURED — locally good compression, globally bad fairness.</p>
+        <p className="mt-2 text-sm text-[var(--color-ink)]/65">MEASURED — locally good compression, globally worse min–max spread.</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {items.slice(0, 12).map((r, i) => (
           <div key={i} className="card font-mono text-xs">

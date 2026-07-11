@@ -8,7 +8,7 @@ import {
   SectionVocabularyEconomy, SectionExploreLab,
 } from "./components/NarrativeSections";
 import {
-  SectionFairnessRace, SectionRejected, SectionGrapheme,
+  SectionOptimizationTrace, SectionRejected, SectionGrapheme,
   SectionReproduce, SectionDownloads, BudgetSimulator,
 } from "./components/StorySections";
 import {
@@ -82,7 +82,7 @@ export default function App() {
       <HeroNarrative stats={stats} />
       <SectionExperiment data={strategies} />
       <SectionWinner stats={stats} />
-      <SectionWhyWinner stats={stats} />
+      <SectionWhyWinner stats={stats} strategies={strategies} />
       <SectionVocabularyEconomy stats={stats} />
 
       <section className="mx-auto max-w-6xl px-4 py-14" id="playground">
@@ -167,7 +167,7 @@ export default function App() {
       <SectionExploreLab>
         <SectionOptimizerNextMove roi={roi as never} />
         <SectionMovingBoundary trace={movingTrace as never} sensitivity={null} />
-        <SectionFairnessRace trace={trace} />
+        <SectionOptimizationTrace trace={trace} />
         <SectionRejected items={rejected} />
         <SectionGrapheme stats={grapheme} />
         <BudgetSimulator curves={curves} actualAlloc={alloc} />

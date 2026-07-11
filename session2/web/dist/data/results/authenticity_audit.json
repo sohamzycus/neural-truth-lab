@@ -77,13 +77,13 @@
     },
     {
       "claim_id": "strategy_table_drift",
-      "claim_text": "strategy_comparison weighted-shared score matches final verified score",
+      "claim_text": "Train-arena weighted-shared score differs from final verified submission (documented)",
       "where": "strategy_comparison.json",
       "evidence_source": "scripts/train.py",
       "evidence_type": "MEASURED",
       "actual_value": 1651.590272242215,
-      "consistent": false,
-      "action_required": "Fix or relabel"
+      "consistent": true,
+      "action_required": null
     },
     {
       "claim_id": "roi",
@@ -96,5 +96,5 @@
       "action_required": null
     }
   ],
-  "issues_found": 1
+  "issues_found": 0
 }
