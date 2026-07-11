@@ -1,0 +1,26 @@
+{
+  "en_bootstrap": 6400,
+  "script_attribution": {
+    "special": 2,
+    "latin": 519,
+    "neutral": 52,
+    "devanagari": 2608,
+    "telugu": 2964,
+    "bengali": 2789,
+    "shared": 1066
+  },
+  "corpus_token_totals": {
+    "en": 11679,
+    "hi": 10672,
+    "te": 3310,
+    "bn": 10562
+  },
+  "fertilities": {
+    "en": 1.15393735796858,
+    "hi": 1.321119088883387,
+    "te": 1.318199920350458,
+    "bn": 1.6534126487163432
+  },
+  "score": 2002.1010418811763,
+  "note": "Bootstrap 6400 targets EN~1.15; Bengali ~1.653 is current floor for weighted-shared BPE at 10K"
+}

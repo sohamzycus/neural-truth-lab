@@ -1,16 +1,16 @@
 {
   "scored_tokenizer_path": "results/tokenizer.json",
-  "scored_tokenizer_sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
+  "scored_tokenizer_sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
   "vocabulary_size_from_loaded_artefact": 10000,
   "download_copies": [
     {
       "path": "web/public/data/results/tokenizer.json",
-      "sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
+      "sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
       "byte_identical_to_scored": true
     },
     {
       "path": "web/dist/data/results/tokenizer.json",
-      "sha256": "968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75",
+      "sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
       "byte_identical_to_scored": true
     }
   ],

@@ -1,0 +1,952 @@
+[
+  {
+    "name": "bootstrap_6150",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11925,
+      "hi": 10672,
+      "te": 3313,
+      "bn": 10561
+    },
+    "fertilities": {
+      "en": 1.1782432565951981,
+      "hi": 1.321119088883387,
+      "te": 1.319394663480685,
+      "bn": 1.6532561051972448
+    },
+    "x_min": 1.1782432565951981,
+    "x_max": 1.6532561051972448,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4750128486020466,
+    "score": 2105.206212722414,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6150,
+    "runtime_sec": 108.5
+  },
+  {
+    "name": "bootstrap_6250",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11825,
+      "hi": 10672,
+      "te": 3313,
+      "bn": 10561
+    },
+    "fertilities": {
+      "en": 1.168362809999012,
+      "hi": 1.321119088883387,
+      "te": 1.319394663480685,
+      "bn": 1.6532561051972448
+    },
+    "x_min": 1.168362809999012,
+    "x_max": 1.6532561051972448,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.48489329519823277,
+    "score": 2062.3093985887817,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6250,
+    "runtime_sec": 115.2
+  },
+  {
+    "name": "bootstrap_6300",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11776,
+      "hi": 10672,
+      "te": 3313,
+      "bn": 10561
+    },
+    "fertilities": {
+      "en": 1.1635213911668807,
+      "hi": 1.321119088883387,
+      "te": 1.319394663480685,
+      "bn": 1.6532561051972448
+    },
+    "x_min": 1.1635213911668807,
+    "x_max": 1.6532561051972448,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.48973471403036406,
+    "score": 2041.9218228789862,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6300,
+    "runtime_sec": 117.4
+  },
+  {
+    "name": "bootstrap_6350",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10672,
+      "te": 3312,
+      "bn": 10561
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.321119088883387,
+      "te": 1.3189964157706093,
+      "bn": 1.6532561051972448
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.6532561051972448,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.49457613286249513,
+    "score": 2021.9333962037867,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "runtime_sec": 116.5
+  },
+  {
+    "name": "bootstrap_6400",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10672,
+      "te": 3310,
+      "bn": 10562
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.318199920350458,
+      "bn": 1.6534126487163432
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.6534126487163432,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4994752907477631,
+    "score": 2002.1010418811763,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "runtime_sec": 116.9
+  },
+  {
+    "name": "bootstrap_6450",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10672,
+      "te": 3306,
+      "bn": 10562
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.321119088883387,
+      "te": 1.3166069295101552,
+      "bn": 1.6534126487163432
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.6534126487163432,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5040202961820086,
+    "score": 1984.0470861492577,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "runtime_sec": 116.4
+  },
+  {
+    "name": "bootstrap_6500",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10672,
+      "te": 3306,
+      "bn": 10562
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.321119088883387,
+      "te": 1.3166069295101552,
+      "bn": 1.6534126487163432
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.6534126487163432,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5089605194801017,
+    "score": 1964.7889408425833,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "runtime_sec": 118.0
+  },
+  {
+    "name": "boot_6500_w1",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10672,
+      "te": 3320,
+      "bn": 10573
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.321119088883387,
+      "te": 1.3221823974512146,
+      "bn": 1.6551346274264245
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.6551346274264245,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.510682498190183,
+    "score": 1958.1638367163907,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 3.5
+    },
+    "runtime_sec": 113.6
+  },
+  {
+    "name": "boot_6500_w2",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10672,
+      "te": 3328,
+      "bn": 10578
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.321119088883387,
+      "te": 1.32536837913182,
+      "bn": 1.655917345021916
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.655917345021916,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5114652157856745,
+    "score": 1955.1671729305679,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 5.0
+    },
+    "runtime_sec": 113.1
+  },
+  {
+    "name": "boot_6500_w3",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10672,
+      "te": 3334,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.321119088883387,
+      "te": 1.327757865392274,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5120913898620678,
+    "score": 1952.776437560004,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 6.0
+    },
+    "runtime_sec": 121.1
+  },
+  {
+    "name": "boot_6500_w4",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10681,
+      "te": 3345,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.322233226046051,
+      "te": 1.3321385902031064,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5120913898620678,
+    "score": 1952.776437560004,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 6.0
+    },
+    "runtime_sec": 120.4
+  },
+  {
+    "name": "boot_6500_w5",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10681,
+      "te": 3351,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.322233226046051,
+      "te": 1.3345280764635603,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5139699120912475,
+    "score": 1945.6391832961328,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 119.1
+  },
+  {
+    "name": "boot_6500_w6",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11583,
+      "hi": 10681,
+      "te": 3351,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.1444521292362415,
+      "hi": 1.322233226046051,
+      "te": 1.3345280764635603,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.1444521292362415,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5139699120912475,
+    "score": 1945.6391832961328,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6500,
+    "weights": {
+      "en": 0.8,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 119.3
+  },
+  {
+    "name": "boot_6450_w1",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10672,
+      "te": 3320,
+      "bn": 10573
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.321119088883387,
+      "te": 1.3221823974512146,
+      "bn": 1.6551346274264245
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.6551346274264245,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5057422748920899,
+    "score": 1977.2916950898948,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 3.5
+    },
+    "runtime_sec": 108.9
+  },
+  {
+    "name": "boot_6450_w2",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10672,
+      "te": 3328,
+      "bn": 10578
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.321119088883387,
+      "te": 1.32536837913182,
+      "bn": 1.655917345021916
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.655917345021916,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5065249924875814,
+    "score": 1974.2362466438756,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 5.0
+    },
+    "runtime_sec": 110.8
+  },
+  {
+    "name": "boot_6450_w3",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10672,
+      "te": 3334,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.321119088883387,
+      "te": 1.327757865392274,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5071511665639747,
+    "score": 1971.7986784397049,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 6.0
+    },
+    "runtime_sec": 112.4
+  },
+  {
+    "name": "boot_6450_w4",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10681,
+      "te": 3345,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.322233226046051,
+      "te": 1.3321385902031064,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5071511665639747,
+    "score": 1971.7986784397049,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 6.0
+    },
+    "runtime_sec": 113.7
+  },
+  {
+    "name": "boot_6450_w5",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10681,
+      "te": 3351,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.322233226046051,
+      "te": 1.3345280764635603,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5090296887931545,
+    "score": 1964.5219562160992,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 105.3
+  },
+  {
+    "name": "boot_6450_w6",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11633,
+      "hi": 10681,
+      "te": 3351,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.1493923525343346,
+      "hi": 1.322233226046051,
+      "te": 1.3345280764635603,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.1493923525343346,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5090296887931545,
+    "score": 1964.5219562160992,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6450,
+    "weights": {
+      "en": 0.8,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 103.4
+  },
+  {
+    "name": "boot_6400_w1",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10672,
+      "te": 3324,
+      "bn": 10573
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.3237753882915173,
+      "bn": 1.6551346274264245
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.6551346274264245,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5011972694578444,
+    "score": 1995.2223624077621,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 3.5
+    },
+    "runtime_sec": 103.9
+  },
+  {
+    "name": "boot_6400_w2",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10672,
+      "te": 3332,
+      "bn": 10578
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.3269613699721226,
+      "bn": 1.655917345021916
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.655917345021916,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5019799870533359,
+    "score": 1992.111290870544,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 5.0
+    },
+    "runtime_sec": 104.2
+  },
+  {
+    "name": "boot_6400_w3",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10672,
+      "te": 3338,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.3293508562325766,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5026061611297292,
+    "score": 1989.6294103364303,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 6.0
+    },
+    "runtime_sec": 103.0
+  },
+  {
+    "name": "boot_6400_w4",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10681,
+      "te": 3349,
+      "bn": 10582
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.322233226046051,
+      "te": 1.333731581043409,
+      "bn": 1.6565435190983093
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.6565435190983093,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.5026061611297292,
+    "score": 1989.6294103364303,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 6.0
+    },
+    "runtime_sec": 101.6
+  },
+  {
+    "name": "boot_6400_w5",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10681,
+      "te": 3355,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.322233226046051,
+      "te": 1.336121067303863,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.504484683358909,
+    "score": 1982.220735309348,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 105.1
+  },
+  {
+    "name": "boot_6400_w6",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11679,
+      "hi": 10681,
+      "te": 3355,
+      "bn": 10594
+    },
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.322233226046051,
+      "te": 1.336121067303863,
+      "bn": 1.658422041327489
+    },
+    "x_min": 1.15393735796858,
+    "x_max": 1.658422041327489,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.504484683358909,
+    "score": 1982.220735309348,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6400,
+    "weights": {
+      "en": 0.8,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 107.1
+  },
+  {
+    "name": "boot_6350_w1",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10672,
+      "te": 3326,
+      "bn": 10572
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.321119088883387,
+      "te": 1.3245718837116687,
+      "bn": 1.6549780839073263
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.6549780839073263,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.49629811157257664,
+    "score": 2014.9180032770769,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 3.5
+    },
+    "runtime_sec": 111.3
+  },
+  {
+    "name": "boot_6350_w2",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10672,
+      "te": 3334,
+      "bn": 10577
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.321119088883387,
+      "te": 1.327757865392274,
+      "bn": 1.6557608015028178
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.6557608015028178,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4970808291680682,
+    "score": 2011.7452561460375,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 5.0
+    },
+    "runtime_sec": 110.7
+  },
+  {
+    "name": "boot_6350_w3",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10672,
+      "te": 3340,
+      "bn": 10581
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.321119088883387,
+      "te": 1.330147351652728,
+      "bn": 1.656386975579211
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.656386975579211,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4977070032444615,
+    "score": 2009.2142434829764,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.0,
+      "te": 2.5,
+      "bn": 6.0
+    },
+    "runtime_sec": 111.5
+  },
+  {
+    "name": "boot_6350_w4",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10681,
+      "te": 3351,
+      "bn": 10581
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.322233226046051,
+      "te": 1.3345280764635603,
+      "bn": 1.656386975579211
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.656386975579211,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4977070032444615,
+    "score": 2009.2142434829764,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 6.0
+    },
+    "runtime_sec": 114.0
+  },
+  {
+    "name": "boot_6350_w5",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10681,
+      "te": 3357,
+      "bn": 10593
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.322233226046051,
+      "te": 1.3369175627240144,
+      "bn": 1.6582654978083908
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.6582654978083908,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4995855254736412,
+    "score": 2001.6592735586798,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 1.0,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 109.9
+  },
+  {
+    "name": "boot_6350_w6",
+    "vocabulary_size": 10000,
+    "token_counts": {
+      "en": 11727,
+      "hi": 10681,
+      "te": 3357,
+      "bn": 10593
+    },
+    "fertilities": {
+      "en": 1.1586799723347496,
+      "hi": 1.322233226046051,
+      "te": 1.3369175627240144,
+      "bn": 1.6582654978083908
+    },
+    "x_min": 1.1586799723347496,
+    "x_max": 1.6582654978083908,
+    "x_min_language": "en",
+    "x_max_language": "bn",
+    "gap": 0.4995855254736412,
+    "score": 2001.6592735586798,
+    "english_pass": true,
+    "vocab_pass": true,
+    "en_bootstrap": 6350,
+    "weights": {
+      "en": 0.8,
+      "hi": 2.5,
+      "te": 3.0,
+      "bn": 8.0
+    },
+    "runtime_sec": 112.9
+  }
+]

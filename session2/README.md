@@ -8,23 +8,23 @@
 
 | Language | Word units | Encoded tokens | X (tokens/word) |
 | -------- | ---------: | -------------: | ----------------: |
-| English  |      10121 |          12074 | 1.1929651220235156 |
+| English  |      10121 |          11679 | 1.153945065705958 |
 | Hindi    |       8078 |          10672 | 1.321119088883387 |
-| Telugu   |       2511 |           3314 | 1.3197929111907607 |
-| Bengali  |       6388 |          10560 | 1.6530995616781465 |
+| Telugu   |       2511 |           3310 | 1.318199920350458 |
+| Bengali  |       6388 |          10562 | 1.6534126487163432 |
 
 | Metric | Value |
 | ------ | ----- |
-| **X_min** (English) | 1.1929651220235156 |
-| **X_max** (Bengali) | 1.6530995616781465 |
-| **Verified fairness gap** | 0.46013443965463097 |
-| **Verified self-score** | **2173.2778810266473** |
+| **X_min** (English) | 1.153945065705958 |
+| **X_max** (Bengali) | 1.6534126487163432 |
+| **Verified fairness gap** | 0.4994675820103852 |
+| **Verified self-score** | **2002.10104738979** |
 | **Previous baseline score** | 1651.590272242215 |
-| **Improvement** | +521.69 (+31.6%) |
+| **Peak score (bootstrap=6000)** | 2173.28 — traded for EN~1.15 balance |
 | Vocabulary | 10,000 / 10,000 |
 | English constraint (X ≤ 1.2) | **PASS** |
-| Winning strategy | Weighted Shared BPE · `en_bootstrap=6000` (Level 3) |
-| Tokenizer SHA-256 | `968a7c4658babe032587cc9e4bd6a78f3060a5d40584fb54df7c46fc480a7c75` |
+| Winning strategy | Weighted Shared BPE · `en_bootstrap=6400` (Level 3) |
+| Tokenizer SHA-256 | `1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983` |
 
 **Reproduce in one command:** `python scripts/verify.py`
 

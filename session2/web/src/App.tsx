@@ -98,7 +98,7 @@ export default function App() {
       <SectionOptimizerNextMove roi={roi as never} />
       <SectionMovingBoundary trace={movingTrace as never} sensitivity={sensitivity} />
       <SectionReproduce stats={stats} />
-      <SectionStrategyArena data={strategies} winner={stats?.winning_strategy ?? ""} />
+      <SectionStrategyArena data={strategies} winner={stats?.winning_strategy ?? ""} stats={stats} />
       <SectionTokenEconomyStory stats={stats} headroom={headroom as never} />
       <SectionRejected items={rejected} />
       <div className="opacity-75">

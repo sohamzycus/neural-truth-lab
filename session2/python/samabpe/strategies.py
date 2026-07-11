@@ -136,7 +136,7 @@ def train_weighted_shared(
     corpora: dict[str, str],
     weights: dict[str, float] | None = None,
     vocab_size: int = VOCAB_BUDGET,
-    en_bootstrap: int = 6000,
+    en_bootstrap: int = 6400,
     pretokenization: PretokenMode = "whitespace",
 ) -> StrategyResult:
     weights = weights or {"en": 1.0, "hi": 2.0, "te": 2.5, "bn": 2.5}
@@ -191,10 +191,12 @@ def train_score_directed_adaptive(
     corpora: dict[str, str],
     vocab_size: int = VOCAB_BUDGET,
     max_steps: int = 80,
+    en_bootstrap: int = 7500,
 ) -> tuple[StrategyResult, list[dict], list[dict]]:
     """English-seeded BPE then fairness-directed merges for remaining budget."""
     pooled = "\n".join(corpora[l] for l in LANGS)
-    en_seed = BPETokenizer.train(corpora["en"], 7500, pretokenization="whitespace")
+    bootstrap = min(en_bootstrap, vocab_size - 100)
+    en_seed = BPETokenizer.train(corpora["en"], bootstrap, pretokenization="whitespace")
     tok = BPETokenizer(
         vocab=dict(en_seed.vocab),
         merges=list(en_seed.merges),
@@ -216,7 +218,7 @@ def train_score_directed_adaptive(
             "vocab_size": tok.vocab_size,
         }
 
-    trace.append(snapshot(0, "english_seed_7500"))
+    trace.append(snapshot(0, f"english_seed_{bootstrap}"))
 
     word_freqs: Counter[str] = Counter()
     for pt in tok.pretokenize(pooled):

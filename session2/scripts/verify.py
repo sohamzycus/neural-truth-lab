@@ -30,6 +30,7 @@ FINAL_PASS_BASELINE = RESULTS / "final_pass_baseline.json"
 SYNC_TO_PUBLIC = (
     "stats.json",
     "tokenizer.json",
+    "strategy_comparison.json",
     "verification_manifest.json",
     "artefact_proof.json",
     "final_pass_baseline.json",
@@ -38,7 +39,42 @@ SYNC_TO_PUBLIC = (
     "optimization_claim_audit.json",
     "objective_sensitivity.json",
     "final_score_search_trace.json",
+    "score_roi_candidates.json",
+    "moving_boundary_trace.json",
+    "english_headroom_analysis.json",
+    "bottleneck_word_analysis.json",
+    "score_landscape.json",
+    "token_distribution.json",
+    "vocab_allocation.json",
 )
+
+
+def _patch_strategy_comparison_winner(result) -> None:
+    path = RESULTS / "strategy_comparison.json"
+    if not path.exists():
+        return
+    data = json.loads(path.read_text(encoding="utf-8"))
+    fert = result.fertilities
+    for s in data.get("strategies", []):
+        if s.get("winner"):
+            s["fertility"] = dict(fert)
+            s["gap"] = result.max_min_gap
+            s["score"] = result.score
+            s["englishConstraintPassed"] = result.english_pass
+            s["vocabularySize"] = result.vocabulary_size
+    for leg in data.get("legacy", []):
+        if leg.get("strategy") == "weighted_shared":
+            leg.update({
+                "en_fertility": fert["en"],
+                "hi_fertility": fert["hi"],
+                "te_fertility": fert["te"],
+                "bn_fertility": fert["bn"],
+                "max_min_gap": result.max_min_gap,
+                "score": result.score,
+                "english_pass": result.english_pass,
+                "vocabulary_size": result.vocabulary_size,
+            })
+    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
 def _read_winning_strategy() -> str | None:
@@ -103,6 +139,8 @@ def main() -> int:
     (RESULTS / "stats.json").write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
     (RESULTS / "verification_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     (RESULTS / "verification.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    _patch_strategy_comparison_winner(result)
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
     for name in SYNC_TO_PUBLIC:

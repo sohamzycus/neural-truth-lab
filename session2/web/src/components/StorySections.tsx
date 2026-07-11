@@ -106,11 +106,30 @@ export function SectionPipeline() {
   );
 }
 
-export function SectionStrategyArena({ data, winner }: { data: StrategyComparison | null; winner: string }) {
+export function SectionStrategyArena({
+  data,
+  winner,
+  stats,
+}: {
+  data: StrategyComparison | null;
+  winner: string;
+  stats?: Stats | null;
+}) {
   const rows = data?.strategies ?? [];
   if (!rows.length) return null;
   const vanilla = rows.find((r) => r.id.includes("vanilla") || r.name.toLowerCase().includes("vanilla"));
-  const finalRow = rows.find((r) => r.winner || r.id === winner);
+  let finalRow = rows.find((r) => r.winner || r.id === winner);
+  // ponytail: overlay verified stats on winner row so table never drifts from stats.json
+  if (finalRow && stats) {
+    finalRow = {
+      ...finalRow,
+      vocabularySize: stats.vocabulary_size,
+      fertility: stats.fertilities,
+      gap: stats.max_min_gap,
+      score: stats.score,
+      englishConstraintPassed: stats.english_constraint.pass,
+    };
+  }
   const others = rows.filter((r) => r !== vanilla && r !== finalRow);
   const highlight = [vanilla, finalRow].filter(Boolean) as typeof rows;
 
