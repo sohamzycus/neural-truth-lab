@@ -1,0 +1,14 @@
+# Default Netlify config for sama-bpe-tokenizer (repo root build).
+# For session1/Neural Truth Lab, set Base directory to `session1` in Netlify UI.
+
+[build]
+  command = "cd session2/web && npm ci && npm run build"
+  publish = "session2/web/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
