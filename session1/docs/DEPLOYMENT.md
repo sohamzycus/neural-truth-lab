@@ -1,63 +1,48 @@
-# Deployment Guide
+# Deployment Guide — Neural Truth Lab (session1)
 
-Neural Truth Lab is a **static Next.js export** — TensorFlow.js runs entirely in the browser. Deploy to any static host; Netlify is the default.
+**Production:** https://llmlab.netlify.app
 
-## Prerequisites
+Static Next.js export — TensorFlow.js runs entirely in the browser.
 
-- Node.js 20+ (see `.nvmrc`)
-- npm 10+
+## Netlify (llmlab site)
+
+### Required site settings
+
+Same repo as session2, **different base directory**:
+
+| Setting | Value |
+|---------|--------|
+| **Base directory** | `session1` |
+| **Build command** | empty |
+| **Publish directory** | empty |
+
+Config is in `session1/netlify.toml` (`bash scripts/netlify-build.sh` → `out/`).
+
+Optional env: `NEXT_PUBLIC_SITE_URL=https://llmlab.netlify.app`
+
+### If llmlab shows SamaBPE instead
+
+The Netlify site base directory is wrong (likely repo root or `session2/web`). Set it to **`session1`**, clear cache, redeploy.
 
 ## Local production build
 
 ```bash
-npm ci
-npm run typecheck
-npm run lint
-npm run build
+cd session1
+yarn install   # or npm ci
+npm run typecheck && npm run lint && npm run build
 npx serve out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (or the port `serve` prints).
+## Registry note
 
-## Netlify (recommended)
-
-### One-time site setup
-
-1. [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import from Git** → `sohamzycus/neural-truth-lab`
-2. **Site configuration → Build & deploy → Build settings**
-   - **Build command:** leave **empty**
-   - **Publish directory:** leave **empty**
-   - (Both are read from `netlify.toml`; UI values like `/` or `.` will break deploys.)
-3. **Site configuration → Environment variables** (optional):
-   - `NEXT_PUBLIC_SITE_URL` = `https://your-site.netlify.app`
-4. Deploy. After the first success, set the env var if needed and redeploy once.
-
-### What `netlify.toml` does
-
-| Setting | Value |
-|---------|--------|
-| Build command | `bash scripts/netlify-build.sh` (or leave UI empty) |
-| Publish directory | `out` |
-| Node | 20 |
-
-Netlify detects `yarn.lock` and runs `yarn install` (not npm). Project `.npmrc` / `.yarnrc` pin `registry.npmjs.org` so lockfiles never point at a private registry (e.g. corporate Nexus) that Netlify cannot reach.
-
-### If a deploy fails
-
-1. **Deploys → Trigger deploy → Clear cache and deploy site**
-2. Confirm UI build settings are empty (see above)
-3. Check the log for `npm install` completing before `next build`
+`.npmrc` / `.yarnrc` pin `registry.npmjs.org` so Netlify can install (corporate Nexus URLs in lockfiles break CI).
 
 ## GitHub Actions
 
-CI on every push/PR to `main`: typecheck, lint, build. See [`.github/workflows/ci.yml`](../.github/workflows/ci.yml).
+Root workflow `.github/workflows/ci.yml` builds session1 on push/PR.
 
 ## Manual checklist
 
-- [ ] All four labs train end-to-end on the deployed URL
-- [ ] No console errors on landing and lab pages
+- [ ] Landing + all four labs train on https://llmlab.netlify.app
+- [ ] No console errors
 - [ ] Lighthouse Accessibility ≥ 90
-
-## Architecture
-
-See [`docs/ARCHITECTURE.md`](./ARCHITECTURE.md).

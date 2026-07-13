@@ -50,15 +50,9 @@ This happens when Turbopack/webpack hot reload races with a stale or mixed `.nex
 
 ## Deploy
 
-Production deploy targets **Netlify** with GitHub Actions CI.
+**Production:** https://llmlab.netlify.app
 
-```bash
-npm run build   # verify locally first
-```
-
-See [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) for Netlify setup and [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) for system overview.
-
-Optional env: `NEXT_PUBLIC_SITE_URL` for canonical Open Graph URLs.
+Netlify site base directory must be **`session1`** (not repo root). See [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md).
 
 ## Specs
 

@@ -1,5 +1,5 @@
-# SamaBPE static Vite app (used when Netlify UI base directory = session2/web only).
-# Prefer repo-root netlify.toml with build.base = "session2/web" and empty UI base directory.
+# SamaBPE static Vite app — Netlify site: sama-bpe-tokenizer.netlify.app
+# Set Netlify UI base directory to session2/web (NOT repo root).
 
 [build]
   command = "test -f dist/index.html && test -d dist/data/results && echo 'Prebuilt dist OK'"

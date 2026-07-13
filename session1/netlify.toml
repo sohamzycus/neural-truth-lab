@@ -1,5 +1,5 @@
-# Static Next.js export. Netlify UI: leave Build command + Publish directory EMPTY.
-# ponytail: yarn.lock → Netlify uses yarn instead of npm (npm hangs with "Exit handler never called")
+# Neural Truth Lab — Netlify site: llmlab.netlify.app
+# Set Netlify UI base directory to session1.
 
 [build]
   command = "bash scripts/netlify-build.sh"

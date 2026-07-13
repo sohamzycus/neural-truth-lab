@@ -1,4 +1,7 @@
-name: Deploy SamaBPE to Netlify
+name: Deploy SamaBPE to Netlify (session2 only)
+
+# Site: https://sama-bpe-tokenizer.netlify.app
+# Session1 (llmlab) deploys via Netlify Git with base directory session1 — see DEPLOYMENT.md
 
 on:
   push:

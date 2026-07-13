@@ -1,16 +1,36 @@
-# Deployment — SamaBPE
+# Deployment — SamaBPE (session2)
 
-Static Vite/React app. Metrics ship in `public/data/` and the production bundle in `web/dist/` (committed for Netlify).
+**Production:** https://sama-bpe-tokenizer.netlify.app
 
-## Netlify (GitHub)
+Static Vite/React app. Metrics ship in `public/data/`; production bundle in `web/dist/` (committed for Netlify).
 
-Netlify’s build image has repeated `npm install` failures (~8 min, then crash). We **commit prebuilt `session2/web/dist/`** and Netlify only publishes it (~seconds, no npm).
+## Netlify (sama-bpe-tokenizer site)
 
-1. After frontend changes: `cd session2/web && npm run build:netlify`
-2. Commit `dist/` with your changes and push.
-3. [sama-bpe-tokenizer](https://app.netlify.com/projects/sama-bpe-tokenizer) — base directory **empty**, build/publish **empty** (uses `netlify.toml`).
+### Required site settings
 
-URL: `https://sama-bpe-tokenizer.netlify.app`
+| Setting | Value |
+|---------|--------|
+| **Base directory** | `session2/web` |
+| **Build command** | empty |
+| **Publish directory** | empty |
+
+Config is in `session2/web/netlify.toml` (verifies prebuilt `dist/`, no npm on Netlify).
+
+Netlify’s build image often fails `npm install` (~8 min crash). We **commit `session2/web/dist/`**; the build step only checks it exists.
+
+### After frontend changes
+
+```bash
+cd session2/web
+npm ci && npm run build:netlify
+git add dist/ public/data/ && git commit && git push
+```
+
+Then **Clear cache and deploy** on the sama-bpe Netlify site.
+
+## Session 1 (Neural Truth Lab)
+
+**Do not** use this site for session1. Use https://llmlab.netlify.app with base directory **`session1`**. See `session1/docs/DEPLOYMENT.md` and repo-root `DEPLOYMENT.md`.
 
 ## Local
 
@@ -20,8 +40,6 @@ npm ci && npm run build
 npx serve dist
 ```
 
-## Session1 (Neural Truth Lab)
+## GitHub Actions
 
-Existing site: [neural-truth-lab.netlify.app](https://neural-truth-lab.netlify.app)
-
-After the monorepo move, set **Base directory** to `session1` in Netlify UI (Build & deploy).
+`.github/workflows/netlify-deploy.yml` can zip-deploy `dist/` when `NETLIFY_AUTH_TOKEN` + `NETLIFY_SITE_ID` (sama-bpe site) are set.

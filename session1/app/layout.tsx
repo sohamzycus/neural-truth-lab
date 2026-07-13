@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   description: SITE.tagline,
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://neural-truth-lab.netlify.app"
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://llmlab.netlify.app"
   ),
   openGraph: {
     title: SITE.name,
