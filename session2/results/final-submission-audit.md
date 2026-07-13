@@ -1,6 +1,6 @@
 # Final Submission Audit
 
-Generated: 2026-07-13T17:54:39.719083+00:00
+Generated: 2026-07-13T18:08:30.527444+00:00
 
 ## Verdict: **SUBMISSION READY**
 
@@ -14,7 +14,7 @@ Generated: 2026-07-13T17:54:39.719083+00:00
 | Normalizer | NFKC | VERIFIED |
 | Pretokenizer | Metaspace | VERIFIED |
 | Decoder | Metaspace | VERIFIED |
-| SHA-256 | `8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469` | VERIFIED |
+| SHA-256 | `9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5` | VERIFIED |
 
 ## Languages
 
@@ -31,12 +31,12 @@ EN, HI, TE, BN only — VERIFIED (en, hi, te, bn)
 
 | Lang | Fertility | EN/HI threshold |
 | ---- | --------: | --------------- |
-| EN | 0.852949 | PASS |
-| HI | 0.829636 | PASS |
-| TE | 0.844555 | — |
-| BN | 0.848572 | — |
+| EN | 0.853186 | PASS |
+| HI | 0.829739 | PASS |
+| TE | 0.844702 | — |
+| BN | 0.848688 | — |
 
-Spread: 0.023314 · Raw score: 42893.47 · Hindi penalty: 1.0000 · Adjusted self-score: 42893.47
+Spread: 0.023446 · Raw score: 42650.36 · Hindi penalty: 1.0000 · Adjusted self-score: 42650.36
 
 ## Round-trip
 
@@ -59,7 +59,7 @@ Spread: 0.023314 · Raw score: 42893.47 · Hindi penalty: 1.0000 · Adjusted sel
 ## Artifact parity
 
 - All tokenizer artifacts identical: PASS
-- Winner registry SHA match: True
+- Winner registry SHA match: False
 
 ## Playground parity
 

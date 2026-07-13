@@ -1,4 +1,4 @@
-Clean-room directory: /var/folders/bj/dgvhq9j57s7bdwrlvdrtsgwc0000gp/T/samabpe-clean-r9s8j3l5/submission
+Clean-room directory: /var/folders/bj/dgvhq9j57s7bdwrlvdrtsgwc0000gp/T/samabpe-clean-eivg9t2h/submission
 
 pip install exit code: 0
 
@@ -12,7 +12,7 @@ SamaBPE Faithful Evaluator-Compatible Verification
 
 Tokenizer format: Hugging Face BPE (NFKC + Metaspace)
 Vocabulary size: 10000
-Tokenizer SHA-256: 8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469
+Tokenizer SHA-256: 9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5
 Decoder present: yes
 
 Reviewer regression sample:
@@ -22,32 +22,32 @@ Reviewer regression sample:
 
 English
   Faithful units: 147908
-  Encoded tokens: 126158
-  Fertility: 0.8529491305406063
+  Encoded tokens: 126193
+  Fertility: 0.8531857641236444
   Full corpus round-trip: PASS
 
 Hindi
   Faithful units: 67473
-  Encoded tokens: 55978
-  Fertility: 0.8296355579268745
+  Encoded tokens: 55985
+  Fertility: 0.8297393031286588
   Full corpus round-trip: PASS
 
 Telugu
   Faithful units: 27225
-  Encoded tokens: 22993
-  Fertility: 0.84455463728191
+  Encoded tokens: 22997
+  Fertility: 0.8447015610651974
   Full corpus round-trip: PASS
 
 Bengali
   Faithful units: 68468
-  Encoded tokens: 58100
-  Fertility: 0.8485715954898638
+  Encoded tokens: 58108
+  Fertility: 0.8486884383945785
   Full corpus round-trip: PASS
 
-Spread: 0.023313572613731792
-Raw score: 42893.46882043277
+Spread: 0.023446460994985596
+Raw score: 42650.35990778592
 Hindi penalty: 1.0000x
-Adjusted evaluator score: 42893.46882043277
+Adjusted evaluator score: 42650.35990778592
 
 English < 1.2: PASS
 Hindi < 1.2: PASS
@@ -66,7 +66,7 @@ Tokens:
 ['India', "'s", '▁population', '▁is', '▁1,', '4', '28', ',', '6', '27', ',', '66', '3.']
 
 Token IDs:
-[385, 1127, 3474, 1120, 3927, 21, 713, 13, 23, 965, 13, 6544, 1565]
+[391, 1133, 3480, 1126, 3933, 21, 719, 13, 23, 971, 13, 6550, 1571]
 
 Decoded:
 India's population is 1,428,627,663.

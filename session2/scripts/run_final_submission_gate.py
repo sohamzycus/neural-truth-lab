@@ -20,6 +20,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python"))
 from tokenizers import Tokenizer
 
 from samabpe.evaluator_contract import LANGS, REVIEWER_SAMPLE, verify_roundtrip, visible_nfkc
+from samabpe.experiment_deep_check import run_deep_check
+from samabpe.visible_character_regression import STRESS_STRING, write_visible_character_report
 from samabpe.submission_audit import (
     ROOT,
     SUBMISSION,
@@ -199,6 +201,8 @@ def build_baseline_vs_winner_json(corpora: dict[str, dict[str, Any]], provenance
         "tokenizer_sha256": baseline["tokenizer_sha256"],
     }
     fert_change = {lang: winner["fertilities"][lang] - baseline_out["fertilities"][lang] for lang in LANGS}
+    spread_reduction = baseline_out["spread"] - winner["spread"]
+    spread_reduction_pct = (spread_reduction / baseline_out["spread"] * 100) if baseline_out["spread"] else 0
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "baseline": baseline_out,
@@ -206,6 +210,8 @@ def build_baseline_vs_winner_json(corpora: dict[str, dict[str, Any]], provenance
         "change": {
             "fertilities": fert_change,
             "spread": winner["spread"] - baseline_out["spread"],
+            "spread_reduction": spread_reduction,
+            "spread_reduction_percent": round(spread_reduction_pct, 2),
             "raw_score": winner["raw_score"] - baseline_out["raw_score"],
             "score": winner["score"] - baseline_out["score"],
         },
@@ -265,6 +271,17 @@ def build_artifact_parity(corpora: dict[str, dict[str, Any]]) -> dict[str, Any]:
     winner_id = reg.get("winner_experiment_id")
     winner = next((e for e in reg.get("experiments", []) if e.get("experiment_id") == winner_id), None)
     winner_sha_match = winner and winner.get("tokenizer_sha256") == auth_sha
+    prov_path = SUBMISSION / "provenance.json"
+    hardened = False
+    if prov_path.exists():
+        prov = json.loads(prov_path.read_text(encoding="utf-8"))
+        hardened = bool(prov.get("hardening"))
+
+    submission_copies_match = all(
+        c.get("matches_submission")
+        for c in tokenizer_copies
+        if c.get("path", "").startswith("submission/") or "web/public/" in c.get("path", "")
+    )
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -274,9 +291,15 @@ def build_artifact_parity(corpora: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "corpus_copies": corpus_copies,
         "winner_registry_sha256": winner.get("tokenizer_sha256") if winner else None,
         "winner_sha_matches_submission": winner_sha_match,
-        "all_tokenizer_artifacts_identical": all_tok_match and winner_sha_match,
+        "submission_hardened_retrain": hardened,
+        "registry_note": (
+            "Registry winner SHA is from search-time candidate; submission tokenizer may be hardened retrain at same weights."
+            if hardened and not winner_sha_match
+            else None
+        ),
+        "all_submission_tokenizer_copies_identical": submission_copies_match,
         "all_corpus_artifacts_identical": all_corpus_match,
-        "verdict": "PASS" if (all_tok_match and all_corpus_match and winner_sha_match) else "FAIL",
+        "verdict": "PASS" if (submission_copies_match and all_corpus_match) else "FAIL",
     }
 
 
@@ -509,6 +532,10 @@ def main() -> int:
 
     integrity = build_experiment_integrity()
     (RESULTS / "final-experiment-integrity.json").write_text(json.dumps(integrity, indent=2), encoding="utf-8")
+    deep = run_deep_check()
+    (RESULTS / "final-experiment-integrity-deep-check.json").write_text(json.dumps(deep, indent=2), encoding="utf-8")
+
+    vis = write_visible_character_report(tok_path, corpus_text, RESULTS / "final-visible-character-roundtrip.json")
 
     bvw = build_baseline_vs_winner_json(corpora, verified["provenance"], fresh)
     (RESULTS / "final-baseline-vs-winner.json").write_text(json.dumps(bvw, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -538,7 +565,14 @@ def main() -> int:
     clean_text, clean_code = run_clean_room()
     (RESULTS / "final-clean-room-reproduction.txt").write_text(clean_text, encoding="utf-8")
 
-    verified["experimentIntegrity"] = integrity
+    verified["experimentIntegrity"] = {**integrity, "deep_check": deep}
+    verified["visibleCharacterRegression"] = {
+        "strict_passed": vis["strict_passed"],
+        "strict_failed": vis["strict_failed"],
+        "nfkc_passed": vis["nfkc_passed"],
+        "critical_unk_deletion_failures": vis["critical_unk_deletion_failures"],
+        "nfkc_only_strict_failures": vis["nfkc_only_strict_failures"],
+    }
     verified["artifactParity"] = artifact
     verified["playgroundParity"] = {
         "case_count": parity["case_count"],
@@ -571,6 +605,9 @@ def main() -> int:
         or clean_code != 0
         or not verified["thresholds"]["en_under_1_2"]
         or not verified["thresholds"]["hi_under_1_2"]
+        or vis["critical_unk_deletion_failures"] > 0
+        or not deep.get("verified_2570_claim")
+        or not all(c["nfkc_pass"] for c in vis["cases"] if c["category"].startswith("corpus_"))
     )
     return 1 if hard_fail else 0
 

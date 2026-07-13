@@ -17,18 +17,20 @@ python encoder.py "India भारत తెలుగు বাংলা"
 
 | Language | Eval units | Tokens | Fertility | < 1.2 |
 | -------- | ---------: | -----: | --------: | ----- |
-| English  | 147,908 | 126,158 | 0.8530 | PASS |
-| Hindi    | 67,473 | 55,978 | 0.8296 | PASS |
-| Telugu   | 27,225 | 22,993 | 0.8446 | — |
-| Bengali  | 68,468 | 58,100 | 0.8486 | — |
+| English  | 147,908 | 126,193 | 0.8532 | PASS |
+| Hindi    | 67,473 | 55,985 | 0.8297 | PASS |
+| Telugu   | 27,225 | 22,997 | 0.8447 | — |
+| Bengali  | 68,468 | 58,108 | 0.8487 | — |
 
 | Metric | Value |
 | ------ | ----: |
-| Spread | 0.0233 |
-| Calculated self-score | 42,893.47 |
+| Spread | 0.0234 |
+| Calculated self-score | 42,650.36 |
 | Weights | EN 3 · HI 5 · TE 9 · BN 5 |
 
-Tokenizer SHA-256: `8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469`
+Tokenizer SHA-256: `9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5`
+
+Hardened retrain at winner weights (byte fallback + visible-punctuation initial alphabet) preserves `@`, `€`, `«`, `»` that were absent from Wikipedia snapshots.
 
 Metrics above match `evaluate_tokenizer.py` output from frozen artifacts in this folder.
 

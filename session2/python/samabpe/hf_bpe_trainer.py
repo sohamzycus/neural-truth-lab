@@ -23,15 +23,18 @@ from samabpe.evaluator_contract import (
 
 VOCAB_BUDGET = 10_000
 DEFAULT_WEIGHTS = {"en": 3, "hi": 4, "te": 4, "bn": 2}
+WINNER_WEIGHTS = {"en": 3, "hi": 5, "te": 9, "bn": 5}
 UNK_TOKEN = "<unk>"
+# ponytail: seed alphabet for visible punctuation absent from Wikipedia snapshots (prevents <unk> decode deletion)
+VISIBLE_INITIAL_ALPHABET = list("«»@€£—…–'\".,;:!?()[]{}|/_\\#&%+=*`~")
 
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def build_hf_bpe_template() -> Tokenizer:
-    tok = Tokenizer(BPE(unk_token=UNK_TOKEN))
+def build_hf_bpe_template(*, hardened: bool = True) -> Tokenizer:
+    tok = Tokenizer(BPE(unk_token=UNK_TOKEN, byte_fallback=hardened))
     tok.normalizer = NFKC()
     tok.pre_tokenizer = Metaspace(replacement="▁", prepend_scheme="never")
     tok.decoder = MetaspaceDecoder(replacement="▁", prepend_scheme="never")
@@ -72,15 +75,19 @@ def train_hf_bpe(
     weights: dict[str, int] | None = None,
     vocab_size: int = VOCAB_BUDGET,
     output_path: Path | str | None = None,
+    hardened: bool = True,
 ) -> tuple[Tokenizer, dict]:
     weights = dict(weights or DEFAULT_WEIGHTS)
-    tok = build_hf_bpe_template()
-    trainer = BpeTrainer(
-        vocab_size=vocab_size,
-        min_frequency=1,
-        special_tokens=[UNK_TOKEN],
-        show_progress=False,
-    )
+    tok = build_hf_bpe_template(hardened=hardened)
+    trainer_kwargs: dict = {
+        "vocab_size": vocab_size,
+        "min_frequency": 1,
+        "special_tokens": [UNK_TOKEN],
+        "show_progress": False,
+    }
+    if hardened:
+        trainer_kwargs["initial_alphabet"] = VISIBLE_INITIAL_ALPHABET
+    trainer = BpeTrainer(**trainer_kwargs)
     lines = _weighted_lines(corpora, weights)
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False, suffix=".txt") as f:
         for line in lines:
@@ -100,6 +107,8 @@ def train_hf_bpe(
         "normalizer": "NFKC",
         "pretokenizer": {"type": "Metaspace", "replacement": "▁", "prepend_scheme": "never"},
         "decoder": {"type": "Metaspace", "replacement": "▁", "prepend_scheme": "never"},
+        "byte_fallback": hardened,
+        "initial_alphabet_seeded": hardened,
         "roundtrip": roundtrip,
     }
     if output_path is not None:

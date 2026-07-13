@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-07-13T18:08:27.060729+00:00",
+  "registry_path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/resubmission/experiments.json",
+  "total_records": 2570,
+  "unique_experiment_ids": 2570,
+  "unique_weight_configurations": 2570,
+  "unique_fertility_signatures": 2570,
+  "huggingface_bpe_runs": 2570,
+  "nfkc_metaspace_architecture": 2570,
+  "loadable_tokenizer_records": 2570,
+  "passed_roundtrip": 2570,
+  "passed_en_under_1_2": 2570,
+  "passed_hi_under_1_2": 2570,
+  "passed_both_thresholds": 2570,
+  "spread_min": 0.023313572613731792,
+  "spread_max": 0.5821196838587748,
+  "winner_experiment_id": "faithful-hf-2361",
+  "non_winner_records_sharing_winner_fertilities": 0,
+  "status_breakdown": {
+    "VALID_MEASURED": 2570
+  },
+  "semantic_issues": [],
+  "verified_2570_claim": true,
+  "ui_headline": "2,570 real Hugging Face BPE candidates trained and measured",
+  "per_experiment_sample": [
+    {
+      "experiment_id": "faithful-hf-2361",
+      "weights": {
+        "en": 3,
+        "hi": 5,
+        "te": 9,
+        "bn": 5
+      },
+      "status": "VALID_MEASURED",
+      "roundtrip_pass": true,
+      "en_under_1_2": true,
+      "hi_under_1_2": true,
+      "spread": 0.023313572613731792
+    },
+    {
+      "experiment_id": "faithful-hf-2348",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 8,
+        "bn": 4
+      },
+      "status": "VALID_MEASURED",
+      "roundtrip_pass": true,
+      "en_under_1_2": true,
+      "hi_under_1_2": true,
+      "spread": 0.026700866991763883
+    },
+    {
+      "experiment_id": "faithful-hf-2345",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 7,
+        "bn": 4
+      },
+      "status": "VALID_MEASURED",
+      "roundtrip_pass": true,
+      "en_under_1_2": true,
+      "hi_under_1_2": true,
+      "spread": 0.03618384727628432
+    },
+    {
+      "experiment_id": "faithful-hf-2352",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 9,
+        "bn": 5
+      },
+      "status": "VALID_MEASURED",
+      "roundtrip_pass": true,
+      "en_under_1_2": true,
+      "hi_under_1_2": true,
+      "spread": 0.036828164997250834
+    },
+    {
+      "experiment_id": "faithful-hf-2386",
+      "weights": {
+        "en": 4,
+        "hi": 5,
+        "te": 9,
+        "bn": 6
+      },
+      "status": "VALID_MEASURED",
+      "roundtrip_pass": true,
+      "en_under_1_2": true,
+      "hi_under_1_2": true,
+      "spread": 0.038876451703417914
+    }
+  ],
+  "note": "Registry metrics are per-candidate measurements from search time; final submission tokenizer may be hardened retrain at winner weights."
+}

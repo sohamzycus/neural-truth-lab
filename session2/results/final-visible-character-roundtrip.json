@@ -1,0 +1,2704 @@
+{
+  "generated_at": "2026-07-13T18:08:27.958004+00:00",
+  "stress_string": "«unicode» — em-dash … ellipsis",
+  "total_cases": 47,
+  "strict_passed": 40,
+  "strict_failed": 7,
+  "nfkc_passed": 47,
+  "nfkc_failed": 0,
+  "critical_unk_deletion_failures": 0,
+  "nfkc_only_strict_failures": 7,
+  "cases": [
+    {
+      "category": "reviewer",
+      "input": "India's population is 1,428,627,663.",
+      "input_length": 36,
+      "normalized_nfkc": "India's population is 1,428,627,663.",
+      "tokens": [
+        "India",
+        "'s",
+        "▁population",
+        "▁is",
+        "▁1,",
+        "4",
+        "28",
+        ",",
+        "6",
+        "27",
+        ",",
+        "66",
+        "3."
+      ],
+      "token_ids": [
+        391,
+        1133,
+        3480,
+        1126,
+        3933,
+        21,
+        719,
+        13,
+        23,
+        971,
+        13,
+        6550,
+        1571
+      ],
+      "decoded": "India's population is 1,428,627,663.",
+      "visible_original": "India'spopulationis1,428,627,663.",
+      "visible_decoded": "India'spopulationis1,428,627,663.",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "stress",
+      "input": "«unicode» — em-dash … ellipsis",
+      "input_length": 30,
+      "normalized_nfkc": "«unicode» — em-dash ... ellipsis",
+      "tokens": [
+        "«",
+        "un",
+        "ic",
+        "ode",
+        "»",
+        "▁—",
+        "▁em",
+        "-d",
+        "ash",
+        "▁...",
+        "▁",
+        "ell",
+        "ip",
+        "s",
+        "is"
+      ],
+      "token_ids": [
+        97,
+        755,
+        432,
+        4578,
+        100,
+        4057,
+        6642,
+        1683,
+        3431,
+        4526,
+        369,
+        5104,
+        599,
+        84,
+        404
+      ],
+      "decoded": "«unicode» — em-dash ... ellipsis",
+      "visible_original": "«unicode»—em-dash…ellipsis",
+      "visible_decoded": "«unicode»—em-dash...ellipsis",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 17,
+          "original": "…",
+          "decoded": ".",
+          "original_cp": "U+2026",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 18,
+          "original": "e",
+          "decoded": ".",
+          "original_cp": "U+0065",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 19,
+          "original": "l",
+          "decoded": ".",
+          "original_cp": "U+006C",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 20,
+          "original": "l",
+          "decoded": "e",
+          "original_cp": "U+006C",
+          "decoded_cp": "U+0065"
+        },
+        {
+          "index": 21,
+          "original": "i",
+          "decoded": "l",
+          "original_cp": "U+0069",
+          "decoded_cp": "U+006C"
+        },
+        {
+          "index": 22,
+          "original": "p",
+          "decoded": "l",
+          "original_cp": "U+0070",
+          "decoded_cp": "U+006C"
+        },
+        {
+          "index": 23,
+          "original": "s",
+          "decoded": "i",
+          "original_cp": "U+0073",
+          "decoded_cp": "U+0069"
+        },
+        {
+          "index": 24,
+          "original": "i",
+          "decoded": "p",
+          "original_cp": "U+0069",
+          "decoded_cp": "U+0070"
+        },
+        {
+          "index": 26,
+          "original": null,
+          "decoded": "i",
+          "original_cp": null,
+          "decoded_cp": "U+0069"
+        },
+        {
+          "index": 27,
+          "original": null,
+          "decoded": "s",
+          "original_cp": null,
+          "decoded_cp": "U+0073"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "ascii_apostrophe",
+      "input": "don't",
+      "input_length": 5,
+      "normalized_nfkc": "don't",
+      "tokens": [
+        "d",
+        "on",
+        "'",
+        "t"
+      ],
+      "token_ids": [
+        69,
+        380,
+        8,
+        85
+      ],
+      "decoded": "don't",
+      "visible_original": "don't",
+      "visible_decoded": "don't",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "typographic_apostrophe",
+      "input": "don’t",
+      "input_length": 5,
+      "normalized_nfkc": "don’t",
+      "tokens": [
+        "d",
+        "on",
+        "’",
+        "t"
+      ],
+      "token_ids": [
+        69,
+        380,
+        355,
+        85
+      ],
+      "decoded": "don’t",
+      "visible_original": "don’t",
+      "visible_decoded": "don’t",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "double_quotes",
+      "input": "\"hello\"",
+      "input_length": 7,
+      "normalized_nfkc": "\"hello\"",
+      "tokens": [
+        "\"",
+        "hel",
+        "lo",
+        "\""
+      ],
+      "token_ids": [
+        3,
+        2049,
+        481,
+        3
+      ],
+      "decoded": "\"hello\"",
+      "visible_original": "\"hello\"",
+      "visible_decoded": "\"hello\"",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "typographic_quotes",
+      "input": "“hello”",
+      "input_length": 7,
+      "normalized_nfkc": "“hello”",
+      "tokens": [
+        "“",
+        "hel",
+        "lo",
+        "”"
+      ],
+      "token_ids": [
+        356,
+        2049,
+        481,
+        357
+      ],
+      "decoded": "“hello”",
+      "visible_original": "“hello”",
+      "visible_decoded": "“hello”",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "guillemets",
+      "input": "«unicode»",
+      "input_length": 9,
+      "normalized_nfkc": "«unicode»",
+      "tokens": [
+        "«",
+        "un",
+        "ic",
+        "ode",
+        "»"
+      ],
+      "token_ids": [
+        97,
+        755,
+        432,
+        4578,
+        100
+      ],
+      "decoded": "«unicode»",
+      "visible_original": "«unicode»",
+      "visible_decoded": "«unicode»",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "comma",
+      "input": "a,b",
+      "input_length": 3,
+      "normalized_nfkc": "a,b",
+      "tokens": [
+        "a,",
+        "b"
+      ],
+      "token_ids": [
+        3878,
+        67
+      ],
+      "decoded": "a,b",
+      "visible_original": "a,b",
+      "visible_decoded": "a,b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "period",
+      "input": "a.b",
+      "input_length": 3,
+      "normalized_nfkc": "a.b",
+      "tokens": [
+        "a.",
+        "b"
+      ],
+      "token_ids": [
+        6836,
+        67
+      ],
+      "decoded": "a.b",
+      "visible_original": "a.b",
+      "visible_decoded": "a.b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "colon",
+      "input": "a:b",
+      "input_length": 3,
+      "normalized_nfkc": "a:b",
+      "tokens": [
+        "a",
+        ":",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        27,
+        67
+      ],
+      "decoded": "a:b",
+      "visible_original": "a:b",
+      "visible_decoded": "a:b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "semicolon",
+      "input": "a;b",
+      "input_length": 3,
+      "normalized_nfkc": "a;b",
+      "tokens": [
+        "a",
+        ";",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        28,
+        67
+      ],
+      "decoded": "a;b",
+      "visible_original": "a;b",
+      "visible_decoded": "a;b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "hyphen",
+      "input": "a-b",
+      "input_length": 3,
+      "normalized_nfkc": "a-b",
+      "tokens": [
+        "a-b"
+      ],
+      "token_ids": [
+        9084
+      ],
+      "decoded": "a-b",
+      "visible_original": "a-b",
+      "visible_decoded": "a-b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "en_dash",
+      "input": "a–b",
+      "input_length": 3,
+      "normalized_nfkc": "a–b",
+      "tokens": [
+        "a",
+        "–",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        352,
+        67
+      ],
+      "decoded": "a–b",
+      "visible_original": "a–b",
+      "visible_decoded": "a–b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "em_dash",
+      "input": "a—b",
+      "input_length": 3,
+      "normalized_nfkc": "a—b",
+      "tokens": [
+        "a",
+        "—",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        353,
+        67
+      ],
+      "decoded": "a—b",
+      "visible_original": "a—b",
+      "visible_decoded": "a—b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "ellipsis",
+      "input": "a…b",
+      "input_length": 3,
+      "normalized_nfkc": "a...b",
+      "tokens": [
+        "a",
+        "...",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        2913,
+        67
+      ],
+      "decoded": "a...b",
+      "visible_original": "a…b",
+      "visible_decoded": "a...b",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 1,
+          "original": "…",
+          "decoded": ".",
+          "original_cp": "U+2026",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 2,
+          "original": "b",
+          "decoded": ".",
+          "original_cp": "U+0062",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 3,
+          "original": null,
+          "decoded": ".",
+          "original_cp": null,
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 4,
+          "original": null,
+          "decoded": "b",
+          "original_cp": null,
+          "decoded_cp": "U+0062"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "parens",
+      "input": "(a)",
+      "input_length": 3,
+      "normalized_nfkc": "(a)",
+      "tokens": [
+        "(",
+        "a)"
+      ],
+      "token_ids": [
+        9,
+        5528
+      ],
+      "decoded": "(a)",
+      "visible_original": "(a)",
+      "visible_decoded": "(a)",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "brackets",
+      "input": "[a]",
+      "input_length": 3,
+      "normalized_nfkc": "[a]",
+      "tokens": [
+        "[",
+        "a",
+        "]"
+      ],
+      "token_ids": [
+        60,
+        66,
+        62
+      ],
+      "decoded": "[a]",
+      "visible_original": "[a]",
+      "visible_decoded": "[a]",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "braces",
+      "input": "{a}",
+      "input_length": 3,
+      "normalized_nfkc": "{a}",
+      "tokens": [
+        "{",
+        "a",
+        "}"
+      ],
+      "token_ids": [
+        92,
+        66,
+        94
+      ],
+      "decoded": "{a}",
+      "visible_original": "{a}",
+      "visible_decoded": "{a}",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "pipe",
+      "input": "a|b",
+      "input_length": 3,
+      "normalized_nfkc": "a|b",
+      "tokens": [
+        "a",
+        "|",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        93,
+        67
+      ],
+      "decoded": "a|b",
+      "visible_original": "a|b",
+      "visible_decoded": "a|b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "slash",
+      "input": "a/b",
+      "input_length": 3,
+      "normalized_nfkc": "a/b",
+      "tokens": [
+        "a/",
+        "b"
+      ],
+      "token_ids": [
+        1689,
+        67
+      ],
+      "decoded": "a/b",
+      "visible_original": "a/b",
+      "visible_decoded": "a/b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "backslash",
+      "input": "a\\b",
+      "input_length": 3,
+      "normalized_nfkc": "a\\b",
+      "tokens": [
+        "a",
+        "\\",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        61,
+        67
+      ],
+      "decoded": "a\\b",
+      "visible_original": "a\\b",
+      "visible_decoded": "a\\b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "underscore",
+      "input": "a_b",
+      "input_length": 3,
+      "normalized_nfkc": "a_b",
+      "tokens": [
+        "a_",
+        "b"
+      ],
+      "token_ids": [
+        921,
+        67
+      ],
+      "decoded": "a_b",
+      "visible_original": "a_b",
+      "visible_decoded": "a_b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "hash",
+      "input": "#tag",
+      "input_length": 4,
+      "normalized_nfkc": "#tag",
+      "tokens": [
+        "#",
+        "t",
+        "ag"
+      ],
+      "token_ids": [
+        4,
+        85,
+        819
+      ],
+      "decoded": "#tag",
+      "visible_original": "#tag",
+      "visible_decoded": "#tag",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "ampersand",
+      "input": "a&b",
+      "input_length": 3,
+      "normalized_nfkc": "a&b",
+      "tokens": [
+        "a",
+        "&",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        7,
+        67
+      ],
+      "decoded": "a&b",
+      "visible_original": "a&b",
+      "visible_decoded": "a&b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "percent",
+      "input": "50%",
+      "input_length": 3,
+      "normalized_nfkc": "50%",
+      "tokens": [
+        "50",
+        "%"
+      ],
+      "token_ids": [
+        791,
+        6
+      ],
+      "decoded": "50%",
+      "visible_original": "50%",
+      "visible_decoded": "50%",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "plus",
+      "input": "a+b",
+      "input_length": 3,
+      "normalized_nfkc": "a+b",
+      "tokens": [
+        "a",
+        "+",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        12,
+        67
+      ],
+      "decoded": "a+b",
+      "visible_original": "a+b",
+      "visible_decoded": "a+b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "equals",
+      "input": "a=b",
+      "input_length": 3,
+      "normalized_nfkc": "a=b",
+      "tokens": [
+        "a",
+        "=",
+        "b"
+      ],
+      "token_ids": [
+        66,
+        30,
+        67
+      ],
+      "decoded": "a=b",
+      "visible_original": "a=b",
+      "visible_decoded": "a=b",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "question",
+      "input": "a?",
+      "input_length": 2,
+      "normalized_nfkc": "a?",
+      "tokens": [
+        "a",
+        "?"
+      ],
+      "token_ids": [
+        66,
+        32
+      ],
+      "decoded": "a?",
+      "visible_original": "a?",
+      "visible_decoded": "a?",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "exclamation",
+      "input": "a!",
+      "input_length": 2,
+      "normalized_nfkc": "a!",
+      "tokens": [
+        "a",
+        "!"
+      ],
+      "token_ids": [
+        66,
+        2
+      ],
+      "decoded": "a!",
+      "visible_original": "a!",
+      "visible_decoded": "a!",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "at_sign",
+      "input": "email@test.org",
+      "input_length": 14,
+      "normalized_nfkc": "email@test.org",
+      "tokens": [
+        "em",
+        "ail",
+        "@",
+        "te",
+        "st",
+        ".org"
+      ],
+      "token_ids": [
+        617,
+        2138,
+        33,
+        379,
+        793,
+        3764
+      ],
+      "decoded": "email@test.org",
+      "visible_original": "email@test.org",
+      "visible_decoded": "email@test.org",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "rupee",
+      "input": "₹100",
+      "input_length": 4,
+      "normalized_nfkc": "₹100",
+      "tokens": [
+        "₹",
+        "100"
+      ],
+      "token_ids": [
+        366,
+        2442
+      ],
+      "decoded": "₹100",
+      "visible_original": "₹100",
+      "visible_decoded": "₹100",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "euro",
+      "input": "€50",
+      "input_length": 3,
+      "normalized_nfkc": "€50",
+      "tokens": [
+        "€",
+        "50"
+      ],
+      "token_ids": [
+        365,
+        791
+      ],
+      "decoded": "€50",
+      "visible_original": "€50",
+      "visible_decoded": "€50",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "pound",
+      "input": "£10",
+      "input_length": 3,
+      "normalized_nfkc": "£10",
+      "tokens": [
+        "£",
+        "10"
+      ],
+      "token_ids": [
+        96,
+        662
+      ],
+      "decoded": "£10",
+      "visible_original": "£10",
+      "visible_decoded": "£10",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "url",
+      "input": "https://en.wikipedia.org/wiki/India",
+      "input_length": 35,
+      "normalized_nfkc": "https://en.wikipedia.org/wiki/India",
+      "tokens": [
+        "https://",
+        "en",
+        ".wikipedia",
+        ".org/wiki/",
+        "India"
+      ],
+      "token_ids": [
+        7663,
+        394,
+        6106,
+        3884,
+        391
+      ],
+      "decoded": "https://en.wikipedia.org/wiki/India",
+      "visible_original": "https://en.wikipedia.org/wiki/India",
+      "visible_decoded": "https://en.wikipedia.org/wiki/India",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "url_with_at",
+      "input": "https://user@example.com/path",
+      "input_length": 29,
+      "normalized_nfkc": "https://user@example.com/path",
+      "tokens": [
+        "https://",
+        "us",
+        "er",
+        "@",
+        "ex",
+        "amp",
+        "le",
+        ".com/",
+        "p",
+        "ath"
+      ],
+      "token_ids": [
+        7663,
+        502,
+        387,
+        33,
+        911,
+        3765,
+        443,
+        658,
+        81,
+        1938
+      ],
+      "decoded": "https://user@example.com/path",
+      "visible_original": "https://user@example.com/path",
+      "visible_decoded": "https://user@example.com/path",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "markdown_link",
+      "input": "[India](https://en.wikipedia.org/wiki/India)",
+      "input_length": 44,
+      "normalized_nfkc": "[India](https://en.wikipedia.org/wiki/India)",
+      "tokens": [
+        "[",
+        "India",
+        "](https://en",
+        ".wikipedia",
+        ".org/wiki/",
+        "India",
+        ")"
+      ],
+      "token_ids": [
+        60,
+        391,
+        7883,
+        6106,
+        3884,
+        391,
+        10
+      ],
+      "decoded": "[India](https://en.wikipedia.org/wiki/India)",
+      "visible_original": "[India](https://en.wikipedia.org/wiki/India)",
+      "visible_decoded": "[India](https://en.wikipedia.org/wiki/India)",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "number_separators",
+      "input": "1,428,627,663.",
+      "input_length": 14,
+      "normalized_nfkc": "1,428,627,663.",
+      "tokens": [
+        "1,",
+        "4",
+        "28",
+        ",",
+        "6",
+        "27",
+        ",",
+        "66",
+        "3."
+      ],
+      "token_ids": [
+        2512,
+        21,
+        719,
+        13,
+        23,
+        971,
+        13,
+        6550,
+        1571
+      ],
+      "decoded": "1,428,627,663.",
+      "visible_original": "1,428,627,663.",
+      "visible_decoded": "1,428,627,663.",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "mixed_script",
+      "input": "India भारत తెలుగు বাংলা",
+      "input_length": 23,
+      "normalized_nfkc": "India भारत తెలుగు বাংলা",
+      "tokens": [
+        "India",
+        "▁भारत",
+        "▁త",
+        "ెలుగు",
+        "▁বা",
+        "ংলা"
+      ],
+      "token_ids": [
+        391,
+        712,
+        1291,
+        4946,
+        1457,
+        2387
+      ],
+      "decoded": "India भारत తెలుగు বাংলা",
+      "visible_original": "Indiaभारतతెలుగుবাংলা",
+      "visible_decoded": "Indiaभारतతెలుగుবাংলা",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "currency_mix",
+      "input": "₹100 and $50",
+      "input_length": 12,
+      "normalized_nfkc": "₹100 and $50",
+      "tokens": [
+        "₹",
+        "100",
+        "▁and",
+        "▁$",
+        "50"
+      ],
+      "token_ids": [
+        366,
+        2442,
+        491,
+        3068,
+        791
+      ],
+      "decoded": "₹100 and $50",
+      "visible_original": "₹100and$50",
+      "visible_decoded": "₹100and$50",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "corpus_en_full",
+      "input": "Country in South Asia\n\nThis article is about the country. For other uses, see [India (disambiguation)](./India_\\(disambiguation\\) \"India \\(disambiguation\\)\").\n\nSee also: [Greater India](./Greater_Indi…[490271 chars total]",
+      "input_length": 490271,
+      "normalized_nfkc": "Country in South Asia\n\nThis article is about the country. For other uses, see [India (disambiguation)](./India_\\(disambiguation\\) \"India \\(disambiguation\\)\").\n\nSee also: [Greater India](./Greater_India \"Greater India\")\n\nRepublic of India _Bhārat Gaṇarājya_  \n---  \n[![Horizontal tricolour flag bearing, from top to bottom, deep saffron, white, and green horizontal bands. In the centre of the white band is a navy-blue wheel with 24 spokes.](//upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_Ind",
+      "tokens": [
+        "C",
+        "ountry",
+        "▁in",
+        "▁South",
+        "▁Asia",
+        "\n",
+        "\n",
+        "Th",
+        "is",
+        "▁article",
+        "▁is",
+        "▁about",
+        "▁the",
+        "▁country",
+        ".",
+        "▁For",
+        "▁other",
+        "▁us",
+        "es,",
+        "▁s",
+        "ee",
+        "▁[India",
+        "▁(",
+        "dis",
+        "amb",
+        "ig",
+        "u",
+        "ation",
+        ")",
+        "](./India",
+        "_\\(",
+        "dis",
+        "amb",
+        "ig",
+        "u",
+        "ation",
+        "\\)",
+        "▁\"India",
+        "▁\\(",
+        "dis",
+        "amb",
+        "ig",
+        "u",
+        "ation",
+        "\\)",
+        "\").\n",
+        "\n",
+        "S",
+        "ee",
+        "▁also",
+        "…+126143 more"
+      ],
+      "token_ids": [
+        36,
+        1961,
+        490,
+        2059,
+        1186,
+        1,
+        1,
+        6523,
+        404,
+        6149,
+        1126,
+        8982,
+        431,
+        5967,
+        15,
+        7490,
+        4834,
+        3403,
+        8074,
+        494,
+        2674,
+        5479,
+        422,
+        3477,
+        3932,
+        556,
+        86,
+        503,
+        10,
+        452,
+        997,
+        3477,
+        3932,
+        556,
+        86,
+        503,
+        471,
+        5724,
+        1035,
+        3477,
+        3932,
+        556,
+        86,
+        503,
+        471,
+        1621,
+        1,
+        52,
+        2674,
+        3461,
+        "…+126143 more"
+      ],
+      "decoded": "Country in South Asia\n\nThis article is about the country. For other uses, see [India (disambiguation)](./India_\\(disambiguation\\) \"India \\(disambiguation\\)\").\n\nSee also: [Greater India](./Greater_Indi…[490273 chars total]",
+      "visible_original": "CountryinSouthAsiaThisarticleisaboutthecountry.Forotheruses,see[India(disambiguation)](./India_\\(dis…[443707 chars]",
+      "visible_decoded": "CountryinSouthAsiaThisarticleisaboutthecountry.Forotheruses,see[India(disambiguation)](./India_\\(dis…[443709 chars]",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 1971,
+          "original": "″",
+          "decoded": "′",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1972,
+          "original": "N",
+          "decoded": "′",
+          "original_cp": "U+004E",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1973,
+          "original": "7",
+          "decoded": "N",
+          "original_cp": "U+0037",
+          "decoded_cp": "U+004E"
+        },
+        {
+          "index": 1975,
+          "original": "°",
+          "decoded": "7",
+          "original_cp": "U+00B0",
+          "decoded_cp": "U+0037"
+        },
+        {
+          "index": 1976,
+          "original": "1",
+          "decoded": "°",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+00B0"
+        },
+        {
+          "index": 1977,
+          "original": "2",
+          "decoded": "1",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+0031"
+        },
+        {
+          "index": 1978,
+          "original": "′",
+          "decoded": "2",
+          "original_cp": "U+2032",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1979,
+          "original": "3",
+          "decoded": "′",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1980,
+          "original": "0",
+          "decoded": "3",
+          "original_cp": "U+0030",
+          "decoded_cp": "U+0033"
+        },
+        {
+          "index": 1981,
+          "original": "″",
+          "decoded": "0",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+0030"
+        },
+        {
+          "index": 1982,
+          "original": "E",
+          "decoded": "′",
+          "original_cp": "U+0045",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1983,
+          "original": "﻿",
+          "decoded": "′",
+          "original_cp": "U+FEFF",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1984,
+          "original": "/",
+          "decoded": "E",
+          "original_cp": "U+002F",
+          "decoded_cp": "U+0045"
+        },
+        {
+          "index": 1986,
+          "original": "2",
+          "decoded": "/",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+002F"
+        },
+        {
+          "index": 1987,
+          "original": "8",
+          "decoded": "﻿",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+FEFF"
+        },
+        {
+          "index": 1988,
+          "original": ".",
+          "decoded": "2",
+          "original_cp": "U+002E",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1989,
+          "original": "6",
+          "decoded": "8",
+          "original_cp": "U+0036",
+          "decoded_cp": "U+0038"
+        },
+        {
+          "index": 1990,
+          "original": "1",
+          "decoded": ".",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 1991,
+          "original": "3",
+          "decoded": "6",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+0036"
+        },
+        {
+          "index": 1992,
+          "original": "8",
+          "decoded": "1",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+0031"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "corpus_en_sample",
+      "input": "[28°36′50″N 77°12′30″E﻿ / ﻿28.61389°N 77.20833°E﻿ / 28.61389; 77.20833](https://geohack.toolforge.org/geohack.php?pagename=India&params=28_36_50_N_77_12_30_E_type:city_region:IN-DL)  ",
+      "input_length": 183,
+      "normalized_nfkc": "[28°36′50′′N 77°12′30′′E﻿ / ﻿28.61389°N 77.20833°E﻿ / 28.61389; 77.20833](https://geohack.toolforge.org/geohack.php?pagename=India&params=28_36_50_N_77_12_30_E_type:city_region:IN-DL)  ",
+      "tokens": [
+        "[",
+        "28",
+        "°",
+        "36",
+        "′",
+        "50",
+        "′",
+        "′",
+        "N",
+        "▁",
+        "77",
+        "°",
+        "12",
+        "′",
+        "30",
+        "′",
+        "′",
+        "E﻿",
+        "▁/",
+        "▁",
+        "﻿",
+        "28.",
+        "613",
+        "89",
+        "°",
+        "N",
+        "▁77.",
+        "208",
+        "33",
+        "°",
+        "E﻿",
+        "▁/",
+        "▁28.",
+        "613",
+        "89",
+        ";",
+        "▁77.",
+        "208",
+        "33",
+        "](https://",
+        "geohack",
+        ".",
+        "tool",
+        "for",
+        "ge",
+        ".org/",
+        "geohack",
+        ".php?",
+        "p",
+        "agen",
+        "…+31 more"
+      ],
+      "token_ids": [
+        60,
+        719,
+        98,
+        1323,
+        361,
+        791,
+        361,
+        361,
+        47,
+        369,
+        1373,
+        98,
+        1619,
+        361,
+        814,
+        361,
+        361,
+        9076,
+        4757,
+        369,
+        370,
+        6853,
+        9468,
+        4071,
+        98,
+        47,
+        8027,
+        5801,
+        1978,
+        98,
+        9076,
+        4757,
+        7161,
+        9468,
+        4071,
+        28,
+        8027,
+        5801,
+        1978,
+        483,
+        7858,
+        15,
+        9484,
+        902,
+        504,
+        463,
+        7858,
+        3858,
+        81,
+        7893,
+        "…+31 more"
+      ],
+      "decoded": "[28°36′50′′N 77°12′30′′E﻿ / ﻿28.61389°N 77.20833°E﻿ / 28.61389; 77.20833](https://geohack.toolforge.org/geohack.php?pagename=India&params=28_36_50_N_77_12_30_E_type:city_region:IN-DL)  ",
+      "visible_original": "[28°36′50″N77°12′30″E﻿/﻿28.61389°N77.20833°E﻿/28.61389;77.20833](https://geohack.toolforge.org/geohack.php?pagename=India&params=28_36_50_N_77_12_30_E_type:city_region:IN-DL)",
+      "visible_decoded": "[28°36′50′′N77°12′30′′E﻿/﻿28.61389°N77.20833°E﻿/28.61389;77.20833](https://geohack.toolforge.org/geohack.php?pagename=India&params=28_36_50_N_77_12_30_E_type:city_region:IN-DL)",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 9,
+          "original": "″",
+          "decoded": "′",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 10,
+          "original": "N",
+          "decoded": "′",
+          "original_cp": "U+004E",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 11,
+          "original": "7",
+          "decoded": "N",
+          "original_cp": "U+0037",
+          "decoded_cp": "U+004E"
+        },
+        {
+          "index": 13,
+          "original": "°",
+          "decoded": "7",
+          "original_cp": "U+00B0",
+          "decoded_cp": "U+0037"
+        },
+        {
+          "index": 14,
+          "original": "1",
+          "decoded": "°",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+00B0"
+        },
+        {
+          "index": 15,
+          "original": "2",
+          "decoded": "1",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+0031"
+        },
+        {
+          "index": 16,
+          "original": "′",
+          "decoded": "2",
+          "original_cp": "U+2032",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 17,
+          "original": "3",
+          "decoded": "′",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 18,
+          "original": "0",
+          "decoded": "3",
+          "original_cp": "U+0030",
+          "decoded_cp": "U+0033"
+        },
+        {
+          "index": 19,
+          "original": "″",
+          "decoded": "0",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+0030"
+        },
+        {
+          "index": 20,
+          "original": "E",
+          "decoded": "′",
+          "original_cp": "U+0045",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 21,
+          "original": "﻿",
+          "decoded": "′",
+          "original_cp": "U+FEFF",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 22,
+          "original": "/",
+          "decoded": "E",
+          "original_cp": "U+002F",
+          "decoded_cp": "U+0045"
+        },
+        {
+          "index": 24,
+          "original": "2",
+          "decoded": "/",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+002F"
+        },
+        {
+          "index": 25,
+          "original": "8",
+          "decoded": "﻿",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+FEFF"
+        },
+        {
+          "index": 26,
+          "original": ".",
+          "decoded": "2",
+          "original_cp": "U+002E",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 27,
+          "original": "6",
+          "decoded": "8",
+          "original_cp": "U+0036",
+          "decoded_cp": "U+0038"
+        },
+        {
+          "index": 28,
+          "original": "1",
+          "decoded": ".",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 29,
+          "original": "3",
+          "decoded": "6",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+0036"
+        },
+        {
+          "index": 30,
+          "original": "8",
+          "decoded": "1",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+0031"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "corpus_hi_full",
+      "input": "भारत गणराज्य  \nRepublic of India   \n([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   \n---  \n[![क्षैतिज तिरंगे …[208693 chars total]",
+      "input_length": 208693,
+      "normalized_nfkc": "भारत गणराज्य  \nRepublic of India   \n([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   \n---  \n[![क्षैतिज तिरंगे झंडे में ऊपर से नीचे तक गहरी केसरिया, सफ़ेद और हरी क्षैतिज पट्टियाँ हैं। सफेद पट्टी के केंद्र में 24 तीलियों वाला एक नेवी-ब्लू पहिया है।](//upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/250px-Flag_of_India.svg.png)](./चित्र:Flag_of_India.svg \"भारत का ध्वज\") [ध्वज](./भारत_का_ध्व",
+      "tokens": [
+        "भारत",
+        "▁गणराज्य",
+        "▁",
+        "▁\n",
+        "Republic",
+        "▁of",
+        "▁India",
+        "▁",
+        "▁",
+        "▁\n",
+        "([",
+        "अन",
+        "्य",
+        "▁क्षेत्रीय",
+        "▁भाषाओं",
+        "▁में",
+        "](./भारत_की_",
+        "आ",
+        "धिकारिक",
+        "_भाषा",
+        "ओं",
+        "_में",
+        "_भारत",
+        "_",
+        "गणराज्य",
+        "_के_",
+        "नाम",
+        "▁\"भारत",
+        "▁की",
+        "▁आधिकारिक",
+        "▁भाषाओं",
+        "▁में",
+        "▁भारत",
+        "▁गणराज्य",
+        "▁के",
+        "▁नाम",
+        "\")",
+        "▁देख",
+        "ें",
+        ")",
+        "▁",
+        "▁",
+        "▁\n",
+        "---",
+        "▁",
+        "▁\n",
+        "[![",
+        "क्ष",
+        "ै",
+        "ति",
+        "…+55935 more"
+      ],
+      "token_ids": [
+        420,
+        4949,
+        369,
+        448,
+        5762,
+        427,
+        445,
+        369,
+        369,
+        448,
+        8839,
+        3503,
+        446,
+        5999,
+        4904,
+        573,
+        4459,
+        143,
+        4950,
+        3020,
+        2333,
+        2003,
+        2062,
+        64,
+        5682,
+        1138,
+        2392,
+        836,
+        711,
+        5639,
+        4904,
+        573,
+        712,
+        4949,
+        515,
+        3334,
+        376,
+        5384,
+        505,
+        10,
+        369,
+        369,
+        448,
+        1054,
+        369,
+        448,
+        4987,
+        858,
+        197,
+        897,
+        "…+55935 more"
+      ],
+      "decoded": "भारत गणराज्य  \nRepublic of India   \n([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   \n---  \n[![क्षैतिज तिरंगे …[208695 chars total]",
+      "visible_original": "भारतगणराज्यRepublicofIndia([अन्यक्षेत्रीयभाषाओंमें](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_ना…[186885 chars]",
+      "visible_decoded": "भारतगणराज्यRepublicofIndia([अन्यक्षेत्रीयभाषाओंमें](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_ना…[186887 chars]",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 1708,
+          "original": "″",
+          "decoded": "′",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1709,
+          "original": "N",
+          "decoded": "′",
+          "original_cp": "U+004E",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1710,
+          "original": "7",
+          "decoded": "N",
+          "original_cp": "U+0037",
+          "decoded_cp": "U+004E"
+        },
+        {
+          "index": 1712,
+          "original": "°",
+          "decoded": "7",
+          "original_cp": "U+00B0",
+          "decoded_cp": "U+0037"
+        },
+        {
+          "index": 1713,
+          "original": "1",
+          "decoded": "°",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+00B0"
+        },
+        {
+          "index": 1714,
+          "original": "2",
+          "decoded": "1",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+0031"
+        },
+        {
+          "index": 1715,
+          "original": "′",
+          "decoded": "2",
+          "original_cp": "U+2032",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1716,
+          "original": "3",
+          "decoded": "′",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1717,
+          "original": "0",
+          "decoded": "3",
+          "original_cp": "U+0030",
+          "decoded_cp": "U+0033"
+        },
+        {
+          "index": 1718,
+          "original": "″",
+          "decoded": "0",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+0030"
+        },
+        {
+          "index": 1719,
+          "original": "E",
+          "decoded": "′",
+          "original_cp": "U+0045",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1720,
+          "original": "﻿",
+          "decoded": "′",
+          "original_cp": "U+FEFF",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1721,
+          "original": "/",
+          "decoded": "E",
+          "original_cp": "U+002F",
+          "decoded_cp": "U+0045"
+        },
+        {
+          "index": 1723,
+          "original": "2",
+          "decoded": "/",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+002F"
+        },
+        {
+          "index": 1724,
+          "original": "8",
+          "decoded": "﻿",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+FEFF"
+        },
+        {
+          "index": 1725,
+          "original": ".",
+          "decoded": "2",
+          "original_cp": "U+002E",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1726,
+          "original": "6",
+          "decoded": "8",
+          "original_cp": "U+0036",
+          "decoded_cp": "U+0038"
+        },
+        {
+          "index": 1727,
+          "original": "1",
+          "decoded": ".",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 1728,
+          "original": "3",
+          "decoded": "6",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+0036"
+        },
+        {
+          "index": 1729,
+          "original": "8",
+          "decoded": "1",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+0031"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "corpus_hi_sample",
+      "input": "([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   ",
+      "input_length": 139,
+      "normalized_nfkc": "([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   ",
+      "tokens": [
+        "([",
+        "अन",
+        "्य",
+        "▁क्षेत्रीय",
+        "▁भाषाओं",
+        "▁में",
+        "](./भारत_की_",
+        "आ",
+        "धिकारिक",
+        "_भाषा",
+        "ओं",
+        "_में",
+        "_भारत",
+        "_",
+        "गणराज्य",
+        "_के_",
+        "नाम",
+        "▁\"भारत",
+        "▁की",
+        "▁आधिकारिक",
+        "▁भाषाओं",
+        "▁में",
+        "▁भारत",
+        "▁गणराज्य",
+        "▁के",
+        "▁नाम",
+        "\")",
+        "▁देख",
+        "ें",
+        ")",
+        "▁",
+        "▁",
+        "▁"
+      ],
+      "token_ids": [
+        8839,
+        3503,
+        446,
+        5999,
+        4904,
+        573,
+        4459,
+        143,
+        4950,
+        3020,
+        2333,
+        2003,
+        2062,
+        64,
+        5682,
+        1138,
+        2392,
+        836,
+        711,
+        5639,
+        4904,
+        573,
+        712,
+        4949,
+        515,
+        3334,
+        376,
+        5384,
+        505,
+        10,
+        369,
+        369,
+        369
+      ],
+      "decoded": "([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम \"भारत की आधिकारिक भाषाओं में भारत गणराज्य के नाम\") देखें)   ",
+      "visible_original": "([अन्यक्षेत्रीयभाषाओंमें](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम\"भारतकीआधिकारिकभाषाओंमेंभारतगणराज्यकेनाम\")देखें)",
+      "visible_decoded": "([अन्यक्षेत्रीयभाषाओंमें](./भारत_की_आधिकारिक_भाषाओं_में_भारत_गणराज्य_के_नाम\"भारतकीआधिकारिकभाषाओंमेंभारतगणराज्यकेनाम\")देखें)",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "corpus_te_full",
+      "input": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  \n(see [other local names](./Names_of_India_in_its_official_languages?action=edit&redlink=1 \"Names of India in its official languages\"))  \n---  \n[![అడ్డ…[89314 chars total]",
+      "input_length": 89314,
+      "normalized_nfkc": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  \n(see [other local names](./Names_of_India_in_its_official_languages?action=edit&redlink=1 \"Names of India in its official languages\"))  \n---  \n[![అడ్డంగా గల జెండా, కాషాయ, తెలుపు, ఆకుపచ్చ పట్టీలతో వుంటుంది. మధ్య తెల్లని పట్టీపై  24 సువ్వలుగల చక్రం వుంటుంది.](//upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/250px-Flag_of_India.svg.png)](./దస్త్రం:Flag_of_India.svg \"Flag of భారతదేశం\") Flag [![రాజముద్ర of భారతదేశం](//upload.wikim",
+      "tokens": [
+        "భారత",
+        "▁గణ",
+        "తంత్ర",
+        "▁రాజ్యం",
+        "▁_",
+        "Bh",
+        "ā",
+        "r",
+        "ata",
+        "▁G",
+        "a",
+        "ṇ",
+        "at",
+        "an",
+        "tra",
+        "▁R",
+        "ā",
+        "j",
+        "yam",
+        "_",
+        "▁",
+        "▁\n",
+        "(",
+        "se",
+        "e",
+        "▁[",
+        "other",
+        "▁lo",
+        "cal",
+        "▁n",
+        "ames",
+        "](./N",
+        "ames",
+        "_of_India",
+        "_in_",
+        "it",
+        "s_",
+        "official",
+        "_languages",
+        "?action=edit&redlink=1",
+        "▁\"N",
+        "ames",
+        "▁of",
+        "▁India",
+        "▁in",
+        "▁its",
+        "▁official",
+        "▁languages",
+        "\"))",
+        "▁",
+        "…+22947 more"
+      ],
+      "token_ids": [
+        480,
+        8532,
+        1931,
+        1583,
+        633,
+        6341,
+        113,
+        83,
+        1403,
+        822,
+        66,
+        344,
+        498,
+        392,
+        4403,
+        643,
+        113,
+        75,
+        6049,
+        64,
+        369,
+        448,
+        9,
+        1262,
+        70,
+        374,
+        1751,
+        6641,
+        896,
+        965,
+        2553,
+        1888,
+        2553,
+        894,
+        7544,
+        413,
+        807,
+        7157,
+        8135,
+        550,
+        1834,
+        2553,
+        427,
+        445,
+        490,
+        2267,
+        3998,
+        2427,
+        1384,
+        369,
+        "…+22947 more"
+      ],
+      "decoded": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  \n(see [other local names](./Names_of_India_in_its_official_languages?action=edit&redlink=1 \"Names of India in its official languages\"))  \n---  \n[![అడ్డ…[89316 chars total]",
+      "visible_original": "భారతగణతంత్రరాజ్యం_BhārataGaṇatantraRājyam_(see[otherlocalnames](./Names_of_India_in_its_official_lan…[81154 chars]",
+      "visible_decoded": "భారతగణతంత్రరాజ్యం_BhārataGaṇatantraRājyam_(see[otherlocalnames](./Names_of_India_in_its_official_lan…[81156 chars]",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 1809,
+          "original": "″",
+          "decoded": "′",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1810,
+          "original": "N",
+          "decoded": "′",
+          "original_cp": "U+004E",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1811,
+          "original": "7",
+          "decoded": "N",
+          "original_cp": "U+0037",
+          "decoded_cp": "U+004E"
+        },
+        {
+          "index": 1813,
+          "original": "°",
+          "decoded": "7",
+          "original_cp": "U+00B0",
+          "decoded_cp": "U+0037"
+        },
+        {
+          "index": 1814,
+          "original": "1",
+          "decoded": "°",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+00B0"
+        },
+        {
+          "index": 1815,
+          "original": "2",
+          "decoded": "1",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+0031"
+        },
+        {
+          "index": 1816,
+          "original": "′",
+          "decoded": "2",
+          "original_cp": "U+2032",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1817,
+          "original": "3",
+          "decoded": "′",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1818,
+          "original": "0",
+          "decoded": "3",
+          "original_cp": "U+0030",
+          "decoded_cp": "U+0033"
+        },
+        {
+          "index": 1819,
+          "original": "″",
+          "decoded": "0",
+          "original_cp": "U+2033",
+          "decoded_cp": "U+0030"
+        },
+        {
+          "index": 1820,
+          "original": "E",
+          "decoded": "′",
+          "original_cp": "U+0045",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1821,
+          "original": "﻿",
+          "decoded": "′",
+          "original_cp": "U+FEFF",
+          "decoded_cp": "U+2032"
+        },
+        {
+          "index": 1822,
+          "original": "/",
+          "decoded": "E",
+          "original_cp": "U+002F",
+          "decoded_cp": "U+0045"
+        },
+        {
+          "index": 1824,
+          "original": "2",
+          "decoded": "/",
+          "original_cp": "U+0032",
+          "decoded_cp": "U+002F"
+        },
+        {
+          "index": 1825,
+          "original": "8",
+          "decoded": "﻿",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+FEFF"
+        },
+        {
+          "index": 1826,
+          "original": ".",
+          "decoded": "2",
+          "original_cp": "U+002E",
+          "decoded_cp": "U+0032"
+        },
+        {
+          "index": 1827,
+          "original": "6",
+          "decoded": "8",
+          "original_cp": "U+0036",
+          "decoded_cp": "U+0038"
+        },
+        {
+          "index": 1828,
+          "original": "1",
+          "decoded": ".",
+          "original_cp": "U+0031",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 1829,
+          "original": "3",
+          "decoded": "6",
+          "original_cp": "U+0033",
+          "decoded_cp": "U+0036"
+        },
+        {
+          "index": 1830,
+          "original": "8",
+          "decoded": "1",
+          "original_cp": "U+0038",
+          "decoded_cp": "U+0031"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "corpus_te_sample",
+      "input": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  ",
+      "input_length": 49,
+      "normalized_nfkc": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  ",
+      "tokens": [
+        "భారత",
+        "▁గణ",
+        "తంత్ర",
+        "▁రాజ్యం",
+        "▁_",
+        "Bh",
+        "ā",
+        "r",
+        "ata",
+        "▁G",
+        "a",
+        "ṇ",
+        "at",
+        "an",
+        "tra",
+        "▁R",
+        "ā",
+        "j",
+        "yam",
+        "_",
+        "▁",
+        "▁"
+      ],
+      "token_ids": [
+        480,
+        8532,
+        1931,
+        1583,
+        633,
+        6341,
+        113,
+        83,
+        1403,
+        822,
+        66,
+        344,
+        498,
+        392,
+        4403,
+        643,
+        113,
+        75,
+        6049,
+        64,
+        369,
+        369
+      ],
+      "decoded": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  ",
+      "visible_original": "భారతగణతంత్రరాజ్యం_BhārataGaṇatantraRājyam_",
+      "visible_decoded": "భారతగణతంత్రరాజ్యం_BhārataGaṇatantraRājyam_",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    },
+    {
+      "category": "corpus_bn_full",
+      "input": "ভারতীয় প্রজাতন্ত্র  \nभारत गणराज्य  \n([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  \n---  \n[![ভারতের জাতীয় পতাকা]…[225189 chars total]",
+      "input_length": 225189,
+      "normalized_nfkc": "ভারতীয় প্রজাতন্ত্র  \nभारत गणराज्य  \n([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  \n---  \n[![ভারতের জাতীয় পতাকা](//upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/250px-Flag_of_India.svg.png)](./চিত্র:Flag_of_India.svg \"ভারতের জাতীয় পতাকা\") [পতাকা](./ভারতের_জাতীয়_পতাকা \"ভারতের জাতীয় পতাকা\") [![ভারতের জাতীয় প্রতীক](//upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/",
+      "tokens": [
+        "ভারতীয়",
+        "▁প্রজাতন্ত্র",
+        "▁",
+        "▁\n",
+        "भारत",
+        "▁गणराज्य",
+        "▁",
+        "▁\n",
+        "([",
+        "অ",
+        "ন",
+        "্যান্য",
+        "▁সরকারি",
+        "▁ভাষায়",
+        "▁নাম",
+        "সমূহ",
+        "](./বি",
+        "ভিন্ন",
+        "_স",
+        "রকারি",
+        "_ভাষা",
+        "য়",
+        "_ভারত",
+        "ের_",
+        "নাম",
+        "সমূহের_তালিকা",
+        "▁\"বি",
+        "ভিন্ন",
+        "▁সরকারি",
+        "▁ভাষায়",
+        "▁ভারতের",
+        "▁নাম",
+        "সমূহের",
+        "▁তালিকা",
+        "\"))",
+        "▁",
+        "▁\n",
+        "---",
+        "▁",
+        "▁\n",
+        "[![",
+        "ভারতের",
+        "▁জাতীয়",
+        "▁পতাকা",
+        "](//upload.wikimedia.org/wikipedia/commons/thumb/",
+        "4/41/Flag_of_India",
+        ".svg/250px-",
+        "Flag_of_India",
+        ".svg.png)](./",
+        "চিত্র:",
+        "…+58058 more"
+      ],
+      "token_ids": [
+        4310,
+        5977,
+        369,
+        448,
+        420,
+        4949,
+        369,
+        448,
+        8839,
+        218,
+        248,
+        4048,
+        4694,
+        5659,
+        3449,
+        1977,
+        5090,
+        5120,
+        2019,
+        8207,
+        1991,
+        406,
+        3501,
+        722,
+        7729,
+        9319,
+        4843,
+        5120,
+        4694,
+        5659,
+        1501,
+        3449,
+        9309,
+        2901,
+        1384,
+        369,
+        448,
+        1054,
+        369,
+        448,
+        4987,
+        6238,
+        2260,
+        9207,
+        756,
+        5057,
+        6717,
+        2669,
+        2981,
+        3361,
+        "…+58058 more"
+      ],
+      "decoded": "ভারতীয় প্রজাতন্ত্র  \nभारत गणराज्य  \n([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  \n---  \n[![ভারতের জাতীয় পতাকা]…[225192 chars total]",
+      "visible_original": "ভারতীয়প্রজাতন্ত্রभारतगणराज्य([অন্যান্যসরকারিভাষায়নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের…[205370 chars]",
+      "visible_decoded": "ভারতীয়প্রজাতন্ত্রभारतगणराज्य([অন্যান্যসরকারিভাষায়নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের…[205372 chars]",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [
+        {
+          "index": 8932,
+          "original": "ⓘ",
+          "decoded": "i",
+          "original_cp": "U+24D8",
+          "decoded_cp": "U+0069"
+        },
+        {
+          "index": 15135,
+          "original": "ʱ",
+          "decoded": "ɦ",
+          "original_cp": "U+02B1",
+          "decoded_cp": "U+0266"
+        },
+        {
+          "index": 15331,
+          "original": "ⓘ",
+          "decoded": "i",
+          "original_cp": "U+24D8",
+          "decoded_cp": "U+0069"
+        },
+        {
+          "index": 84690,
+          "original": "´",
+          "decoded": "́",
+          "original_cp": "U+00B4",
+          "decoded_cp": "U+0301"
+        },
+        {
+          "index": 149517,
+          "original": "…",
+          "decoded": ".",
+          "original_cp": "U+2026",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 149518,
+          "original": "I",
+          "decoded": ".",
+          "original_cp": "U+0049",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 149519,
+          "original": "t",
+          "decoded": ".",
+          "original_cp": "U+0074",
+          "decoded_cp": "U+002E"
+        },
+        {
+          "index": 149520,
+          "original": "i",
+          "decoded": "I",
+          "original_cp": "U+0069",
+          "decoded_cp": "U+0049"
+        },
+        {
+          "index": 149521,
+          "original": "s",
+          "decoded": "t",
+          "original_cp": "U+0073",
+          "decoded_cp": "U+0074"
+        },
+        {
+          "index": 149522,
+          "original": "t",
+          "decoded": "i",
+          "original_cp": "U+0074",
+          "decoded_cp": "U+0069"
+        },
+        {
+          "index": 149523,
+          "original": "h",
+          "decoded": "s",
+          "original_cp": "U+0068",
+          "decoded_cp": "U+0073"
+        },
+        {
+          "index": 149524,
+          "original": "e",
+          "decoded": "t",
+          "original_cp": "U+0065",
+          "decoded_cp": "U+0074"
+        },
+        {
+          "index": 149525,
+          "original": "r",
+          "decoded": "h",
+          "original_cp": "U+0072",
+          "decoded_cp": "U+0068"
+        },
+        {
+          "index": 149527,
+          "original": "f",
+          "decoded": "r",
+          "original_cp": "U+0066",
+          "decoded_cp": "U+0072"
+        },
+        {
+          "index": 149528,
+          "original": "o",
+          "decoded": "e",
+          "original_cp": "U+006F",
+          "decoded_cp": "U+0065"
+        },
+        {
+          "index": 149529,
+          "original": "r",
+          "decoded": "f",
+          "original_cp": "U+0072",
+          "decoded_cp": "U+0066"
+        },
+        {
+          "index": 149530,
+          "original": "e",
+          "decoded": "o",
+          "original_cp": "U+0065",
+          "decoded_cp": "U+006F"
+        },
+        {
+          "index": 149531,
+          "original": "o",
+          "decoded": "r",
+          "original_cp": "U+006F",
+          "decoded_cp": "U+0072"
+        },
+        {
+          "index": 149532,
+          "original": "n",
+          "decoded": "e",
+          "original_cp": "U+006E",
+          "decoded_cp": "U+0065"
+        },
+        {
+          "index": 149533,
+          "original": "e",
+          "decoded": "o",
+          "original_cp": "U+0065",
+          "decoded_cp": "U+006F"
+        }
+      ],
+      "failure_class": "nfkc_normalization"
+    },
+    {
+      "category": "corpus_bn_sample",
+      "input": "([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  ",
+      "input_length": 133,
+      "normalized_nfkc": "([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  ",
+      "tokens": [
+        "([",
+        "অ",
+        "ন",
+        "্যান্য",
+        "▁সরকারি",
+        "▁ভাষায়",
+        "▁নাম",
+        "সমূহ",
+        "](./বি",
+        "ভিন্ন",
+        "_স",
+        "রকারি",
+        "_ভাষা",
+        "য়",
+        "_ভারত",
+        "ের_",
+        "নাম",
+        "সমূহের_তালিকা",
+        "▁\"বি",
+        "ভিন্ন",
+        "▁সরকারি",
+        "▁ভাষায়",
+        "▁ভারতের",
+        "▁নাম",
+        "সমূহের",
+        "▁তালিকা",
+        "\"))",
+        "▁",
+        "▁"
+      ],
+      "token_ids": [
+        8839,
+        218,
+        248,
+        4048,
+        4694,
+        5659,
+        3449,
+        1977,
+        5090,
+        5120,
+        2019,
+        8207,
+        1991,
+        406,
+        3501,
+        722,
+        7729,
+        9319,
+        4843,
+        5120,
+        4694,
+        5659,
+        1501,
+        3449,
+        9309,
+        2901,
+        1384,
+        369,
+        369
+      ],
+      "decoded": "([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা \"বিভিন্ন সরকারি ভাষায় ভারতের নামসমূহের তালিকা\"))  ",
+      "visible_original": "([অন্যান্যসরকারিভাষায়নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা\"বিভিন্নসরকারিভাষায়ভারতেরনামসমূহেরতালিকা\"))",
+      "visible_decoded": "([অন্যান্যসরকারিভাষায়নামসমূহ](./বিভিন্ন_সরকারি_ভাষায়_ভারতের_নামসমূহের_তালিকা\"বিভিন্নসরকারিভাষায়ভারতেরনামসমূহেরতালিকা\"))",
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "char_diffs": [],
+      "failure_class": null
+    }
+  ],
+  "failure_summary": [
+    {
+      "category": "stress",
+      "input": "«unicode» — em-dash … ellipsis",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "ellipsis",
+      "input": "a…b",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "corpus_en_full",
+      "input": "Country in South Asia\n\nThis article is about the country. For other uses, see [I",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "corpus_en_sample",
+      "input": "[28°36′50″N 77°12′30″E﻿ / ﻿28.61389°N 77.20833°E﻿ / 28.61389; 77.20833](https://",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "corpus_hi_full",
+      "input": "भारत गणराज्य  \nRepublic of India   \n([अन्य क्षेत्रीय भाषाओं में](./भारत_की_आधिका",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "corpus_te_full",
+      "input": "భారత గణతంత్ర రాజ్యం _Bhārata Gaṇatantra Rājyam_  \n(see [other local names](./Nam",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    },
+    {
+      "category": "corpus_bn_full",
+      "input": "ভারতীয় প্রজাতন্ত্র  \nभारत गणराज्य  \n([অন্যান্য সরকারি ভাষায় নামসমূহ](./বিভিন্ন",
+      "failure_class": "nfkc_normalization",
+      "unk_emitted": false
+    }
+  ]
+}

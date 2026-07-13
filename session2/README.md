@@ -120,16 +120,16 @@ Machine-verified counts in `results/final-experiment-integrity.json`:
 | Weights | EN 3 · HI 5 · TE 9 · BN 5 |
 | Experiment ID | `faithful-hf-2361` |
 | Vocabulary | 10,000 |
-| Tokenizer SHA-256 | `8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469` |
+| Tokenizer SHA-256 | `9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5` |
 
 | Lang | Fertility |
 | ---- | --------: |
-| EN | 0.8530 |
-| HI | 0.8296 |
-| TE | 0.8446 |
-| BN | 0.8486 |
+| EN | 0.8532 |
+| HI | 0.8297 |
+| TE | 0.8447 |
+| BN | 0.8487 |
 
-Spread **0.0233** · Raw score **42,893.47** · Hindi penalty **1.0** · Calculated self-score **42,893.47**
+Spread **0.0234** · Raw score **42,650.36** · Hindi penalty **1.0** · Calculated self-score **42,650.36**
 
 This is a reproducible self-calculated metric — not an official awarded grade.
 
@@ -139,14 +139,14 @@ Source: `results/final-baseline-vs-winner.json` (fresh evaluation on identical c
 
 | Metric | Baseline HF BPE | SamaBPE Winner | Change |
 | ------ | --------------: | -------------: | -----: |
-| English fertility | 0.7985 | 0.8530 | +0.0545 |
-| Hindi fertility | 0.7960 | 0.8296 | +0.0336 |
-| Telugu fertility | 0.9377 | 0.8446 | −0.0931 |
-| Bengali fertility | 0.9336 | 0.8486 | −0.0850 |
-| Spread | 0.1417 | 0.0233 | −0.1184 |
-| Self-score | 7,057.31 | 42,893.47 | +35,836 |
+| English fertility | 0.7985 | 0.8532 | +0.0547 |
+| Hindi fertility | 0.7960 | 0.8297 | +0.0337 |
+| Telugu fertility | 0.9377 | 0.8447 | −0.0930 |
+| Bengali fertility | 0.9336 | 0.8487 | −0.0849 |
+| Spread | 0.1417 | 0.0234 | −0.1183 (**83.5% reduction**) |
+| Self-score | 7,057.31 | 42,650.36 | +35,593 |
 
-SamaBPE tightened four-language balance dramatically. English and Hindi fertilities rose slightly; Telugu and Bengali moved much closer to the cluster. Both EN and HI remain below 1.2.
+Spread tightened by **83.5%** (0.1417 → 0.0234). SamaBPE accepts a measured trade-off in English and Hindi fertility to significantly improve Telugu and Bengali and reduce overall multilingual fertility spread.
 
 ## Inside the 10K Vocabulary
 
@@ -305,7 +305,8 @@ python scripts/run_final_submission_gate.py
 - Script classification describes token shape, not language ownership
 - 789 vocabulary entries unused by all four evaluation corpora
 - Isolated stress strings with rare symbols may fail round-trip; four full corpora pass
-- Self-score is reproducible self-calculation, not an official grade
+- NFKC normalizer means strict literal round-trip may differ for NFKC-equivalent characters (e.g. `…` → `...`, `″` → `′′`); evaluator uses NFKC-visible comparison
+- Final submission tokenizer is a hardened retrain at winner weights (see `provenance.json` → `hardening`)
 
 ## Legacy Research History
 

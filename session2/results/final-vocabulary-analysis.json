@@ -1,23 +1,23 @@
 {
   "tokenizer_path": "submission/tokenizer.json",
-  "tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "tokenizer_sha256": "9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5",
   "vocab_size": 10000,
   "categories": {
-    "latin_dominant": 4113,
+    "latin_dominant": 4109,
     "devanagari_dominant": 1684,
-    "telugu_dominant": 1478,
+    "telugu_dominant": 1477,
     "bengali_dominant": 1703,
-    "shared_punctuation_digits_symbols": 895,
+    "shared_punctuation_digits_symbols": 900,
     "mixed_script": 113,
     "other_unicode": 13,
     "special_token": 1
   },
   "percentages": {
-    "latin_dominant": 41.13,
+    "latin_dominant": 41.09,
     "devanagari_dominant": 16.84,
-    "telugu_dominant": 14.78,
+    "telugu_dominant": 14.77,
     "bengali_dominant": 17.03,
-    "shared_punctuation_digits_symbols": 8.95,
+    "shared_punctuation_digits_symbols": 9.0,
     "mixed_script": 1.13,
     "other_unicode": 0.13,
     "special_token": 0.01
