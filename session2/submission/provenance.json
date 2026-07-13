@@ -1,19 +1,27 @@
 {
-  "strategy": "threshold-aware-weight-search",
+  "strategy": "faithful-adaptive-weight-search",
+  "languages": [
+    "en",
+    "hi",
+    "te",
+    "bn"
+  ],
   "weights": {
-    "en": 1,
-    "hi": 3,
-    "te": 2,
-    "bn": 1
+    "en": 3,
+    "hi": 5,
+    "te": 9,
+    "bn": 5
   },
-  "constraint_class": "B",
-  "english_threshold_pass": false,
-  "hindi_threshold_pass": true,
-  "selection_reason": "class_b_hindi_valid_no_class_a",
-  "tokenizer_sha256": "b0cc0fcd7009ee998f64bc8a653718fc048ff5d813804ca030c2c83236bea331",
-  "experiment_id": "hf-weight-066",
-  "new_tokenizers_trained": 2544,
-  "evaluation_command": "python scripts/evaluate_hf_tokenizer.py --tokenizer results/resubmission/final/tokenizer.json --corpus-dir data/faithful --output results/resubmission/final/metrics.json",
-  "training_command": "python scripts/run_threshold_search.py",
-  "git_commit": "6fd2f4284a1508b741d66dacb297da94ea339952"
+  "architecture": {
+    "normalizer": "NFKC",
+    "pretokenizer": "Metaspace",
+    "decoder": "Metaspace"
+  },
+  "thresholds": {
+    "en_under_1_2": true,
+    "hi_under_1_2": true
+  },
+  "tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "experiment_id": "faithful-hf-2361",
+  "training_command": "python scripts/run_faithful_weight_search.py"
 }

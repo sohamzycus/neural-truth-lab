@@ -1,10 +1,14 @@
 {
-  "generated_at": "2026-07-13T10:21:14.562557+00:00",
+  "generated_at": "2026-07-13T14:06:18.759240+00:00",
   "tokenizer": {
     "format": "huggingface-tokenizers",
+    "engine": "BPE",
+    "normalizer": "NFKC",
+    "pretokenizer": "Metaspace",
+    "decoder": "Metaspace",
     "path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/resubmission/baseline/tokenizer.json",
     "vocab_size": 10000,
-    "sha256": "cb7bb610bf743e1b2b326cd5ff9fe962413395ecb1bd1c643e602b6fcfd6b94a",
+    "sha256": "6fde397d734cf6fbb0ca9ae6bcc283a689b665d1e8873886092af964660c0fa1",
     "vocab_constraint_pass": true
   },
   "corpus_dir": "/Users/soham.niyogi/Soham/codebase/erav5/session2/data/faithful",
@@ -14,52 +18,87 @@
     "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
     "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
   },
+  "roundtrip": {
+    "reviewer_sample": true,
+    "reviewer_tokens": [
+      "India",
+      "'s",
+      "▁population",
+      "▁is",
+      "▁1,",
+      "4",
+      "28",
+      ",",
+      "6",
+      "27",
+      ",",
+      "66",
+      "3."
+    ],
+    "reviewer_decoded": "India's population is 1,428,627,663.",
+    "full_corpus": {
+      "en": true,
+      "hi": true,
+      "te": true,
+      "bn": true
+    },
+    "valid": true
+  },
   "languages": {
     "en": {
-      "wordish_units": 69411,
-      "tokens": 92380,
-      "fertility": 1.3309129676852371
+      "faithful_units": 147908,
+      "wordish_units": 147908,
+      "tokens": 118101,
+      "fertility": 0.7984760797252346
     },
     "hi": {
-      "wordish_units": 31941,
-      "tokens": 41907,
-      "fertility": 1.312012773551235
+      "faithful_units": 67473,
+      "wordish_units": 67473,
+      "tokens": 53709,
+      "fertility": 0.7960072918056111
     },
     "te": {
-      "wordish_units": 11817,
-      "tokens": 18567,
-      "fertility": 1.5712109672505712
+      "faithful_units": 27225,
+      "wordish_units": 27225,
+      "tokens": 25529,
+      "fertility": 0.9377043158861341
     },
     "bn": {
-      "wordish_units": 30806,
-      "tokens": 48446,
-      "fertility": 1.5726157242095695
+      "faithful_units": 68468,
+      "wordish_units": 68468,
+      "tokens": 63921,
+      "fertility": 0.9335894140328329
     }
   },
+  "thresholds": {
+    "en_under_1_2": true,
+    "hi_under_1_2": true
+  },
   "scoring": {
-    "x_min": 1.312012773551235,
-    "x_max": 1.5726157242095695,
-    "spread": 0.2606029506583345,
-    "raw_score": 3837.2550942873154,
-    "hindi_penalty": 1.0978393028499984,
-    "final_grade": 3495.2793950132545
+    "x_min": 0.7960072918056111,
+    "x_max": 0.9377043158861341,
+    "spread": 0.14169702408052298,
+    "raw_score": 7057.31123493267,
+    "hindi_penalty": 1.0,
+    "final_grade": 7057.31123493267,
+    "adjusted_score": 7057.31123493267
   },
   "token_counts": {
-    "en": 92380,
-    "hi": 41907,
-    "te": 18567,
-    "bn": 48446
+    "en": 118101,
+    "hi": 53709,
+    "te": 25529,
+    "bn": 63921
   },
-  "wordish_counts": {
-    "en": 69411,
-    "hi": 31941,
-    "te": 11817,
-    "bn": 30806
+  "faithful_unit_counts": {
+    "en": 147908,
+    "hi": 67473,
+    "te": 27225,
+    "bn": 68468
   },
   "fertilities": {
-    "en": 1.3309129676852371,
-    "hi": 1.312012773551235,
-    "te": 1.5712109672505712,
-    "bn": 1.5726157242095695
+    "en": 0.7984760797252346,
+    "hi": 0.7960072918056111,
+    "te": 0.9377043158861341,
+    "bn": 0.9335894140328329
   }
 }

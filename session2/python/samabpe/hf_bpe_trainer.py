@@ -1,4 +1,4 @@
-"""Train standard Hugging Face BPE tokenizers under the evaluator contract."""
+"""Train faithful Hugging Face BPE: NFKC + Metaspace + decoder."""
 
 from __future__ import annotations
 
@@ -6,14 +6,24 @@ import hashlib
 import tempfile
 from pathlib import Path
 
-from tokenizers import Regex, Tokenizer, models, normalizers, pre_tokenizers, trainers
-from tokenizers.normalizers import Replace
+from tokenizers import Tokenizer
+from tokenizers.decoders import Metaspace as MetaspaceDecoder
+from tokenizers.models import BPE
+from tokenizers.normalizers import NFKC
+from tokenizers.pre_tokenizers import Metaspace
+from tokenizers.trainers import BpeTrainer
 
-from samabpe.evaluator_contract import LANGS, count_wordish_units
-from samabpe.evaluator_contract import compute_evaluator_metrics
+from samabpe.evaluator_contract import (
+    LANGS,
+    REVIEWER_SAMPLE,
+    compute_evaluator_metrics,
+    faithful_units,
+    verify_roundtrip,
+)
 
 VOCAB_BUDGET = 10_000
 DEFAULT_WEIGHTS = {"en": 3, "hi": 4, "te": 4, "bn": 2}
+UNK_TOKEN = "<unk>"
 
 
 def sha256_file(path: Path) -> str:
@@ -21,14 +31,10 @@ def sha256_file(path: Path) -> str:
 
 
 def build_hf_bpe_template() -> Tokenizer:
-    tok = Tokenizer(models.BPE(unk_token="<unk>"))
-    tok.normalizer = normalizers.Sequence(
-        [
-            normalizers.NFKC(),
-            Replace(Regex(r"[^\p{L}\p{M}\p{N}]+"), " "),
-        ]
-    )
-    tok.pre_tokenizer = pre_tokenizers.Whitespace()
+    tok = Tokenizer(BPE(unk_token=UNK_TOKEN))
+    tok.normalizer = NFKC()
+    tok.pre_tokenizer = Metaspace(replacement="▁", prepend_scheme="never")
+    tok.decoder = MetaspaceDecoder(replacement="▁", prepend_scheme="never")
     return tok
 
 
@@ -43,6 +49,23 @@ def _weighted_lines(corpora: dict[str, str], weights: dict[str, int]) -> list[st
     return lines
 
 
+def verify_tokenizer_roundtrip(tok: Tokenizer, corpora: dict[str, str]) -> dict:
+    """Round-trip gate: reviewer sample + full corpora."""
+    result = {
+        "reviewer_sample": verify_roundtrip(tok, REVIEWER_SAMPLE),
+        "full_corpus": {},
+        "valid": True,
+    }
+    for lang in LANGS:
+        ok = verify_roundtrip(tok, corpora[lang])
+        result["full_corpus"][lang] = ok
+        if not ok:
+            result["valid"] = False
+    if not result["reviewer_sample"]:
+        result["valid"] = False
+    return result
+
+
 def train_hf_bpe(
     corpora: dict[str, str],
     *,
@@ -52,10 +75,10 @@ def train_hf_bpe(
 ) -> tuple[Tokenizer, dict]:
     weights = dict(weights or DEFAULT_WEIGHTS)
     tok = build_hf_bpe_template()
-    trainer = trainers.BpeTrainer(
+    trainer = BpeTrainer(
         vocab_size=vocab_size,
         min_frequency=1,
-        special_tokens=["<unk>", "<pad>"],
+        special_tokens=[UNK_TOKEN],
         show_progress=False,
     )
     lines = _weighted_lines(corpora, weights)
@@ -67,10 +90,17 @@ def train_hf_bpe(
         tok.train([train_path], trainer)
     finally:
         Path(train_path).unlink(missing_ok=True)
+
+    roundtrip = verify_tokenizer_roundtrip(tok, corpora)
     meta = {
         "weights": weights,
         "vocab_size": tok.get_vocab_size(with_added_tokens=True),
         "training_lines": len(lines),
+        "tokenizer_engine": "huggingface-bpe",
+        "normalizer": "NFKC",
+        "pretokenizer": {"type": "Metaspace", "replacement": "▁", "prepend_scheme": "never"},
+        "decoder": {"type": "Metaspace", "replacement": "▁", "prepend_scheme": "never"},
+        "roundtrip": roundtrip,
     }
     if output_path is not None:
         path = Path(output_path)
@@ -80,11 +110,13 @@ def train_hf_bpe(
     return tok, meta
 
 
-def load_faithful_corpora(corpus_dir: Path | str) -> dict[str, str]:
+def load_faithful_corpora(corpus_dir: Path | str, *, ext: str = ".faithful.txt") -> dict[str, str]:
     corpus_dir = Path(corpus_dir)
     out: dict[str, str] = {}
     for lang in LANGS:
-        p = corpus_dir / f"{lang}.faithful.md"
+        p = corpus_dir / f"{lang}{ext}"
+        if not p.exists() and ext == ".faithful.txt":
+            p = corpus_dir / f"{lang}.faithful.md"
         if not p.exists():
             raise FileNotFoundError(p)
         out[lang] = p.read_text(encoding="utf-8")
@@ -92,7 +124,9 @@ def load_faithful_corpora(corpus_dir: Path | str) -> dict[str, str]:
 
 
 def evaluate_tokenizer(tok: Tokenizer, corpora: dict[str, str]) -> dict:
+    if not verify_tokenizer_roundtrip(tok, corpora)["valid"]:
+        raise ValueError("Tokenizer failed round-trip faithfulness gate")
     token_counts = {lang: len(tok.encode(corpora[lang]).ids) for lang in LANGS}
-    wordish_counts = {lang: count_wordish_units(corpora[lang]) for lang in LANGS}
-    m = compute_evaluator_metrics(token_counts, wordish_counts)
+    unit_counts = {lang: faithful_units(corpora[lang]) for lang in LANGS}
+    m = compute_evaluator_metrics(token_counts, unit_counts)
     return m.to_dict()

@@ -1,6 +1,8 @@
 /**
- * Browser Hugging Face BPE encoder — mirrors tokenizers pipeline from tokenizer.json.
+ * Faithful HF BPE encoder: NFKC + Metaspace + BPE (matches tokenizers pipeline).
  */
+
+const META = "▁";
 
 export interface HfTokenizerJson {
   model: {
@@ -8,12 +10,6 @@ export interface HfTokenizerJson {
     merges: [string, string][];
     unk_token?: string;
   };
-}
-
-const WORDISH = /[^\p{L}\p{M}\p{N}]+/gu;
-
-function normalize(text: string): string {
-  return text.normalize("NFKC").replace(WORDISH, " ").trim();
 }
 
 function getPairs(symbols: string[]): Array<[string, string]> {
@@ -52,8 +48,7 @@ export class HfBpeEncoder {
 
   static async load(path = "/data/submission/tokenizer.json"): Promise<HfBpeEncoder> {
     const res = await fetch(path);
-    const data = (await res.json()) as HfTokenizerJson;
-    return new HfBpeEncoder(data);
+    return new HfBpeEncoder((await res.json()) as HfTokenizerJson);
   }
 
   private bpeWord(word: string): string[] {
@@ -77,12 +72,19 @@ export class HfBpeEncoder {
     return symbols;
   }
 
-  encodeTokens(text: string): string[] {
-    const norm = normalize(text);
+  private metaspacePretokens(text: string): string[] {
+    const norm = text.normalize("NFKC");
     if (!norm) return [];
-    const words = norm.split(/\s+/).filter(Boolean);
+    const parts = norm.split(" ");
+    if (parts.length === 1) return parts;
+    const out = [parts[0]];
+    for (let i = 1; i < parts.length; i++) out.push(META + parts[i]);
+    return out;
+  }
+
+  encodeTokens(text: string): string[] {
     const tokens: string[] = [];
-    for (const w of words) tokens.push(...this.bpeWord(w));
+    for (const pretok of this.metaspacePretokens(text)) tokens.push(...this.bpeWord(pretok));
     return tokens;
   }
 
@@ -90,7 +92,22 @@ export class HfBpeEncoder {
     return this.encodeTokens(text).map((t) => this.vocab[t] ?? this.unkId);
   }
 
-  encode(text: string): string[] {
-    return this.encodeTokens(text);
+  decode(tokenIds: number[]): string {
+    const idToTok = new Map(Object.entries(this.vocab).map(([k, v]) => [v, k]));
+    const tokens = tokenIds.map((id) => idToTok.get(id) ?? "<unk>");
+    return tokens.join("").replaceAll(META, " ");
+  }
+
+  decodeTokens(tokens: string[]): string {
+    return tokens.join("").replaceAll(META, " ");
+  }
+
+  visibleNfkc(text: string): string {
+    return [...text.normalize("NFKC")].filter((c) => !/\s/.test(c)).join("");
+  }
+
+  verifyRoundtrip(text: string): boolean {
+    const decoded = this.decode(this.encodeIds(text));
+    return this.visibleNfkc(decoded) === this.visibleNfkc(text);
   }
 }

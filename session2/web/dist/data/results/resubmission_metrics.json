@@ -1,10 +1,14 @@
 {
-  "generated_at": "2026-07-13T13:30:35.364998+00:00",
+  "generated_at": "2026-07-13T16:34:28.611711+00:00",
   "tokenizer": {
     "format": "huggingface-tokenizers",
+    "engine": "BPE",
+    "normalizer": "NFKC",
+    "pretokenizer": "Metaspace",
+    "decoder": "Metaspace",
     "path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/resubmission/final/tokenizer.json",
     "vocab_size": 10000,
-    "sha256": "b0cc0fcd7009ee998f64bc8a653718fc048ff5d813804ca030c2c83236bea331",
+    "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
     "vocab_constraint_pass": true
   },
   "corpus_dir": "/Users/soham.niyogi/Soham/codebase/erav5/session2/data/faithful",
@@ -14,67 +18,101 @@
     "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
     "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
   },
+  "roundtrip": {
+    "reviewer_sample": true,
+    "reviewer_tokens": [
+      "India",
+      "'s",
+      "▁population",
+      "▁is",
+      "▁1,",
+      "4",
+      "28",
+      ",",
+      "6",
+      "27",
+      ",",
+      "66",
+      "3."
+    ],
+    "reviewer_decoded": "India's population is 1,428,627,663.",
+    "full_corpus": {
+      "en": true,
+      "hi": true,
+      "te": true,
+      "bn": true
+    },
+    "valid": true
+  },
   "languages": {
     "en": {
-      "wordish_units": 69411,
-      "tokens": 99304,
-      "fertility": 1.430666609038913
+      "faithful_units": 147908,
+      "wordish_units": 147908,
+      "tokens": 126158,
+      "fertility": 0.8529491305406063
     },
     "hi": {
-      "wordish_units": 31941,
-      "tokens": 38214,
-      "fertility": 1.196393350239504
+      "faithful_units": 67473,
+      "wordish_units": 67473,
+      "tokens": 55978,
+      "fertility": 0.8296355579268745
     },
     "te": {
-      "wordish_units": 11817,
-      "tokens": 18605,
-      "fertility": 1.5744266734365744
+      "faithful_units": 27225,
+      "wordish_units": 27225,
+      "tokens": 22993,
+      "fertility": 0.84455463728191
     },
     "bn": {
-      "wordish_units": 30806,
-      "tokens": 49037,
-      "fertility": 1.5918002986431214
+      "faithful_units": 68468,
+      "wordish_units": 68468,
+      "tokens": 58100,
+      "fertility": 0.8485715954898638
     }
   },
+  "thresholds": {
+    "en_under_1_2": true,
+    "hi_under_1_2": true
+  },
   "scoring": {
-    "x_min": 1.196393350239504,
-    "x_max": 1.5918002986431214,
-    "spread": 0.39540694840361734,
-    "raw_score": 2529.040028348808,
+    "x_min": 0.8296355579268745,
+    "x_max": 0.8529491305406063,
+    "spread": 0.023313572613731792,
+    "raw_score": 42893.46882043277,
     "hindi_penalty": 1.0,
-    "final_grade": 2529.040028348808,
-    "adjusted_score": 2529.040028348808
+    "final_grade": 42893.46882043277,
+    "adjusted_score": 42893.46882043277
   },
   "token_counts": {
-    "en": 99304,
-    "hi": 38214,
-    "te": 18605,
-    "bn": 49037
+    "en": 126158,
+    "hi": 55978,
+    "te": 22993,
+    "bn": 58100
   },
-  "wordish_counts": {
-    "en": 69411,
-    "hi": 31941,
-    "te": 11817,
-    "bn": 30806
+  "faithful_unit_counts": {
+    "en": 147908,
+    "hi": 67473,
+    "te": 27225,
+    "bn": 68468
   },
   "fertilities": {
-    "en": 1.430666609038913,
-    "hi": 1.196393350239504,
-    "te": 1.5744266734365744,
-    "bn": 1.5918002986431214
+    "en": 0.8529491305406063,
+    "hi": 0.8296355579268745,
+    "te": 0.84455463728191,
+    "bn": 0.8485715954898638
   },
   "provenance": {
-    "strategy": "threshold-aware-weight-search",
+    "strategy": "faithful-adaptive-weight-search",
     "weights": {
-      "en": 1,
-      "hi": 3,
-      "te": 2,
-      "bn": 1
+      "en": 3,
+      "hi": 5,
+      "te": 9,
+      "bn": 5
     },
-    "experiment_id": "hf-weight-066",
-    "constraint_class": "B",
-    "english_threshold_pass": false,
-    "hindi_threshold_pass": true,
-    "selection_reason": "class_b_hindi_valid_no_class_a"
+    "experiment_id": "faithful-hf-2361",
+    "constraint_class": null,
+    "english_threshold_pass": null,
+    "hindi_threshold_pass": null,
+    "selection_reason": null
   }
 }

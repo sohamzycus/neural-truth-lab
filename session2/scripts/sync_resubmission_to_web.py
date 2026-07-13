@@ -27,7 +27,7 @@ def main() -> int:
     if (FINAL / "provenance.json").exists():
         shutil.copy2(FINAL / "provenance.json", SUB / "provenance.json")
     for lang in ("en", "hi", "te", "bn"):
-        for ext in (".faithful.md", ".meta.json"):
+        for ext in (".faithful.md", ".faithful.txt", ".meta.json"):
             p = CORPUS / f"{lang}{ext}"
             if p.exists():
                 shutil.copy2(p, SUB / "corpus" / p.name)

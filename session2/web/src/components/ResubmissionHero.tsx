@@ -3,24 +3,18 @@ import { LANG_DISPLAY } from "../types";
 
 const LANG_ORDER = ["en", "hi", "te", "bn"] as const;
 const THRESHOLD = 1.2;
+const REVIEWER_SAMPLE = "India's population is 1,428,627,663.";
 
 const TRUST_MARKERS = [
-  "Standard Hugging Face BPE",
-  "One shared 10K vocabulary",
+  "Faithful round-trip verified",
+  "NFKC + Metaspace BPE",
   "English · Hindi · Telugu · Bengali",
-  "Executable and reproducible",
+  "One shared 10K vocabulary",
 ];
 
-const ARCH_STEPS = [
-  "Wiki-faithful corpora",
-  "SamaBPE adaptive weight search",
-  "Standard Hugging Face BPE training",
-  "One tokenizer.json",
-  "Four-language evaluation",
-];
+const ARCH_STEPS = ["NFKC", "Metaspace pretokenizer", "Hugging Face BPE", "Metaspace decoder"];
 
-function thresholdBadge(lang: "en" | "hi", fertility: number) {
-  const pass = fertility <= THRESHOLD;
+function thresholdBadge(pass: boolean) {
   return (
     <span
       className={`mt-2 inline-block rounded px-2 py-0.5 text-xs font-semibold ${
@@ -52,6 +46,8 @@ export function ResubmissionHero({
   const s = metrics.scoring;
   const adjusted = s.adjusted_score ?? s.final_grade;
   const prov = metrics.provenance;
+  const rt = metrics.roundtrip;
+  const th = metrics.thresholds;
   const totalMeasured = experiments?.total_measured ?? experiments?.experiments?.length;
 
   return (
@@ -62,12 +58,11 @@ export function ResubmissionHero({
             SamaBPE
           </h1>
           <p className="mt-4 text-[clamp(1.5rem,3.5vw,2.25rem)] font-bold text-[var(--color-indigo)]">
-            One standard BPE tokenizer. Four languages. 10,000 tokens.
+            One faithful tokenizer. Four Wikipedia pages. 10,000 tokens.
           </p>
           <p className="mt-3 max-w-3xl text-base text-[var(--color-ink)]/75">
-            Built with <strong>Hugging Face BPE</strong> and an adaptive multilingual weight search that
-            trains real tokenizer candidates, measures them on the same faithful Wikipedia corpus, and lets
-            evidence choose the winner.
+            Standard Hugging Face BPE with <strong>NFKC</strong> and <strong>Metaspace</strong> so visible
+            characters survive <code className="text-xs">decode(encode(text))</code> — the reviewer validity gate.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2">
             {TRUST_MARKERS.map((m) => (
@@ -92,73 +87,89 @@ export function ResubmissionHero({
 {`from tokenizers import Tokenizer
 
 tokenizer = Tokenizer.from_file("tokenizer.json")
-tokens = tokenizer.encode("भारत India বাংলা తెలుగు")`}
+assert tokenizer.decode(tokenizer.encode(text).ids) preserves visible text`}
         </pre>
-        <p className="mt-2 text-center text-xs text-[var(--color-ink)]/55">
-          Standard. Executable. No custom decoder required.
-        </p>
       </section>
+
+      {rt && (
+        <section className="px-4 py-10" id="faithfulness">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="text-2xl font-bold">Nothing visible gets lost</h2>
+            <p className="mt-2 text-sm text-[var(--color-ink)]/70">
+              Reviewer sample round-trip:{" "}
+              <span className={rt.reviewer_sample ? "text-emerald-700 font-semibold" : "text-amber-800"}>
+                {rt.reviewer_sample ? "PASS" : "FAIL"}
+              </span>
+              {" · "}
+              Full corpus:{" "}
+              {LANG_ORDER.map((l) => (
+                <span key={l} className="font-mono text-xs">
+                  {l.toUpperCase()} {rt.full_corpus[l] ? "✓" : "✗"}{" "}
+                </span>
+              ))}
+            </p>
+            <blockquote className="mt-4 rounded-lg border border-[var(--color-ink)]/10 bg-white/50 p-4 font-mono text-sm">
+              {REVIEWER_SAMPLE}
+            </blockquote>
+          </div>
+        </section>
+      )}
 
       <section className="px-4 py-12 md:py-16" id="result">
         <div className="mx-auto max-w-6xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-saffron)]">
-            Verified result
+            Verified fertility
           </p>
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
             {LANG_ORDER.map((lang) => {
               const l = metrics.languages[lang];
               const d = LANG_DISPLAY[lang];
+              const units = l.faithful_units ?? l.wordish_units ?? 0;
               return (
                 <div key={lang} className="text-center">
                   <div className={`text-sm font-semibold ${d.fontClass}`}>{d.native}</div>
                   <div className="mt-2 font-mono text-[clamp(1.75rem,4vw,2.75rem)] font-bold tabular-nums">
                     {l.fertility.toFixed(4)}
                   </div>
-                  <div className="mt-1 text-xs text-[var(--color-ink)]/55">fertility (tokens / word-ish)</div>
-                  {(lang === "en" || lang === "hi") && thresholdBadge(lang, l.fertility)}
+                  <div className="mt-1 text-xs text-[var(--color-ink)]/55">
+                    fertility · {units.toLocaleString()} faithful units
+                  </div>
+                  {(lang === "en" || lang === "hi") &&
+                    thresholdBadge(
+                      th ? (lang === "en" ? th.en_under_1_2 : th.hi_under_1_2) : l.fertility <= THRESHOLD
+                    )}
                 </div>
               );
             })}
           </div>
 
-          <div className="mt-10 grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-lg border border-[var(--color-ink)]/10 p-4">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Spread</p>
-              <p className="font-mono text-xl font-semibold tabular-nums">{s.spread.toFixed(6)}</p>
-            </div>
-            <div className="rounded-lg border border-[var(--color-ink)]/10 p-4">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Raw score</p>
-              <p className="font-mono text-xl font-semibold tabular-nums">
-                {s.raw_score.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-              </p>
-            </div>
-            <div className="rounded-lg border border-[var(--color-ink)]/10 p-4">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Hindi penalty</p>
-              <p className="font-mono text-xl font-semibold tabular-nums">{s.hindi_penalty.toFixed(4)}×</p>
-            </div>
-            <div className="rounded-lg border border-[var(--color-ink)]/10 p-4">
-              <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Adjusted evaluator score</p>
-              <p className="font-mono text-xl font-semibold tabular-nums">
-                {adjusted.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-              </p>
-            </div>
-          </div>
-
-          <details className="mx-auto mt-8 max-w-2xl text-sm">
+          <details className="mx-auto mt-10 max-w-2xl text-sm">
             <summary className="cursor-pointer font-medium text-[var(--color-indigo)]">
-              How is the evaluator score calculated?
+              Scoring details (evaluator formula)
             </summary>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-[var(--color-ink)]/75">
-              <li>Fertility = tokens / word-ish units</li>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border border-[var(--color-ink)]/10 p-4 text-center">
+                <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Spread</p>
+                <p className="font-mono text-lg font-semibold tabular-nums">{s.spread.toFixed(6)}</p>
+              </div>
+              <div className="rounded-lg border border-[var(--color-ink)]/10 p-4 text-center">
+                <p className="text-xs uppercase tracking-wider text-[var(--color-ink)]/50">Adjusted score</p>
+                <p className="font-mono text-lg font-semibold tabular-nums">
+                  {adjusted.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                </p>
+              </div>
+            </div>
+            <ul className="mt-4 list-disc space-y-1 pl-5 text-[var(--color-ink)]/75">
+              <li>Faithful unit = letter/mark/number run or single punctuation symbol</li>
+              <li>Fertility = tokens / faithful units</li>
               <li>Raw score = 1000 / (X<sub>max</sub> − X<sub>min</sub>)</li>
-              <li>Hindi penalty = exp(max(0, X<sub>hi</sub> / 1.2 − 1))</li>
               <li>Adjusted score = raw score / Hindi penalty</li>
             </ul>
           </details>
 
           {comparison?.rows && (
             <div className="mt-10 overflow-x-auto">
-              <h3 className="text-lg font-semibold">Experiment comparison</h3>
+              <h3 className="text-lg font-semibold">Weight search candidates</h3>
               <table className="mt-3 w-full min-w-[40rem] text-left text-sm">
                 <thead>
                   <tr className="border-b text-xs uppercase text-[var(--color-ink)]/50">
@@ -207,11 +218,8 @@ tokens = tokenizer.encode("भारत India বাংলা తెలుగు
             <a href="/data/submission/evaluate_tokenizer.py" download className="btn">
               evaluator
             </a>
-            <a href="/data/results/resubmission_experiments.json" download className="btn">
-              experiment registry
-            </a>
             <a
-              href="https://github.com/sohamzycus/neural-truth-lab"
+              href="https://github.com/sohamzycus/neural-truth-lab/tree/main/session2"
               target="_blank"
               rel="noreferrer"
               className="btn"
@@ -225,13 +233,11 @@ tokens = tokenizer.encode("भारत India বাংলা తెలుగు
             {metrics.tokenizer.sha256.slice(0, 16)}…
             {prov?.weights && (
               <span className="block mt-1">
-                Winning weights EN {prov.weights.en} · HI {prov.weights.hi} · TE {prov.weights.te} · BN{" "}
-                {prov.weights.bn}
-                {prov.constraint_class && ` · Class ${prov.constraint_class}`}
+                Weights EN {prov.weights.en} · HI {prov.weights.hi} · TE {prov.weights.te} · BN {prov.weights.bn}
               </span>
             )}
             {totalMeasured != null && (
-              <span className="block mt-1">{totalMeasured} real tokenizer candidates measured</span>
+              <span className="block mt-1">{totalMeasured} tokenizer candidates measured</span>
             )}
           </p>
         </div>
@@ -252,41 +258,18 @@ export function SectionInnovation({
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16" id="innovation">
-      <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">What makes SamaBPE different?</h2>
+      <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">SamaBPE weight search</h2>
       <p className="mt-3 max-w-3xl text-[var(--color-ink)]/80">
-        The tokenizer itself is <strong>standard Hugging Face BPE</strong>. The experiment is in deciding how
-        to spend training exposure across four languages.
+        The tokenizer engine is standard Hugging Face BPE. SamaBPE searches multilingual training weights —
+        only candidates that pass the faithful round-trip gate and EN/HI fertility thresholds compete on score.
       </p>
-      <p className="mt-2 max-w-3xl text-sm text-[var(--color-ink)]/65">
-        <strong>Hugging Face BPE</strong> = tokenizer engine · <strong>SamaBPE</strong> = intelligent
-        multilingual training-weight search. Weights do not change at runtime — one static{" "}
-        <code>tokenizer.json</code> encodes all four languages.
-      </p>
-      <ol className="mt-8 space-y-4 border-l-2 border-[var(--color-indigo)]/30 pl-6 text-sm">
-        {[
-          "Choose weights",
-          "Train real 10K BPE",
-          "Measure all four languages",
-          "Check thresholds and score",
-          "Adjust weights",
-          "Train again",
-          "Best measured candidate wins",
-        ].map((step, i) => (
-          <li key={step}>
-            <span className="font-mono text-[var(--color-indigo)]">{String(i + 1).padStart(2, "0")}</span>{" "}
-            {step}
-          </li>
-        ))}
-      </ol>
       {w && (
         <p className="mt-6 font-mono text-sm">
           Winner weights: EN {w.en} · HI {w.hi} · TE {w.te} · BN {w.bn}
         </p>
       )}
       {total != null && (
-        <p className="mt-2 text-sm text-[var(--color-ink)]/60">
-          {total} real Hugging Face BPE candidates trained and measured.
-        </p>
+        <p className="mt-2 text-sm text-[var(--color-ink)]/60">{total} candidates trained and measured.</p>
       )}
     </section>
   );
@@ -298,8 +281,8 @@ export function SectionLegacyNote() {
       <details className="text-sm text-[var(--color-ink)]/60">
         <summary className="cursor-pointer font-medium">Legacy custom tokenizer (research history)</summary>
         <p className="mt-2">
-          The original custom SamaBPE JSON tokenizer and plain-text Wikipedia corpora remain in the repository
-          for research history. They are <strong>not</strong> the current Hugging Face BPE submission.
+          The original custom SamaBPE JSON tokenizer and punctuation-stripping pretokenizer remain in the
+          repository for research history. They are <strong>not</strong> the current faithful submission.
         </p>
       </details>
     </section>

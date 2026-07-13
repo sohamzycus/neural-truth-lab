@@ -29,7 +29,7 @@ def test_reviewer_arithmetic():
     m = compute_evaluator_metrics(tokens, units)
     assert abs(m.raw_score - 657.5) < 1.0
     assert abs(m.hindi_penalty - 13.18) < 0.1
-    assert abs(m.adjusted_score - 49.9) < 2.0
+    assert abs(m.final_grade - 49.9) < 2.0
 
 
 def test_spread_and_raw_score():

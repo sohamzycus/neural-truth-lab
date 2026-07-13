@@ -1,15 +1,13 @@
 {
   "language": "te",
-  "title": "భారతదేశం",
-  "wikipedia_url": "https://te.wikipedia.org/wiki/%E0%B0%AD%E0%B0%BE%E0%B0%B0%E0%B0%A4%E0%B0%A6%E0%B1%87%E0%B0%B6%E0%B0%82",
-  "rest_html_url": "https://te.wikipedia.org/api/rest_v1/page/html/%E0%B0%AD%E0%B0%BE%E0%B0%B0%E0%B0%A4%E0%B0%A6%E0%B1%87%E0%B0%B6%E0%B0%82",
+  "language_name": "Telugu",
+  "article": "భారతదేశం",
+  "source_url": "https://te.wikipedia.org/wiki/%E0%B0%AD%E0%B0%BE%E0%B0%B0%E0%B0%A4%E0%B0%A6%E0%B1%87%E0%B0%B6%E0%B0%82",
   "fetch_timestamp": "2026-07-13T09:31:51.641886+00:00",
   "revision_id": "4848340",
-  "character_count": 89314,
-  "byte_count": 174154,
+  "characters": 89314,
+  "bytes": 174154,
+  "faithful_units": 27225,
   "sha256_md": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
-  "sha256_txt": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
-  "wordish_unit_count": 11817,
-  "format": "wiki-faithful-markdown",
-  "converter": "html2text"
+  "sha256_txt": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39"
 }

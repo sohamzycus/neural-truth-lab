@@ -1,59 +1,49 @@
-"""Tests for authoritative evaluator contract."""
+"""Tests for faithful evaluator contract."""
 
 from __future__ import annotations
-
-import math
-import unicodedata
 
 import pytest
 
 from samabpe.evaluator_contract import (
-    HINDI_FERTILITY_THRESHOLD,
+    REVIEWER_SAMPLE,
     calculate_scores,
-    count_wordish_units,
-    extract_wordish_units,
+    extract_faithful_units,
+    faithful_units,
     fertility,
     hindi_penalty,
-    normalize_for_tokenizer,
+    threshold_status,
 )
 
 
-def test_nfkc_compatibility():
-    # NFKC compatibility: fullwidth digits → ASCII
-    assert normalize_for_tokenizer("１２３") == "123"
-
-
-def test_punctuation_not_wordish():
-    text = "India, Bharat! বাংলা | తెలుగు [link](url)"
-    units = extract_wordish_units(text)
+def test_reviewer_sample_faithful_units():
+    units = extract_faithful_units(REVIEWER_SAMPLE)
     assert "India" in units
-    assert "Bharat" in units
-    assert "," not in "".join(units)
-    assert "|" not in units
+    assert "'" in units
+    assert "s" in units
+    assert "," in units
+    assert "." in units
+    assert "1" in units
+
+
+def test_faithful_unit_india():
+    assert faithful_units("India") == 1
+
+
+def test_markdown_punctuation_counted():
+    text = "India, Bharat! [link](url)"
+    units = extract_faithful_units(text)
+    assert "India" in units
+    assert "," in units
+    assert "!" in units
+    assert "[" in units
 
 
 def test_devanagari():
-    units = extract_wordish_units("भारत एक देश")
-    assert len(units) >= 3
+    assert faithful_units("भारत एक देश") >= 3
 
 
-def test_telugu_combining():
-    assert count_wordish_units("తెలుగు") >= 1
-
-
-def test_bengali_combining():
-    assert count_wordish_units("বাংলা") >= 1
-
-
-def test_url_processing():
-    units = extract_wordish_units("see https://example.com/path for info")
-    assert "see" in units
-    assert "for" in units
-
-
-def test_empty_input():
-    assert count_wordish_units("") == 0
-    assert extract_wordish_units("!!!") == []
+def test_empty():
+    assert faithful_units("") == 0
 
 
 def test_reference_fertility_spread():
@@ -65,8 +55,12 @@ def test_reference_fertility_spread():
     }
     s = calculate_scores(fertilities)
     assert abs(s["hindi_penalty"] - 1.0) < 1e-9
-    assert abs(s["spread"] - (1.366433 - 1.192285)) < 1e-6
-    assert abs(s["raw_score"] - 1000.0 / s["spread"]) < 1e-6
+
+
+def test_threshold_status():
+    t = threshold_status({"en": 1.1, "hi": 1.3, "te": 1.2, "bn": 1.2})
+    assert t["en_under_1_2"] is True
+    assert t["hi_under_1_2"] is False
 
 
 def test_reviewer_hindi_penalty():
@@ -76,8 +70,3 @@ def test_reviewer_hindi_penalty():
 def test_fertility_requires_positive_denominator():
     with pytest.raises(ValueError):
         fertility(10, 0)
-
-
-def test_spread_must_be_positive():
-    with pytest.raises(ValueError):
-        calculate_scores({"en": 1.0, "hi": 1.0, "te": 1.0, "bn": 1.0})

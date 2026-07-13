@@ -30,8 +30,17 @@ export interface ResubmissionMetrics {
   corpus_sha256?: Record<string, string>;
   languages: Record<
     string,
-    { wordish_units: number; tokens: number; fertility: number }
+    { faithful_units: number; tokens: number; fertility: number; wordish_units?: number }
   >;
+  roundtrip?: {
+    reviewer_sample: boolean;
+    full_corpus: Record<string, boolean>;
+    valid: boolean;
+  };
+  thresholds?: {
+    en_under_1_2: boolean;
+    hi_under_1_2: boolean;
+  };
   scoring: {
     x_min: number;
     x_max: number;

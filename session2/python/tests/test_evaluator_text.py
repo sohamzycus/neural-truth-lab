@@ -1,4 +1,4 @@
-"""Tests for evaluator text pipeline."""
+"""Tests for evaluator text pipeline (faithful units)."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from samabpe.evaluator_text import (
 
 
 def test_english_punctuation_splits():
-    assert count_wordish_units("Hello, world!") == 2
+    assert count_wordish_units("Hello, world!") == 4
 
 
 def test_devanagari_word():
@@ -28,18 +28,16 @@ def test_bengali_word():
 
 
 def test_combining_mark_preserved_in_letter_run():
-    # NFKC + letter/mark class — combining marks stay with letters
     n = count_wordish_units("café")
     assert n >= 1
 
 
-def test_url_splits_punctuation_runs():
+def test_url_keeps_punctuation_units():
     u = "see https://example.com/path for info"
     units = wordish_units(u)
-    # Punctuation runs become spaces — protocol/host segments are separate letter runs.
     assert "see" in units
     assert "for" in units
-    assert len(units) >= 5
+    assert len(units) >= 8
 
 
 def test_markdown_syntax():
@@ -59,7 +57,7 @@ def test_pattern_documented():
 
 def test_empty():
     assert count_wordish_units("") == 0
-    assert count_wordish_units("!!!") == 0
+    assert count_wordish_units("!!!") == 3
 
 
 def test_normalize_collapses_whitespace():

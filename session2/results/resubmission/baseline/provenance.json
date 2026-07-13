@@ -8,6 +8,28 @@
   },
   "vocab_size": 10000,
   "training_lines": 14628,
-  "tokenizer_sha256": "cb7bb610bf743e1b2b326cd5ff9fe962413395ecb1bd1c643e602b6fcfd6b94a",
+  "tokenizer_engine": "huggingface-bpe",
+  "normalizer": "NFKC",
+  "pretokenizer": {
+    "type": "Metaspace",
+    "replacement": "\u2581",
+    "prepend_scheme": "never"
+  },
+  "decoder": {
+    "type": "Metaspace",
+    "replacement": "\u2581",
+    "prepend_scheme": "never"
+  },
+  "roundtrip": {
+    "reviewer_sample": true,
+    "full_corpus": {
+      "en": true,
+      "hi": true,
+      "te": true,
+      "bn": true
+    },
+    "valid": true
+  },
+  "tokenizer_sha256": "6fde397d734cf6fbb0ca9ae6bcc283a689b665d1e8873886092af964660c0fa1",
   "metrics_path": "results/resubmission/baseline/metrics.json"
 }

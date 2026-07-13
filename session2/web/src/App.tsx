@@ -93,9 +93,8 @@ export default function App() {
       <section className="mx-auto max-w-6xl px-4 py-14" id="playground">
         <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">Try the Hugging Face tokenizer</h2>
         <p className="mt-2 text-base text-[var(--color-ink)]/70">
-          This playground loads the exact frozen <code className="text-xs">submission/tokenizer.json</code> winner
-          — same pipeline as <code className="text-xs">encoder.py</code> (NFKC → word-ish normalize → whitespace →
-          BPE).
+          Loads the frozen <code className="text-xs">submission/tokenizer.json</code> — NFKC → Metaspace → BPE →
+          Metaspace decode (same as <code className="text-xs">encoder.py</code>).
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {PRESETS.map((p) => (
