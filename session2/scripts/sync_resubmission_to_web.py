@@ -47,15 +47,26 @@ def main() -> int:
             "strategy": prov.get("strategy"),
             "weights": prov.get("weights"),
             "experiment_id": prov.get("experiment_id"),
+            "constraint_class": prov.get("constraint_class"),
+            "english_threshold_pass": prov.get("english_threshold_pass"),
+            "hindi_threshold_pass": prov.get("hindi_threshold_pass"),
+            "selection_reason": prov.get("selection_reason"),
         }
+    comp = ROOT / "results" / "resubmission" / "comparison.json"
+    if comp.exists():
+        shutil.copy2(comp, res_dir / "resubmission_comparison.json")
+    reg = json.loads((ROOT / "results" / "resubmission" / "experiments.json").read_text(encoding="utf-8"))
+    (res_dir / "resubmission_experiments.json").write_text(
+        json.dumps(reg, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
     (res_dir / "resubmission_metrics.json").write_text(
         json.dumps(metrics, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-    shutil.copy2(REGISTRY := ROOT / "results" / "resubmission" / "experiments.json", res_dir / "resubmission_experiments.json")
     shutil.copy2(FINAL / "tokenizer.json", sub_dir / "tokenizer.json")
     shutil.copy2(SUB / "metrics.json", sub_dir / "metrics.json")
     shutil.copy2(ROOT / "submission" / "encoder.py", sub_dir / "encoder.py")
     shutil.copy2(SUB / "evaluate_tokenizer.py", sub_dir / "evaluate_tokenizer.py")
+    subprocess.check_call([sys.executable, str(ROOT / "scripts" / "export_playground_parity.py")])
     print("Synced resubmission artefacts to submission/ and web/public/data/")
     return 0
 

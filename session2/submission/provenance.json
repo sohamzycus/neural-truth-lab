@@ -1,20 +1,19 @@
 {
-  "strategy": "adaptive-weight-search",
+  "strategy": "threshold-aware-weight-search",
   "weights": {
-    "en": 2,
+    "en": 1,
     "hi": 3,
-    "te": 6,
-    "bn": 4
+    "te": 2,
+    "bn": 1
   },
-  "tokenizer_sha256": "cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a",
-  "corpus_sha256": {
-    "en": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
-    "hi": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
-    "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
-    "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
-  },
-  "experiment_id": "hf-weight-018",
+  "constraint_class": "B",
+  "english_threshold_pass": false,
+  "hindi_threshold_pass": true,
+  "selection_reason": "class_b_hindi_valid_no_class_a",
+  "tokenizer_sha256": "b0cc0fcd7009ee998f64bc8a653718fc048ff5d813804ca030c2c83236bea331",
+  "experiment_id": "hf-weight-066",
+  "new_tokenizers_trained": 2544,
   "evaluation_command": "python scripts/evaluate_hf_tokenizer.py --tokenizer results/resubmission/final/tokenizer.json --corpus-dir data/faithful --output results/resubmission/final/metrics.json",
-  "training_command": "python scripts/run_weight_search.py",
-  "git_commit": "0e9321c1a59846ff76de87c3ed7bb21c5a25d3b6"
+  "training_command": "python scripts/run_threshold_search.py",
+  "git_commit": "6fd2f4284a1508b741d66dacb297da94ea339952"
 }

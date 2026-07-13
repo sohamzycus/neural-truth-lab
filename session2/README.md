@@ -1,41 +1,40 @@
 # SamaBPE
 
-One standard **Hugging Face BPE** tokenizer. Four languages. 10,000-token maximum vocabulary. **Adaptive multilingual weight search** optimized for the actual **final grade** — not raw score alone.
+One standard **Hugging Face BPE** tokenizer. Four languages. 10,000-token maximum vocabulary. **Adaptive multilingual weight search** with **threshold-aware winner selection**.
 
 **Production:** https://sama-bpe-tokenizer-413.netlify.app
 
 ---
 
-## Final verified result
+## What did I build?
 
-| Language | Word-ish Units | Encoded Tokens | Fertility |
-| -------- | -------------: | -------------: | --------: |
-| English  | 69411 | 99168 | 1.428707 |
-| Hindi    | 31941 | 44257 | 1.385586 |
-| Telugu   | 11817 | 16620 | 1.406448 |
-| Bengali  | 30806 | 43045 | 1.397293 |
+**SamaBPE** trains real Hugging Face BPE candidates, measures them on wiki-faithful Wikipedia India Markdown corpora, and selects the best measured winner under explicit fertility thresholds.
 
-| Metric | Value |
-| ------ | ----- |
-| Spread | 0.043121 |
-| Raw score | 23190.37 |
-| Hindi penalty | 1.1673× |
-| **Final grade** | **19867.44** |
-| Vocabulary size | 10,000 |
-| Tokenizer SHA-256 | `cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a` |
-| Winning weights | EN 2 · HI 3 · TE 6 · BN 4 |
-
-Download: [`submission/tokenizer.json`](submission/tokenizer.json)
+- **Hugging Face BPE** = tokenizer engine (standard `tokenizer.json`)
+- **SamaBPE** = training-time multilingual weight search (weights do not change at runtime)
 
 ---
 
-## What is innovative?
+## Final submission winner (threshold-aware)
 
-SamaBPE does **not** replace standard BPE with a custom runtime tokenizer. It uses standard Hugging Face BPE and innovates in **training-time multilingual weight search**. Each candidate is a real tokenizer trained and evaluated against the same faithful corpora. The candidate with the highest **measured final grade** wins.
+| Language | Word-ish | Tokens | Fertility | ≤1.2 |
+| -------- | -------: | -----: | --------: | ---- |
+| English  | 69411 | 99304 | 1.4307 | **> 1.2** |
+| Hindi    | 31941 | 38214 | 1.1964 | ✓ |
+| Telugu   | 11817 | 18605 | 1.5744 | |
+| Bengali  | 30806 | 49037 | 1.5918 | |
 
-```
-Choose weights → Train HF BPE → Evaluate 4 corpora → Final grade → Next weights → Winner
-```
+| Metric | Value |
+| ------ | ----- |
+| Spread | 0.3954 |
+| Raw score | 2529.04 |
+| Hindi penalty | 1.0× |
+| **Adjusted evaluator score** | **2529.04** |
+| Winning weights | EN 1 · HI 3 · TE 2 · BN 1 |
+| Constraint class | **B** (Hindi ≤1.2; English >1.2) |
+| Tokenizer SHA-256 | `b0cc0fcd7009ee998f64bc8a653718fc048ff5d813804ca030c2c83236bea331` |
+
+**No Class A candidate** (EN≤1.2 and HI≤1.2) was found among **2,971** measured tokenizers after threshold-aware search. See `results/resubmission/comparison.json`.
 
 ---
 
@@ -47,26 +46,19 @@ pip install -r requirements.txt
 python evaluate_tokenizer.py
 ```
 
-## Try the encoder
-
 ```bash
 python encoder.py "भारत India বাংলা తెలుగు"
 ```
 
 ---
 
-## Evaluator contract
+## Experiment comparison
 
-- **Corpus:** wiki-faithful Markdown (`data/faithful/*.faithful.md`) — Wikipedia REST HTML → BeautifulSoup → markdownify
-- **Normalizer:** NFKC + replace `[^\p{L}\p{M}\p{N}]+` with space (serialized in `tokenizer.json`)
-- **Pretokenizer:** whitespace
-- **Denominator:** word-ish units (`[\p{L}\p{M}\p{N}]+` after NFKC)
-- **Fertility:** encoded tokens ÷ word-ish units
-- **Raw score:** `1000 / (X_max − X_min)`
-- **Hindi penalty:** `exp(max(0, X_hi / 1.2 − 1))`
-- **Final grade:** `raw_score / hindi_penalty` ← optimization objective
-
-Single source of truth: `python/samabpe/evaluator_contract.py`
+| Candidate | Adjusted score | Status |
+| --------- | -------------: | ------ |
+| Baseline (3/4/4/2) | 3495.28 | Baseline |
+| Best unconstrained (2/3/6/4) | 19,867.44 | High-score experiment (Class C) |
+| **Final submission (1/3/2/1)** | **2529.04** | Threshold-aware winner (Class B) |
 
 ---
 
@@ -74,42 +66,12 @@ Single source of truth: `python/samabpe/evaluator_contract.py`
 
 | File | Role |
 | ---- | ---- |
-| `python/samabpe/evaluator_contract.py` | Normalization, word-ish units, scoring |
-| `python/samabpe/hf_bpe_trainer.py` | Standard HF BPE training |
-| `python/samabpe/weight_optimizer.py` | Adaptive weight search |
-| `scripts/build_wiki_faithful_markdown.py` | Faithful corpus builder |
-| `scripts/evaluate_hf_tokenizer.py` | Canonical evaluator CLI |
-| `scripts/train_hf_baseline.py` | Reference baseline (weights 3/4/4/2) |
-| `scripts/run_weight_search.py` | Coarse + neighbor search → winner |
-| `scripts/sync_resubmission_to_web.py` | Sync to `submission/` and web |
+| `python/samabpe/evaluator_contract.py` | Scoring contract |
+| `python/samabpe/weight_optimizer.py` | Constraint classes A/B/C + winner selection |
+| `scripts/run_threshold_search.py` | Threshold-aware search |
+| `submission/tokenizer.json` | Frozen HF BPE winner |
 | `submission/encoder.py` | Executable encoder |
-| `submission/evaluate_tokenizer.py` | Standalone reviewer verifier |
-| `results/resubmission/experiments.json` | Measured experiment registry |
-
----
-
-## Experiment registry
-
-Full measured search: [`results/resubmission/experiments.json`](results/resubmission/experiments.json)
-
-- **Baseline** (EN 3 · HI 4 · TE 4 · BN 2): final grade **3495.28**
-- **Winner** (EN 2 · HI 3 · TE 6 · BN 4): final grade **19867.44**
-- ~300+ real tokenizers trained in coarse grid + neighbor refinement
-
----
-
-## Legacy (not resubmission)
-
-The original custom JSON BPE (`results/tokenizer.json`, score **2002.10** on plain-text corpora) is preserved for research history. It is **not** the evaluator-compatible result. See `results/pre_resubmission_snapshot.json` for why the first submission scored **49.9/1000**.
-
----
-
-## Limitations
-
-- Benchmark is four frozen Wikipedia India pages only.
-- Faithful Markdown corpus may differ slightly from a reference builder unless byte-identical.
-- Weight search is bounded grid + local neighbors — not a claim of global optimality.
-- Legacy playground UI still loads the custom tokenizer for research demos.
+| `results/resubmission/experiments.json` | 2,971 measured experiments |
 
 ## License
 

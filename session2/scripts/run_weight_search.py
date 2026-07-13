@@ -18,6 +18,7 @@ from samabpe.weight_optimizer import (
     coarse_grid,
     neighbor_configs,
     pick_winner,
+    pick_winner_constrained,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,7 +84,7 @@ def main() -> int:
             candidates.append(_train_and_measure(corpora, w, f"hf-weight-{n_id:03d}"))
             n_id += 1
 
-    winner = pick_winner(candidates)
+    winner, selection = pick_winner_constrained(candidates)
     records = [c.to_experiment_record() for c in sorted(candidates, key=lambda x: x.final_grade, reverse=True)]
     REGISTRY.parent.mkdir(parents=True, exist_ok=True)
     REGISTRY.write_text(
@@ -93,6 +94,7 @@ def main() -> int:
                 "objective": "final_grade",
                 "experiments": records,
                 "winner_experiment_id": winner.experiment_id,
+                "winner_selection": selection,
             },
             indent=2,
             ensure_ascii=False,

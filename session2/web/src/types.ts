@@ -39,11 +39,34 @@ export interface ResubmissionMetrics {
     raw_score: number;
     hindi_penalty: number;
     final_grade: number;
+    adjusted_score?: number;
   };
   provenance?: {
     weights?: Record<string, number>;
     strategy?: string;
+    constraint_class?: string;
+    english_threshold_pass?: boolean;
+    hindi_threshold_pass?: boolean;
+    selection_reason?: string;
   };
+}
+
+export interface ResubmissionComparisonRow {
+  label: string;
+  weights?: Record<string, number>;
+  fertilities: Record<string, number>;
+  spread: number;
+  adjusted_score: number;
+  status: string;
+  constraint_class?: string;
+  english_threshold_pass?: boolean;
+  hindi_threshold_pass?: boolean;
+}
+
+export interface ResubmissionComparison {
+  generated_at?: string;
+  rows: (ResubmissionComparisonRow | null)[];
+  selection?: Record<string, unknown>;
 }
 
 export interface ResubmissionExperiment {
@@ -51,11 +74,15 @@ export interface ResubmissionExperiment {
   strategy: string;
   weights: Record<string, number>;
   final_grade: number;
+  adjusted_score?: number;
   raw_score: number;
   hindi_penalty: number;
   spread: number;
   fertilities: Record<string, number>;
   status: string;
+  english_threshold_pass?: boolean;
+  hindi_threshold_pass?: boolean;
+  constraint_class?: string;
 }
 
 export interface ResubmissionExperiments {
@@ -63,6 +90,8 @@ export interface ResubmissionExperiments {
   objective?: string;
   experiments: ResubmissionExperiment[];
   winner_experiment_id?: string;
+  total_measured?: number;
+  winner_selection?: Record<string, unknown>;
 }
 
 export interface Stats {

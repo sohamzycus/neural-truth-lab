@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { BPEEncoder, codePoints, scriptAttribution, graphemeCount } from "./lib/bpe";
+import { HfBpeEncoder } from "./lib/hf-encoder";
 import { loadJson } from "./types";
 import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves } from "./types";
-import { ResubmissionHero, SectionWeightSearch, SectionLegacyNote } from "./components/ResubmissionHero";
-import type { ResubmissionMetrics, ResubmissionExperiments } from "./types";
-import {
-  SiteNav, SectionExperiment, SectionWinner, SectionWhyWinner,
-  SectionVocabularyEconomy, SectionExploreLab,
-} from "./components/NarrativeSections";
+import { ResubmissionHero, SectionInnovation, SectionLegacyNote } from "./components/ResubmissionHero";
+import type { ResubmissionMetrics, ResubmissionExperiments, ResubmissionComparison } from "./types";
+import { SiteNav, SectionExploreLab } from "./components/NarrativeSections";
 import {
   SectionOptimizationTrace, SectionRejected, SectionGrapheme,
   SectionReproduce, SectionDownloads, BudgetSimulator,
@@ -22,20 +19,22 @@ const PRESETS = [
   "भारत एक विविध देश है।",
   "భారతదేశం వైవిధ్యభరితమైన దేశం.",
   "ভারত একটি বৈচিত্র্যময় দেশ।",
+  "see https://example.com/path for info",
+  "भारत India বাংলা తెలుగు",
 ];
 
 export default function App() {
   const [resubmission, setResubmission] = useState<ResubmissionMetrics | null>(null);
   const [experiments, setExperiments] = useState<ResubmissionExperiments | null>(null);
+  const [comparison, setComparison] = useState<ResubmissionComparison | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
   const [strategies, setStrategies] = useState<StrategyComparison | null>(null);
   const [trace, setTrace] = useState<OptTraceStep[]>([]);
   const [rejected, setRejected] = useState<RejectedMerge[]>([]);
   const [curves, setCurves] = useState<SweepCurves | null>(null);
   const [grapheme, setGrapheme] = useState<Record<string, { integrity_pct: number; split_clusters: number; total_graphemes: number }> | null>(null);
-  const [encoder, setEncoder] = useState<BPEEncoder | null>(null);
+  const [encoder, setEncoder] = useState<HfBpeEncoder | null>(null);
   const [playText, setPlayText] = useState(PRESETS[0]);
-  const [selectedToken, setSelectedToken] = useState<string | null>(null);
   const [movingTrace, setMovingTrace] = useState<Array<Record<string, unknown>> | null>(null);
   const [roi, setRoi] = useState<{ candidates?: Array<Record<string, unknown>> } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -44,21 +43,23 @@ export default function App() {
     Promise.all([
       loadJson<ResubmissionMetrics>("/data/results/resubmission_metrics.json"),
       loadJson<ResubmissionExperiments>("/data/results/resubmission_experiments.json").catch(() => null),
+      loadJson<ResubmissionComparison>("/data/results/resubmission_comparison.json").catch(() => null),
       loadJson<Stats>("/data/results/stats.json").catch(() => null),
       loadJson<StrategyComparison | StrategyComparison["strategies"]>("/data/results/strategy_comparison.json").then((d) =>
         Array.isArray(d) ? { strategies: d as unknown as StrategyComparison["strategies"] } : d
       ).catch(() => null),
-      loadJson<OptTraceStep[]>("/data/results/optimization_trace.json"),
-      loadJson<RejectedMerge[]>("/data/results/rejected_merges.json"),
-      loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json"),
-      loadJson<typeof grapheme>("/data/results/grapheme_stats.json"),
+      loadJson<OptTraceStep[]>("/data/results/optimization_trace.json").catch(() => []),
+      loadJson<RejectedMerge[]>("/data/results/rejected_merges.json").catch(() => []),
+      loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json").catch(() => null),
+      loadJson<typeof grapheme>("/data/results/grapheme_stats.json").catch(() => null),
       loadJson<typeof movingTrace>("/data/results/moving_boundary_trace.json").catch(() => null),
       loadJson<typeof roi>("/data/results/score_roi_candidates.json").catch(() => null),
-      BPEEncoder.load(),
+      HfBpeEncoder.load("/data/submission/tokenizer.json"),
     ])
-      .then(([rs, ex, s, st, tr, rj, cu, gr, mt, roiData, enc]) => {
+      .then(([rs, ex, cmp, s, st, tr, rj, cu, gr, mt, roiData, enc]) => {
         setResubmission(rs);
         setExperiments(ex);
+        setComparison(cmp);
         setStats(s);
         setStrategies(st);
         setTrace(tr);
@@ -72,9 +73,8 @@ export default function App() {
       .catch((e) => setError(String(e)));
   }, []);
 
-  const tokens = encoder ? encoder.encode(playText) : [];
+  const tokens = encoder ? encoder.encodeTokens(playText) : [];
   const ids = encoder ? encoder.encodeIds(playText) : [];
-  const vocabEntries = encoder?.getVocabEntries() ?? [];
   const alloc = stats?.vocab_attribution ?? stats?.vocab_allocation ?? {};
 
   return (
@@ -86,19 +86,16 @@ export default function App() {
         </div>
       )}
 
-      <ResubmissionHero metrics={resubmission} experiments={experiments} />
-      <SectionWeightSearch experiments={experiments} />
+      <ResubmissionHero metrics={resubmission} experiments={experiments} comparison={comparison} />
+      <SectionInnovation metrics={resubmission} experiments={experiments} />
       <SectionLegacyNote />
 
       <section className="mx-auto max-w-6xl px-4 py-14" id="playground">
-        <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">Try the tokenizer</h2>
+        <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">Try the Hugging Face tokenizer</h2>
         <p className="mt-2 text-base text-[var(--color-ink)]/70">
-          Legacy custom BPE playground (research history). The resubmission artefact is standard Hugging Face{" "}
-          <code className="text-xs">tokenizer.json</code> — use{" "}
-          <a href="/data/submission/encoder.py" download className="text-[var(--color-indigo)]">
-            encoder.py
-          </a>{" "}
-          or download the HF tokenizer above.
+          This playground loads the exact frozen <code className="text-xs">submission/tokenizer.json</code> winner
+          — same pipeline as <code className="text-xs">encoder.py</code> (NFKC → word-ish normalize → whitespace →
+          BPE).
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {PRESETS.map((p) => (
@@ -115,55 +112,18 @@ export default function App() {
           aria-label="Tokenizer input"
         />
         {encoder && (
-          <div className="mt-4 grid gap-6 md:grid-cols-2">
-            <div>
-              <div className="text-sm font-semibold">Tokens ({tokens.length})</div>
-              <div className="mt-2 flex flex-wrap gap-1 font-mono text-xs">
-                {tokens.map((t, i) => (
-                  <button key={i} type="button" className="rounded border border-[var(--color-indigo)]/20 px-1 hover:bg-[var(--color-indigo)]/10" onClick={() => setSelectedToken(t)}>
-                    {t.replace("</w>", "·")}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-2 font-mono text-xs text-[var(--color-ink)]/60">IDs: {ids.join(", ")}</div>
+          <div className="mt-4">
+            <div className="text-sm font-semibold">Tokens ({tokens.length})</div>
+            <div className="mt-2 flex flex-wrap gap-1 font-mono text-xs">
+              {tokens.map((t, i) => (
+                <span key={i} className="rounded border border-[var(--color-indigo)]/20 px-1">
+                  {t}
+                </span>
+              ))}
             </div>
-            <div>
-              <div className="text-sm font-semibold">Script attribution (heuristic)</div>
-              <ul className="mt-2 max-h-40 space-y-1 overflow-y-auto font-mono text-xs">
-                {tokens.map((t, i) => (
-                  <li key={i}>{t.replace("</w>", "")} → {scriptAttribution(t)}</li>
-                ))}
-              </ul>
-            </div>
+            <div className="mt-2 font-mono text-xs text-[var(--color-ink)]/60">IDs: {ids.join(", ")}</div>
           </div>
         )}
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12" id="vocabulary">
-        <h2 className="text-2xl font-bold">Inspect the vocabulary</h2>
-        <p className="mt-1 text-sm text-[var(--color-ink)]/60">
-          Searchable slice of the submitted vocabulary ({vocabEntries.length} tokens). Download the full artefact below.
-        </p>
-        <div className="mt-4 grid gap-4 lg:grid-cols-2">
-          <div className="max-h-64 overflow-y-auto font-mono text-xs">
-            {vocabEntries.slice(0, 200).map(({ token, id }) => (
-              <button key={id} type="button" className={`block w-full text-left py-0.5 hover:bg-white/50 ${selectedToken === token ? "bg-[var(--color-saffron)]/20" : ""}`} onClick={() => setSelectedToken(token)}>
-                {id}: {token.replace("</w>", "·")}
-              </button>
-            ))}
-          </div>
-          {selectedToken && (
-            <div className="font-mono text-sm">
-              <div className="text-lg font-semibold">{selectedToken}</div>
-              <dl className="mt-2 space-y-1 text-xs">
-                <div>ID: {encoder?.getVocabEntries().find((e) => e.token === selectedToken)?.id}</div>
-                <div>Code points: {codePoints(selectedToken).join(" ")}</div>
-                <div>Script: {scriptAttribution(selectedToken)}</div>
-                <div>Graphemes: {graphemeCount(selectedToken)}</div>
-              </dl>
-            </div>
-          )}
-        </div>
       </section>
 
       <SectionReproduce metrics={resubmission} />
@@ -180,7 +140,7 @@ export default function App() {
 
       <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-[var(--color-ink)]/50">
         <p>
-          Resubmission metrics from <code>submission/metrics.json</code> ·{" "}
+          Hugging Face BPE submission · <code>submission/metrics.json</code> ·{" "}
           <code>python evaluate_tokenizer.py</code>
         </p>
       </footer>

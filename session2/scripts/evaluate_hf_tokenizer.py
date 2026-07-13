@@ -59,6 +59,7 @@ def evaluate(tokenizer_path: Path, corpus_dir: Path) -> dict:
             "raw_score": metrics.raw_score,
             "hindi_penalty": metrics.hindi_penalty,
             "final_grade": metrics.final_grade,
+            "adjusted_score": metrics.final_grade,
         },
         "token_counts": metrics.token_counts,
         "wordish_counts": metrics.wordish_counts,

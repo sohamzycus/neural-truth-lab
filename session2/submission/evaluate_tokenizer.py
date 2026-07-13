@@ -57,7 +57,7 @@ def main() -> int:
     print(f"\nRaw score: {m.raw_score}")
     print(f"Hindi fertility: {m.fertilities['hi']}")
     print(f"Hindi penalty: {m.hindi_penalty:.4f}x")
-    print(f"\nFINAL GRADE: {m.final_grade}")
+    print(f"\nAdjusted evaluator score: {m.final_grade}")
     print(f"\nPASS: One standard executable tokenizer")
     print(f"PASS: Vocabulary <= 10000" if vocab_size <= 10000 else "FAIL: Vocabulary")
     print("PASS: Four complete faithful corpora encoded")
