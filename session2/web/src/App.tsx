@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { BPEEncoder, codePoints, scriptAttribution, graphemeCount } from "./lib/bpe";
 import { loadJson } from "./types";
 import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves } from "./types";
-import { HeroNarrative } from "./components/HeroNarrative";
+import { ResubmissionHero, SectionWeightSearch, SectionLegacyNote } from "./components/ResubmissionHero";
+import type { ResubmissionMetrics, ResubmissionExperiments } from "./types";
 import {
   SiteNav, SectionExperiment, SectionWinner, SectionWhyWinner,
   SectionVocabularyEconomy, SectionExploreLab,
@@ -24,6 +25,8 @@ const PRESETS = [
 ];
 
 export default function App() {
+  const [resubmission, setResubmission] = useState<ResubmissionMetrics | null>(null);
+  const [experiments, setExperiments] = useState<ResubmissionExperiments | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
   const [strategies, setStrategies] = useState<StrategyComparison | null>(null);
   const [trace, setTrace] = useState<OptTraceStep[]>([]);
@@ -39,10 +42,12 @@ export default function App() {
 
   useEffect(() => {
     Promise.all([
-      loadJson<Stats>("/data/results/stats.json"),
+      loadJson<ResubmissionMetrics>("/data/results/resubmission_metrics.json"),
+      loadJson<ResubmissionExperiments>("/data/results/resubmission_experiments.json").catch(() => null),
+      loadJson<Stats>("/data/results/stats.json").catch(() => null),
       loadJson<StrategyComparison | StrategyComparison["strategies"]>("/data/results/strategy_comparison.json").then((d) =>
         Array.isArray(d) ? { strategies: d as unknown as StrategyComparison["strategies"] } : d
-      ),
+      ).catch(() => null),
       loadJson<OptTraceStep[]>("/data/results/optimization_trace.json"),
       loadJson<RejectedMerge[]>("/data/results/rejected_merges.json"),
       loadJson<SweepCurves>("/data/results/vocab_sweep_curves.json"),
@@ -51,7 +56,9 @@ export default function App() {
       loadJson<typeof roi>("/data/results/score_roi_candidates.json").catch(() => null),
       BPEEncoder.load(),
     ])
-      .then(([s, st, tr, rj, cu, gr, mt, roiData, enc]) => {
+      .then(([rs, ex, s, st, tr, rj, cu, gr, mt, roiData, enc]) => {
+        setResubmission(rs);
+        setExperiments(ex);
         setStats(s);
         setStrategies(st);
         setTrace(tr);
@@ -75,25 +82,23 @@ export default function App() {
       <SiteNav />
       {error && (
         <div className="bg-[var(--color-saffron)]/20 p-4 text-center text-sm" role="alert">
-          Run <code>python scripts/verify.py</code> first. ({error})
+          Failed to load application data. ({error})
         </div>
       )}
 
-      <HeroNarrative stats={stats} />
-      <SectionExperiment data={strategies} />
-      <SectionWinner stats={stats} />
-      <SectionWhyWinner stats={stats} strategies={strategies} />
-      <SectionVocabularyEconomy stats={stats} />
+      <ResubmissionHero metrics={resubmission} experiments={experiments} />
+      <SectionWeightSearch experiments={experiments} />
+      <SectionLegacyNote />
 
       <section className="mx-auto max-w-6xl px-4 py-14" id="playground">
         <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold">Try the tokenizer</h2>
         <p className="mt-2 text-base text-[var(--color-ink)]/70">
-          This playground uses the same authoritative tokenizer artefact submitted for scoring.
-          {stats && (
-            <span className="ml-1 font-mono text-xs text-[var(--color-ink)]/50">
-              SHA-256 {stats.tokenizer_sha256.slice(0, 16)}…
-            </span>
-          )}
+          Legacy custom BPE playground (research history). The resubmission artefact is standard Hugging Face{" "}
+          <code className="text-xs">tokenizer.json</code> — use{" "}
+          <a href="/data/submission/encoder.py" download className="text-[var(--color-indigo)]">
+            encoder.py
+          </a>{" "}
+          or download the HF tokenizer above.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {PRESETS.map((p) => (
@@ -161,7 +166,7 @@ export default function App() {
         </div>
       </section>
 
-      <SectionReproduce stats={stats} />
+      <SectionReproduce metrics={resubmission} />
       <SectionDownloads />
 
       <SectionExploreLab>
@@ -174,7 +179,10 @@ export default function App() {
       </SectionExploreLab>
 
       <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-[var(--color-ink)]/50">
-        <p>Headline metrics from <code>results/stats.json</code> · <code>python scripts/verify.py</code></p>
+        <p>
+          Resubmission metrics from <code>submission/metrics.json</code> ·{" "}
+          <code>python evaluate_tokenizer.py</code>
+        </p>
       </footer>
     </div>
   );

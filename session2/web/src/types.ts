@@ -18,6 +18,53 @@ export interface LanguageStat {
   distance_from_worst?: number;
 }
 
+export interface ResubmissionMetrics {
+  generated_at?: string;
+  tokenizer: {
+    format: string;
+    vocab_size: number;
+    sha256: string;
+    vocab_constraint_pass?: boolean;
+  };
+  corpus_dir?: string;
+  corpus_sha256?: Record<string, string>;
+  languages: Record<
+    string,
+    { wordish_units: number; tokens: number; fertility: number }
+  >;
+  scoring: {
+    x_min: number;
+    x_max: number;
+    spread: number;
+    raw_score: number;
+    hindi_penalty: number;
+    final_grade: number;
+  };
+  provenance?: {
+    weights?: Record<string, number>;
+    strategy?: string;
+  };
+}
+
+export interface ResubmissionExperiment {
+  experiment_id: string;
+  strategy: string;
+  weights: Record<string, number>;
+  final_grade: number;
+  raw_score: number;
+  hindi_penalty: number;
+  spread: number;
+  fertilities: Record<string, number>;
+  status: string;
+}
+
+export interface ResubmissionExperiments {
+  generated_at?: string;
+  objective?: string;
+  experiments: ResubmissionExperiment[];
+  winner_experiment_id?: string;
+}
+
 export interface Stats {
   generated_at: string;
   source?: string;

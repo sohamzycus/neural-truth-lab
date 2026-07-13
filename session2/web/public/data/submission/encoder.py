@@ -30,10 +30,14 @@ def main(argv: list[str] | None = None) -> int:
     enc = SamaBPEEncoder(tok_path)
     tokens = enc.encode_tokens(text)
     ids = enc.encode(text)
-    print(f"Text: {text}")
-    print(f"Tokens ({len(tokens)}): {tokens}")
-    print(f"IDs: {ids}")
-    print(f"Token count: {len(ids)}")
+    print("Input:")
+    print(text)
+    print("\nTokens:")
+    print(tokens)
+    print("\nToken IDs:")
+    print(ids)
+    print("\nToken count:")
+    print(len(ids))
     return 0
 
 

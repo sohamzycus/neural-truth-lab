@@ -1,6 +1,6 @@
 # SamaBPE Resubmission Package
 
-Executable Hugging Face BPE tokenizer evaluated on wiki-faithful Wikipedia India Markdown corpora.
+Standard Hugging Face `tokenizer.json` evaluated on wiki-faithful Wikipedia India Markdown corpora.
 
 ## Reproduce
 
@@ -12,30 +12,33 @@ python evaluate_tokenizer.py
 ## Encode sample text
 
 ```bash
-python encoder.py "भारत India"
+python encoder.py "भारत India বাংলা తెలుగు"
 ```
 
-## Verified result (reference — verifier recomputes fresh)
+## Verified result (evaluator recomputes fresh)
+
+| Language | Word-ish | Tokens | Fertility |
+| -------- | -------: | -----: | --------: |
+| English  | 69411 | 99168 | 1.428707 |
+| Hindi    | 31941 | 44257 | 1.385586 |
+| Telugu   | 11817 | 16620 | 1.406448 |
+| Bengali  | 30806 | 43045 | 1.397293 |
 
 | Metric | Value |
 | ------ | ----- |
-| Vocabulary | 10000 |
-| Spread | 0.08882810507148253 |
-| Raw score | 11257.698216068791 |
-| Hindi penalty | 2.0905394067626437 |
-| **Adjusted score** | **5385.068647666478** |
-| Tokenizer SHA-256 | `31fdf2b855ebd8b2d4c5ae4cf6e7780cec1880b1b539c3f3d5c61dbcab0feeff` |
+| Spread | 0.043121 |
+| Raw score | 23190.37 |
+| Hindi penalty | 1.1673× |
+| **Final grade** | **19867.44** |
+| Vocabulary | 10,000 |
+| Tokenizer SHA-256 | `cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a` |
 
-Strategy: boundary_aware_search · weights `{'en': 2, 'hi': 2, 'te': 6, 'bn': 3}`
+Strategy: adaptive-weight-search · weights EN 2 · HI 3 · TE 6 · BN 4
 
 ## Corpus
 
-Wiki-faithful Markdown snapshots in `corpus/*.faithful.md` (from Wikipedia REST HTML via html2text).
+Faithful Markdown in `corpus/*.faithful.md` (Wikipedia REST HTML → markdownify pipeline).
 
 ## Scoring
 
-- `fertility(lang) = encoded_tokens / wordish_units`
-- Word-ish units: NFKC → replace non-letter/mark/number runs with space → whitespace split
-- `raw_score = 1000 / (X_max - X_min)`
-- `hindi_penalty = exp(max(0, X_hi/1.2 - 1))`
-- `adjusted_score = raw_score / hindi_penalty`
+Implemented in `evaluator_contract.py` — word-ish denominator, raw score, Hindi penalty, final grade.

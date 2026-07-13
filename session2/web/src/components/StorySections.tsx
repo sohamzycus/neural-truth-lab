@@ -1,7 +1,7 @@
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, Cell,
 } from "recharts";
-import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves } from "../types";
+import type { Stats, StrategyComparison, OptTraceStep, RejectedMerge, SweepCurves, ResubmissionMetrics } from "../types";
 import { LANG_DISPLAY } from "../types";
 
 const LANG_COLORS: Record<string, string> = {
@@ -279,25 +279,29 @@ export function SectionGrapheme({ stats }: { stats: Record<string, { integrity_p
   );
 }
 
-export function SectionReproduce({ stats }: { stats: Stats | null }) {
+export function SectionReproduce({ metrics }: { metrics: ResubmissionMetrics | null }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10" id="reproduce">
-      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Don&apos;t trust the dashboard. Reproduce it.</h2>
+      <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold">Reproduce the evaluator-compatible result</h2>
       <ol className="mt-4 list-decimal space-y-2 pl-5 text-base text-[var(--color-ink)]/80">
-        <li>Clone <code className="text-sm">github.com/sohamzycus/neural-truth-lab</code></li>
-        <li><code className="text-sm">cd session2 && pip install -r requirements.txt</code></li>
-        <li>Run <code className="rounded bg-white/60 px-1 font-mono text-sm">python scripts/verify.py</code></li>
+        <li><code className="text-sm">cd submission && pip install -r requirements.txt</code></li>
+        <li><code className="rounded bg-white/60 px-1 font-mono text-sm">python evaluate_tokenizer.py</code></li>
+        <li>Optional: <code className="text-sm">python encoder.py &quot;भारत India&quot;</code></li>
       </ol>
       <p className="mt-3 text-sm text-[var(--color-ink)]/65">
-        The verifier independently loads the authoritative tokenizer, four frozen corpora, and denominator
-        implementation — then freshly calculates token counts, four X values, gap, score, and hashes.
+        The standalone evaluator loads standard <code>tokenizer.json</code>, four faithful Markdown corpora, and
+        freshly computes word-ish units, token counts, fertilities, spread, raw score, Hindi penalty, and final
+        grade — no hidden preprocessing.
       </p>
-      {stats && (
+      {metrics && (
         <dl className="card mt-4 space-y-1 font-mono text-xs">
-          <div><span className="text-[var(--color-ink)]/50">VERIFIED</span> Tokenizer SHA-256: {stats.tokenizer_sha256}</div>
-          {stats.corpus_hashes && Object.entries(stats.corpus_hashes).map(([l, h]) => (
-            <div key={l}>{l.toUpperCase()} corpus: {h}</div>
-          ))}
+          <div><span className="text-[var(--color-ink)]/50">HF BPE</span> SHA-256: {metrics.tokenizer.sha256}</div>
+          {metrics.corpus_sha256 &&
+            Object.entries(metrics.corpus_sha256).map(([l, h]) => (
+              <div key={l}>
+                {l.toUpperCase()} corpus: {h.slice(0, 16)}…
+              </div>
+            ))}
         </dl>
       )}
     </section>
@@ -306,20 +310,24 @@ export function SectionReproduce({ stats }: { stats: Stats | null }) {
 
 export function SectionDownloads() {
   const files = [
-    "results/tokenizer.json", "results/vocab.json", "vocab.txt", "merges.txt",
-    "results/stats.json", "results/verification_manifest.json",
-    "results/strategy_comparison.json", "results/optimization_trace.json",
-    "results/grapheme_stats.json", "results/vocab_roi.json", "results/parity_corpus.json",
-    "results/manifest.sha256.json",
-    "corpora/frozen/en_india.txt", "corpora/frozen/hi_india.txt",
-    "corpora/frozen/te_india.txt", "corpora/frozen/bn_india.txt",
+    { href: "/data/submission/tokenizer.json", label: "tokenizer.json" },
+    { href: "/data/submission/encoder.py", label: "encoder.py" },
+    { href: "/data/submission/metrics.json", label: "metrics.json" },
+    { href: "/data/results/resubmission_experiments.json", label: "experiments.json" },
+    { href: "/data/submission/evaluate_tokenizer.py", label: "evaluate_tokenizer.py" },
   ];
   return (
     <section className="mx-auto max-w-6xl px-4 py-12" id="downloads">
       <h2 className="text-2xl font-bold">Downloads</h2>
+      <p className="mt-2 text-sm text-[var(--color-ink)]/60">
+        Resubmission artefacts (evaluator-compatible). Legacy custom tokenizer files remain under{" "}
+        <code>/data/results/</code> for research history.
+      </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {files.map((f) => (
-          <a key={f} className="btn text-xs" href={`/data/${f}`} download>{f.split("/").pop()}</a>
+          <a key={f.href} className="btn text-xs" href={f.href} download>
+            {f.label}
+          </a>
         ))}
       </div>
     </section>

@@ -1,230 +1,115 @@
-# SamaBPE — Multilingual BPE Experiment
+# SamaBPE
+
+One standard **Hugging Face BPE** tokenizer. Four languages. 10,000-token maximum vocabulary. **Adaptive multilingual weight search** optimized for the actual **final grade** — not raw score alone.
 
 **Production:** https://sama-bpe-tokenizer-413.netlify.app
 
-(Netlify account: `niyogi.soham@gmail.com` · site `sama-bpe-tokenizer-413`)
+---
+
+## Final verified result
+
+| Language | Word-ish Units | Encoded Tokens | Fertility |
+| -------- | -------------: | -------------: | --------: |
+| English  | 69411 | 99168 | 1.428707 |
+| Hindi    | 31941 | 44257 | 1.385586 |
+| Telugu   | 11817 | 16620 | 1.406448 |
+| Bengali  | 30806 | 43045 | 1.397293 |
+
+| Metric | Value |
+| ------ | ----- |
+| Spread | 0.043121 |
+| Raw score | 23190.37 |
+| Hindi penalty | 1.1673× |
+| **Final grade** | **19867.44** |
+| Vocabulary size | 10,000 |
+| Tokenizer SHA-256 | `cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a` |
+| Winning weights | EN 2 · HI 3 · TE 6 · BN 4 |
+
+Download: [`submission/tokenizer.json`](submission/tokenizer.json)
 
 ---
 
-## Resubmission (evaluator-compatible)
+## What is innovative?
 
-> The resubmission pipeline was rebuilt around the evaluator's **wiki-faithful Markdown** corpus and a **standard Hugging Face `tokenizer.json`** artefact so reviewers can reproduce scores without custom decoding assumptions.
+SamaBPE does **not** replace standard BPE with a custom runtime tokenizer. It uses standard Hugging Face BPE and innovates in **training-time multilingual weight search**. Each candidate is a real tokenizer trained and evaluated against the same faithful corpora. The candidate with the highest **measured final grade** wins.
 
-**One-command reproduction:**
+```
+Choose weights → Train HF BPE → Evaluate 4 corpora → Final grade → Next weights → Winner
+```
+
+---
+
+## Reproduce
 
 ```bash
-cd session2/submission
+cd submission
 pip install -r requirements.txt
 python evaluate_tokenizer.py
 ```
 
-**Sample encode:**
+## Try the encoder
 
 ```bash
-python encoder.py "भारत India"
+python encoder.py "भारत India বাংলা తెలుగు"
 ```
-
-### Assignment (evaluator contract)
-
-- Four languages: English, Hindi, Telugu, Bengali — frozen wiki-faithful Markdown (`corpus/*.faithful.md`)
-- One shared BPE tokenizer, vocabulary ≤ 10,000, `min_frequency=1`
-- Normalizer: NFKC + replace `[^\p{L}\p{M}\p{N}]+` with space
-- Pretokenizer: whitespace
-- `fertility(lang) = encoded_tokens / wordish_units`
-- `raw_score = 1000 / (X_max − X_min)`
-- `hindi_penalty = exp(max(0, X_hi / 1.2 − 1))`
-- `adjusted_score = raw_score / hindi_penalty` ← **objective maximized**
-
-### Verified resubmission result
-
-| Language | Word-ish units | Tokens | Fertility X |
-| -------- | -------------: | -----: | ----------: |
-| English  | 69411 | 143796 | 2.0717 |
-| Hindi    | 31941 | 66594 | 2.0849 |
-| Telugu   | 11817 | 24616 | 2.0831 |
-| Bengali  | 30806 | 66556 | 2.1605 |
-
-| Metric | Value |
-| ------ | ----- |
-| Spread | 0.0888 |
-| **Raw score** | **11257.70** |
-| **Hindi penalty** | 2.0905 |
-| **Adjusted score** | **5385.07** |
-| Vocabulary | 10,000 |
-| Winning strategy | boundary-aware search (weights: en=2, hi=2, te=6, bn=3) |
-| Tokenizer SHA-256 | `31fdf2b855ebd8b2d4c5ae4cf6e7780cec1880b1b539c3f3d5c61dbcab0feeff` |
-
-Download: [`submission/tokenizer.json`](submission/tokenizer.json) · Encoder: [`submission/encoder.py`](submission/encoder.py)
-
-### Why the first submission scored 49.9
-
-The prior artefact used a **custom JSON BPE format** (not `Tokenizer.from_file`). The reviewer could only estimate fertility (~EN 5.8, HI 4.3) and applied the Hindi penalty (`≈13.18`), yielding adjusted **49.9**. See `results/reviewer_reproduction.json` and `results/pre_resubmission_snapshot.json`.
-
-### Resubmission code map
-
-| File | Role |
-| ---- | ---- |
-| `scripts/build_wiki_faithful_markdown.py` | Fetch REST HTML → wiki-faithful Markdown |
-| `python/samabpe/evaluator_text.py` | NFKC + word-ish denominator |
-| `python/samabpe/evaluator_scoring.py` | Raw score + Hindi penalty |
-| `python/samabpe/hf_bpe.py` | Hugging Face BPE training |
-| `scripts/train_evaluator_tokenizer.py` | Multi-strategy search |
-| `submission/evaluate_tokenizer.py` | Independent verifier (recomputes everything) |
-| `submission/encoder.py` | Executable encoder CLI |
 
 ---
 
-## Previous submission (historical — custom contract)
+## Evaluator contract
 
-> Headline metrics below are from `python scripts/verify.py` + plain-text corpora + custom encoder.
+- **Corpus:** wiki-faithful Markdown (`data/faithful/*.faithful.md`) — Wikipedia REST HTML → BeautifulSoup → markdownify
+- **Normalizer:** NFKC + replace `[^\p{L}\p{M}\p{N}]+` with space (serialized in `tokenizer.json`)
+- **Pretokenizer:** whitespace
+- **Denominator:** word-ish units (`[\p{L}\p{M}\p{N}]+` after NFKC)
+- **Fertility:** encoded tokens ÷ word-ish units
+- **Raw score:** `1000 / (X_max − X_min)`
+- **Hindi penalty:** `exp(max(0, X_hi / 1.2 − 1))`
+- **Final grade:** `raw_score / hindi_penalty` ← optimization objective
 
-## 1. SamaBPE in one paragraph
+Single source of truth: `python/samabpe/evaluator_contract.py`
 
-SamaBPE turns a multilingual tokenizer assignment into an open, interactive experiment. Multiple BPE strategies compete for the same 10,000-token budget across English, Hindi, Telugu, and Bengali Wikipedia *India* articles. Each candidate is measured under identical corpora, denominator rules, vocabulary limits, English constraints, and scoring formula. The highest-scoring valid tokenizer becomes the submitted artefact. Every token, calculation, and claim is inspectable and reproducible.
+---
 
-## 2. The assignment
+## Code map
 
-- **Languages:** English, Hindi, Telugu, Bengali (frozen Wikipedia India pages)
-- **One tokenizer**, maximum **10,000** vocabulary tokens
-- `X_language = encoded_tokens / word_units`
-- English must satisfy `X_English ≤ 1.2`
-- `Score = 1000 / (X_max − X_min)` — maximize the score
+| File | Role |
+| ---- | ---- |
+| `python/samabpe/evaluator_contract.py` | Normalization, word-ish units, scoring |
+| `python/samabpe/hf_bpe_trainer.py` | Standard HF BPE training |
+| `python/samabpe/weight_optimizer.py` | Adaptive weight search |
+| `scripts/build_wiki_faithful_markdown.py` | Faithful corpus builder |
+| `scripts/evaluate_hf_tokenizer.py` | Canonical evaluator CLI |
+| `scripts/train_hf_baseline.py` | Reference baseline (weights 3/4/4/2) |
+| `scripts/run_weight_search.py` | Coarse + neighbor search → winner |
+| `scripts/sync_resubmission_to_web.py` | Sync to `submission/` and web |
+| `submission/encoder.py` | Executable encoder |
+| `submission/evaluate_tokenizer.py` | Standalone reviewer verifier |
+| `results/resubmission/experiments.json` | Measured experiment registry |
 
-Lower min–max fertility spread on these four frozen corpora under this scoring rule — not broader “fairness” claims.
+---
 
-## 3. Verified result
+## Experiment registry
 
-| Language | Word units | Encoded tokens | X (tokens/word) |
-| -------- | ---------: | -------------: | ----------------: |
-| English  |      10121 |          11679 | 1.153945065705958 |
-| Hindi    |       8078 |          10672 | 1.321119088883387 |
-| Telugu   |       2511 |           3310 | 1.318199920350458 |
-| Bengali  |       6388 |          10562 | 1.6534126487163432 |
+Full measured search: [`results/resubmission/experiments.json`](results/resubmission/experiments.json)
 
-| Metric | Value |
-| ------ | ----- |
-| **X_min** | 1.153945065705958 (English) |
-| **X_max** | 1.6534126487163432 (Bengali) |
-| **Gap** | 0.4994675820103852 |
-| **Verified score** | **2002.10104738979** |
-| Vocabulary | 10,000 / 10,000 |
-| English constraint | **PASS** |
-| Winning strategy | **Weighted Shared BPE** (`en_bootstrap=6400`) |
-| Tokenizer SHA-256 | `1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983` |
+- **Baseline** (EN 3 · HI 4 · TE 4 · BN 2): final grade **3495.28**
+- **Winner** (EN 2 · HI 3 · TE 6 · BN 4): final grade **19867.44**
+- ~300+ real tokenizers trained in coarse grid + neighbor refinement
 
-**Reproduce:** `python scripts/verify.py`
+---
 
-## 4. What makes SamaBPE different?
+## Legacy (not resubmission)
 
-| Pillar | What SamaBPE does |
-| ------ | ----------------- |
-| **Design** | Multiple BPE strategies compete under identical constraints |
-| **Explain** | Shows measured behaviour, why the winner won, and what failed |
-| **Experience** | Playground, vocabulary inspection, mixed-script examples, downloads |
-| **Prove** | Frozen corpora, hashes, independent verifier, tests, artefact identity |
+The original custom JSON BPE (`results/tokenizer.json`, score **2002.10** on plain-text corpora) is preserved for research history. It is **not** the evaluator-compatible result. See `results/pre_resubmission_snapshot.json` for why the first submission scored **49.9/1000**.
 
-## 5. The experiment
+---
 
-All strategies measured in `scripts/train.py` → `results/strategy_comparison.json` (**MEASURED** train-arena snapshots).
-
-| # | Strategy | Question | Train-arena score |
-| - | -------- | -------- | ----------------: |
-| 01 | Shared Vanilla BPE | Shared vocabulary, no weighting | 1383.39 |
-| 02 | Allocated Monolingual BPE | Explicit per-language vocab slots | 196.85 |
-| 03 | Weighted Shared BPE | Indic-weighted shared merges | 1651.59 |
-| 04 | Grapheme-Aware BPE | Grapheme-cluster pretokenization | 347.42 |
-| 05 | Score-Directed Adaptive BPE | Gap-aware merge selection | 1650.26 |
-
-**Final submitted artefact** is Weighted Shared BPE tuned to `en_bootstrap=6400` — **VERIFIED** score **2002.10** in `results/stats.json`. Train-arena numbers differ; see `results/submission_metadata.json`.
-
-## 6. Why the winner won
-
-- Beat vanilla shared BPE on measured min–max spread (gap 0.72 → 0.50 verified).
-- English-seeded bootstrap plus Indic-weighted pair selection under one shared merge table.
-- Score-directed adaptive BPE was implemented and measured but did not beat the final artefact.
-- Allocated monolingual and grapheme-aware strategies failed constraints or scored far lower.
-
-## 7. How the tokenizer works
-
-```
-Frozen corpora
-  → NFC normalization
-  → Whitespace pretokenization (word_units.py)
-  → UTF-8 byte-level initial symbols
-  → BPE merge learning (strategies.py)
-  → 10,000-token vocabulary
-  → Deterministic encoding (bpe.py)
-```
-
-## 8. Code map
-
-| File | Responsibility | Key functions/classes | Why it matters |
-| ---- | -------------- | --------------------- | -------------- |
-| `scripts/train.py` | Strategy arena orchestration | `main()`, `build_stats()`, `_strategy_entry()` | Runs all five strategies and exports artefacts |
-| `scripts/verify.py` | Independent verification CLI | `main()` | Authoritative score reproduction |
-| `scripts/authenticity_audit.py` | Claim consistency audit | `build_authenticity_audit()`, `build_strategy_registry()` | Catches stale UI/README metrics |
-| `python/samabpe/bpe.py` | Core BPE | `BPETokenizer` | Vocabulary, merges, encode/decode |
-| `python/samabpe/strategies.py` | Five training strategies | `train_shared_vanilla()`, `train_weighted_shared()`, `train_score_directed_adaptive()` | How each experiment differs |
-| `python/samabpe/scoring.py` | Assignment metric | `compute_score()`, `LanguageMetrics` | X, gap, score formula |
-| `python/samabpe/word_units.py` | Denominator | `count_word_units()`, `normalize_nfc()` | Authoritative word-unit definition |
-| `python/samabpe/verify_core.py` | Verification engine | `run_verification()`, `to_stats_json()` | Recomputes metrics from artefacts |
-| `python/samabpe/corpus.py` | Frozen corpora | `load_frozen()`, `CorpusRecord` | Corpus loading and hashes |
-| `python/samabpe/unicode_utils.py` | Script/grapheme analysis | `script_attribution()`, `grapheme_clusters()` | Supplementary vocabulary analysis |
-| `web/src/lib/bpe.ts` | Browser encoder | `BPEEncoder` | Playground loads same JSON artefact |
-| `results/tokenizer.json` | Submitted tokenizer | — | The actual submission |
-| `results/stats.json` | **Authoritative verified metrics** | — | Single source of truth for UI hero |
-| `results/strategy_comparison.json` | Train-arena measured results | — | Experiment evidence |
-| `results/strategy_evidence_registry.json` | Strategy provenance | — | Evidence types per strategy |
-| `python/tests/` | Automated checks | parity, one-tokenizer, verify | Regression safety |
-
-## 9. Read the code in five minutes
-
-1. `scripts/train.py` — how the strategy arena runs.
-2. `python/samabpe/strategies.py` — how each design differs.
-3. `python/samabpe/bpe.py` — BPE training and encoding.
-4. `python/samabpe/scoring.py` — X, gap, score.
-5. `python/samabpe/verify_core.py` — independent recomputation.
-6. `python scripts/verify.py` — reproduce the final score yourself.
-
-## 10. The 10K-token economy
-
-Script-attribution breakdown (heuristic) in `results/vocab_allocation.json`: Devanagari ~2608, Telugu ~2964, Bengali ~2789, Latin ~519, shared ~1066. Attribution is informational — tokens are shared across languages through one merge table.
-
-## 11. Try the tokenizer
-
-https://sama-bpe-tokenizer.netlify.app/ — playground loads `/data/results/tokenizer.json` (same SHA-256 as scored artefact when `artefact_proof.json` reports byte identity).
-
-## 12. Reproduce every number
-
-```bash
-cd session2
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/fetch_corpora.py   # if corpora missing
-python scripts/verify.py
-python scripts/authenticity_audit.py
-pytest python/tests -q
-cd web && npm test && npm run build:netlify
-```
-
-## 13. Experiment journal
-
-Historical experiments (not the primary product story):
-
-| Experiment | Result | Evidence |
-| ---------- | ------ | -------- |
-| English bootstrap sweep | Peak 2173 @ bootstrap=6000; final 2002 @ 6400 | `english_bootstrap_sweep.json` |
-| Bengali weight sweep | No BN improvement below ~1.653 | `refine_sweep.json` |
-| Character/grapheme BPE | Far worse scores | `representation_strategy_comparison.json` |
-| Score-directed adaptive | Did not beat final winner | `strategy_comparison.json` |
-
-## 14. Limitations
+## Limitations
 
 - Benchmark is four frozen Wikipedia India pages only.
-- Denominator is assignment-specific (Unicode whitespace word units).
-- Lower min–max spread does not prove broader societal fairness or universal tokenizer superiority.
-- Script attribution is heuristic, not exclusive language ownership.
-- Train-arena strategy scores may differ from the final submitted artefact parameters.
+- Faithful Markdown corpus may differ slightly from a reference builder unless byte-identical.
+- Weight search is bounded grid + local neighbors — not a claim of global optimality.
+- Legacy playground UI still loads the custom tokenizer for research demos.
 
 ## License
 

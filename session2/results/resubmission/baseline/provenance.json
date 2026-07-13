@@ -1,0 +1,13 @@
+{
+  "strategy": "reference-compatible-baseline",
+  "weights": {
+    "en": 3,
+    "hi": 4,
+    "te": 4,
+    "bn": 2
+  },
+  "vocab_size": 10000,
+  "training_lines": 14628,
+  "tokenizer_sha256": "cb7bb610bf743e1b2b326cd5ff9fe962413395ecb1bd1c643e602b6fcfd6b94a",
+  "metrics_path": "results/resubmission/baseline/metrics.json"
+}

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-07-13T10:26:23.094660+00:00",
+  "tokenizer": {
+    "format": "huggingface-tokenizers",
+    "path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/resubmission/final/tokenizer.json",
+    "vocab_size": 10000,
+    "sha256": "cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a",
+    "vocab_constraint_pass": true
+  },
+  "corpus_dir": "/Users/soham.niyogi/Soham/codebase/erav5/session2/data/faithful",
+  "corpus_sha256": {
+    "en": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+    "hi": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+    "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+    "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
+  },
+  "languages": {
+    "en": {
+      "wordish_units": 69411,
+      "tokens": 99168,
+      "fertility": 1.4287072654190258
+    },
+    "hi": {
+      "wordish_units": 31941,
+      "tokens": 44257,
+      "fertility": 1.3855859240474626
+    },
+    "te": {
+      "wordish_units": 11817,
+      "tokens": 16620,
+      "fertility": 1.4064483371414065
+    },
+    "bn": {
+      "wordish_units": 30806,
+      "tokens": 43045,
+      "fertility": 1.3972927351814581
+    }
+  },
+  "scoring": {
+    "x_min": 1.3855859240474626,
+    "x_max": 1.4287072654190258,
+    "spread": 0.043121341371563204,
+    "raw_score": 23190.373216438482,
+    "hindi_penalty": 1.1672551147108055,
+    "final_grade": 19867.44193636199
+  },
+  "token_counts": {
+    "en": 99168,
+    "hi": 44257,
+    "te": 16620,
+    "bn": 43045
+  },
+  "wordish_counts": {
+    "en": 69411,
+    "hi": 31941,
+    "te": 11817,
+    "bn": 30806
+  },
+  "fertilities": {
+    "en": 1.4287072654190258,
+    "hi": 1.3855859240474626,
+    "te": 1.4064483371414065,
+    "bn": 1.3972927351814581
+  },
+  "provenance": {
+    "strategy": "adaptive-weight-search",
+    "weights": {
+      "en": 2,
+      "hi": 3,
+      "te": 6,
+      "bn": 4
+    },
+    "experiment_id": "hf-weight-018"
+  }
+}

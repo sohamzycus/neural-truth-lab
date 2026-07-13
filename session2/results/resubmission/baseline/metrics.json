@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-07-13T10:21:14.562557+00:00",
+  "tokenizer": {
+    "format": "huggingface-tokenizers",
+    "path": "/Users/soham.niyogi/Soham/codebase/erav5/session2/results/resubmission/baseline/tokenizer.json",
+    "vocab_size": 10000,
+    "sha256": "cb7bb610bf743e1b2b326cd5ff9fe962413395ecb1bd1c643e602b6fcfd6b94a",
+    "vocab_constraint_pass": true
+  },
+  "corpus_dir": "/Users/soham.niyogi/Soham/codebase/erav5/session2/data/faithful",
+  "corpus_sha256": {
+    "en": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+    "hi": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+    "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+    "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
+  },
+  "languages": {
+    "en": {
+      "wordish_units": 69411,
+      "tokens": 92380,
+      "fertility": 1.3309129676852371
+    },
+    "hi": {
+      "wordish_units": 31941,
+      "tokens": 41907,
+      "fertility": 1.312012773551235
+    },
+    "te": {
+      "wordish_units": 11817,
+      "tokens": 18567,
+      "fertility": 1.5712109672505712
+    },
+    "bn": {
+      "wordish_units": 30806,
+      "tokens": 48446,
+      "fertility": 1.5726157242095695
+    }
+  },
+  "scoring": {
+    "x_min": 1.312012773551235,
+    "x_max": 1.5726157242095695,
+    "spread": 0.2606029506583345,
+    "raw_score": 3837.2550942873154,
+    "hindi_penalty": 1.0978393028499984,
+    "final_grade": 3495.2793950132545
+  },
+  "token_counts": {
+    "en": 92380,
+    "hi": 41907,
+    "te": 18567,
+    "bn": 48446
+  },
+  "wordish_counts": {
+    "en": 69411,
+    "hi": 31941,
+    "te": 11817,
+    "bn": 30806
+  },
+  "fertilities": {
+    "en": 1.3309129676852371,
+    "hi": 1.312012773551235,
+    "te": 1.5712109672505712,
+    "bn": 1.5726157242095695
+  }
+}

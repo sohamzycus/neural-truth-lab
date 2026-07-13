@@ -7,5 +7,6 @@ __pycache__/
 node_modules/
 web/.netlify/
 results/evaluator_candidates/
+results/resubmission/candidates/
 results/evaluator_train.log
 .DS_Store

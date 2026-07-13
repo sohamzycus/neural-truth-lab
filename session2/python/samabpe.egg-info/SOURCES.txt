@@ -4,9 +4,11 @@ python/samabpe/__init__.py
 python/samabpe/boundary.py
 python/samabpe/bpe.py
 python/samabpe/corpus.py
+python/samabpe/evaluator_contract.py
 python/samabpe/evaluator_scoring.py
 python/samabpe/evaluator_text.py
 python/samabpe/hf_bpe.py
+python/samabpe/hf_bpe_trainer.py
 python/samabpe/score_roi.py
 python/samabpe/scoring.py
 python/samabpe/strategies.py
@@ -14,6 +16,7 @@ python/samabpe/sweeps.py
 python/samabpe/unicode_utils.py
 python/samabpe/verify_core.py
 python/samabpe/vocab_roi.py
+python/samabpe/weight_optimizer.py
 python/samabpe/word_units.py
 python/samabpe.egg-info/PKG-INFO
 python/samabpe.egg-info/SOURCES.txt
@@ -22,9 +25,11 @@ python/samabpe.egg-info/requires.txt
 python/samabpe.egg-info/top_level.txt
 python/tests/test_boundary.py
 python/tests/test_bpe.py
+python/tests/test_evaluator_contract.py
 python/tests/test_evaluator_scoring.py
 python/tests/test_evaluator_text.py
 python/tests/test_grapheme.py
+python/tests/test_hf_tokenizer.py
 python/tests/test_p0_verification.py
 python/tests/test_parity.py
 python/tests/test_scoring.py

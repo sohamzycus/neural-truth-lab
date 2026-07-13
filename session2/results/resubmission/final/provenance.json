@@ -1,0 +1,20 @@
+{
+  "strategy": "adaptive-weight-search",
+  "weights": {
+    "en": 2,
+    "hi": 3,
+    "te": 6,
+    "bn": 4
+  },
+  "tokenizer_sha256": "cc5f9dc496391d289e9a3c5cdc22dc2b80f23d08aacd8126bdf83b89ea6b733a",
+  "corpus_sha256": {
+    "en": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+    "hi": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+    "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+    "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
+  },
+  "experiment_id": "hf-weight-018",
+  "evaluation_command": "python scripts/evaluate_hf_tokenizer.py --tokenizer results/resubmission/final/tokenizer.json --corpus-dir data/faithful --output results/resubmission/final/metrics.json",
+  "training_command": "python scripts/run_weight_search.py",
+  "git_commit": "0e9321c1a59846ff76de87c3ed7bb21c5a25d3b6"
+}
