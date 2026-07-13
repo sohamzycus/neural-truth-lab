@@ -54,7 +54,7 @@ def main() -> int:
                 "applied_at": datetime.now(timezone.utc).isoformat(),
                 "byte_fallback": True,
                 "initial_alphabet_seeded": True,
-                "reason": "Preserve visible punctuation absent from Wikipedia snapshots (<unk> decode deletion fix)",
+                "reason": "Expanded initial_alphabet seeding for visible symbols and emoji components absent from Wikipedia snapshots (<unk> decode deletion fix)",
                 "prior_tokenizer_sha256": old_sha,
             },
         }

@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-07-13T18:17:57.571203+00:00",
+  "purpose": "Before-state snapshot for absolute final adversarial submission gate",
+  "tokenizer_path": "submission/tokenizer.json",
+  "tokenizer_sha256": "9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5",
+  "tokenizer_type": null,
+  "vocabulary_size": 10000,
+  "normalizer": {
+    "type": "NFKC"
+  },
+  "pretokenizer": {
+    "type": "Metaspace",
+    "replacement": "▁",
+    "prepend_scheme": "never",
+    "split": true
+  },
+  "decoder": {
+    "type": "Metaspace",
+    "replacement": "▁",
+    "prepend_scheme": "never",
+    "split": true
+  },
+  "winner_weights": {
+    "en": 3,
+    "hi": 5,
+    "te": 9,
+    "bn": 5
+  },
+  "fertilities": {
+    "en": 0.8531857641236444,
+    "hi": 0.8297393031286588,
+    "te": 0.8447015610651974,
+    "bn": 0.8486884383945785
+  },
+  "spread": 0.023446460994985596,
+  "raw_score": 42650.35990778592,
+  "hindi_penalty": 1.0,
+  "adjusted_self_score": 42650.35990778592,
+  "thresholds": {
+    "en_under_1_2": true,
+    "hi_under_1_2": true
+  },
+  "metrics_file": {
+    "tokenizer": {
+      "format": "huggingface-tokenizers",
+      "vocab_size": 10000,
+      "sha256": "9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5"
+    },
+    "roundtrip": {
+      "reviewer_sample": true,
+      "full_corpus": {
+        "en": true,
+        "hi": true,
+        "te": true,
+        "bn": true
+      },
+      "valid": true
+    },
+    "languages": {
+      "en": {
+        "faithful_units": 147908,
+        "tokens": 126193,
+        "fertility": 0.8531857641236444
+      },
+      "hi": {
+        "faithful_units": 67473,
+        "tokens": 55985,
+        "fertility": 0.8297393031286588
+      },
+      "te": {
+        "faithful_units": 27225,
+        "tokens": 22997,
+        "fertility": 0.8447015610651974
+      },
+      "bn": {
+        "faithful_units": 68468,
+        "tokens": 58108,
+        "fertility": 0.8486884383945785
+      }
+    },
+    "thresholds": {
+      "en_under_1_2": true,
+      "hi_under_1_2": true
+    },
+    "scoring": {
+      "spread": 0.023446460994985596,
+      "raw_score": 42650.35990778592,
+      "hindi_penalty": 1.0,
+      "adjusted_score": 42650.35990778592
+    }
+  },
+  "corpus_hashes": {
+    "en": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+    "hi": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+    "te": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+    "bn": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815"
+  },
+  "playground_parity": {
+    "total_cases": null,
+    "passed": null,
+    "all_pass": true
+  },
+  "artifact_parity": {
+    "all_tokenizer_copies_match": null,
+    "all_corpus_copies_match": null,
+    "submission_sha256": null
+  },
+  "experiment_integrity": {
+    "verified_2570_claim": true,
+    "total_records": 2570,
+    "unique_weight_configurations": 2570
+  },
+  "hardening": {
+    "applied_at": "2026-07-13T18:06:48.466674+00:00",
+    "byte_fallback": true,
+    "initial_alphabet_seeded": true,
+    "reason": "Preserve visible punctuation absent from Wikipedia snapshots (<unk> decode deletion fix)",
+    "prior_tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469"
+  }
+}

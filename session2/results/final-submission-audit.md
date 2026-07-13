@@ -1,6 +1,6 @@
 # Final Submission Audit
 
-Generated: 2026-07-13T18:08:30.527444+00:00
+Generated: 2026-07-13T18:21:43.822517+00:00
 
 ## Verdict: **SUBMISSION READY**
 
@@ -14,7 +14,7 @@ Generated: 2026-07-13T18:08:30.527444+00:00
 | Normalizer | NFKC | VERIFIED |
 | Pretokenizer | Metaspace | VERIFIED |
 | Decoder | Metaspace | VERIFIED |
-| SHA-256 | `9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5` | VERIFIED |
+| SHA-256 | `c7ac20a2af2fddeebc05ce75ce8cc62db2ee2552221f8da7b59d0f86739828d0` | VERIFIED |
 
 ## Languages
 
@@ -31,12 +31,12 @@ EN, HI, TE, BN only — VERIFIED (en, hi, te, bn)
 
 | Lang | Fertility | EN/HI threshold |
 | ---- | --------: | --------------- |
-| EN | 0.853186 | PASS |
-| HI | 0.829739 | PASS |
-| TE | 0.844702 | — |
-| BN | 0.848688 | — |
+| EN | 0.855735 | PASS |
+| HI | 0.830228 | PASS |
+| TE | 0.850615 | — |
+| BN | 0.849083 | — |
 
-Spread: 0.023446 · Raw score: 42650.36 · Hindi penalty: 1.0000 · Adjusted self-score: 42650.36
+Spread: 0.025506 · Raw score: 39206.06 · Hindi penalty: 1.0000 · Adjusted self-score: 39206.06
 
 ## Round-trip
 
@@ -63,7 +63,7 @@ Spread: 0.023446 · Raw score: 42650.36 · Hindi penalty: 1.0000 · Adjusted sel
 
 ## Playground parity
 
-- Cases: 21 · Pass: 21 · All pass: True
+- Cases: 28 · Pass: 28 · All pass: True
 
 ## Clean-room reproduction
 

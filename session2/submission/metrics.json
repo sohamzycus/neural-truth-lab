@@ -2,7 +2,7 @@
   "tokenizer": {
     "format": "huggingface-tokenizers",
     "vocab_size": 10000,
-    "sha256": "9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5"
+    "sha256": "c7ac20a2af2fddeebc05ce75ce8cc62db2ee2552221f8da7b59d0f86739828d0"
   },
   "roundtrip": {
     "reviewer_sample": true,
@@ -17,23 +17,23 @@
   "languages": {
     "en": {
       "faithful_units": 147908,
-      "tokens": 126193,
-      "fertility": 0.8531857641236444
+      "tokens": 126570,
+      "fertility": 0.8557346458609406
     },
     "hi": {
       "faithful_units": 67473,
-      "tokens": 55985,
-      "fertility": 0.8297393031286588
+      "tokens": 56018,
+      "fertility": 0.8302283876513569
     },
     "te": {
       "faithful_units": 27225,
-      "tokens": 22997,
-      "fertility": 0.8447015610651974
+      "tokens": 23158,
+      "fertility": 0.850615243342516
     },
     "bn": {
       "faithful_units": 68468,
-      "tokens": 58108,
-      "fertility": 0.8486884383945785
+      "tokens": 58135,
+      "fertility": 0.8490827831979904
     }
   },
   "thresholds": {
@@ -41,9 +41,9 @@
     "hi_under_1_2": true
   },
   "scoring": {
-    "spread": 0.023446460994985596,
-    "raw_score": 42650.35990778592,
+    "spread": 0.025506258209583743,
+    "raw_score": 39206.06432284368,
     "hindi_penalty": 1.0,
-    "adjusted_score": 42650.35990778592
+    "adjusted_score": 39206.06432284368
   }
 }

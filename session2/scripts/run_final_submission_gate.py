@@ -21,7 +21,12 @@ from tokenizers import Tokenizer
 
 from samabpe.evaluator_contract import LANGS, REVIEWER_SAMPLE, verify_roundtrip, visible_nfkc
 from samabpe.experiment_deep_check import run_deep_check
-from samabpe.visible_character_regression import STRESS_STRING, write_visible_character_report
+from samabpe.adversarial_unicode import write_adversarial_artifacts
+from samabpe.visible_character_regression import (
+    ADVERSARIAL_SENTENCES,
+    STRESS_STRING,
+    write_visible_character_report,
+)
 from samabpe.submission_audit import (
     ROOT,
     SUBMISSION,
@@ -62,6 +67,13 @@ PLAYGROUND_CASES = [
     "COVID-19 pandemic",
     "₹100 and $50",
     "see https://example.com/path for info",
+    "Price: ₹1,428.50 — approximately €15.99.",
+    "Warning ⚠: [India™](https://example.com?q=भारत&x=1)",
+    "Math: 2×3=6, x≤10, ∞≠0.",
+    "Weather: ☀→☁→☂.",
+    "Emoji: India 🇮🇳 and rocket 🚀.",
+    "Symbols: ©2026 Example™ — all rights reserved®.",
+    "https://example.com/search?q=भारत&lang=hi",
 ]
 
 
@@ -365,51 +377,53 @@ def merge_browser_parity(report_path: Path, python_report: dict[str, Any]) -> di
 
 
 def run_clean_room() -> tuple[str, int]:
-  lines: list[str] = []
-  code = 0
-  tmp = Path(tempfile.mkdtemp(prefix="samabpe-clean-"))
-  try:
-    dest = tmp / "submission"
-    shutil.copytree(SUBMISSION, dest)
-    lines.append(f"Clean-room directory: {dest}")
-    lines.append("")
-    pip = subprocess.run(
-        [sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"],
-        cwd=dest,
-        capture_output=True,
-        text=True,
-    )
-    lines.append(f"pip install exit code: {pip.returncode}")
-    if pip.stderr:
-        lines.append(pip.stderr[-2000:])
-    eval_run = subprocess.run(
-        [sys.executable, "evaluate_tokenizer.py"],
-        cwd=dest,
-        capture_output=True,
-        text=True,
-    )
-    lines.append("")
-    lines.append("=== evaluate_tokenizer.py ===")
-    lines.append(eval_run.stdout)
-    if eval_run.stderr:
-        lines.append(eval_run.stderr)
-    lines.append(f"exit code: {eval_run.returncode}")
-    code = eval_run.returncode
-    enc_run = subprocess.run(
-        [sys.executable, "encoder.py", REVIEWER_SAMPLE],
-        cwd=dest,
-        capture_output=True,
-        text=True,
-    )
-    lines.append("")
-    lines.append("=== encoder.py reviewer sample ===")
-    lines.append(enc_run.stdout)
-    lines.append(f"exit code: {enc_run.returncode}")
-    if enc_run.returncode != 0:
-        code = enc_run.returncode
-  finally:
-    shutil.rmtree(tmp, ignore_errors=True)
-  return "\n".join(lines) + "\n", code
+    lines: list[str] = []
+    code = 0
+    tmp = Path(tempfile.mkdtemp(prefix="samabpe-clean-"))
+    adversarial_samples = [REVIEWER_SAMPLE, *ADVERSARIAL_SENTENCES]
+    try:
+        dest = tmp / "submission"
+        shutil.copytree(SUBMISSION, dest)
+        lines.append(f"Clean-room directory: {dest}")
+        lines.append("")
+        pip = subprocess.run(
+            [sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"],
+            cwd=dest,
+            capture_output=True,
+            text=True,
+        )
+        lines.append(f"pip install exit code: {pip.returncode}")
+        if pip.stderr:
+            lines.append(pip.stderr[-2000:])
+        eval_run = subprocess.run(
+            [sys.executable, "evaluate_tokenizer.py"],
+            cwd=dest,
+            capture_output=True,
+            text=True,
+        )
+        lines.append("")
+        lines.append("=== evaluate_tokenizer.py ===")
+        lines.append(eval_run.stdout)
+        if eval_run.stderr:
+            lines.append(eval_run.stderr)
+        lines.append(f"exit code: {eval_run.returncode}")
+        code = eval_run.returncode
+        for sample in adversarial_samples:
+            enc_run = subprocess.run(
+                [sys.executable, "encoder.py", sample],
+                cwd=dest,
+                capture_output=True,
+                text=True,
+            )
+            lines.append("")
+            lines.append(f"=== encoder.py === {sample[:60]}")
+            lines.append(enc_run.stdout)
+            lines.append(f"exit code: {enc_run.returncode}")
+            if enc_run.returncode != 0:
+                code = enc_run.returncode
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    return "\n".join(lines) + "\n", code
 
 
 def write_submission_audit_md(
@@ -535,7 +549,10 @@ def main() -> int:
     deep = run_deep_check()
     (RESULTS / "final-experiment-integrity-deep-check.json").write_text(json.dumps(deep, indent=2), encoding="utf-8")
 
-    vis = write_visible_character_report(tok_path, corpus_text, RESULTS / "final-visible-character-roundtrip.json")
+    vis = write_visible_character_report(tok_path, corpora, RESULTS / "final-visible-character-roundtrip.json")
+    adv_paths = write_adversarial_artifacts(tok_path, corpora, RESULTS)
+    corpus_cov = json.loads((RESULTS / "final-corpus-character-coverage.json").read_text(encoding="utf-8"))
+    byte_fb = json.loads((RESULTS / "final-byte-fallback-check.json").read_text(encoding="utf-8"))
 
     bvw = build_baseline_vs_winner_json(corpora, verified["provenance"], fresh)
     (RESULTS / "final-baseline-vs-winner.json").write_text(json.dumps(bvw, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -572,6 +589,18 @@ def main() -> int:
         "nfkc_passed": vis["nfkc_passed"],
         "critical_unk_deletion_failures": vis["critical_unk_deletion_failures"],
         "nfkc_only_strict_failures": vis["nfkc_only_strict_failures"],
+        "total_cases": vis["total_cases"],
+        "evaluator_contract": vis["evaluator_contract"],
+    }
+    verified["corpusCharacterCoverage"] = {
+        "unique_visible_symbols": corpus_cov["unique_visible_symbols_discovered"],
+        "total_tested": corpus_cov["total_tested"],
+        "nfkc_visible_passes": corpus_cov["nfkc_visible_passes"],
+        "submission_blocker": corpus_cov["submission_blocker"],
+    }
+    verified["byteFallback"] = {
+        "configured": byte_fb["byte_fallback_configured"],
+        "verdict": byte_fb["verdict"],
     }
     verified["artifactParity"] = artifact
     verified["playgroundParity"] = {
@@ -606,8 +635,9 @@ def main() -> int:
         or not verified["thresholds"]["en_under_1_2"]
         or not verified["thresholds"]["hi_under_1_2"]
         or vis["critical_unk_deletion_failures"] > 0
+        or vis.get("submission_blocker")
+        or corpus_cov.get("submission_blocker")
         or not deep.get("verified_2570_claim")
-        or not all(c["nfkc_pass"] for c in vis["cases"] if c["category"].startswith("corpus_"))
     )
     return 1 if hard_fail else 0
 

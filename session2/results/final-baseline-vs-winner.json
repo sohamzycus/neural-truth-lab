@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T18:08:28.168852+00:00",
+  "generated_at": "2026-07-13T18:21:40.870504+00:00",
   "baseline": {
     "weights": {
       "en": 3,
@@ -27,29 +27,29 @@
       "bn": 5
     },
     "fertilities": {
-      "en": 0.8531857641236444,
-      "hi": 0.8297393031286588,
-      "te": 0.8447015610651974,
-      "bn": 0.8486884383945785
+      "en": 0.8557346458609406,
+      "hi": 0.8302283876513569,
+      "te": 0.850615243342516,
+      "bn": 0.8490827831979904
     },
-    "spread": 0.023446460994985596,
-    "raw_score": 42650.35990778592,
+    "spread": 0.025506258209583743,
+    "raw_score": 39206.06432284368,
     "hindi_penalty": 1.0,
-    "score": 42650.35990778592,
-    "tokenizer_sha256": "9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5"
+    "score": 39206.06432284368,
+    "tokenizer_sha256": "c7ac20a2af2fddeebc05ce75ce8cc62db2ee2552221f8da7b59d0f86739828d0"
   },
   "change": {
     "fertilities": {
-      "en": 0.05470968439840984,
-      "hi": 0.033732011323047706,
-      "te": -0.09300275482093667,
-      "bn": -0.08490097563825438
+      "en": 0.05725856613570601,
+      "hi": 0.03422109584574573,
+      "te": -0.08708907254361808,
+      "bn": -0.08450663083484256
     },
-    "spread": -0.11825056308553739,
-    "spread_reduction": 0.11825056308553739,
-    "spread_reduction_percent": 83.45,
-    "raw_score": 35593.04867285325,
-    "score": 35593.04867285325
+    "spread": -0.11619076587093924,
+    "spread_reduction": 0.11619076587093924,
+    "spread_reduction_percent": 82.0,
+    "raw_score": 32148.753087911013,
+    "score": 32148.753087911013
   },
   "interpretation": "SamaBPE tightened four-language balance (spread fell sharply). English and Hindi fertilities rose slightly; Telugu and Bengali moved closer to the cluster."
 }

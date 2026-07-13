@@ -1,0 +1,143 @@
+{
+  "generated_at": "2026-07-13T18:21:40.655563+00:00",
+  "byte_fallback_configured": true,
+  "verdict": "PARTIALLY EFFECTIVE",
+  "explanation": "byte_fallback=True is configured but unseen visible characters still route to <unk> instead of byte tokens; preservation depends on initial_alphabet seeding, not byte fallback alone.",
+  "probes": [
+    {
+      "input": "«",
+      "tokens": [
+        "«"
+      ],
+      "token_ids": [
+        101
+      ],
+      "decoded": "«",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "€",
+      "tokens": [
+        "€"
+      ],
+      "token_ids": [
+        388
+      ],
+      "decoded": "€",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "×",
+      "tokens": [
+        "×"
+      ],
+      "token_ids": [
+        109
+      ],
+      "decoded": "×",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "∞",
+      "tokens": [
+        "∞"
+      ],
+      "token_ids": [
+        411
+      ],
+      "decoded": "∞",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "⚠",
+      "tokens": [
+        "⚠"
+      ],
+      "token_ids": [
+        430
+      ],
+      "decoded": "⚠",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "😀",
+      "tokens": [
+        "😀"
+      ],
+      "token_ids": [
+        447
+      ],
+      "decoded": "😀",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "🇮🇳",
+      "tokens": [
+        "🇮",
+        "🇳"
+      ],
+      "token_ids": [
+        439,
+        440
+      ],
+      "decoded": "🇮🇳",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "A☃B",
+      "tokens": [
+        "A",
+        "☃",
+        "B"
+      ],
+      "token_ids": [
+        34,
+        422,
+        35
+      ],
+      "decoded": "A☃B",
+      "byte_tokens_used": false,
+      "unk_emitted": false,
+      "nfkc_pass": true,
+      "visible_deletion": false
+    },
+    {
+      "input": "ɋ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "byte_tokens_used": false,
+      "unk_emitted": true,
+      "nfkc_pass": false,
+      "visible_deletion": true
+    }
+  ],
+  "byte_token_probe_count": 0,
+  "unk_probe_count": 1,
+  "nfkc_preservation_count": 8
+}

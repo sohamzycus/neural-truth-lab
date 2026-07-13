@@ -1,0 +1,5003 @@
+{
+  "generated_at": "2026-07-13T18:21:40.649881+00:00",
+  "note": "Deterministic samples from common Unicode blocks — not universal coverage.",
+  "total_probed": 221,
+  "nfkc_passes": 163,
+  "strict_passes": 141,
+  "by_block": {
+    "Basic_Latin": {
+      "sampled": 32,
+      "nfkc_pass": 32,
+      "strict_pass": 32,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Latin_1_Supplement": {
+      "sampled": 32,
+      "nfkc_pass": 19,
+      "strict_pass": 12,
+      "unk_deletions": 13,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "General_Punctuation": {
+      "sampled": 20,
+      "nfkc_pass": 16,
+      "strict_pass": 12,
+      "unk_deletions": 4,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Currency_Symbols": {
+      "sampled": 9,
+      "nfkc_pass": 9,
+      "strict_pass": 9,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Letterlike_Symbols": {
+      "sampled": 8,
+      "nfkc_pass": 6,
+      "strict_pass": 0,
+      "unk_deletions": 2,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Arrows": {
+      "sampled": 13,
+      "nfkc_pass": 12,
+      "strict_pass": 12,
+      "unk_deletions": 1,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Mathematical_Operators": {
+      "sampled": 20,
+      "nfkc_pass": 20,
+      "strict_pass": 20,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Miscellaneous_Technical": {
+      "sampled": 8,
+      "nfkc_pass": 0,
+      "strict_pass": 0,
+      "unk_deletions": 8,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Enclosed_Alphanumerics": {
+      "sampled": 5,
+      "nfkc_pass": 5,
+      "strict_pass": 0,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Geometric_Shapes": {
+      "sampled": 8,
+      "nfkc_pass": 0,
+      "strict_pass": 0,
+      "unk_deletions": 8,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Miscellaneous_Symbols": {
+      "sampled": 13,
+      "nfkc_pass": 13,
+      "strict_pass": 13,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Dingbats": {
+      "sampled": 9,
+      "nfkc_pass": 4,
+      "strict_pass": 4,
+      "unk_deletions": 5,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Devanagari": {
+      "sampled": 2,
+      "nfkc_pass": 2,
+      "strict_pass": 2,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Bengali": {
+      "sampled": 1,
+      "nfkc_pass": 1,
+      "strict_pass": 1,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Telugu": {
+      "sampled": 1,
+      "nfkc_pass": 1,
+      "strict_pass": 1,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Greek_and_Coptic": {
+      "sampled": 28,
+      "nfkc_pass": 11,
+      "strict_pass": 11,
+      "unk_deletions": 17,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    },
+    "Emoji_sample": {
+      "sampled": 12,
+      "nfkc_pass": 12,
+      "strict_pass": 12,
+      "unk_deletions": 0,
+      "nfkc_normalization_only": 0,
+      "visible_substitution": 0,
+      "other_failures": 0
+    }
+  },
+  "cases": [
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:!",
+      "input": "!",
+      "tokens": [
+        "!"
+      ],
+      "token_ids": [
+        2
+      ],
+      "decoded": "!",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:\"",
+      "input": "\"",
+      "tokens": [
+        "\""
+      ],
+      "token_ids": [
+        3
+      ],
+      "decoded": "\"",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:#",
+      "input": "#",
+      "tokens": [
+        "#"
+      ],
+      "token_ids": [
+        4
+      ],
+      "decoded": "#",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:$",
+      "input": "$",
+      "tokens": [
+        "$"
+      ],
+      "token_ids": [
+        5
+      ],
+      "decoded": "$",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:%",
+      "input": "%",
+      "tokens": [
+        "%"
+      ],
+      "token_ids": [
+        6
+      ],
+      "decoded": "%",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:&",
+      "input": "&",
+      "tokens": [
+        "&"
+      ],
+      "token_ids": [
+        7
+      ],
+      "decoded": "&",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:'",
+      "input": "'",
+      "tokens": [
+        "'"
+      ],
+      "token_ids": [
+        8
+      ],
+      "decoded": "'",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:(",
+      "input": "(",
+      "tokens": [
+        "("
+      ],
+      "token_ids": [
+        9
+      ],
+      "decoded": "(",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:)",
+      "input": ")",
+      "tokens": [
+        ")"
+      ],
+      "token_ids": [
+        10
+      ],
+      "decoded": ")",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:*",
+      "input": "*",
+      "tokens": [
+        "*"
+      ],
+      "token_ids": [
+        11
+      ],
+      "decoded": "*",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:+",
+      "input": "+",
+      "tokens": [
+        "+"
+      ],
+      "token_ids": [
+        12
+      ],
+      "decoded": "+",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:,",
+      "input": ",",
+      "tokens": [
+        ","
+      ],
+      "token_ids": [
+        13
+      ],
+      "decoded": ",",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:-",
+      "input": "-",
+      "tokens": [
+        "-"
+      ],
+      "token_ids": [
+        14
+      ],
+      "decoded": "-",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:.",
+      "input": ".",
+      "tokens": [
+        "."
+      ],
+      "token_ids": [
+        15
+      ],
+      "decoded": ".",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:/",
+      "input": "/",
+      "tokens": [
+        "/"
+      ],
+      "token_ids": [
+        16
+      ],
+      "decoded": "/",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin::",
+      "input": ":",
+      "tokens": [
+        ":"
+      ],
+      "token_ids": [
+        27
+      ],
+      "decoded": ":",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:;",
+      "input": ";",
+      "tokens": [
+        ";"
+      ],
+      "token_ids": [
+        28
+      ],
+      "decoded": ";",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:<",
+      "input": "<",
+      "tokens": [
+        "<"
+      ],
+      "token_ids": [
+        29
+      ],
+      "decoded": "<",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:=",
+      "input": "=",
+      "tokens": [
+        "="
+      ],
+      "token_ids": [
+        30
+      ],
+      "decoded": "=",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:>",
+      "input": ">",
+      "tokens": [
+        ">"
+      ],
+      "token_ids": [
+        31
+      ],
+      "decoded": ">",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:?",
+      "input": "?",
+      "tokens": [
+        "?"
+      ],
+      "token_ids": [
+        32
+      ],
+      "decoded": "?",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:@",
+      "input": "@",
+      "tokens": [
+        "@"
+      ],
+      "token_ids": [
+        33
+      ],
+      "decoded": "@",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:[",
+      "input": "[",
+      "tokens": [
+        "["
+      ],
+      "token_ids": [
+        60
+      ],
+      "decoded": "[",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:\\",
+      "input": "\\",
+      "tokens": [
+        "\\"
+      ],
+      "token_ids": [
+        61
+      ],
+      "decoded": "\\",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:]",
+      "input": "]",
+      "tokens": [
+        "]"
+      ],
+      "token_ids": [
+        62
+      ],
+      "decoded": "]",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:^",
+      "input": "^",
+      "tokens": [
+        "^"
+      ],
+      "token_ids": [
+        63
+      ],
+      "decoded": "^",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:_",
+      "input": "_",
+      "tokens": [
+        "_"
+      ],
+      "token_ids": [
+        64
+      ],
+      "decoded": "_",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:`",
+      "input": "`",
+      "tokens": [
+        "`"
+      ],
+      "token_ids": [
+        65
+      ],
+      "decoded": "`",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:{",
+      "input": "{",
+      "tokens": [
+        "{"
+      ],
+      "token_ids": [
+        92
+      ],
+      "decoded": "{",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:|",
+      "input": "|",
+      "tokens": [
+        "|"
+      ],
+      "token_ids": [
+        93
+      ],
+      "decoded": "|",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:}",
+      "input": "}",
+      "tokens": [
+        "}"
+      ],
+      "token_ids": [
+        94
+      ],
+      "decoded": "}",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Basic_Latin:~",
+      "input": "~",
+      "tokens": [
+        "~"
+      ],
+      "token_ids": [
+        95
+      ],
+      "decoded": "~",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Basic_Latin"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¡",
+      "input": "¡",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00A1"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¢",
+      "input": "¢",
+      "tokens": [
+        "¢"
+      ],
+      "token_ids": [
+        96
+      ],
+      "decoded": "¢",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:£",
+      "input": "£",
+      "tokens": [
+        "£"
+      ],
+      "token_ids": [
+        97
+      ],
+      "decoded": "£",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¤",
+      "input": "¤",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00A4"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¥",
+      "input": "¥",
+      "tokens": [
+        "¥"
+      ],
+      "token_ids": [
+        98
+      ],
+      "decoded": "¥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¦",
+      "input": "¦",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00A6"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:§",
+      "input": "§",
+      "tokens": [
+        "§"
+      ],
+      "token_ids": [
+        99
+      ],
+      "decoded": "§",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¨",
+      "input": "¨",
+      "tokens": [
+        "▁",
+        "<unk>"
+      ],
+      "token_ids": [
+        418,
+        0
+      ],
+      "decoded": " ",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00A8"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:©",
+      "input": "©",
+      "tokens": [
+        "©"
+      ],
+      "token_ids": [
+        100
+      ],
+      "decoded": "©",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:ª",
+      "input": "ª",
+      "tokens": [
+        "a"
+      ],
+      "token_ids": [
+        66
+      ],
+      "decoded": "a",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00AA"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:«",
+      "input": "«",
+      "tokens": [
+        "«"
+      ],
+      "token_ids": [
+        101
+      ],
+      "decoded": "«",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¬",
+      "input": "¬",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00AC"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:®",
+      "input": "®",
+      "tokens": [
+        "®"
+      ],
+      "token_ids": [
+        102
+      ],
+      "decoded": "®",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¯",
+      "input": "¯",
+      "tokens": [
+        "▁",
+        "<unk>"
+      ],
+      "token_ids": [
+        418,
+        0
+      ],
+      "decoded": " ",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00AF"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:°",
+      "input": "°",
+      "tokens": [
+        "°"
+      ],
+      "token_ids": [
+        103
+      ],
+      "decoded": "°",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:±",
+      "input": "±",
+      "tokens": [
+        "±"
+      ],
+      "token_ids": [
+        104
+      ],
+      "decoded": "±",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:²",
+      "input": "²",
+      "tokens": [
+        "2"
+      ],
+      "token_ids": [
+        19
+      ],
+      "decoded": "2",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00B2"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:³",
+      "input": "³",
+      "tokens": [
+        "3"
+      ],
+      "token_ids": [
+        20
+      ],
+      "decoded": "3",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00B3"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:´",
+      "input": "´",
+      "tokens": [
+        "▁",
+        "́"
+      ],
+      "token_ids": [
+        418,
+        138
+      ],
+      "decoded": " ́",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00B4"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:µ",
+      "input": "µ",
+      "tokens": [
+        "μ"
+      ],
+      "token_ids": [
+        148
+      ],
+      "decoded": "μ",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00B5"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¶",
+      "input": "¶",
+      "tokens": [
+        "¶"
+      ],
+      "token_ids": [
+        105
+      ],
+      "decoded": "¶",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:·",
+      "input": "·",
+      "tokens": [
+        "·"
+      ],
+      "token_ids": [
+        106
+      ],
+      "decoded": "·",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¸",
+      "input": "¸",
+      "tokens": [
+        "▁",
+        "<unk>"
+      ],
+      "token_ids": [
+        418,
+        0
+      ],
+      "decoded": " ",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00B8"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¹",
+      "input": "¹",
+      "tokens": [
+        "1"
+      ],
+      "token_ids": [
+        18
+      ],
+      "decoded": "1",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00B9"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:º",
+      "input": "º",
+      "tokens": [
+        "o"
+      ],
+      "token_ids": [
+        80
+      ],
+      "decoded": "o",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+00BA"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:»",
+      "input": "»",
+      "tokens": [
+        "»"
+      ],
+      "token_ids": [
+        107
+      ],
+      "decoded": "»",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¼",
+      "input": "¼",
+      "tokens": [
+        "1",
+        "<unk>",
+        "4"
+      ],
+      "token_ids": [
+        18,
+        0,
+        21
+      ],
+      "decoded": "14",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00BC"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:½",
+      "input": "½",
+      "tokens": [
+        "1",
+        "<unk>",
+        "2"
+      ],
+      "token_ids": [
+        18,
+        0,
+        19
+      ],
+      "decoded": "12",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00BD"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¾",
+      "input": "¾",
+      "tokens": [
+        "3",
+        "<unk>",
+        "4"
+      ],
+      "token_ids": [
+        20,
+        0,
+        21
+      ],
+      "decoded": "34",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00BE"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:¿",
+      "input": "¿",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00BF"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:À",
+      "input": "À",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00C0"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Latin_1_Supplement:Á",
+      "input": "Á",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+00C1"
+      ],
+      "unicode_block": "Latin_1_Supplement"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‘",
+      "input": "‘",
+      "tokens": [
+        "‘"
+      ],
+      "token_ids": [
+        371
+      ],
+      "decoded": "‘",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:’",
+      "input": "’",
+      "tokens": [
+        "’"
+      ],
+      "token_ids": [
+        372
+      ],
+      "decoded": "’",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‚",
+      "input": "‚",
+      "tokens": [
+        "‚"
+      ],
+      "token_ids": [
+        373
+      ],
+      "decoded": "‚",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‛",
+      "input": "‛",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+201B"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:“",
+      "input": "“",
+      "tokens": [
+        "“"
+      ],
+      "token_ids": [
+        374
+      ],
+      "decoded": "“",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:”",
+      "input": "”",
+      "tokens": [
+        "”"
+      ],
+      "token_ids": [
+        375
+      ],
+      "decoded": "”",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:„",
+      "input": "„",
+      "tokens": [
+        "„"
+      ],
+      "token_ids": [
+        376
+      ],
+      "decoded": "„",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‟",
+      "input": "‟",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+201F"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:†",
+      "input": "†",
+      "tokens": [
+        "†"
+      ],
+      "token_ids": [
+        377
+      ],
+      "decoded": "†",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‡",
+      "input": "‡",
+      "tokens": [
+        "‡"
+      ],
+      "token_ids": [
+        378
+      ],
+      "decoded": "‡",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:•",
+      "input": "•",
+      "tokens": [
+        "•"
+      ],
+      "token_ids": [
+        379
+      ],
+      "decoded": "•",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:…",
+      "input": "…",
+      "tokens": [
+        "..."
+      ],
+      "token_ids": [
+        2993
+      ],
+      "decoded": "...",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2026"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‰",
+      "input": "‰",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2030"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‱",
+      "input": "‱",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2031"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:′",
+      "input": "′",
+      "tokens": [
+        "′"
+      ],
+      "token_ids": [
+        382
+      ],
+      "decoded": "′",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:″",
+      "input": "″",
+      "tokens": [
+        "′",
+        "′"
+      ],
+      "token_ids": [
+        382,
+        382
+      ],
+      "decoded": "′′",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2033"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‴",
+      "input": "‴",
+      "tokens": [
+        "′",
+        "′",
+        "′"
+      ],
+      "token_ids": [
+        382,
+        382,
+        382
+      ],
+      "decoded": "′′′",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2034"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:‹",
+      "input": "‹",
+      "tokens": [
+        "‹"
+      ],
+      "token_ids": [
+        383
+      ],
+      "decoded": "‹",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:›",
+      "input": "›",
+      "tokens": [
+        "›"
+      ],
+      "token_ids": [
+        384
+      ],
+      "decoded": "›",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "General_Punctuation:⁇",
+      "input": "⁇",
+      "tokens": [
+        "?",
+        "?"
+      ],
+      "token_ids": [
+        32,
+        32
+      ],
+      "decoded": "??",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2047"
+      ],
+      "unicode_block": "General_Punctuation"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:$",
+      "input": "$",
+      "tokens": [
+        "$"
+      ],
+      "token_ids": [
+        5
+      ],
+      "decoded": "$",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:€",
+      "input": "€",
+      "tokens": [
+        "€"
+      ],
+      "token_ids": [
+        388
+      ],
+      "decoded": "€",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:£",
+      "input": "£",
+      "tokens": [
+        "£"
+      ],
+      "token_ids": [
+        97
+      ],
+      "decoded": "£",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:¥",
+      "input": "¥",
+      "tokens": [
+        "¥"
+      ],
+      "token_ids": [
+        98
+      ],
+      "decoded": "¥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:₹",
+      "input": "₹",
+      "tokens": [
+        "₹"
+      ],
+      "token_ids": [
+        389
+      ],
+      "decoded": "₹",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:₩",
+      "input": "₩",
+      "tokens": [
+        "₩"
+      ],
+      "token_ids": [
+        387
+      ],
+      "decoded": "₩",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:₽",
+      "input": "₽",
+      "tokens": [
+        "₽"
+      ],
+      "token_ids": [
+        390
+      ],
+      "decoded": "₽",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:₿",
+      "input": "₿",
+      "tokens": [
+        "₿"
+      ],
+      "token_ids": [
+        391
+      ],
+      "decoded": "₿",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Currency_Symbols:¢",
+      "input": "¢",
+      "tokens": [
+        "¢"
+      ],
+      "token_ids": [
+        96
+      ],
+      "decoded": "¢",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Currency_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:№",
+      "input": "№",
+      "tokens": [
+        "N",
+        "o"
+      ],
+      "token_ids": [
+        47,
+        80
+      ],
+      "decoded": "No",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2116"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:™",
+      "input": "™",
+      "tokens": [
+        "T",
+        "M"
+      ],
+      "token_ids": [
+        53,
+        46
+      ],
+      "decoded": "TM",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2122"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:℠",
+      "input": "℠",
+      "tokens": [
+        "S",
+        "M"
+      ],
+      "token_ids": [
+        52,
+        46
+      ],
+      "decoded": "SM",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2120"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:℗",
+      "input": "℗",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2117"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:℡",
+      "input": "℡",
+      "tokens": [
+        "T",
+        "E",
+        "L"
+      ],
+      "token_ids": [
+        53,
+        38,
+        45
+      ],
+      "decoded": "TEL",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2121"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:Ω",
+      "input": "Ω",
+      "tokens": [
+        "Ω"
+      ],
+      "token_ids": [
+        140
+      ],
+      "decoded": "Ω",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2126"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:℮",
+      "input": "℮",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+212E"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Letterlike_Symbols:ℯ",
+      "input": "ℯ",
+      "tokens": [
+        "e"
+      ],
+      "token_ids": [
+        70
+      ],
+      "decoded": "e",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+212F"
+      ],
+      "unicode_block": "Letterlike_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:←",
+      "input": "←",
+      "tokens": [
+        "←"
+      ],
+      "token_ids": [
+        393
+      ],
+      "decoded": "←",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↑",
+      "input": "↑",
+      "tokens": [
+        "↑"
+      ],
+      "token_ids": [
+        394
+      ],
+      "decoded": "↑",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:→",
+      "input": "→",
+      "tokens": [
+        "→"
+      ],
+      "token_ids": [
+        395
+      ],
+      "decoded": "→",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↓",
+      "input": "↓",
+      "tokens": [
+        "↓"
+      ],
+      "token_ids": [
+        396
+      ],
+      "decoded": "↓",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↔",
+      "input": "↔",
+      "tokens": [
+        "↔"
+      ],
+      "token_ids": [
+        397
+      ],
+      "decoded": "↔",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↕",
+      "input": "↕",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2195"
+      ],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↖",
+      "input": "↖",
+      "tokens": [
+        "↖"
+      ],
+      "token_ids": [
+        398
+      ],
+      "decoded": "↖",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↗",
+      "input": "↗",
+      "tokens": [
+        "↗"
+      ],
+      "token_ids": [
+        399
+      ],
+      "decoded": "↗",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↘",
+      "input": "↘",
+      "tokens": [
+        "↘"
+      ],
+      "token_ids": [
+        400
+      ],
+      "decoded": "↘",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:↙",
+      "input": "↙",
+      "tokens": [
+        "↙"
+      ],
+      "token_ids": [
+        401
+      ],
+      "decoded": "↙",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:⇐",
+      "input": "⇐",
+      "tokens": [
+        "⇐"
+      ],
+      "token_ids": [
+        402
+      ],
+      "decoded": "⇐",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:⇒",
+      "input": "⇒",
+      "tokens": [
+        "⇒"
+      ],
+      "token_ids": [
+        403
+      ],
+      "decoded": "⇒",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Arrows:⇔",
+      "input": "⇔",
+      "tokens": [
+        "⇔"
+      ],
+      "token_ids": [
+        404
+      ],
+      "decoded": "⇔",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Arrows"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:+",
+      "input": "+",
+      "tokens": [
+        "+"
+      ],
+      "token_ids": [
+        12
+      ],
+      "decoded": "+",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:−",
+      "input": "−",
+      "tokens": [
+        "−"
+      ],
+      "token_ids": [
+        409
+      ],
+      "decoded": "−",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:×",
+      "input": "×",
+      "tokens": [
+        "×"
+      ],
+      "token_ids": [
+        109
+      ],
+      "decoded": "×",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:÷",
+      "input": "÷",
+      "tokens": [
+        "÷"
+      ],
+      "token_ids": [
+        120
+      ],
+      "decoded": "÷",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:=",
+      "input": "=",
+      "tokens": [
+        "="
+      ],
+      "token_ids": [
+        30
+      ],
+      "decoded": "=",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:≠",
+      "input": "≠",
+      "tokens": [
+        "≠"
+      ],
+      "token_ids": [
+        414
+      ],
+      "decoded": "≠",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:<",
+      "input": "<",
+      "tokens": [
+        "<"
+      ],
+      "token_ids": [
+        29
+      ],
+      "decoded": "<",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:≤",
+      "input": "≤",
+      "tokens": [
+        "≤"
+      ],
+      "token_ids": [
+        416
+      ],
+      "decoded": "≤",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:>",
+      "input": ">",
+      "tokens": [
+        ">"
+      ],
+      "token_ids": [
+        31
+      ],
+      "decoded": ">",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:≥",
+      "input": "≥",
+      "tokens": [
+        "≥"
+      ],
+      "token_ids": [
+        417
+      ],
+      "decoded": "≥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:±",
+      "input": "±",
+      "tokens": [
+        "±"
+      ],
+      "token_ids": [
+        104
+      ],
+      "decoded": "±",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∞",
+      "input": "∞",
+      "tokens": [
+        "∞"
+      ],
+      "token_ids": [
+        411
+      ],
+      "decoded": "∞",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:√",
+      "input": "√",
+      "tokens": [
+        "√"
+      ],
+      "token_ids": [
+        410
+      ],
+      "decoded": "√",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∑",
+      "input": "∑",
+      "tokens": [
+        "∑"
+      ],
+      "token_ids": [
+        408
+      ],
+      "decoded": "∑",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∏",
+      "input": "∏",
+      "tokens": [
+        "∏"
+      ],
+      "token_ids": [
+        407
+      ],
+      "decoded": "∏",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∫",
+      "input": "∫",
+      "tokens": [
+        "∫"
+      ],
+      "token_ids": [
+        412
+      ],
+      "decoded": "∫",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:≈",
+      "input": "≈",
+      "tokens": [
+        "≈"
+      ],
+      "token_ids": [
+        413
+      ],
+      "decoded": "≈",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:≡",
+      "input": "≡",
+      "tokens": [
+        "≡"
+      ],
+      "token_ids": [
+        415
+      ],
+      "decoded": "≡",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∂",
+      "input": "∂",
+      "tokens": [
+        "∂"
+      ],
+      "token_ids": [
+        405
+      ],
+      "decoded": "∂",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Mathematical_Operators:∆",
+      "input": "∆",
+      "tokens": [
+        "∆"
+      ],
+      "token_ids": [
+        406
+      ],
+      "decoded": "∆",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Mathematical_Operators"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⌂",
+      "input": "⌂",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2302"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⌘",
+      "input": "⌘",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2318"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⌛",
+      "input": "⌛",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+231B"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⌥",
+      "input": "⌥",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2325"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⏎",
+      "input": "⏎",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+23CE"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⏏",
+      "input": "⏏",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+23CF"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⏩",
+      "input": "⏩",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+23E9"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Technical:⏪",
+      "input": "⏪",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+23EA"
+      ],
+      "unicode_block": "Miscellaneous_Technical"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Enclosed_Alphanumerics:①",
+      "input": "①",
+      "tokens": [
+        "1"
+      ],
+      "token_ids": [
+        18
+      ],
+      "decoded": "1",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2460"
+      ],
+      "unicode_block": "Enclosed_Alphanumerics"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Enclosed_Alphanumerics:②",
+      "input": "②",
+      "tokens": [
+        "2"
+      ],
+      "token_ids": [
+        19
+      ],
+      "decoded": "2",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2461"
+      ],
+      "unicode_block": "Enclosed_Alphanumerics"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Enclosed_Alphanumerics:③",
+      "input": "③",
+      "tokens": [
+        "3"
+      ],
+      "token_ids": [
+        20
+      ],
+      "decoded": "3",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2462"
+      ],
+      "unicode_block": "Enclosed_Alphanumerics"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Enclosed_Alphanumerics:④",
+      "input": "④",
+      "tokens": [
+        "4"
+      ],
+      "token_ids": [
+        21
+      ],
+      "decoded": "4",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2463"
+      ],
+      "unicode_block": "Enclosed_Alphanumerics"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Enclosed_Alphanumerics:⑤",
+      "input": "⑤",
+      "tokens": [
+        "5"
+      ],
+      "token_ids": [
+        22
+      ],
+      "decoded": "5",
+      "failure_class": "nfkc_normalization",
+      "strict_pass": false,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": true,
+      "chars_lost": [
+        "U+2464"
+      ],
+      "unicode_block": "Enclosed_Alphanumerics"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:■",
+      "input": "■",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25A0"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:□",
+      "input": "□",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25A1"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:▲",
+      "input": "▲",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25B2"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:△",
+      "input": "△",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25B3"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:●",
+      "input": "●",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25CF"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:○",
+      "input": "○",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25CB"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:◆",
+      "input": "◆",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25C6"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Geometric_Shapes:◇",
+      "input": "◇",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+25C7"
+      ],
+      "unicode_block": "Geometric_Shapes"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☀",
+      "input": "☀",
+      "tokens": [
+        "☀"
+      ],
+      "token_ids": [
+        419
+      ],
+      "decoded": "☀",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☁",
+      "input": "☁",
+      "tokens": [
+        "☁"
+      ],
+      "token_ids": [
+        420
+      ],
+      "decoded": "☁",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☂",
+      "input": "☂",
+      "tokens": [
+        "☂"
+      ],
+      "token_ids": [
+        421
+      ],
+      "decoded": "☂",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☃",
+      "input": "☃",
+      "tokens": [
+        "☃"
+      ],
+      "token_ids": [
+        422
+      ],
+      "decoded": "☃",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:★",
+      "input": "★",
+      "tokens": [
+        "★"
+      ],
+      "token_ids": [
+        423
+      ],
+      "decoded": "★",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☆",
+      "input": "☆",
+      "tokens": [
+        "☆"
+      ],
+      "token_ids": [
+        424
+      ],
+      "decoded": "☆",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:♠",
+      "input": "♠",
+      "tokens": [
+        "♠"
+      ],
+      "token_ids": [
+        426
+      ],
+      "decoded": "♠",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:♣",
+      "input": "♣",
+      "tokens": [
+        "♣"
+      ],
+      "token_ids": [
+        427
+      ],
+      "decoded": "♣",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:♥",
+      "input": "♥",
+      "tokens": [
+        "♥"
+      ],
+      "token_ids": [
+        428
+      ],
+      "decoded": "♥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:♦",
+      "input": "♦",
+      "tokens": [
+        "♦"
+      ],
+      "token_ids": [
+        429
+      ],
+      "decoded": "♦",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:⚠",
+      "input": "⚠",
+      "tokens": [
+        "⚠"
+      ],
+      "token_ids": [
+        430
+      ],
+      "decoded": "⚠",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:⚡",
+      "input": "⚡",
+      "tokens": [
+        "⚡"
+      ],
+      "token_ids": [
+        431
+      ],
+      "decoded": "⚡",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Miscellaneous_Symbols:☕",
+      "input": "☕",
+      "tokens": [
+        "☕"
+      ],
+      "token_ids": [
+        425
+      ],
+      "decoded": "☕",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Miscellaneous_Symbols"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✁",
+      "input": "✁",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2701"
+      ],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✂",
+      "input": "✂",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2702"
+      ],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✃",
+      "input": "✃",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2703"
+      ],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✄",
+      "input": "✄",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2704"
+      ],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✅",
+      "input": "✅",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+2705"
+      ],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✓",
+      "input": "✓",
+      "tokens": [
+        "✓"
+      ],
+      "token_ids": [
+        432
+      ],
+      "decoded": "✓",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✔",
+      "input": "✔",
+      "tokens": [
+        "✔"
+      ],
+      "token_ids": [
+        433
+      ],
+      "decoded": "✔",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✗",
+      "input": "✗",
+      "tokens": [
+        "✗"
+      ],
+      "token_ids": [
+        434
+      ],
+      "decoded": "✗",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Dingbats:✘",
+      "input": "✘",
+      "tokens": [
+        "✘"
+      ],
+      "token_ids": [
+        435
+      ],
+      "decoded": "✘",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Dingbats"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Devanagari:।",
+      "input": "।",
+      "tokens": [
+        "।"
+      ],
+      "token_ids": [
+        218
+      ],
+      "decoded": "।",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Devanagari"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Devanagari:॥",
+      "input": "॥",
+      "tokens": [
+        "॥"
+      ],
+      "token_ids": [
+        219
+      ],
+      "decoded": "॥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Devanagari"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Bengali:।",
+      "input": "।",
+      "tokens": [
+        "।"
+      ],
+      "token_ids": [
+        218
+      ],
+      "decoded": "।",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Bengali"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Telugu:।",
+      "input": "।",
+      "tokens": [
+        "।"
+      ],
+      "token_ids": [
+        218
+      ],
+      "decoded": "।",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Telugu"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:α",
+      "input": "α",
+      "tokens": [
+        "α"
+      ],
+      "token_ids": [
+        142
+      ],
+      "decoded": "α",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:β",
+      "input": "β",
+      "tokens": [
+        "β"
+      ],
+      "token_ids": [
+        143
+      ],
+      "decoded": "β",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:γ",
+      "input": "γ",
+      "tokens": [
+        "γ"
+      ],
+      "token_ids": [
+        144
+      ],
+      "decoded": "γ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:δ",
+      "input": "δ",
+      "tokens": [
+        "δ"
+      ],
+      "token_ids": [
+        145
+      ],
+      "decoded": "δ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ε",
+      "input": "ε",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03B5"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ζ",
+      "input": "ζ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03B6"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:η",
+      "input": "η",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03B7"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:θ",
+      "input": "θ",
+      "tokens": [
+        "θ"
+      ],
+      "token_ids": [
+        146
+      ],
+      "decoded": "θ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ι",
+      "input": "ι",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03B9"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:κ",
+      "input": "κ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03BA"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:λ",
+      "input": "λ",
+      "tokens": [
+        "λ"
+      ],
+      "token_ids": [
+        147
+      ],
+      "decoded": "λ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:μ",
+      "input": "μ",
+      "tokens": [
+        "μ"
+      ],
+      "token_ids": [
+        148
+      ],
+      "decoded": "μ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ν",
+      "input": "ν",
+      "tokens": [
+        "ν"
+      ],
+      "token_ids": [
+        149
+      ],
+      "decoded": "ν",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ξ",
+      "input": "ξ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03BE"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ο",
+      "input": "ο",
+      "tokens": [
+        "ο"
+      ],
+      "token_ids": [
+        150
+      ],
+      "decoded": "ο",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:π",
+      "input": "π",
+      "tokens": [
+        "π"
+      ],
+      "token_ids": [
+        151
+      ],
+      "decoded": "π",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ρ",
+      "input": "ρ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C1"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:σ",
+      "input": "σ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C3"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:τ",
+      "input": "τ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C4"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:υ",
+      "input": "υ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C5"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:φ",
+      "input": "φ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C6"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:χ",
+      "input": "χ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C7"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ψ",
+      "input": "ψ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C8"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:ω",
+      "input": "ω",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+03C9"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:Α",
+      "input": "Α",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+0391"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:Β",
+      "input": "Β",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+0392"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:Γ",
+      "input": "Γ",
+      "tokens": [
+        "<unk>"
+      ],
+      "token_ids": [
+        0
+      ],
+      "decoded": "",
+      "failure_class": "unk_deletion",
+      "strict_pass": false,
+      "nfkc_pass": false,
+      "unk_emitted": true,
+      "visible_deletion": true,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [
+        "U+0393"
+      ],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Greek_and_Coptic:Δ",
+      "input": "Δ",
+      "tokens": [
+        "Δ"
+      ],
+      "token_ids": [
+        139
+      ],
+      "decoded": "Δ",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Greek_and_Coptic"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:😀",
+      "input": "😀",
+      "tokens": [
+        "😀"
+      ],
+      "token_ids": [
+        447
+      ],
+      "decoded": "😀",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:😃",
+      "input": "😃",
+      "tokens": [
+        "😃"
+      ],
+      "token_ids": [
+        449
+      ],
+      "decoded": "😃",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:😂",
+      "input": "😂",
+      "tokens": [
+        "😂"
+      ],
+      "token_ids": [
+        448
+      ],
+      "decoded": "😂",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:❤",
+      "input": "❤",
+      "tokens": [
+        "❤"
+      ],
+      "token_ids": [
+        436
+      ],
+      "decoded": "❤",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:👍",
+      "input": "👍",
+      "tokens": [
+        "👍"
+      ],
+      "token_ids": [
+        444
+      ],
+      "decoded": "👍",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🚀",
+      "input": "🚀",
+      "tokens": [
+        "🚀"
+      ],
+      "token_ids": [
+        450
+      ],
+      "decoded": "🚀",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🌍",
+      "input": "🌍",
+      "tokens": [
+        "🌍"
+      ],
+      "token_ids": [
+        441
+      ],
+      "decoded": "🌍",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🔥",
+      "input": "🔥",
+      "tokens": [
+        "🔥"
+      ],
+      "token_ids": [
+        446
+      ],
+      "decoded": "🔥",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🎉",
+      "input": "🎉",
+      "tokens": [
+        "🎉"
+      ],
+      "token_ids": [
+        442
+      ],
+      "decoded": "🎉",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:💡",
+      "input": "💡",
+      "tokens": [
+        "💡"
+      ],
+      "token_ids": [
+        445
+      ],
+      "decoded": "💡",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🇮",
+      "input": "🇮",
+      "tokens": [
+        "🇮"
+      ],
+      "token_ids": [
+        439
+      ],
+      "decoded": "🇮",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    },
+    {
+      "category": "unicode_block",
+      "label": "Emoji_sample:🇳",
+      "input": "🇳",
+      "tokens": [
+        "🇳"
+      ],
+      "token_ids": [
+        440
+      ],
+      "decoded": "🇳",
+      "failure_class": null,
+      "strict_pass": true,
+      "nfkc_pass": true,
+      "unk_emitted": false,
+      "visible_deletion": false,
+      "visible_substitution": false,
+      "normalization_only_difference": false,
+      "chars_lost": [],
+      "unicode_block": "Emoji_sample"
+    }
+  ]
+}

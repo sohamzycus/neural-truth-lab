@@ -43,9 +43,13 @@ SAMPLES = [
     "తెలుగు",
     "বাংলা",
     "India भारत భారతదేశం ভারত",
-    "India is a diverse country.",
-    "भारत एक विविध देश है।",
-    "mixed EN हिंदी తెలుగు বাংলা text",
+    "Price: ₹1,428.50 — approximately €15.99.",
+    "Warning ⚠: [India™](https://example.com?q=भारत&x=1)",
+    "Math: 2×3=6, x≤10, ∞≠0.",
+    "Weather: ☀→☁→☂.",
+    "Emoji: India 🇮🇳 and rocket 🚀.",
+    "Symbols: ©2026 Example™ — all rights reserved®.",
+    "https://example.com/search?q=भारत&lang=hi",
 ]
 
 

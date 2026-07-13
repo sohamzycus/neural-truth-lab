@@ -1,4 +1,4 @@
-Clean-room directory: /var/folders/bj/dgvhq9j57s7bdwrlvdrtsgwc0000gp/T/samabpe-clean-eivg9t2h/submission
+Clean-room directory: /var/folders/bj/dgvhq9j57s7bdwrlvdrtsgwc0000gp/T/samabpe-clean-lybkkzyi/submission
 
 pip install exit code: 0
 
@@ -12,7 +12,7 @@ SamaBPE Faithful Evaluator-Compatible Verification
 
 Tokenizer format: Hugging Face BPE (NFKC + Metaspace)
 Vocabulary size: 10000
-Tokenizer SHA-256: 9f80405daa8f9a6b1832462bf970d9ff390b7f12c19eaa370ca80002d0fc00b5
+Tokenizer SHA-256: c7ac20a2af2fddeebc05ce75ce8cc62db2ee2552221f8da7b59d0f86739828d0
 Decoder present: yes
 
 Reviewer regression sample:
@@ -22,32 +22,32 @@ Reviewer regression sample:
 
 English
   Faithful units: 147908
-  Encoded tokens: 126193
-  Fertility: 0.8531857641236444
+  Encoded tokens: 126570
+  Fertility: 0.8557346458609406
   Full corpus round-trip: PASS
 
 Hindi
   Faithful units: 67473
-  Encoded tokens: 55985
-  Fertility: 0.8297393031286588
+  Encoded tokens: 56018
+  Fertility: 0.8302283876513569
   Full corpus round-trip: PASS
 
 Telugu
   Faithful units: 27225
-  Encoded tokens: 22997
-  Fertility: 0.8447015610651974
+  Encoded tokens: 23158
+  Fertility: 0.850615243342516
   Full corpus round-trip: PASS
 
 Bengali
   Faithful units: 68468
-  Encoded tokens: 58108
-  Fertility: 0.8486884383945785
+  Encoded tokens: 58135
+  Fertility: 0.8490827831979904
   Full corpus round-trip: PASS
 
-Spread: 0.023446460994985596
-Raw score: 42650.35990778592
+Spread: 0.025506258209583743
+Raw score: 39206.06432284368
 Hindi penalty: 1.0000x
-Adjusted evaluator score: 42650.35990778592
+Adjusted evaluator score: 39206.06432284368
 
 English < 1.2: PASS
 Hindi < 1.2: PASS
@@ -58,7 +58,7 @@ PASS: Four complete faithful corpora encoded
 
 exit code: 0
 
-=== encoder.py reviewer sample ===
+=== encoder.py === India's population is 1,428,627,663.
 Original:
 India's population is 1,428,627,663.
 
@@ -66,10 +66,136 @@ Tokens:
 ['India', "'s", '▁population', '▁is', '▁1,', '4', '28', ',', '6', '27', ',', '66', '3.']
 
 Token IDs:
-[391, 1133, 3480, 1126, 3933, 21, 719, 13, 23, 971, 13, 6550, 1571]
+[471, 1213, 3560, 1206, 4013, 21, 799, 13, 23, 1051, 13, 6630, 1651]
 
 Decoded:
 India's population is 1,428,627,663.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Price: ₹1,428.50 — approximately €15.99.
+Original:
+Price: ₹1,428.50 — approximately €15.99.
+
+Tokens:
+['Pr', 'ice', ':', '▁', '₹', '1,', '4', '28.', '50', '▁—', '▁app', 'ro', 'x', 'imate', 'ly', '▁', '€', '15', '.', '9', '9.']
+
+Token IDs:
+[4343, 2526, 27, 418, 389, 2592, 21, 6933, 871, 4137, 4929, 759, 89, 9594, 881, 418, 388, 1041, 15, 26, 2305]
+
+Decoded:
+Price: ₹1,428.50 — approximately €15.99.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Warning ⚠: [India™](https://example.com?q=भारत&x=1)
+Original:
+Warning ⚠: [India™](https://example.com?q=भारत&x=1)
+
+Tokens:
+['W', 'arn', 'ing', '▁', '⚠', ':', '▁[India', 'T', 'M', '](https://', 'ex', 'amp', 'le', '.com', '?', 'q=', 'भारत', '&', 'x', '=1', ')']
+
+Token IDs:
+[56, 4796, 575, 418, 430, 27, 5559, 53, 46, 563, 991, 3845, 523, 717, 32, 8861, 500, 7, 89, 614, 10]
+
+Decoded:
+Warning ⚠: [IndiaTM](https://example.com?q=भारत&x=1)
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Math: 2×3=6, x≤10, ∞≠0.
+Original:
+Math: 2×3=6, x≤10, ∞≠0.
+
+Tokens:
+['M', 'ath', ':', '▁2', '×', '3', '=', '6,', '▁x', '≤', '10', ',', '▁', '∞', '≠', '0.']
+
+Token IDs:
+[46, 2018, 27, 2191, 109, 20, 30, 8922, 6130, 416, 742, 13, 418, 411, 414, 3397]
+
+Decoded:
+Math: 2×3=6, x≤10, ∞≠0.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Weather: ☀→☁→☂.
+Original:
+Weather: ☀→☁→☂.
+
+Tokens:
+['W', 'ea', 'ther', ':', '▁', '☀', '→', '☁', '→', '☂', '.']
+
+Token IDs:
+[56, 7046, 1416, 27, 418, 419, 395, 420, 395, 421, 15]
+
+Decoded:
+Weather: ☀→☁→☂.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Emoji: India 🇮🇳 and rocket 🚀.
+Original:
+Emoji: India 🇮🇳 and rocket 🚀.
+
+Tokens:
+['E', 'm', 'o', 'ji', ':', '▁India', '▁', '🇮', '🇳', '▁and', '▁ro', 'ck', 'et', '▁', '🚀', '.']
+
+Token IDs:
+[38, 78, 80, 8223, 27, 525, 418, 439, 440, 571, 5589, 2400, 647, 418, 450, 15]
+
+Decoded:
+Emoji: India 🇮🇳 and rocket 🚀.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === Symbols: ©2026 Example™ — all rights reserved®.
+Original:
+Symbols: ©2026 Example™ — all rights reserved®.
+
+Tokens:
+['S', 'ymbols', ':', '▁', '©', '20', '26', '▁Ex', 'amp', 'le', 'T', 'M', '▁—', '▁all', '▁right', 's', '▁res', 'erv', 'ed', '®', '.']
+
+Token IDs:
+[52, 5217, 27, 418, 100, 469, 772, 9809, 3845, 523, 53, 46, 4137, 3776, 5542, 84, 4094, 1792, 476, 102, 15]
+
+Decoded:
+Symbols: ©2026 ExampleTM — all rights reserved®.
+
+Visible round-trip:
+PASS
+
+exit code: 0
+
+=== encoder.py === English हिन्दी తెలుగు বাংলা — four scripts, one tokenizer.
+Original:
+English हिन्दी తెలుగు বাংলা — four scripts, one tokenizer.
+
+Tokens:
+['En', 'glish', '▁हिन्दी', '▁త', 'ెలుగు', '▁বা', 'ংলা', '▁—', '▁four', '▁s', 'crip', 'ts', ',', '▁one', '▁to', 'k', 'en', 'iz', 'er', '.']
+
+Token IDs:
+[3447, 2946, 5208, 1371, 5026, 1537, 2467, 4137, 8160, 574, 4028, 1401, 13, 4691, 779, 76, 474, 2493, 467, 15]
+
+Decoded:
+English हिन्दी తెలుగు বাংলা — four scripts, one tokenizer.
 
 Visible round-trip:
 PASS

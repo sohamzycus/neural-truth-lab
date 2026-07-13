@@ -25,8 +25,48 @@ VOCAB_BUDGET = 10_000
 DEFAULT_WEIGHTS = {"en": 3, "hi": 4, "te": 4, "bn": 2}
 WINNER_WEIGHTS = {"en": 3, "hi": 5, "te": 9, "bn": 5}
 UNK_TOKEN = "<unk>"
-# ponytail: seed alphabet for visible punctuation absent from Wikipedia snapshots (prevents <unk> decode deletion)
-VISIBLE_INITIAL_ALPHABET = list("«»@€£—…–'\".,;:!?()[]{}|/_\\#&%+=*`~")
+# ponytail: seed alphabet for visible symbols absent from Wikipedia snapshots (prevents <unk> decode deletion)
+_BASE_VISIBLE_ALPHABET = "«»@€£—…–'\".,;:!?()[]{}|/_\\#&%+=*`~"
+_EXTENDED_VISIBLE_SYMBOLS = (
+    "‚„‹›―‧※$¥₩₽₿¢"
+    "−×÷≠≤≥±∞√∑∏∫≈≡∂∆"
+    "←→↑↓↔⇒⇐⇔↗↘↙↖"
+    "©®™§¶†‡✓✔✗✘★☆♠♣♥♦⚠⚡☀☁☂☃☕"
+    "βγΩΔλμ॥"
+)
+_EMOJI_ALPHABET_SEEDS = (
+    "😀",
+    "😃",
+    "😂",
+    "❤️",
+    "👍",
+    "🚀",
+    "🌍",
+    "🔥",
+    "🎉",
+    "💡",
+    "🇮🇳",
+    "\U0001F1EE",  # regional indicator I (flag components)
+    "\U0001F1F3",  # regional indicator N
+    "\uFE0F",  # variation selector-16
+    "\U0001F3FD",  # medium skin tone
+    "\u2764",  # heavy black heart
+)
+
+
+def _dedupe_alphabet(items: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            out.append(item)
+    return out
+
+
+VISIBLE_INITIAL_ALPHABET = _dedupe_alphabet(
+    list(_BASE_VISIBLE_ALPHABET + _EXTENDED_VISIBLE_SYMBOLS) + list(_EMOJI_ALPHABET_SEEDS)
+)
 
 
 def sha256_file(path: Path) -> str:
