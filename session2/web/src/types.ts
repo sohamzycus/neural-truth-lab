@@ -1,3 +1,83 @@
+export interface VerifiedSubmission {
+  generated_at: string;
+  tokenizer: {
+    model: string;
+    vocab_size: number;
+    normalizer: Record<string, unknown>;
+    pretokenizer: Record<string, unknown>;
+    decoder: Record<string, unknown>;
+    sha256: string;
+    verified: boolean;
+  };
+  languages: string[];
+  corpora: Record<
+    string,
+    {
+      language: string;
+      language_name: string;
+      article: string;
+      source_url: string;
+      frozen_path: string;
+      sha256: string;
+      faithful_units: number;
+      characters: number;
+      bytes: number;
+    }
+  >;
+  metrics: {
+    faithful_unit_counts: Record<string, number>;
+    token_counts: Record<string, number>;
+    fertilities: Record<string, number>;
+    spread: number;
+    raw_score: number;
+    hindi_penalty: number;
+    adjusted_score: number;
+  };
+  thresholds: { en_under_1_2: boolean; hi_under_1_2: boolean };
+  roundtrip: {
+    reviewer_sample: boolean;
+    full_corpus: Record<string, boolean>;
+    samples: Record<string, boolean>;
+  };
+  vocabularyComposition: {
+    vocab_size: number;
+    categories: Record<string, number>;
+    sum: number;
+  };
+  vocabularyUtilization: {
+    per_corpus_unique_ids: Record<string, number>;
+    used_by_at_least_one: number;
+    unused_by_all_four: number;
+    used_by_exactly_one: number;
+    used_by_all_four: number;
+  };
+  fertilityExamples: {
+    reviewer_sample: {
+      original_text: string;
+      faithful_units: string[];
+      faithful_unit_count: number;
+      bpe_tokens: string[];
+      token_ids?: number[];
+      bpe_token_count: number;
+      fertility: number | null;
+      decoded_text: string;
+    };
+    per_language: Record<string, {
+      original_text: string;
+      faithful_unit_count: number;
+      bpe_token_count: number;
+      fertility: number | null;
+    }>;
+  };
+  optimizer: {
+    total_measured?: number;
+    baseline_weights?: Record<string, number>;
+    candidates_passing_both_thresholds?: number;
+  };
+  provenance: { weights: Record<string, number> };
+  tokenizer_sha256: string;
+}
+
 export interface TokenizerData {
   version: string;
   pretokenization: "whitespace" | "character" | "grapheme";

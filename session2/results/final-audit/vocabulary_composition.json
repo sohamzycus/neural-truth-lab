@@ -1,0 +1,15 @@
+{
+  "vocab_size": 10000,
+  "categories": {
+    "latin_dominant": 4113,
+    "devanagari_dominant": 1684,
+    "telugu_dominant": 1478,
+    "bengali_dominant": 1703,
+    "shared_punctuation_digits_symbols": 895,
+    "mixed_script": 113,
+    "other_unicode": 13,
+    "special_token": 1
+  },
+  "sum": 10000,
+  "sum_matches_vocab_size": true
+}

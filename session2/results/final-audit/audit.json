@@ -1,0 +1,358 @@
+{
+  "verdict": "SUBMISSION READY",
+  "hard_stops": [],
+  "tokenizer": {
+    "model": "BPE",
+    "vocab_size": 10000,
+    "normalizer": {
+      "type": "NFKC"
+    },
+    "pretokenizer": {
+      "type": "Metaspace",
+      "replacement": "▁",
+      "prepend_scheme": "never",
+      "split": true
+    },
+    "decoder": {
+      "type": "Metaspace",
+      "replacement": "▁",
+      "prepend_scheme": "never",
+      "split": true
+    },
+    "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+    "verified": true
+  },
+  "languages": [
+    "en",
+    "hi",
+    "te",
+    "bn"
+  ],
+  "corpora": {
+    "en": {
+      "language": "en",
+      "language_name": "English",
+      "article": "India",
+      "source_url": "https://en.wikipedia.org/wiki/India",
+      "frozen_path": "submission/corpus/en.faithful.txt",
+      "corpus_extension": ".faithful.txt",
+      "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+      "characters": 490271,
+      "bytes": 492307,
+      "faithful_units": 147908,
+      "training_input": true,
+      "evaluation_input": true
+    },
+    "hi": {
+      "language": "hi",
+      "language_name": "Hindi",
+      "article": "भारत",
+      "source_url": "https://hi.wikipedia.org/wiki/%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4",
+      "frozen_path": "submission/corpus/hi.faithful.txt",
+      "corpus_extension": ".faithful.txt",
+      "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+      "characters": 208693,
+      "bytes": 402503,
+      "faithful_units": 67473,
+      "training_input": true,
+      "evaluation_input": true
+    },
+    "te": {
+      "language": "te",
+      "language_name": "Telugu",
+      "article": "భారతదేశం",
+      "source_url": "https://te.wikipedia.org/wiki/%E0%B0%AD%E0%B0%BE%E0%B0%B0%E0%B0%A4%E0%B0%A6%E0%B1%87%E0%B0%B6%E0%B0%82",
+      "frozen_path": "submission/corpus/te.faithful.txt",
+      "corpus_extension": ".faithful.txt",
+      "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+      "characters": 89314,
+      "bytes": 174154,
+      "faithful_units": 27225,
+      "training_input": true,
+      "evaluation_input": true
+    },
+    "bn": {
+      "language": "bn",
+      "language_name": "Bengali",
+      "article": "ভারত",
+      "source_url": "https://bn.wikipedia.org/wiki/%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A6%A4",
+      "frozen_path": "submission/corpus/bn.faithful.txt",
+      "corpus_extension": ".faithful.txt",
+      "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+      "characters": 225189,
+      "bytes": 433066,
+      "faithful_units": 68468,
+      "training_input": true,
+      "evaluation_input": true
+    }
+  },
+  "roundtrip": {
+    "reviewer_sample": true,
+    "reviewer_strict": true,
+    "reviewer_tokens": [
+      "India",
+      "'s",
+      "▁population",
+      "▁is",
+      "▁1,",
+      "4",
+      "28",
+      ",",
+      "6",
+      "27",
+      ",",
+      "66",
+      "3."
+    ],
+    "reviewer_ids": [
+      385,
+      1127,
+      3474,
+      1120,
+      3927,
+      21,
+      713,
+      13,
+      23,
+      965,
+      13,
+      6544,
+      1565
+    ],
+    "reviewer_decoded": "India's population is 1,428,627,663.",
+    "full_corpus": {
+      "en": true,
+      "hi": true,
+      "te": true,
+      "bn": true
+    },
+    "valid": true,
+    "samples": {
+      "India's population is 1,428,627,663.": true,
+      "[India](https://en.wikipedia.org/wiki/India)": true,
+      "https://en.wikipedia.org/wiki/India?x=1&y=2#History": true,
+      "1,428,627,663.50": true,
+      "**India** _भारत_ ~~test~~": true,
+      "| Country | Population |": true,
+      "## History of India": true,
+      "India[1][2][citation needed]": true,
+      "India भारत తెలుగు বাংলা — 2026!": true,
+      "₹ $ € % + = / \\ : ; @ # & ? !": false
+    }
+  },
+  "metrics": {
+    "faithful_unit_counts": {
+      "en": 147908,
+      "hi": 67473,
+      "te": 27225,
+      "bn": 68468
+    },
+    "token_counts": {
+      "en": 126158,
+      "hi": 55978,
+      "te": 22993,
+      "bn": 58100
+    },
+    "fertilities": {
+      "en": 0.8529491305406063,
+      "hi": 0.8296355579268745,
+      "te": 0.84455463728191,
+      "bn": 0.8485715954898638
+    },
+    "spread": 0.023313572613731792,
+    "raw_score": 42893.46882043277,
+    "hindi_penalty": 1.0,
+    "adjusted_score": 42893.46882043277
+  },
+  "thresholds": {
+    "en_under_1_2": true,
+    "hi_under_1_2": true
+  },
+  "claims": [
+    {
+      "claim": "tokenizer.sha256",
+      "saved": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "fresh": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "en.faithful_units",
+      "saved": 147908,
+      "fresh": 147908,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "en.tokens",
+      "saved": 126158,
+      "fresh": 126158,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "en.fertility",
+      "saved": 0.8529491305406063,
+      "fresh": 0.8529491305406063,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "hi.faithful_units",
+      "saved": 67473,
+      "fresh": 67473,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "hi.tokens",
+      "saved": 55978,
+      "fresh": 55978,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "hi.fertility",
+      "saved": 0.8296355579268745,
+      "fresh": 0.8296355579268745,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "te.faithful_units",
+      "saved": 27225,
+      "fresh": 27225,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "te.tokens",
+      "saved": 22993,
+      "fresh": 22993,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "te.fertility",
+      "saved": 0.84455463728191,
+      "fresh": 0.84455463728191,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "bn.faithful_units",
+      "saved": 68468,
+      "fresh": 68468,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "bn.tokens",
+      "saved": 58100,
+      "fresh": 58100,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "bn.fertility",
+      "saved": 0.8485715954898638,
+      "fresh": 0.8485715954898638,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "spread",
+      "saved": 0.023313572613731792,
+      "fresh": 0.023313572613731792,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "raw_score",
+      "saved": 42893.46882043277,
+      "fresh": 42893.46882043277,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "hindi_penalty",
+      "saved": 1.0,
+      "fresh": 1.0,
+      "status": "VERIFIED"
+    },
+    {
+      "claim": "adjusted_score",
+      "saved": 42893.46882043277,
+      "fresh": 42893.46882043277,
+      "status": "VERIFIED"
+    }
+  ],
+  "discrepancies": [],
+  "vocabulary_composition": {
+    "vocab_size": 10000,
+    "categories": {
+      "latin_dominant": 4113,
+      "devanagari_dominant": 1684,
+      "telugu_dominant": 1478,
+      "bengali_dominant": 1703,
+      "shared_punctuation_digits_symbols": 895,
+      "mixed_script": 113,
+      "other_unicode": 13,
+      "special_token": 1
+    },
+    "sum": 10000,
+    "sum_matches_vocab_size": true
+  },
+  "vocabulary_utilization": {
+    "per_corpus_unique_ids": {
+      "en": 4331,
+      "hi": 4124,
+      "te": 3220,
+      "bn": 4531
+    },
+    "used_by_at_least_one": 9211,
+    "unused_by_all_four": 789,
+    "used_by_exactly_one": 5619,
+    "used_by_exactly_two": 1281,
+    "used_by_exactly_three": 1219,
+    "used_by_all_four": 1092,
+    "overlap_matrix": {
+      "en": {
+        "en": 4331,
+        "hi": 2360,
+        "te": 1737,
+        "bn": 2758
+      },
+      "hi": {
+        "en": 2360,
+        "hi": 4124,
+        "te": 1327,
+        "bn": 1946
+      },
+      "te": {
+        "en": 1737,
+        "hi": 1327,
+        "te": 3220,
+        "bn": 1362
+      },
+      "bn": {
+        "en": 2758,
+        "hi": 1946,
+        "te": 1362,
+        "bn": 4531
+      }
+    }
+  },
+  "optimizer": {
+    "registry_path": "results/resubmission/experiments.json",
+    "architecture": "NFKC+Metaspace",
+    "total_measured": 2570,
+    "valid_roundtrip": 2570,
+    "both_thresholds": 2570,
+    "winner_experiment_id": "faithful-hf-2361",
+    "winner_weights": {
+      "en": 3,
+      "hi": 5,
+      "te": 9,
+      "bn": 5
+    },
+    "baseline_weights": {
+      "en": 3,
+      "hi": 4,
+      "te": 4,
+      "bn": 2
+    },
+    "valid_candidates": 2570,
+    "candidates_passing_both_thresholds": 2570,
+    "legacy_note": "Prior non-faithful experiments (NFKC+Whitespace) are not in this registry."
+  },
+  "risks": [
+    "Rare Unicode symbols (€, @) fail isolated round-trip stress sample"
+  ],
+  "authoritative_corpus": "submission/corpus/{lang}.faithful.txt (preferred; .md identical byte-for-byte)"
+}

@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:netlify": "vite build && test -f dist/index.html",
+    "build:netlify": "test -f public/data/verifiedSubmission.json || (echo 'Missing verifiedSubmission.json — run python scripts/generate_verified_submission_data.py' && exit 1); vite build && test -f dist/index.html",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest run"

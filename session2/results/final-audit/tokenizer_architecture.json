@@ -1,0 +1,21 @@
+{
+  "model": "BPE",
+  "vocab_size": 10000,
+  "normalizer": {
+    "type": "NFKC"
+  },
+  "pretokenizer": {
+    "type": "Metaspace",
+    "replacement": "▁",
+    "prepend_scheme": "never",
+    "split": true
+  },
+  "decoder": {
+    "type": "Metaspace",
+    "replacement": "▁",
+    "prepend_scheme": "never",
+    "split": true
+  },
+  "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "verified": true
+}

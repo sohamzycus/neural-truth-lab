@@ -66,7 +66,12 @@ def main() -> int:
     shutil.copy2(SUB / "metrics.json", sub_dir / "metrics.json")
     shutil.copy2(ROOT / "submission" / "encoder.py", sub_dir / "encoder.py")
     shutil.copy2(SUB / "evaluate_tokenizer.py", sub_dir / "evaluate_tokenizer.py")
+    corp_web = sub_dir / "corpus"
+    corp_web.mkdir(exist_ok=True)
+    for f in (SUB / "corpus").glob("*"):
+        shutil.copy2(f, corp_web / f.name)
     subprocess.check_call([sys.executable, str(ROOT / "scripts" / "export_playground_parity.py")])
+    subprocess.check_call([sys.executable, str(ROOT / "scripts" / "generate_verified_submission_data.py")])
     print("Synced resubmission artefacts to submission/ and web/public/data/")
     return 0
 
