@@ -1,6 +1,6 @@
 # SamaBPE
 
-SamaBPE is one standard Hugging Face BPE tokenizer trained across faithful Markdown snapshots of India's Wikipedia page in English, Hindi, Telugu and Bengali.
+**How should four languages share just 10,000 tokens?** SamaBPE searches multilingual training exposure on top of standard Hugging Face BPE — English, Hindi, Telugu and Bengali on India's Wikipedia page.
 
 **Production:** https://sama-bpe-tokenizer-413.netlify.app
 

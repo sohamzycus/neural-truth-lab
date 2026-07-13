@@ -76,6 +76,14 @@ export interface VerifiedSubmission {
   };
   provenance: { weights: Record<string, number> };
   tokenizer_sha256: string;
+  baseline?: {
+    weights: Record<string, number>;
+    fertilities: Record<string, number>;
+    spread: number;
+    adjusted_score: number;
+  };
+  baselineVsWinner?: Record<string, unknown>;
+  vocabularyMap?: Array<{ id: number; token: string; category: string }>;
 }
 
 export interface TokenizerData {

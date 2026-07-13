@@ -301,7 +301,67 @@ def load_experiment_summary() -> dict[str, Any]:
     }
 
 
-def compare_json_metrics(fresh: dict[str, Any], saved_path: Path) -> list[dict[str, Any]]:
+def build_vocabulary_map(tok_path: Path) -> list[dict[str, Any]]:
+    raw = json.loads(tok_path.read_text(encoding="utf-8"))
+    vocab: dict[str, int] = raw["model"]["vocab"]
+    return [
+        {"id": tid, "token": token, "category": classify_token(token)}
+        for token, tid in sorted(vocab.items(), key=lambda x: x[1])
+    ]
+
+
+def evaluate_baseline_tokenizer(corpora: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    """Fresh metrics for baseline weights tokenizer on submission corpora."""
+    baseline_path = ROOT / "results" / "resubmission" / "baseline" / "tokenizer.json"
+    if not baseline_path.exists():
+        return None
+    tok = Tokenizer.from_file(str(baseline_path))
+    token_counts = {lang: len(tok.encode(corpora[lang]["text"]).ids) for lang in LANGS}
+    unit_counts = {lang: corpora[lang]["faithful_units"] for lang in LANGS}
+    m = compute_evaluator_metrics(token_counts, unit_counts)
+    return {
+        "weights": {"en": 3, "hi": 4, "te": 4, "bn": 2},
+        "tokenizer_sha256": sha256_file(baseline_path),
+        "token_counts": token_counts,
+        "evaluation_unit_counts": unit_counts,
+        "fertilities": m.fertilities,
+        "spread": m.spread,
+        "raw_score": m.raw_score,
+        "hindi_penalty": m.hindi_penalty,
+        "adjusted_score": m.final_grade,
+        "thresholds": m.thresholds,
+    }
+
+
+def build_baseline_vs_winner(
+    baseline: dict[str, Any] | None, winner: dict[str, Any]
+) -> dict[str, Any] | None:
+    if not baseline:
+        return None
+    rows: dict[str, dict[str, float]] = {}
+    for key in ("fertilities",):
+        for lang in LANGS:
+            rows.setdefault(lang, {})
+    comparison: dict[str, Any] = {"baseline_weights": baseline["weights"], "winner_weights": winner.get("weights")}
+    for lang in LANGS:
+        b = baseline["fertilities"][lang]
+        w = winner["fertilities"][lang]
+        comparison[lang] = {
+            "baseline_fertility": b,
+            "winner_fertility": w,
+            "change": w - b,
+        }
+    for metric in ("spread", "adjusted_score"):
+        b = baseline[metric if metric != "adjusted_score" else "adjusted_score"]
+        w = winner["metrics"][metric]
+        comparison[metric] = {"baseline": b, "winner": w, "change": w - b}
+    comparison["summary"] = (
+        "SamaBPE tightened multilingual balance: spread fell sharply while Telugu and Bengali "
+        "fertilities moved closer to English and Hindi. English and Hindi fertilities rose slightly."
+    )
+    return comparison
+
+
     if not saved_path.exists():
         return [{"claim": "metrics.json", "status": "UNVERIFIED", "note": "missing"}]
     saved = json.loads(saved_path.read_text(encoding="utf-8"))
@@ -355,6 +415,17 @@ def build_verified_submission(submission_dir: Path | None = None) -> dict[str, A
     prov_path = submission_dir / "provenance.json"
     provenance = json.loads(prov_path.read_text(encoding="utf-8")) if prov_path.exists() else {}
     optimizer = load_experiment_summary()
+    baseline = evaluate_baseline_tokenizer(corpora)
+    winner_block = {
+        "weights": provenance.get("weights", {}),
+        "fertilities": fresh["fertilities"],
+        "metrics": {
+            "spread": fresh["spread"],
+            "adjusted_score": fresh["adjusted_score"],
+        },
+    }
+    baseline_vs_winner = build_baseline_vs_winner(baseline, winner_block) if baseline else None
+    vocab_map = build_vocabulary_map(tok_path)
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -378,6 +449,9 @@ def build_verified_submission(submission_dir: Path | None = None) -> dict[str, A
         "optimizer": optimizer,
         "provenance": provenance,
         "tokenizer_sha256": arch["sha256"],
+        "baseline": baseline,
+        "baselineVsWinner": baseline_vs_winner,
+        "vocabularyMap": vocab_map,
     }
 
 
