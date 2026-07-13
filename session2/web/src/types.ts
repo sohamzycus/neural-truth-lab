@@ -95,6 +95,12 @@ export interface VerifiedSubmission {
     passed_roundtrip: number;
     passed_both_thresholds: number;
     winner_count: number;
+    ui_headline?: string;
+  };
+  experimentIntegrity?: {
+    verified_2570_claim?: boolean;
+    ui_headline?: string;
+    total_records?: number;
   };
   vocabularyMap?: Array<{ id: number; token: string; category: string }>;
 }

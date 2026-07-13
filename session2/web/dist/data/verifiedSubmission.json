@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T17:36:27.645848+00:00",
+  "generated_at": "2026-07-13T17:54:37.010607+00:00",
   "tokenizer": {
     "model": "BPE",
     "vocab_size": 10000,
@@ -737,7 +737,8 @@
     },
     "valid_candidates": 2570,
     "candidates_passing_both_thresholds": 2570,
-    "legacy_note": "Prior non-faithful experiments (NFKC+Whitespace) are not in this registry."
+    "legacy_note": "Prior non-faithful experiments (NFKC+Whitespace) are not in this registry.",
+    "ui_headline": "2,570 real Hugging Face BPE candidates trained and measured"
   },
   "provenance": {
     "strategy": "faithful-adaptive-weight-search",
@@ -921,7 +922,8 @@
     "passed_both_thresholds": 2570,
     "winner_count": 1,
     "architecture": "NFKC+Metaspace",
-    "note": "Registry records one trained HF BPE per unique weight config under NFKC+Metaspace."
+    "note": "Registry records one trained HF BPE per unique weight config under NFKC+Metaspace.",
+    "ui_headline": "2,570 real Hugging Face BPE candidates trained and measured"
   },
   "vocabularyMap": [
     {
@@ -50924,5 +50926,148 @@
       "token": "](./Special:BookSources/978-81",
       "category": "latin_dominant"
     }
-  ]
+  ],
+  "experimentIntegrity": {
+    "generated_at": "2026-07-13T17:54:37.039696+00:00",
+    "registry_path": "results/resubmission/experiments.json",
+    "registry_architecture": "NFKC+Metaspace",
+    "total_records": 2570,
+    "huggingface_bpe_runs": 2570,
+    "unique_weight_configurations": 2570,
+    "unique_canonical_weight_ratios": 2570,
+    "scale_equivalent_duplicates_in_registry": 0,
+    "nfkc_metaspace_architecture": 2570,
+    "four_language_corpora": 2570,
+    "loadable_tokenizer_records": 2570,
+    "passed_lossless_roundtrip": 2570,
+    "passed_en_under_1_2": 2570,
+    "passed_hi_under_1_2": 2570,
+    "passed_both_thresholds": 2570,
+    "status_breakdown": {
+      "VALID_MEASURED": 2570
+    },
+    "engine_breakdown": {
+      "huggingface-bpe": 2570
+    },
+    "legacy_mixed_into_registry": false,
+    "legacy_note": "Prior non-NFKC+Metaspace experiments are in separate results/ artifacts, not this registry.",
+    "verified_2570_claim": true,
+    "ui_headline": "2,570 real Hugging Face BPE candidates trained and measured",
+    "winner_experiment_id": "faithful-hf-2361"
+  },
+  "artifactParity": {
+    "generated_at": "2026-07-13T17:54:37.709265+00:00",
+    "authoritative_tokenizer": "submission/tokenizer.json",
+    "authoritative_tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+    "tokenizer_copies": [
+      {
+        "path": "submission/tokenizer.json",
+        "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+        "matches_submission": true,
+        "status": "VERIFIED"
+      },
+      {
+        "path": "web/public/data/submission/tokenizer.json",
+        "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+        "matches_submission": true,
+        "status": "VERIFIED"
+      },
+      {
+        "path": "web/dist/data/submission/tokenizer.json",
+        "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+        "matches_submission": true,
+        "status": "VERIFIED"
+      },
+      {
+        "path": "results/resubmission/final/tokenizer.json",
+        "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+        "matches_submission": true,
+        "status": "VERIFIED"
+      }
+    ],
+    "corpus_copies": [
+      {
+        "language": "en",
+        "path": "web/public/data/submission/corpus/en.faithful.txt",
+        "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+        "matches_submission": true
+      },
+      {
+        "language": "en",
+        "path": "web/dist/data/submission/corpus/en.faithful.txt",
+        "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+        "matches_submission": true
+      },
+      {
+        "language": "en",
+        "path": "submission/corpus/en.faithful.txt",
+        "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+        "matches_submission": true
+      },
+      {
+        "language": "hi",
+        "path": "web/public/data/submission/corpus/hi.faithful.txt",
+        "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+        "matches_submission": true
+      },
+      {
+        "language": "hi",
+        "path": "web/dist/data/submission/corpus/hi.faithful.txt",
+        "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+        "matches_submission": true
+      },
+      {
+        "language": "hi",
+        "path": "submission/corpus/hi.faithful.txt",
+        "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+        "matches_submission": true
+      },
+      {
+        "language": "te",
+        "path": "web/public/data/submission/corpus/te.faithful.txt",
+        "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+        "matches_submission": true
+      },
+      {
+        "language": "te",
+        "path": "web/dist/data/submission/corpus/te.faithful.txt",
+        "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+        "matches_submission": true
+      },
+      {
+        "language": "te",
+        "path": "submission/corpus/te.faithful.txt",
+        "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+        "matches_submission": true
+      },
+      {
+        "language": "bn",
+        "path": "web/public/data/submission/corpus/bn.faithful.txt",
+        "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+        "matches_submission": true
+      },
+      {
+        "language": "bn",
+        "path": "web/dist/data/submission/corpus/bn.faithful.txt",
+        "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+        "matches_submission": true
+      },
+      {
+        "language": "bn",
+        "path": "submission/corpus/bn.faithful.txt",
+        "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+        "matches_submission": true
+      }
+    ],
+    "winner_registry_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+    "winner_sha_matches_submission": true,
+    "all_tokenizer_artifacts_identical": true,
+    "all_corpus_artifacts_identical": true,
+    "verdict": "PASS"
+  },
+  "playgroundParity": {
+    "case_count": 21,
+    "all_pass": true,
+    "pass_count": 21
+  }
 }

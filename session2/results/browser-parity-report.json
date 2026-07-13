@@ -1,0 +1,770 @@
+{
+  "generated_at": "2026-07-13T17:54:38.391Z",
+  "cases": [
+    {
+      "input": "India's population is 1,428,627,663.",
+      "ids": [
+        385,
+        1127,
+        3474,
+        1120,
+        3927,
+        21,
+        713,
+        13,
+        23,
+        965,
+        13,
+        6544,
+        1565
+      ],
+      "tokens": [
+        "India",
+        "'s",
+        "▁population",
+        "▁is",
+        "▁1,",
+        "4",
+        "28",
+        ",",
+        "6",
+        "27",
+        ",",
+        "66",
+        "3."
+      ],
+      "decoded": "India's population is 1,428,627,663.",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "भारत एक विशाल देश है।",
+      "ids": [
+        414,
+        1596,
+        363,
+        1072,
+        644,
+        1771,
+        1266
+      ],
+      "tokens": [
+        "भारत",
+        "▁एक",
+        "▁",
+        "विश",
+        "ाल",
+        "▁देश",
+        "▁है।"
+      ],
+      "decoded": "भारत एक विशाल देश है।",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "భారతదేశం వైవిధ్యభరితమైన దేశం.",
+      "ids": [
+        677,
+        8364,
+        1092,
+        1708,
+        315,
+        625,
+        307,
+        2697,
+        4539,
+        15
+      ],
+      "tokens": [
+        "భారతదేశం",
+        "▁వై",
+        "వి",
+        "ధ్య",
+        "భ",
+        "రి",
+        "త",
+        "మైన",
+        "▁దేశం",
+        "."
+      ],
+      "decoded": "భారతదేశం వైవిధ్యభరితమైన దేశం.",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "ভারত একটি বৈচিত্র্যময় দেশ।",
+      "ids": [
+        401,
+        2422,
+        3187,
+        6006,
+        8197,
+        2157,
+        199
+      ],
+      "tokens": [
+        "ভারত",
+        "▁একটি",
+        "▁বৈ",
+        "চিত্র্য",
+        "ময়",
+        "▁দেশ",
+        "।"
+      ],
+      "decoded": "ভারত একটি বৈচিত্র্যময় দেশ।",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "India भारत తెలుగు বাংলা",
+      "ids": [
+        385,
+        706,
+        1285,
+        4940,
+        1451,
+        2381
+      ],
+      "tokens": [
+        "India",
+        "▁भारत",
+        "▁త",
+        "ెలుగు",
+        "▁বা",
+        "ংলা"
+      ],
+      "decoded": "India भारत తెలుగు বাংলা",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "https://en.wikipedia.org/wiki/India",
+      "ids": [
+        7657,
+        388,
+        6100,
+        3878,
+        385
+      ],
+      "tokens": [
+        "https://",
+        "en",
+        ".wikipedia",
+        ".org/wiki/",
+        "India"
+      ],
+      "decoded": "https://en.wikipedia.org/wiki/India",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "[India](https://en.wikipedia.org/wiki/India)",
+      "ids": [
+        59,
+        385,
+        7877,
+        6100,
+        3878,
+        385,
+        10
+      ],
+      "tokens": [
+        "[",
+        "India",
+        "](https://en",
+        ".wikipedia",
+        ".org/wiki/",
+        "India",
+        ")"
+      ],
+      "decoded": "[India](https://en.wikipedia.org/wiki/India)",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "don't can't won't",
+      "ids": [
+        68,
+        374,
+        8,
+        84,
+        8790,
+        8,
+        84,
+        605,
+        374,
+        8,
+        84
+      ],
+      "tokens": [
+        "d",
+        "on",
+        "'",
+        "t",
+        "▁can",
+        "'",
+        "t",
+        "▁w",
+        "on",
+        "'",
+        "t"
+      ],
+      "decoded": "don't can't won't",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "1,428,627,663.50",
+      "ids": [
+        2506,
+        21,
+        713,
+        13,
+        23,
+        965,
+        13,
+        6544,
+        1565,
+        785
+      ],
+      "tokens": [
+        "1,",
+        "4",
+        "28",
+        ",",
+        "6",
+        "27",
+        ",",
+        "66",
+        "3.",
+        "50"
+      ],
+      "decoded": "1,428,627,663.50",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "(parentheses) [brackets] {braces}",
+      "ids": [
+        9,
+        80,
+        2398,
+        78,
+        378,
+        393,
+        393,
+        10,
+        368,
+        1134,
+        2546,
+        9026,
+        61,
+        363,
+        91,
+        1134,
+        452,
+        393,
+        93
+      ],
+      "tokens": [
+        "(",
+        "p",
+        "are",
+        "n",
+        "th",
+        "es",
+        "es",
+        ")",
+        "▁[",
+        "br",
+        "ack",
+        "ets",
+        "]",
+        "▁",
+        "{",
+        "br",
+        "ac",
+        "es",
+        "}"
+      ],
+      "decoded": "(parentheses) [brackets] {braces}",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "pipe | underscore _ test",
+      "ids": [
+        80,
+        593,
+        69,
+        987,
+        363,
+        1193,
+        658,
+        67,
+        1148,
+        627,
+        2350,
+        787
+      ],
+      "tokens": [
+        "p",
+        "ip",
+        "e",
+        "▁|",
+        "▁",
+        "und",
+        "ers",
+        "c",
+        "ore",
+        "▁_",
+        "▁te",
+        "st"
+      ],
+      "decoded": "pipe | underscore _ test",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "colon: semicolon;",
+      "ids": [
+        67,
+        7530,
+        27,
+        488,
+        7288,
+        7530,
+        28
+      ],
+      "tokens": [
+        "c",
+        "olon",
+        ":",
+        "▁s",
+        "emic",
+        "olon",
+        ";"
+      ],
+      "decoded": "colon: semicolon;",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "path/to/file?x=1&y=2#anchor",
+      "ids": [
+        80,
+        1932,
+        16,
+        569,
+        16,
+        524,
+        437,
+        32,
+        88,
+        528,
+        7,
+        7922,
+        19,
+        4,
+        386,
+        433,
+        380
+      ],
+      "tokens": [
+        "p",
+        "ath",
+        "/",
+        "to",
+        "/",
+        "fi",
+        "le",
+        "?",
+        "x",
+        "=1",
+        "&",
+        "y=",
+        "2",
+        "#",
+        "an",
+        "ch",
+        "or"
+      ],
+      "decoded": "path/to/file?x=1&y=2#anchor",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "«unicode» — em-dash … ellipsis",
+      "ids": [
+        0,
+        749,
+        426,
+        4572,
+        0,
+        4051,
+        6636,
+        1677,
+        3425,
+        4520,
+        363,
+        5098,
+        593,
+        83,
+        398
+      ],
+      "tokens": [
+        "<unk>",
+        "un",
+        "ic",
+        "ode",
+        "<unk>",
+        "▁—",
+        "▁em",
+        "-d",
+        "ash",
+        "▁...",
+        "▁",
+        "ell",
+        "ip",
+        "s",
+        "is"
+      ],
+      "decoded": "unicode — em-dash ... ellipsis",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "EN हिंदी తెలుగు বাংলা mixed",
+      "ids": [
+        37,
+        46,
+        2154,
+        1588,
+        188,
+        1285,
+        4940,
+        1451,
+        2381,
+        5257,
+        88,
+        390
+      ],
+      "tokens": [
+        "E",
+        "N",
+        "▁हि",
+        "ंद",
+        "ी",
+        "▁త",
+        "ెలుగు",
+        "▁বা",
+        "ংলা",
+        "▁mi",
+        "x",
+        "ed"
+      ],
+      "decoded": "EN हिंदी తెలుగు বাংলা mixed",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "word   with   repeated   spaces",
+      "ids": [
+        87,
+        1620,
+        363,
+        363,
+        1460,
+        363,
+        363,
+        937,
+        2170,
+        2318,
+        363,
+        363,
+        4851,
+        452,
+        393
+      ],
+      "tokens": [
+        "w",
+        "ord",
+        "▁",
+        "▁",
+        "▁with",
+        "▁",
+        "▁",
+        "▁re",
+        "pe",
+        "ated",
+        "▁",
+        "▁",
+        "▁sp",
+        "ac",
+        "es"
+      ],
+      "decoded": "word   with   repeated   spaces",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "Table | Header | Value",
+      "ids": [
+        52,
+        3930,
+        987,
+        786,
+        7863,
+        381,
+        987,
+        5891,
+        1502
+      ],
+      "tokens": [
+        "T",
+        "able",
+        "▁|",
+        "▁H",
+        "ead",
+        "er",
+        "▁|",
+        "▁Val",
+        "ue"
+      ],
+      "decoded": "Table | Header | Value",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "## Markdown heading",
+      "ids": [
+        907,
+        616,
+        1584,
+        68,
+        5454,
+        4295,
+        468,
+        489
+      ],
+      "tokens": [
+        "##",
+        "▁M",
+        "ark",
+        "d",
+        "own",
+        "▁he",
+        "ad",
+        "ing"
+      ],
+      "decoded": "## Markdown heading",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "COVID-19 pandemic",
+      "ids": [
+        2927,
+        54,
+        3161,
+        1253,
+        471,
+        584,
+        7288
+      ],
+      "tokens": [
+        "CO",
+        "V",
+        "ID",
+        "-19",
+        "▁p",
+        "and",
+        "emic"
+      ],
+      "decoded": "COVID-19 pandemic",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "₹100 and $50",
+      "ids": [
+        360,
+        2436,
+        485,
+        3062,
+        785
+      ],
+      "tokens": [
+        "₹",
+        "100",
+        "▁and",
+        "▁$",
+        "50"
+      ],
+      "decoded": "₹100 and $50",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "see https://example.com/path for info",
+      "ids": [
+        1256,
+        69,
+        363,
+        7657,
+        905,
+        3759,
+        437,
+        652,
+        80,
+        1932,
+        1126,
+        484,
+        8017
+      ],
+      "tokens": [
+        "se",
+        "e",
+        "▁",
+        "https://",
+        "ex",
+        "amp",
+        "le",
+        ".com/",
+        "p",
+        "ath",
+        "▁for",
+        "▁in",
+        "fo"
+      ],
+      "decoded": "see https://example.com/path for info",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "India",
+      "ids": [
+        385
+      ],
+      "tokens": [
+        "India"
+      ],
+      "decoded": "India",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "भारत",
+      "ids": [
+        414
+      ],
+      "tokens": [
+        "भारत"
+      ],
+      "decoded": "भारत",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "తెలుగు",
+      "ids": [
+        5222
+      ],
+      "tokens": [
+        "తెలుగు"
+      ],
+      "decoded": "తెలుగు",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "বাংলা",
+      "ids": [
+        2518
+      ],
+      "tokens": [
+        "বাংলা"
+      ],
+      "decoded": "বাংলা",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "India भारत భారతదేశం ভারত",
+      "ids": [
+        385,
+        706,
+        1844,
+        772
+      ],
+      "tokens": [
+        "India",
+        "▁भारत",
+        "▁భారతదేశం",
+        "▁ভারত"
+      ],
+      "decoded": "India भारत భారతదేశం ভারত",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "India is a diverse country.",
+      "ids": [
+        385,
+        1120,
+        415,
+        648,
+        945,
+        69,
+        5961,
+        15
+      ],
+      "tokens": [
+        "India",
+        "▁is",
+        "▁a",
+        "▁d",
+        "ivers",
+        "e",
+        "▁country",
+        "."
+      ],
+      "decoded": "India is a diverse country.",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "भारत एक विविध देश है।",
+      "ids": [
+        414,
+        1596,
+        1340,
+        620,
+        169,
+        1771,
+        1266
+      ],
+      "tokens": [
+        "भारत",
+        "▁एक",
+        "▁वि",
+        "वि",
+        "ध",
+        "▁देश",
+        "▁है।"
+      ],
+      "decoded": "भारत एक विविध देश है।",
+      "ids_match_python_fixture": true
+    },
+    {
+      "input": "mixed EN हिंदी తెలుగు বাংলা text",
+      "ids": [
+        77,
+        6083,
+        390,
+        796,
+        46,
+        2154,
+        1588,
+        188,
+        1285,
+        4940,
+        1451,
+        2381,
+        7358,
+        84
+      ],
+      "tokens": [
+        "m",
+        "ix",
+        "ed",
+        "▁E",
+        "N",
+        "▁हि",
+        "ंद",
+        "ी",
+        "▁త",
+        "ెలుగు",
+        "▁বা",
+        "ংলা",
+        "▁tex",
+        "t"
+      ],
+      "decoded": "mixed EN हिंदी తెలుగు বাংলা text",
+      "ids_match_python_fixture": true
+    }
+  ]
+}

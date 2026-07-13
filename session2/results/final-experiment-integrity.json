@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-07-13T17:54:37.039696+00:00",
+  "registry_path": "results/resubmission/experiments.json",
+  "registry_architecture": "NFKC+Metaspace",
+  "total_records": 2570,
+  "huggingface_bpe_runs": 2570,
+  "unique_weight_configurations": 2570,
+  "unique_canonical_weight_ratios": 2570,
+  "scale_equivalent_duplicates_in_registry": 0,
+  "nfkc_metaspace_architecture": 2570,
+  "four_language_corpora": 2570,
+  "loadable_tokenizer_records": 2570,
+  "passed_lossless_roundtrip": 2570,
+  "passed_en_under_1_2": 2570,
+  "passed_hi_under_1_2": 2570,
+  "passed_both_thresholds": 2570,
+  "status_breakdown": {
+    "VALID_MEASURED": 2570
+  },
+  "engine_breakdown": {
+    "huggingface-bpe": 2570
+  },
+  "legacy_mixed_into_registry": false,
+  "legacy_note": "Prior non-NFKC+Metaspace experiments are in separate results/ artifacts, not this registry.",
+  "verified_2570_claim": true,
+  "ui_headline": "2,570 real Hugging Face BPE candidates trained and measured",
+  "winner_experiment_id": "faithful-hf-2361"
+}

@@ -1,0 +1,82 @@
+{
+  "tokenizer_path": "submission/tokenizer.json",
+  "tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "vocab_size": 10000,
+  "categories": {
+    "latin_dominant": 4113,
+    "devanagari_dominant": 1684,
+    "telugu_dominant": 1478,
+    "bengali_dominant": 1703,
+    "shared_punctuation_digits_symbols": 895,
+    "mixed_script": 113,
+    "other_unicode": 13,
+    "special_token": 1
+  },
+  "percentages": {
+    "latin_dominant": 41.13,
+    "devanagari_dominant": 16.84,
+    "telugu_dominant": 14.78,
+    "bengali_dominant": 17.03,
+    "shared_punctuation_digits_symbols": 8.95,
+    "mixed_script": 1.13,
+    "other_unicode": 0.13,
+    "special_token": 0.01
+  },
+  "sum": 10000,
+  "sum_matches_vocab_size": true,
+  "sample_tokens": {
+    "latin_dominant": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "devanagari_dominant": [
+      "ँ",
+      "ं",
+      "ः",
+      "अ",
+      "आ"
+    ],
+    "telugu_dominant": [
+      "ం",
+      "ః",
+      "అ",
+      "ఆ",
+      "ఇ"
+    ],
+    "bengali_dominant": [
+      "ঁ",
+      "ং",
+      "ঃ",
+      "অ",
+      "আ"
+    ],
+    "shared_punctuation_digits_symbols": [
+      "\n",
+      "!",
+      "\"",
+      "#",
+      "$"
+    ],
+    "mixed_script": [
+      "](./भारत#cite_ref-",
+      "]](./भारत#cite_note-",
+      "]](./ভারত#cite_note-",
+      "▁[↑](./ভারত#cite_ref-",
+      "▁[↑](./भारत#cite_ref-"
+    ],
+    "other_unicode": [
+      "ʼ",
+      "ˈ",
+      "ː",
+      "ί",
+      "α"
+    ],
+    "special_token": [
+      "<unk>"
+    ]
+  },
+  "note": "Vocabulary composition by script — not language ownership."
+}

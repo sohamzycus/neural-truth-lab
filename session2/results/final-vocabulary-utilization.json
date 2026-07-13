@@ -1,0 +1,40 @@
+{
+  "per_corpus_unique_ids": {
+    "en": 4331,
+    "hi": 4124,
+    "te": 3220,
+    "bn": 4531
+  },
+  "used_by_at_least_one": 9211,
+  "unused_by_all_four": 789,
+  "used_by_exactly_one": 5619,
+  "used_by_exactly_two": 1281,
+  "used_by_exactly_three": 1219,
+  "used_by_all_four": 1092,
+  "overlap_matrix": {
+    "en": {
+      "en": 4331,
+      "hi": 2360,
+      "te": 1737,
+      "bn": 2758
+    },
+    "hi": {
+      "en": 2360,
+      "hi": 4124,
+      "te": 1327,
+      "bn": 1946
+    },
+    "te": {
+      "en": 1737,
+      "hi": 1327,
+      "te": 3220,
+      "bn": 1362
+    },
+    "bn": {
+      "en": 2758,
+      "hi": 1946,
+      "te": 1362,
+      "bn": 4531
+    }
+  }
+}

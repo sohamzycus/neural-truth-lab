@@ -122,6 +122,12 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
   const opt = data.optimizer;
   const cmp = data.baselineVsWinner;
   const util = data.vocabularyUtilization;
+  const experimentHeadline =
+    data.experimentIntegrity?.ui_headline ??
+    data.experimentFunnel?.ui_headline ??
+    (data.experimentIntegrity?.verified_2570_claim
+      ? "2,570 real HF BPE candidates"
+      : `${data.experimentFunnel?.candidates_trained?.toLocaleString() ?? opt.total_measured?.toLocaleString() ?? "—"} candidates`);
 
   const evalUnits = (lang: string) =>
     m.evaluation_unit_counts?.[lang] ?? m.faithful_unit_counts[lang];
@@ -145,7 +151,7 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
               ["4", "languages"],
               ["10,000", "shared vocabulary"],
               ["1", "Hugging Face BPE"],
-              [data.experimentFunnel?.candidates_trained?.toLocaleString() ?? opt.total_measured?.toLocaleString() ?? "—", "candidates trained"],
+              [String(data.experimentFunnel?.candidates_trained?.toLocaleString() ?? opt.total_measured?.toLocaleString() ?? "—"), experimentHeadline],
             ].map(([n, l]) => (
               <li key={l} className="rounded-lg border border-[var(--color-indigo)]/15 p-4 text-center">
                 <div className="font-mono text-2xl font-bold">{n}</div>

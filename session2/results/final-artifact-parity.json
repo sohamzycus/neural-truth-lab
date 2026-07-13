@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-07-13T17:54:37.709265+00:00",
+  "authoritative_tokenizer": "submission/tokenizer.json",
+  "authoritative_tokenizer_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "tokenizer_copies": [
+    {
+      "path": "submission/tokenizer.json",
+      "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "matches_submission": true,
+      "status": "VERIFIED"
+    },
+    {
+      "path": "web/public/data/submission/tokenizer.json",
+      "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "matches_submission": true,
+      "status": "VERIFIED"
+    },
+    {
+      "path": "web/dist/data/submission/tokenizer.json",
+      "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "matches_submission": true,
+      "status": "VERIFIED"
+    },
+    {
+      "path": "results/resubmission/final/tokenizer.json",
+      "sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+      "matches_submission": true,
+      "status": "VERIFIED"
+    }
+  ],
+  "corpus_copies": [
+    {
+      "language": "en",
+      "path": "web/public/data/submission/corpus/en.faithful.txt",
+      "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+      "matches_submission": true
+    },
+    {
+      "language": "en",
+      "path": "web/dist/data/submission/corpus/en.faithful.txt",
+      "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+      "matches_submission": true
+    },
+    {
+      "language": "en",
+      "path": "submission/corpus/en.faithful.txt",
+      "sha256": "beefe609575008bcda18af72589f35bbe6322afb63a54c106ae0dc8190f3a463",
+      "matches_submission": true
+    },
+    {
+      "language": "hi",
+      "path": "web/public/data/submission/corpus/hi.faithful.txt",
+      "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+      "matches_submission": true
+    },
+    {
+      "language": "hi",
+      "path": "web/dist/data/submission/corpus/hi.faithful.txt",
+      "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+      "matches_submission": true
+    },
+    {
+      "language": "hi",
+      "path": "submission/corpus/hi.faithful.txt",
+      "sha256": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+      "matches_submission": true
+    },
+    {
+      "language": "te",
+      "path": "web/public/data/submission/corpus/te.faithful.txt",
+      "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+      "matches_submission": true
+    },
+    {
+      "language": "te",
+      "path": "web/dist/data/submission/corpus/te.faithful.txt",
+      "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+      "matches_submission": true
+    },
+    {
+      "language": "te",
+      "path": "submission/corpus/te.faithful.txt",
+      "sha256": "d0f5727be7ea9167f300d90ce09101786345289eb6a5b55f3f1d027f09a98c39",
+      "matches_submission": true
+    },
+    {
+      "language": "bn",
+      "path": "web/public/data/submission/corpus/bn.faithful.txt",
+      "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+      "matches_submission": true
+    },
+    {
+      "language": "bn",
+      "path": "web/dist/data/submission/corpus/bn.faithful.txt",
+      "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+      "matches_submission": true
+    },
+    {
+      "language": "bn",
+      "path": "submission/corpus/bn.faithful.txt",
+      "sha256": "be103ace9d5d2ada8e141737f4270ec3e034e27c20c7b190ca218ff4c2129815",
+      "matches_submission": true
+    }
+  ],
+  "winner_registry_sha256": "8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469",
+  "winner_sha_matches_submission": true,
+  "all_tokenizer_artifacts_identical": true,
+  "all_corpus_artifacts_identical": true,
+  "verdict": "PASS"
+}

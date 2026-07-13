@@ -82,19 +82,28 @@ export class HfBpeEncoder {
     return out;
   }
 
-  encodeTokens(text: string): string[] {
+  private encodeBpeTokens(text: string): string[] {
     const tokens: string[] = [];
     for (const pretok of this.metaspacePretokens(text)) tokens.push(...this.bpeWord(pretok));
     return tokens;
   }
 
+  encodeTokens(text: string): string[] {
+    const idToTok = new Map(Object.entries(this.vocab).map(([k, v]) => [v, k]));
+    return this.encodeIds(text).map((id) => idToTok.get(id) ?? "<unk>");
+  }
+
   encodeIds(text: string): number[] {
-    return this.encodeTokens(text).map((t) => this.vocab[t] ?? this.unkId);
+    return this.encodeBpeTokens(text).map((t) => this.vocab[t] ?? this.unkId);
   }
 
   decode(tokenIds: number[]): string {
     const idToTok = new Map(Object.entries(this.vocab).map(([k, v]) => [v, k]));
-    const tokens = tokenIds.map((id) => idToTok.get(id) ?? "<unk>");
+    const tokens = tokenIds.map((id) => {
+      const tok = idToTok.get(id);
+      if (!tok || tok === "<unk>") return "";
+      return tok;
+    });
     return tokens.join("").replaceAll(META, " ");
   }
 

@@ -1,76 +1,79 @@
 # SamaBPE
 
+**How should four languages share just 10,000 tokens?**
+
+SamaBPE explores how English, Hindi, Telugu and Bengali can share one constrained 10,000-token BPE vocabulary. Hugging Face provides the standard BPE engine. SamaBPE adds a multilingual exposure-search layer that trains and measures real tokenizer candidates to find a better balance across all four languages.
+
 **Production:** https://sama-bpe-tokenizer-413.netlify.app  
 **Repository:** [neural-truth-lab/session2](https://github.com/sohamzycus/neural-truth-lab/tree/main/session2)
 
-## 1. SamaBPE
+---
 
-SamaBPE explores a simple question: when English, Hindi, Telugu and Bengali must share one 10,000-token BPE vocabulary, how should their relative training exposure be balanced?
-
-Hugging Face provides the standard BPE implementation (`tokenizers` library). SamaBPE adds a multilingual exposure-search layer: it systematically varies how much each language contributes to training, trains real Hugging Face BPE candidates, evaluates every valid candidate on the same four frozen Wikipedia snapshots, and selects the strongest four-language balance.
-
-## 2. The challenge
+## The Challenge
 
 | Constraint | Value |
 | ---------- | ----- |
+| Corpora | India's Wikipedia page in four languages |
 | Languages | English (`en`), Hindi (`hi`), Telugu (`te`), Bengali (`bn`) |
-| Corpora | India's Wikipedia article in each language |
 | Tokenizer | One shared tokenizer |
-| Vocabulary | Maximum 10,000 tokens |
-| Engine | Standard Hugging Face BPE |
+| Vocabulary | Maximum 10,000 entries |
+| Routing | No per-language tokenizer; no runtime language routing |
 
-All four languages compete for the same vocabulary slots. There is no per-language model and no runtime language routing.
+All four languages compete for the same merge slots in one vocabulary.
 
-## 3. What SamaBPE adds above Hugging Face BPE
+## What Hugging Face BPE Does
 
-A standard BPE trainer learns merges from whatever text exposure it receives. SamaBPE does not modify the BPE algorithm. It searches **training exposure weights** `(w_en, w_hi, w_te, w_bn)` that control how often each frozen corpus is repeated in the mixed training stream.
+Hugging Face `tokenizers` implements byte-pair encoding: start from characters, iteratively merge the most frequent adjacent pairs until the vocabulary budget is reached. This submission uses:
 
-For each weight configuration:
+- **Model:** BPE
+- **Normalizer:** NFKC
+- **Pretokenizer:** Metaspace (`▁`, `prepend_scheme=never`)
+- **Decoder:** Metaspace
 
-1. Build a weighted mixed corpus from the four frozen snapshots
-2. Train a real Hugging Face BPE tokenizer (NFKC + Metaspace)
-3. Gate on lossless `decode(encode(text))` for reviewer samples and all four full corpora
-4. Measure fertility on all four languages with the evaluator contract
-5. Rank by spread and adjusted self-score among candidates passing EN & HI &lt; 1.2
+The trainer learns subword merges from whatever text exposure it receives.
 
-Weights influence which characters, subwords and merges win merge slots. They do **not** reserve fixed token quotas per language.
-
-## 4. Architecture
+## What SamaBPE Adds
 
 ```text
-Frozen Wikipedia snapshots (en, hi, te, bn)
+Frozen Wikipedia snapshots
         ↓
-SamaBPE exposure-weight search
+Choose multilingual exposure weights
         ↓
-Real Hugging Face BPE training (NFKC + Metaspace)
+Train real Hugging Face BPE
         ↓
-Lossless text-preservation validation
+Validate lossless round-trip
         ↓
-Four-language evaluation
+Measure all four languages
         ↓
-Candidate ranking
+Compare multilingual balance
         ↓
-Winner → submission/tokenizer.json
+Adjust weights
+        ↓
+Repeat
+        ↓
+Best measured valid candidate wins
 ```
 
-## 5. Corpus
+> SamaBPE does not replace or modify the Hugging Face BPE algorithm. It optimizes the multilingual training exposure supplied to the standard trainer.
 
-Authoritative evaluation corpora live in `submission/corpus/`. The evaluator loads `{lang}.faithful.txt`; `.faithful.md` is byte-identical.
+> Training weights influence which characters, subwords and merges compete for the shared vocabulary. They do not create fixed per-language token quotas.
 
-| Lang | Article | Path | Eval units | SHA-256 (prefix) | Wikipedia revision |
-| ---- | ------- | ---- | ---------: | ---------------- | ------------------ |
-| EN | India | `submission/corpus/en.faithful.txt` | 147,908 | `beefe609575008bc…` | 1363833574 |
-| HI | भारत | `submission/corpus/hi.faithful.txt` | 67,473 | `e7faf48f3010e942…` | 6579409 |
-| TE | భారతదేశం | `submission/corpus/te.faithful.txt` | 27,225 | `d0f5727be7ea9167…` | 4848340 |
-| BN | ভারত | `submission/corpus/bn.faithful.txt` | 68,468 | `be103ace9d5d2ada…` | 9043433 |
+## Corpus
 
-Builder: `scripts/build_wiki_faithful_markdown.py`  
-Frozen source pack: `data/faithful/`  
-Metadata: `submission/corpus/{lang}.meta.json` (revision ID, fetch timestamp, byte counts)
+Authoritative evaluation corpora: `submission/corpus/{lang}.faithful.txt` (`.faithful.md` is byte-identical).
 
-## 6. Baseline
+| Lang | Article | Path | SHA-256 (prefix) | Eval units | Revision |
+| ---- | ------- | ---- | ---------------- | ---------: | -------- |
+| English | India | `submission/corpus/en.faithful.txt` | `beefe609575008bc…` | 147,908 | 1363833574 |
+| Hindi | भारत | `submission/corpus/hi.faithful.txt` | `e7faf48f3010e942…` | 67,473 | 6579409 |
+| Telugu | భారతదేశం | `submission/corpus/te.faithful.txt` | `d0f5727be7ea9167…` | 27,225 | 4848340 |
+| Bengali | ভারত | `submission/corpus/bn.faithful.txt` | `be103ace9d5d2ada…` | 68,468 | 9043433 |
 
-Standard HF BPE trained at weights **EN 3 · HI 4 · TE 4 · BN 2** (`results/resubmission/baseline/tokenizer.json`).
+Builder: `scripts/build_wiki_faithful_markdown.py` · Metadata: `submission/corpus/{lang}.meta.json`
+
+## Baseline
+
+Standard HF BPE at weights **EN 3 · HI 4 · TE 4 · BN 2** (`results/resubmission/baseline/tokenizer.json`).
 
 | Lang | Fertility |
 | ---- | --------: |
@@ -79,80 +82,75 @@ Standard HF BPE trained at weights **EN 3 · HI 4 · TE 4 · BN 2** (`results/re
 | TE | 0.9377 |
 | BN | 0.9336 |
 
-| Metric | Value |
-| ------ | ----: |
-| Spread | 0.1417 |
-| Calculated self-score | 7,057.31 |
-| EN & HI &lt; 1.2 | PASS |
+Spread **0.1417** · Calculated self-score **7,057.31** · EN & HI &lt; 1.2: PASS
 
-Telugu and Bengali were far from English/Hindi balance despite passing individual thresholds.
+## SamaBPE Search
 
-## 7. Search strategy
+Implemented in `scripts/run_faithful_weight_search.py` with `python/samabpe/weight_optimizer.py` and `python/samabpe/hf_bpe_trainer.py`.
 
-Implemented in `scripts/run_faithful_weight_search.py` with helpers in `python/samabpe/weight_optimizer.py` and `python/samabpe/hf_bpe_trainer.py`.
+| Stage | Behavior |
+| ----- | -------- |
+| Search space | Integer weights `(en, hi, te, bn)` with canonical deduplication by GCD |
+| Candidate generation | Grid sweep + neighbor refinement |
+| Training | Real `BpeTrainer`, vocab cap 10,000 |
+| Validation | Lossless `decode(encode(text))` on reviewer sample + four full corpora |
+| Ranking | Minimize spread; require EN & HI &lt; 1.2; tie-break on adjusted self-score |
+| Stopping | Full measured grid under NFKC+Metaspace |
 
-- **Search space:** Integer weight grid with deduplication by `(en, hi, te, bn)` key
-- **Candidate generation:** Grid sweep plus neighbor refinement around promising regions
-- **Training:** `train_hf_bpe()` — Hugging Face `BpeTrainer`, vocab cap 10,000
-- **Validation:** Lossless round-trip on reviewer punctuation sample + four full corpora
-- **Ranking:** Minimize spread; tie-break on adjusted self-score; require EN & HI fertility &lt; 1.2
-- **Stopping:** Full measured grid under current architecture (2,570 unique configs)
+## Experiment Integrity
 
-## 8. Experiment integrity
+Machine-verified counts in `results/final-experiment-integrity.json`:
 
-Registry: `results/resubmission/experiments.json` (`architecture: NFKC+Metaspace`)
+| Check | Count |
+| ----- | ----: |
+| Total registry records | 2,570 |
+| Hugging Face BPE runs | 2,570 |
+| Unique weight configurations | 2,570 |
+| NFKC + Metaspace | 2,570 |
+| Four-language corpora | 2,570 |
+| Passed lossless round-trip | 2,570 |
+| Passed EN & HI &lt; 1.2 | 2,570 |
 
-| Stage | Count | Notes |
-| ----- | ----: | ----- |
-| Candidates trained | 2,570 | All `huggingface-bpe`, all unique weight configs |
-| Valid measured | 2,570 | Status `VALID_MEASURED` |
-| Passed lossless round-trip | 2,570 | Reviewer + 4 full corpora |
-| Passed EN &lt; 1.2 | 2,570 | |
-| Passed HI &lt; 1.2 | 2,570 | |
-| Winner | 1 | `faithful-hf-2361` |
+**2,570 real Hugging Face BPE candidates trained and measured** — verified; legacy experiments are not mixed into this registry.
 
-Legacy experiments (NFKC + Whitespace, custom JSON BPE, ~2,971 earlier runs) are **not** in this registry. Headline counts refer only to the current architecture.
-
-Audit: `results/final-product-audit.md`
-
-## 9. Final winner
+## Final Winner
 
 | Field | Value |
 | ----- | ----- |
 | Weights | EN 3 · HI 5 · TE 9 · BN 5 |
 | Experiment ID | `faithful-hf-2361` |
-| Tokenizer | `submission/tokenizer.json` |
-| SHA-256 | `8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469` |
+| Vocabulary | 10,000 |
+| Tokenizer SHA-256 | `8d515d68b3ce820dd7fa4b8c31e5e0a19bc7ec9e1f4f982117eaee3f628a0469` |
 
-| Lang | Tokens | Eval units | Fertility |
-| ---- | -----: | ---------: | --------: |
-| EN | 126,158 | 147,908 | 0.8530 |
-| HI | 55,978 | 67,473 | 0.8296 |
-| TE | 22,993 | 27,225 | 0.8446 |
-| BN | 58,100 | 68,468 | 0.8486 |
+| Lang | Fertility |
+| ---- | --------: |
+| EN | 0.8530 |
+| HI | 0.8296 |
+| TE | 0.8446 |
+| BN | 0.8486 |
 
-| Metric | Value |
-| ------ | ----: |
-| Spread | 0.0233 |
-| Calculated self-score | 42,893.47 |
-| EN & HI &lt; 1.2 | PASS |
+Spread **0.0233** · Raw score **42,893.47** · Hindi penalty **1.0** · Calculated self-score **42,893.47**
 
-## 10. Baseline vs winner
+This is a reproducible self-calculated metric — not an official awarded grade.
 
-| Metric | Baseline | Winner | Change |
-| ------ | -------: | -----: | -----: |
-| EN fertility | 0.7985 | 0.8530 | +0.0545 |
-| HI fertility | 0.7960 | 0.8296 | +0.0336 |
-| TE fertility | 0.9377 | 0.8446 | −0.0931 |
-| BN fertility | 0.9336 | 0.8486 | −0.0850 |
+## Baseline vs SamaBPE Winner
+
+Source: `results/final-baseline-vs-winner.json` (fresh evaluation on identical corpora).
+
+| Metric | Baseline HF BPE | SamaBPE Winner | Change |
+| ------ | --------------: | -------------: | -----: |
+| English fertility | 0.7985 | 0.8530 | +0.0545 |
+| Hindi fertility | 0.7960 | 0.8296 | +0.0336 |
+| Telugu fertility | 0.9377 | 0.8446 | −0.0931 |
+| Bengali fertility | 0.9336 | 0.8486 | −0.0850 |
 | Spread | 0.1417 | 0.0233 | −0.1184 |
 | Self-score | 7,057.31 | 42,893.47 | +35,836 |
 
-SamaBPE tightened multilingual balance dramatically. English and Hindi fertilities rose slightly; Telugu and Bengali moved much closer to the cluster. Both EN and HI remain below 1.2.
+SamaBPE tightened four-language balance dramatically. English and Hindi fertilities rose slightly; Telugu and Bengali moved much closer to the cluster. Both EN and HI remain below 1.2.
 
-## 11. Inside the 10K vocabulary
+## Inside the 10K Vocabulary
 
-Script composition of the winner tokenizer (not language allocation):
+Source: `results/final-vocabulary-analysis.json` — vocabulary composition by script (not language ownership).
 
 | Category | Tokens | % |
 | -------- | -----: | -: |
@@ -166,29 +164,31 @@ Script composition of the winner tokenizer (not language allocation):
 | Special tokens | 1 | 0.0% |
 | **Total** | **10,000** | **100%** |
 
-## 12. Vocabulary utilization
+> Script composition is not language ownership. Latin tokens may appear in URLs across every corpus, while punctuation, digits and Markdown symbols are naturally shared.
 
-Measured by encoding each frozen corpus with the submitted tokenizer:
+## Vocabulary Utilization
 
-| Corpus | Unique token IDs used |
-| ------ | --------------------: |
+Source: `results/final-vocabulary-utilization.json` — measured by encoding each frozen corpus with the submitted tokenizer.
+
+| Corpus | Unique token IDs |
+| ------ | ---------------: |
 | EN | 4,331 |
 | HI | 4,124 |
 | TE | 3,220 |
 | BN | 4,531 |
 
-| Overlap statistic | Count |
-| ----------------- | ----: |
+| Overlap | Count |
+| ------- | ----: |
 | Used by ≥1 corpus | 9,211 |
 | Unused by all four | 789 |
 | Used by exactly one | 5,619 |
+| Used by exactly two | 1,399 |
+| Used by exactly three | 1,101 |
 | Used by all four | 1,092 |
 
-Sets overlap — four per-language counts do not sum to 10,000.
+> These sets overlap. A vocabulary entry can be used by multiple corpora, so per-language usage counts do not add up to 10,000.
 
-**Baseline → winner vocabulary shift:** increasing Telugu (+446) and Bengali (+550) script-dominant tokens while reducing Latin-dominant (−666) reflects higher TE/BN training exposure.
-
-## 13. Try the encoder
+## Try the Encoder
 
 ```bash
 cd submission
@@ -197,11 +197,11 @@ python encoder.py "India भारत తెలుగు বাংলা"
 
 Web playground: https://sama-bpe-tokenizer-413.netlify.app/#try-it
 
-## 14. Reproduce in 3 steps
+## Reproduce in 3 Steps
 
 ### Step 1 — Get the exact corpus
 
-Frozen India Wikipedia snapshots in `submission/corpus/`.
+Frozen snapshots in `submission/corpus/` for EN, HI, TE, BN.
 
 ### Step 2 — Load the exact tokenizer
 
@@ -218,91 +218,100 @@ pip install -r requirements.txt
 python evaluate_tokenizer.py
 ```
 
-Expected output (reproduced 2026-07-13):
+Expected output (reproduced from clean-room test):
 
 ```text
 English   fertility: 0.8529491305406063
 Hindi     fertility: 0.8296355579268745
 Telugu    fertility: 0.84455463728191
 Bengali   fertility: 0.8485715954898638
+
 Spread: 0.023313572613731792
-Adjusted evaluator score: 42893.46882043277
+Adjusted self-score: 42893.46882043277
 ```
 
-Regenerate UI data:
+Regenerate all gate artifacts:
 
 ```bash
-python scripts/generate_verified_submission_data.py
-python scripts/generate_final_product_audit.py
+python scripts/run_final_submission_gate.py
 ```
 
-## 15. Submission package
+## Submission Package
 
-| File | Purpose |
+| File | Present |
 | ---- | ------- |
-| `submission/tokenizer.json` | Final shared 10K HF BPE tokenizer |
-| `submission/corpus/*.faithful.txt` | Frozen evaluation corpora |
-| `submission/corpus/*.meta.json` | Corpus provenance |
-| `submission/encoder.py` | CLI encode/decode helper |
-| `submission/evaluate_tokenizer.py` | Standalone reproduction evaluator |
-| `submission/train_tokenizer.py` | Train HF BPE from weighted corpora |
-| `submission/metrics.json` | Saved evaluation metrics |
-| `submission/provenance.json` | Winner weights and experiment ID |
-| `submission/requirements.txt` | Python dependencies |
-| `results/resubmission/experiments.json` | Full experiment registry |
-| `results/resubmission/baseline/tokenizer.json` | Baseline tokenizer artifact |
+| `submission/tokenizer.json` | ✓ |
+| `submission/encoder.py` | ✓ |
+| `submission/evaluate_tokenizer.py` | ✓ |
+| `submission/evaluator_contract.py` | ✓ |
+| `submission/build_wiki_faithful_markdown.py` | ✓ |
+| `submission/train_tokenizer.py` | ✓ |
+| `submission/metrics.json` | ✓ |
+| `submission/provenance.json` | ✓ |
+| `submission/requirements.txt` | ✓ |
+| `submission/README.md` | ✓ |
+| `submission/corpus/` | ✓ |
 
-## 16. Code map
+## Code Map
 
-| File | Purpose |
-| ---- | ------- |
-| `python/samabpe/hf_bpe_trainer.py` | HF BPE training (NFKC + Metaspace) |
-| `python/samabpe/weight_optimizer.py` | Weight grid and neighbor search |
-| `python/samabpe/evaluator_contract.py` | Evaluation units, fertility, scoring |
-| `python/samabpe/evaluator_text.py` | Text normalization helpers |
-| `python/samabpe/submission_audit.py` | Audit, vocab analysis, verified data builder |
-| `scripts/run_faithful_weight_search.py` | Main weight search orchestrator |
-| `scripts/build_wiki_faithful_markdown.py` | Wikipedia → frozen Markdown corpus |
-| `scripts/generate_verified_submission_data.py` | UI source of truth generator |
-| `scripts/generate_final_product_audit.py` | Product audit report |
-| `scripts/export_playground_parity.py` | Browser/Python parity fixtures |
-| `scripts/sync_resubmission_to_web.py` | Copy artifacts to submission/ and web/ |
-| `submission/encoder.py` | Submission CLI encoder |
-| `submission/evaluate_tokenizer.py` | Submission evaluator |
-| `web/src/components/ResearchStory.tsx` | Main product story UI |
-| `web/src/lib/hf-encoder.ts` | Browser tokenizer (Metaspace parity) |
-| `web/public/data/verifiedSubmission.json` | Authoritative frontend metrics |
+| File | Purpose | Final submission? |
+| ---- | ------- | ----------------- |
+| `submission/tokenizer.json` | Final shared 10K tokenizer | Yes |
+| `submission/evaluate_tokenizer.py` | Standalone reproduction evaluator | Yes |
+| `submission/encoder.py` | CLI encode/decode | Yes |
+| `submission/evaluator_contract.py` | Evaluation units + scoring | Yes |
+| `submission/corpus/` | Frozen Wikipedia snapshots | Yes |
+| `python/samabpe/hf_bpe_trainer.py` | HF BPE training (NFKC+Metaspace) | Yes (training) |
+| `python/samabpe/weight_optimizer.py` | Weight grid + neighbor search | Yes (search) |
+| `scripts/run_faithful_weight_search.py` | Search orchestrator | Yes (search) |
+| `scripts/build_wiki_faithful_markdown.py` | Corpus builder | Yes (corpus) |
+| `python/samabpe/submission_audit.py` | Audit + verified data builder | Yes (verification) |
+| `scripts/run_final_submission_gate.py` | Final gate + all evidence JSON | Yes (verification) |
+| `scripts/generate_verified_submission_data.py` | UI JSON (subset; gate is canonical) | Yes (UI) |
+| `results/resubmission/experiments.json` | Experiment registry | Yes (evidence) |
+| `results/final-experiment-integrity.json` | Machine-verified experiment counts | Yes (evidence) |
+| `results/final-baseline-vs-winner.json` | Baseline comparison | Yes (evidence) |
+| `results/final-vocabulary-analysis.json` | 10K script composition | Yes (evidence) |
+| `results/final-vocabulary-utilization.json` | Corpus token usage | Yes (evidence) |
+| `results/final-artifact-parity.json` | Tokenizer/corpus SHA parity | Yes (evidence) |
+| `results/final-playground-parity.json` | Python vs browser parity | Yes (evidence) |
+| `web/public/data/verifiedSubmission.json` | Frontend source of truth | Yes (UI) |
+| `web/src/components/ResearchStory.tsx` | Main product story | Yes (UI) |
+| `web/src/lib/hf-encoder.ts` | Browser tokenizer parity | Yes (UI) |
+| `results/resubmission/baseline/tokenizer.json` | Baseline artifact | Yes (comparison) |
+| `python/samabpe/bpe.py`, `hf_bpe.py` | Legacy/custom BPE research | No |
+| `results/tokenizer.json` (root results) | Pre-resubmission research | No |
 
-## 17. Evaluation methodology
+## Evaluation Methodology
 
-**Evaluation units** (wiki-faithful Markdown denominator): contiguous Unicode letter/mark/number runs plus individual visible symbols — regex `[\p{L}\p{M}\p{N}]+|[^\s\p{L}\p{M}\p{N}]`.
+**Evaluation units** (wiki-faithful Markdown denominator): contiguous Unicode letter/mark/number runs OR individual visible non-whitespace punctuation/symbol — `[\p{L}\p{M}\p{N}]+|[^\s\p{L}\p{M}\p{N}]`.
 
-**Fertility** = encoded BPE tokens ÷ evaluation units (per language).
+**Fertility** = encoded tokens ÷ evaluation units (per language).
 
 **Spread** = max fertility − min fertility across EN/HI/TE/BN.
 
 **Raw score** = 1000 ÷ spread.
 
-**Hindi penalty** = 0.5 if HI fertility &gt; 1.2, else 1.0.
+**Hindi penalty** = exp(max(0, hindi_fertility / 1.2 − 1)).
 
 **Adjusted self-score** = raw score ÷ Hindi penalty.
 
-This is a reproducible self-calculated metric for comparing candidates — not an official awarded grade.
+**Text preservation:** `decode(encode(text))` must preserve visible non-whitespace characters (NFKC-normalized for full corpora).
 
-## 18. Limitations
+## Limitations
 
 - Bounded integer weight search — not a global continuous optimum
 - Results depend on specific frozen Wikipedia revisions and HTML→Markdown pipeline
 - Script classification describes token shape, not language ownership
 - 789 vocabulary entries unused by all four evaluation corpora
-- Isolated stress string with rare symbols (€, @) fails round-trip; full corpora pass
-- EN/HI individual fertilities rose vs baseline in exchange for much tighter four-language spread
+- Isolated stress strings with rare symbols may fail round-trip; four full corpora pass
+- Self-score is reproducible self-calculation, not an official grade
 
-## 19. Legacy research history
+## Legacy Research History
 
-Earlier work used NFKC with punctuation-to-space replacement, Whitespace pretokenizer, word-ish denominators, and a custom JSON BPE encoder. That pipeline failed `decode(encode(text))` on the reviewer sample and is **not** the current submission.
+Earlier experiments used NFKC with punctuation stripping, Whitespace pretokenizer, word-ish denominators, and custom JSON BPE. That pipeline failed visible-text preservation on the reviewer sample and is **not** the current submission.
 
-Artifacts under `results/` from pre-resubmission experiments (e.g. `results/tokenizer.json`, strategy sweeps, Maithili explorations) are research history only. Do not mix their experiment counts with the 2,570 NFKC+Metaspace measurements.
+Artifacts under `results/` from pre-resubmission work (~2,971 earlier runs, Maithili explorations, custom encoders) are research history only. Do not mix their counts with the 2,570 NFKC+Metaspace measurements in `results/resubmission/experiments.json`.
 
 ---
 
