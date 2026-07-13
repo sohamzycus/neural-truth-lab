@@ -1,6 +1,8 @@
 # Deployment — SamaBPE (session2)
 
-**Production:** https://sama-bpe-tokenizer.netlify.app
+**Production:** https://sama-bpe-tokenizer-413.netlify.app
+
+Netlify site on account `niyogi.soham@gmail.com` (team: Soham's Buddies). Legacy URL `sama-bpe-tokenizer.netlify.app` was on a different account.
 
 Static Vite/React app. Metrics ship in `public/data/`; production bundle in `web/dist/` (committed for Netlify).
 
