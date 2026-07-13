@@ -66,6 +66,8 @@ def main() -> int:
     shutil.copy2(SUB / "metrics.json", sub_dir / "metrics.json")
     shutil.copy2(ROOT / "submission" / "encoder.py", sub_dir / "encoder.py")
     shutil.copy2(SUB / "evaluate_tokenizer.py", sub_dir / "evaluate_tokenizer.py")
+    if (SUB / "train_tokenizer.py").exists():
+        shutil.copy2(SUB / "train_tokenizer.py", sub_dir / "train_tokenizer.py")
     corp_web = sub_dir / "corpus"
     corp_web.mkdir(exist_ok=True)
     for f in (SUB / "corpus").glob("*"):

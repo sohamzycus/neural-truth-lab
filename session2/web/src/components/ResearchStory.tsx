@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { VerifiedSubmission } from "../types";
 import { LANG_DISPLAY } from "../types";
 
@@ -28,6 +28,51 @@ const CAT_LABELS: Record<string, string> = {
 
 function fmt(n: number, d = 4) {
   return n.toLocaleString(undefined, { maximumFractionDigits: d });
+}
+
+function FertilityRange({ fertilities }: { fertilities: Record<string, number> }) {
+  const entries = LANG_ORDER.map((l) => ({ lang: l, v: fertilities[l], label: LANG_DISPLAY[l].label }));
+  const min = Math.min(...entries.map((e) => e.v)) - 0.005;
+  const max = Math.max(...entries.map((e) => e.v)) + 0.005;
+  const span = max - min || 1;
+  const colors: Record<string, string> = { en: "#4338ca", hi: "#ea580c", te: "#059669", bn: "#db2777" };
+  return (
+    <div className="mt-8 rounded-lg border border-[var(--color-ink)]/10 p-6">
+      <p className="text-sm text-[var(--color-ink)]/70">Four-language fertility range (tighter = better balance)</p>
+      <div className="relative mt-6 h-12">
+        <div className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-[var(--color-ink)]/15" />
+        {entries.map((e) => (
+          <div
+            key={e.lang}
+            className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={{ left: `${((e.v - min) / span) * 100}%` }}
+            title={`${e.label}: ${e.v.toFixed(4)}`}
+          >
+            <div className="h-3 w-3 rounded-full" style={{ backgroundColor: colors[e.lang] }} />
+            <div className="mt-2 whitespace-nowrap text-center text-[10px] font-mono">{e.label}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-8 text-center font-mono text-xs">
+        Spread = {(Math.max(...entries.map((e) => e.v)) - Math.min(...entries.map((e) => e.v))).toFixed(4)}
+      </p>
+    </div>
+  );
+}
+
+function CorpusProvenance({ lang, c }: { lang: string; c: VerifiedSubmission["corpora"][string] }) {
+  return (
+    <details className="mt-2 text-xs text-[var(--color-ink)]/60">
+      <summary className="cursor-pointer text-[var(--color-indigo)]">Technical provenance</summary>
+      <ul className="mt-1 space-y-0.5 font-mono">
+        <li>Path: {c.frozen_path}</li>
+        {c.revision_id && <li>Revision: {c.revision_id}</li>}
+        {c.fetch_timestamp && <li>Fetched: {c.fetch_timestamp}</li>}
+        {c.builder_script && <li>Builder: {c.builder_script}</li>}
+        <li>SHA-256: {c.sha256}</li>
+      </ul>
+    </details>
+  );
 }
 
 function VocabMap({ data }: { data: VerifiedSubmission }) {
@@ -78,10 +123,8 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
   const cmp = data.baselineVsWinner;
   const util = data.vocabularyUtilization;
 
-  const evalUnits = useMemo(
-    () => (lang: string) => m.faithful_unit_counts[lang],
-    [m.faithful_unit_counts]
-  );
+  const evalUnits = (lang: string) =>
+    m.evaluation_unit_counts?.[lang] ?? m.faithful_unit_counts[lang];
 
   return (
     <>
@@ -102,7 +145,7 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
               ["4", "languages"],
               ["10,000", "shared vocabulary"],
               ["1", "Hugging Face BPE"],
-              [opt.total_measured?.toLocaleString() ?? "—", "valid experiments"],
+              [data.experimentFunnel?.candidates_trained?.toLocaleString() ?? opt.total_measured?.toLocaleString() ?? "—", "candidates trained"],
             ].map(([n, l]) => (
               <li key={l} className="rounded-lg border border-[var(--color-indigo)]/15 p-4 text-center">
                 <div className="font-mono text-2xl font-bold">{n}</div>
@@ -113,6 +156,7 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#how-it-works" className="btn">See how SamaBPE works</a>
             <a href="#try-it" className="btn">Try the tokenizer</a>
+            <a href="#reproduce" className="btn text-sm opacity-80">Reproduce locally</a>
           </div>
         </div>
       </header>
@@ -123,7 +167,7 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
           <h2 className="text-3xl font-bold">Four languages. One shared vocabulary.</h2>
           <p className="mt-2 text-[var(--color-ink)]/75">
             The same 10,000-token vocabulary must represent India&apos;s Wikipedia page in English, Hindi, Telugu and
-            Bengali. One vocabulary. No per-language tokenizer. No runtime routing.
+            Bengali. One tokenizer. One vocabulary. No per-language model. No runtime language routing.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {LANG_ORDER.map((lang) => {
@@ -140,8 +184,9 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
                     Wikipedia source
                   </a>
                   <a href={`/data/submission/corpus/${lang}.faithful.md`} download className="mt-1 block text-xs text-[var(--color-indigo)]">
-                    Download frozen snapshot
+                    View frozen snapshot
                   </a>
+                  <CorpusProvenance lang={lang} c={c} />
                 </article>
               );
             })}
@@ -153,29 +198,32 @@ export function ResearchStory({ data }: { data: VerifiedSubmission | null }) {
       <section className="mx-auto max-w-6xl px-4 py-16" id="how-it-works">
         <h2 className="text-3xl font-bold">Hugging Face trains the tokenizer. SamaBPE decides how the languages compete.</h2>
         <p className="mt-4 max-w-3xl text-[var(--color-ink)]/80">
-          A standard BPE trainer learns from whatever corpus exposure it receives. With four scripts competing for 10,000
-          slots, training balance matters. SamaBPE changes each language&apos;s relative training exposure, trains real
-          Hugging Face BPE candidates, measures them on the same four frozen corpora, and keeps the strongest valid
-          result.
+          A standard BPE tokenizer learns from the corpus exposure it receives. English, Hindi, Telugu and Bengali use
+          very different scripts, and all four compete for only 10,000 shared vocabulary slots. SamaBPE systematically
+          changes their relative training exposure, trains real Hugging Face BPE candidates, evaluates every valid
+          candidate on the same four frozen Wikipedia snapshots, and keeps the strongest multilingual balance.
         </p>
         <p className="mt-3 text-sm text-[var(--color-ink)]/65">
-          Training weights influence which subwords win space in the shared vocabulary. They do not reserve fixed token
-          quotas per language.
+          SamaBPE does not replace or modify Hugging Face BPE. It optimizes the multilingual training exposure given to
+          the standard BPE trainer. Training weights influence which characters, subwords and merges compete for space
+          in the shared vocabulary. They do not reserve fixed token quotas for each language.
         </p>
         <pre className="mt-6 overflow-x-auto rounded-lg bg-[var(--color-ink)]/90 p-4 text-xs text-white">
-{`EN · HI · TE · BN corpora
+{`EN · HI · TE · BN — frozen Wikipedia snapshots
         ↓
-Choose exposure weights
+Choose language exposure weights
         ↓
-Train real Hugging Face BPE
+Train a real Hugging Face BPE tokenizer
         ↓
-Validate encode → decode
+Validate lossless encode → decode
         ↓
 Measure all four languages
         ↓
-Compare balance and score
+Compare multilingual balance
         ↓
-Adjust weights → Repeat → Best measured candidate wins`}
+Adjust weights and repeat
+        ↓
+Best measured valid candidate wins`}
         </pre>
       </section>
 
@@ -198,17 +246,29 @@ Adjust weights → Repeat → Best measured candidate wins`}
             </div>
           </div>
         </div>
-        <p className="mt-4 text-sm text-[var(--color-ink)]/70">
-          {opt.total_measured?.toLocaleString()} real Hugging Face BPE candidates trained under the current architecture.
-          Invalid candidates rejected; valid candidates compared on the same four corpora.
-        </p>
+        {data.experimentFunnel && (
+          <pre className="mt-6 overflow-x-auto rounded-lg border border-[var(--color-ink)]/10 bg-white/40 p-4 text-xs">
+{`${data.experimentFunnel.candidates_trained} candidates trained
+        ↓
+${data.experimentFunnel.passed_roundtrip} passed lossless round-trip
+        ↓
+${data.experimentFunnel.passed_both_thresholds} passed EN & HI < 1.2
+        ↓
+${data.experimentFunnel.winner_count} winner`}
+          </pre>
+        )}
       </section>
 
       {/* 5 MONEY SHOT */}
       {cmp && data.baseline && (
         <section className="mx-auto max-w-6xl px-4 py-14" id="comparison">
           <h2 className="text-3xl font-bold">What did SamaBPE actually improve?</h2>
-          <p className="mt-2 max-w-3xl text-sm text-[var(--color-ink)]/75">{cmp.summary as string}</p>
+          <FertilityRange fertilities={m.fertilities} />
+          <p className="mt-4 text-sm text-[var(--color-ink)]/75">
+            SamaBPE reduced the gap between the best- and worst-performing languages from{" "}
+            {(cmp.spread as { baseline: number }).baseline.toFixed(4)} to{" "}
+            {(cmp.spread as { winner: number }).winner.toFixed(4)}, while keeping English and Hindi below 1.2.
+          </p>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full min-w-[36rem] text-left text-sm">
               <thead>
@@ -240,7 +300,7 @@ Adjust weights → Repeat → Best measured candidate wins`}
                   <td className="text-emerald-700">{(cmp.spread as { change: number }).change.toFixed(4)}</td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-sans">Reproduced score</td>
+                  <td className="py-2 font-sans">Calculated self-score</td>
                   <td>{(cmp.adjusted_score as { baseline: number }).baseline.toFixed(2)}</td>
                   <td>{(cmp.adjusted_score as { winner: number }).winner.toFixed(2)}</td>
                   <td className="text-emerald-700">+{((cmp.adjusted_score as { change: number }).change).toFixed(2)}</td>
@@ -263,8 +323,44 @@ Adjust weights → Repeat → Best measured candidate wins`}
         </div>
       </section>
 
+      {data.vocabularyShift && (
+        <section className="mx-auto max-w-6xl px-4 py-14">
+          <h2 className="text-2xl font-bold">How did SamaBPE change the learned vocabulary?</h2>
+          <p className="mt-2 text-sm text-[var(--color-ink)]/70">
+            Comparing script composition of the baseline tokenizer (EN 3·HI 4·TE 4·BN 2) vs the winner.
+          </p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[32rem] text-left text-sm">
+              <thead>
+                <tr className="border-b text-xs uppercase text-[var(--color-ink)]/50">
+                  <th className="py-2">Category</th>
+                  <th>Baseline</th>
+                  <th>Winner</th>
+                  <th>Delta</th>
+                </tr>
+              </thead>
+              <tbody className="font-mono text-xs">
+                {Object.entries(data.vocabularyShift.categories)
+                  .filter(([k]) => k !== "mixed_other_combined")
+                  .map(([k, row]) => {
+                    const r = row as { baseline: number; winner: number; delta: number };
+                    return (
+                      <tr key={k} className="border-b border-[var(--color-ink)]/8">
+                        <td className="py-2 font-sans">{CAT_LABELS[k] ?? k}</td>
+                        <td>{r.baseline}</td>
+                        <td>{r.winner}</td>
+                        <td className={r.delta >= 0 ? "text-indigo-700" : "text-amber-700"}>{r.delta >= 0 ? "+" : ""}{r.delta}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       {/* 7 UTILIZATION */}
-      <section className="mx-auto max-w-6xl px-4 py-14">
+      <section className="mx-auto max-w-6xl px-4 py-14" id="vocab-usage">
         <h2 className="text-2xl font-bold">One vocabulary, four different usage patterns</h2>
         <div className="mt-4 grid gap-2 font-mono text-sm md:grid-cols-2">
           {LANG_ORDER.map((l) => (
@@ -289,21 +385,30 @@ Adjust weights → Repeat → Best measured candidate wins`}
               <div key={lang} className="rounded-lg border p-4 text-center">
                 <div className={`font-semibold ${d.fontClass}`}>{d.native}</div>
                 <div className="mt-2 font-mono text-xl font-bold">{fert.toFixed(4)}</div>
-                <div className="mt-1 text-xs">{m.token_counts[lang].toLocaleString()} tokens / {evalUnits(lang).toLocaleString()} units</div>
+                <div className="mt-1 text-xs">
+                  {m.token_counts[lang].toLocaleString()} tokens ÷ {evalUnits(lang).toLocaleString()} units
+                  <details className="mt-1 text-left">
+                    <summary className="cursor-pointer text-[var(--color-indigo)]">What does fertility mean?</summary>
+                    <p className="mt-1 text-[var(--color-ink)]/65">
+                      Encoded tokens divided by evaluation units. A BPE token can span multiple units, so fertility can
+                      be below 1.
+                    </p>
+                  </details>
+                </div>
                 {(lang === "en" || lang === "hi") && (
-                  <div className="mt-2 text-xs">&lt; 1.2: {data.thresholds[`${lang}_under_1_2` as "en_under_1_2"] ? "yes" : "no"}</div>
+                  <div className="mt-2 text-xs">&lt; 1.2: {data.thresholds[`${lang}_under_1_2` as "en_under_1_2"] ? "PASS" : "FAIL"}</div>
                 )}
               </div>
             );
           })}
         </div>
         <p className="mt-6 font-mono text-sm">
-          Spread {fmt(m.spread, 6)} · Reproduced evaluator score {fmt(m.adjusted_score, 2)}
+          Spread {fmt(m.spread, 6)} · Hindi penalty {fmt(m.hindi_penalty, 4)}× · Calculated self-score {fmt(m.adjusted_score, 2)}
         </p>
         <details className="mt-4 text-sm">
           <summary className="cursor-pointer text-[var(--color-indigo)]">How is this calculated?</summary>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-[var(--color-ink)]/75">
-            <li>Evaluation unit = letter/mark/number run or single punctuation symbol</li>
+            <li>Evaluation unit = contiguous letter/mark/number run or single visible symbol (wiki-faithful Markdown denominator)</li>
             <li>Fertility = encoded tokens ÷ evaluation units</li>
             <li>Spread = max fertility − min fertility across EN/HI/TE/BN</li>
             <li>Score = 1000 ÷ spread (÷ Hindi penalty if HI &gt; 1.2)</li>
@@ -319,6 +424,7 @@ Adjust weights → Repeat → Best measured candidate wins`}
             ["/data/submission/tokenizer.json", "tokenizer.json"],
             ["/data/submission/encoder.py", "encoder.py"],
             ["/data/submission/evaluate_tokenizer.py", "evaluate_tokenizer.py"],
+            ["/data/submission/train_tokenizer.py", "train_tokenizer.py"],
             ["/data/verifiedSubmission.json", "verified data"],
             ["/data/results/resubmission_experiments.json", "experiments"],
             ["https://github.com/sohamzycus/neural-truth-lab/tree/main/session2", "GitHub"],
@@ -421,6 +527,7 @@ export function SectionTryIt({
         rows={5}
         value={playText}
         onChange={(e) => setPlayText(e.target.value)}
+        aria-label="Tokenizer input"
       />
       {encoder && (
         <div className="mt-4 space-y-3 font-mono text-xs">

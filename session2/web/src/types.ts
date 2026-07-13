@@ -20,12 +20,17 @@ export interface VerifiedSubmission {
       frozen_path: string;
       sha256: string;
       faithful_units: number;
+      evaluation_units?: number;
       characters: number;
       bytes: number;
+      revision_id?: string;
+      fetch_timestamp?: string;
+      builder_script?: string;
     }
   >;
   metrics: {
     faithful_unit_counts: Record<string, number>;
+    evaluation_unit_counts?: Record<string, number>;
     token_counts: Record<string, number>;
     fertilities: Record<string, number>;
     spread: number;
@@ -83,6 +88,14 @@ export interface VerifiedSubmission {
     adjusted_score: number;
   };
   baselineVsWinner?: Record<string, unknown>;
+  baselineVocabularyComposition?: VerifiedSubmission["vocabularyComposition"];
+  vocabularyShift?: { categories: Record<string, { baseline: number; winner: number; delta: number }> };
+  experimentFunnel?: {
+    candidates_trained: number;
+    passed_roundtrip: number;
+    passed_both_thresholds: number;
+    winner_count: number;
+  };
   vocabularyMap?: Array<{ id: number; token: string; category: string }>;
 }
 

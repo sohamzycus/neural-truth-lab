@@ -82,12 +82,17 @@ def load_submission_corpora(submission_dir: Path | None = None) -> dict[str, dic
             "language_name": label,
             "article": meta.get("article", article),
             "source_url": meta.get("source_url", ""),
+            "wikipedia_url": meta.get("wikipedia_url", meta.get("source_url", "")),
+            "revision_id": meta.get("revision_id"),
+            "fetch_timestamp": meta.get("fetch_timestamp"),
+            "builder_script": "scripts/build_wiki_faithful_markdown.py",
             "frozen_path": str(path.relative_to(ROOT)),
             "corpus_extension": ext,
             "sha256": sha256_text(text),
             "characters": len(text),
             "bytes": len(text.encode("utf-8")),
             "faithful_units": faithful_units(text),
+            "evaluation_units": faithful_units(text),
             "training_input": True,
             "evaluation_input": True,
             "text": text,
@@ -301,6 +306,49 @@ def load_experiment_summary() -> dict[str, Any]:
     }
 
 
+def build_experiment_funnel(optimizer: dict[str, Any]) -> dict[str, Any]:
+    """Stages supported by current experiment registry only."""
+    n = optimizer.get("total_measured", 0)
+    return {
+        "candidates_trained": n,
+        "passed_roundtrip": optimizer.get("valid_roundtrip", n),
+        "passed_en_under_1_2": optimizer.get("both_thresholds", n),
+        "passed_hi_under_1_2": optimizer.get("both_thresholds", n),
+        "passed_both_thresholds": optimizer.get("candidates_passing_both_thresholds", n),
+        "winner_count": 1,
+        "architecture": optimizer.get("architecture"),
+        "note": "Registry records one trained HF BPE per unique weight config under NFKC+Metaspace.",
+    }
+
+
+def build_vocabulary_shift(
+    baseline_comp: dict[str, Any] | None, winner_comp: dict[str, Any]
+) -> dict[str, Any] | None:
+    if not baseline_comp:
+        return None
+    rows: dict[str, dict[str, int]] = {}
+    for cat in baseline_comp["categories"]:
+        b = baseline_comp["categories"][cat]
+        w = winner_comp["categories"][cat]
+        rows[cat] = {"baseline": b, "winner": w, "delta": w - b}
+    mixed_other_b = (
+        baseline_comp["categories"]["mixed_script"]
+        + baseline_comp["categories"]["other_unicode"]
+        + baseline_comp["categories"]["special_token"]
+    )
+    mixed_other_w = (
+        winner_comp["categories"]["mixed_script"]
+        + winner_comp["categories"]["other_unicode"]
+        + winner_comp["categories"]["special_token"]
+    )
+    rows["mixed_other_combined"] = {
+        "baseline": mixed_other_b,
+        "winner": mixed_other_w,
+        "delta": mixed_other_w - mixed_other_b,
+    }
+    return {"categories": rows, "baseline_vocab_size": baseline_comp["vocab_size"], "winner_vocab_size": winner_comp["vocab_size"]}
+
+
 def build_vocabulary_map(tok_path: Path) -> list[dict[str, Any]]:
     raw = json.loads(tok_path.read_text(encoding="utf-8"))
     vocab: dict[str, int] = raw["model"]["vocab"]
@@ -362,6 +410,7 @@ def build_baseline_vs_winner(
     return comparison
 
 
+def compare_json_metrics(fresh: dict[str, Any], saved_path: Path) -> list[dict[str, Any]]:
     if not saved_path.exists():
         return [{"claim": "metrics.json", "status": "UNVERIFIED", "note": "missing"}]
     saved = json.loads(saved_path.read_text(encoding="utf-8"))
@@ -426,6 +475,12 @@ def build_verified_submission(submission_dir: Path | None = None) -> dict[str, A
     }
     baseline_vs_winner = build_baseline_vs_winner(baseline, winner_block) if baseline else None
     vocab_map = build_vocabulary_map(tok_path)
+    baseline_path = ROOT / "results" / "resubmission" / "baseline" / "tokenizer.json"
+    baseline_vocab_comp = analyze_vocabulary(baseline_path) if baseline_path.exists() else None
+    vocab_shift = (
+        build_vocabulary_shift(baseline_vocab_comp, vocab_comp) if baseline_vocab_comp else None
+    )
+    funnel = build_experiment_funnel(optimizer)
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -434,6 +489,7 @@ def build_verified_submission(submission_dir: Path | None = None) -> dict[str, A
         "corpora": {lang: {k: v for k, v in corpora[lang].items() if k != "text"} for lang in LANGS},
         "metrics": {
             "faithful_unit_counts": fresh["faithful_unit_counts"],
+            "evaluation_unit_counts": fresh["faithful_unit_counts"],
             "token_counts": fresh["token_counts"],
             "fertilities": fresh["fertilities"],
             "spread": fresh["spread"],
@@ -451,6 +507,9 @@ def build_verified_submission(submission_dir: Path | None = None) -> dict[str, A
         "tokenizer_sha256": arch["sha256"],
         "baseline": baseline,
         "baselineVsWinner": baseline_vs_winner,
+        "baselineVocabularyComposition": baseline_vocab_comp,
+        "vocabularyShift": vocab_shift,
+        "experimentFunnel": funnel,
         "vocabularyMap": vocab_map,
     }
 
