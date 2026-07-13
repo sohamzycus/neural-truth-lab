@@ -1,4 +1,6 @@
 # SamaBPE Python dependencies (also installable via pip install -e ".[dev]")
 regex>=2024.0.0
 requests>=2.31.0
+tokenizers>=0.20.0
+html2text>=2024.2.26
 pytest>=8.0.0

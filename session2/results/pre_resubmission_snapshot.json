@@ -1,0 +1,117 @@
+{
+  "label": "pre_resubmission_freeze",
+  "frozen_at": "2026-07-13T09:31:51.340802+00:00",
+  "git_commit": "29e67ad1cbc2d36e2bb8e372bd086468bcc162ac",
+  "tokenizer": {
+    "path": "results/tokenizer.json",
+    "sha256": "1fa412b49ae91b331f4ad077ee8c076c339131a206fc88be187f1be6dcfad983",
+    "format": "samabpe-custom-v1.0",
+    "vocabulary_size": 10000,
+    "encoder_paths": [
+      "python/samabpe/bpe.py",
+      "web/src/lib/bpe.ts"
+    ]
+  },
+  "displayed_metrics": {
+    "source": "results/stats.json",
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.318199920350458,
+      "bn": 1.6534126487163432
+    },
+    "gap": 0.4994752907477631,
+    "score": 2002.1010418811763,
+    "languages": [
+      {
+        "lang": "en",
+        "label": "English",
+        "characters": 65327,
+        "word_units": 10121,
+        "tokens": 11679,
+        "fertility": 1.15393735796858,
+        "rank": 1,
+        "distance_from_best": 0.0,
+        "distance_from_worst": 0.4994752907477631
+      },
+      {
+        "lang": "hi",
+        "label": "Hindi",
+        "characters": 43796,
+        "word_units": 8078,
+        "tokens": 10672,
+        "fertility": 1.321119088883387,
+        "rank": 3,
+        "distance_from_best": 0.16718173091480693,
+        "distance_from_worst": 0.33229355983295616
+      },
+      {
+        "lang": "te",
+        "label": "Telugu",
+        "characters": 20012,
+        "word_units": 2511,
+        "tokens": 3310,
+        "fertility": 1.318199920350458,
+        "rank": 2,
+        "distance_from_best": 0.16426256238187786,
+        "distance_from_worst": 0.3352127283658852
+      },
+      {
+        "lang": "bn",
+        "label": "Bengali",
+        "characters": 46434,
+        "word_units": 6388,
+        "tokens": 10562,
+        "fertility": 1.6534126487163432,
+        "rank": 4,
+        "distance_from_best": 0.4994752907477631,
+        "distance_from_worst": 0.0
+      }
+    ]
+  },
+  "verification_run": {
+    "fertilities": {
+      "en": 1.15393735796858,
+      "hi": 1.321119088883387,
+      "te": 1.318199920350458,
+      "bn": 1.6534126487163432
+    },
+    "gap": 0.4994752907477631,
+    "score": 2002.1010418811763,
+    "english_pass": true
+  },
+  "corpus": {
+    "paths": {
+      "en": "data/frozen/en_india.txt",
+      "hi": "data/frozen/hi_india.txt",
+      "te": "data/frozen/te_india.txt",
+      "bn": "data/frozen/bn_india.txt"
+    },
+    "sha256": {
+      "en": "d533ea08932e37b4e8a187ffbf4430c7e857810cecebc12a853af8ae9930f341",
+      "hi": "903386dc268a4f1a9446133c0755d24265c9835126b1b234d2d82610b9674abd",
+      "te": "b5f601e0f0ee541b82af265a07e3657130e32550d550086179289db44fce3a46",
+      "bn": "5a81fc4e6785196ef37c2bc52040c5dd0ae1c1040a462d428d6441044d604a8e"
+    },
+    "source": "Wikipedia plain-text extract (MediaWiki API explaintext=true)",
+    "urls": {
+      "en": "https://en.wikipedia.org/wiki/India",
+      "hi": "https://hi.wikipedia.org/wiki/भारत",
+      "te": "https://te.wikipedia.org/wiki/భారతదేశం",
+      "bn": "https://bn.wikipedia.org/wiki/ভারত"
+    }
+  },
+  "evaluation_contract_old": {
+    "normalization": "NFC only (freeze_text)",
+    "pretokenization": "whitespace split + </w> suffix on words",
+    "denominator": "count_word_units: NFC → split on Unicode whitespace → non-empty segments",
+    "denominator_module": "python/samabpe/word_units.py::count_word_units",
+    "scoring": "score = 1000 / (X_max - X_min); no Hindi penalty",
+    "scoring_module": "python/samabpe/scoring.py::compute_score",
+    "english_constraint": "X_en <= 1.2 (training constraint, not exponential penalty)"
+  },
+  "notes": [
+    "Custom JSON tokenizer format — not HuggingFace tokenizers loadable.",
+    "Do not overwrite results/tokenizer.json during resubmission work."
+  ]
+}

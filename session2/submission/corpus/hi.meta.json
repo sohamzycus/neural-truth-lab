@@ -1,0 +1,15 @@
+{
+  "language": "hi",
+  "title": "भारत",
+  "wikipedia_url": "https://hi.wikipedia.org/wiki/%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4",
+  "rest_html_url": "https://hi.wikipedia.org/api/rest_v1/page/html/%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4",
+  "fetch_timestamp": "2026-07-13T09:31:51.641886+00:00",
+  "revision_id": "6579409",
+  "character_count": 208693,
+  "byte_count": 402503,
+  "sha256_md": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+  "sha256_txt": "e7faf48f3010e942a00927e7d7ab1d15a9bba2946289626a20aec40816c6c5c6",
+  "wordish_unit_count": 31941,
+  "format": "wiki-faithful-markdown",
+  "converter": "html2text"
+}

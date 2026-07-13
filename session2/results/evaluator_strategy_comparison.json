@@ -1,0 +1,712 @@
+{
+  "generated_at": "2026-07-13T09:33:00.129937+00:00",
+  "corpus": "corpus/*.faithful.md",
+  "objective": "maximize adjusted_score = raw_score / hindi_penalty",
+  "strategies_evaluated": 17,
+  "candidates": [
+    {
+      "strategy": "boundary_aware_search",
+      "weights": {
+        "en": 2,
+        "hi": 2,
+        "te": 6,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/04_boundary_0_-1.json",
+      "tokenizer_sha256": "31fdf2b855ebd8b2d4c5ae4cf6e7780cec1880b1b539c3f3d5c61dbcab0feeff",
+      "token_counts": {
+        "en": 143796,
+        "hi": 66594,
+        "te": 24616,
+        "bn": 66556
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.071660111509703,
+        "hi": 2.084906546445008,
+        "te": 2.083100617754083,
+        "bn": 2.1604882165811854
+      },
+      "x_min": 2.071660111509703,
+      "x_max": 2.1604882165811854,
+      "spread": 0.08882810507148253,
+      "raw_score": 11257.698216068791,
+      "hindi_penalty": 2.0905394067626437,
+      "adjusted_score": 5385.068647666478,
+      "evidence_type": "MEASURED",
+      "seed": {
+        "en": 2,
+        "hi": 3,
+        "te": 6,
+        "bn": 3
+      }
+    },
+    {
+      "strategy": "boundary_aware_search",
+      "weights": {
+        "en": 2,
+        "hi": 2,
+        "te": 6,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/04_boundary_1_-1.json",
+      "tokenizer_sha256": "816dac9e54e39fcc3fe522709a19a577b0b1474fa0aa09ab3c19f87656266a13",
+      "token_counts": {
+        "en": 143939,
+        "hi": 67065,
+        "te": 25659,
+        "bn": 64409
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.073720303698261,
+        "hi": 2.0996524842678688,
+        "te": 2.1713632901751714,
+        "bn": 2.0907940011686037
+      },
+      "x_min": 2.073720303698261,
+      "x_max": 2.1713632901751714,
+      "spread": 0.09764298647691039,
+      "raw_score": 10241.390970118164,
+      "hindi_penalty": 2.1163870297007947,
+      "adjusted_score": 4839.091728683504,
+      "evidence_type": "MEASURED",
+      "seed": {
+        "en": 2,
+        "hi": 3,
+        "te": 6,
+        "bn": 4
+      }
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 6,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_6_3.json",
+      "tokenizer_sha256": "5a856dba26142c9dcb8e645e291ffc14e45c3282941ba5977b9ba0bc92e1b3e1",
+      "token_counts": {
+        "en": 144050,
+        "hi": 63453,
+        "te": 25556,
+        "bn": 67173
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0753194738586105,
+        "hi": 1.9865689865689866,
+        "te": 2.162647033934163,
+        "bn": 2.180516782444978
+      },
+      "x_min": 1.9865689865689866,
+      "x_max": 2.180516782444978,
+      "spread": 0.19394779587599142,
+      "raw_score": 5156.02662811075,
+      "hindi_penalty": 1.9260555506822705,
+      "adjusted_score": 2676.9874972112407,
+      "evidence_type": "MEASURED",
+      "grid_id": 14
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 6,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_6_4.json",
+      "tokenizer_sha256": "33ce0a9b6aae4d596a044e924cdf9541e6947caa75c56510366c820fcade9a15",
+      "token_counts": {
+        "en": 144482,
+        "hi": 64296,
+        "te": 26488,
+        "bn": 64453
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.081543271239429,
+        "hi": 2.0129613975767824,
+        "te": 2.2415164593382415,
+        "bn": 2.092222294358242
+      },
+      "x_min": 2.0129613975767824,
+      "x_max": 2.2415164593382415,
+      "spread": 0.22855506176145912,
+      "raw_score": 4375.313293405381,
+      "hindi_penalty": 1.9688858636408069,
+      "adjusted_score": 2222.2279991968035,
+      "evidence_type": "MEASURED",
+      "grid_id": 15
+    },
+    {
+      "strategy": "adaptive_fertility_balancing",
+      "weights": {
+        "en": 2,
+        "hi": 2,
+        "te": 6,
+        "bn": 5
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/03_adaptive_balanced.json",
+      "tokenizer_sha256": "947795372b239f1878882685efc610032fea61989a01c6c8573fdc147324a9fb",
+      "token_counts": {
+        "en": 144592,
+        "hi": 67650,
+        "te": 26526,
+        "bn": 62650
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0831280344613967,
+        "hi": 2.117967502582887,
+        "te": 2.244732165524245,
+        "bn": 2.033694734791924
+      },
+      "x_min": 2.033694734791924,
+      "x_max": 2.244732165524245,
+      "spread": 0.21103743073232106,
+      "raw_score": 4738.4958987128475,
+      "hindi_penalty": 2.1489361781377667,
+      "adjusted_score": 2205.0426378037673,
+      "evidence_type": "MEASURED",
+      "seed_weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 6,
+        "bn": 3
+      },
+      "x_max_lang": "bn",
+      "x_min_lang": "hi"
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 3,
+        "te": 6,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_3_3_6_4.json",
+      "tokenizer_sha256": "26ed299fa41ec80160de46b3bc44dc05ad7971cd80052e53fc7a25e8de8b5d4b",
+      "token_counts": {
+        "en": 140628,
+        "hi": 65283,
+        "te": 26631,
+        "bn": 65853
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0260189307170333,
+        "hi": 2.0438621207851977,
+        "te": 2.2536176694592536,
+        "bn": 2.137667986755827
+      },
+      "x_min": 2.0260189307170333,
+      "x_max": 2.2536176694592536,
+      "spread": 0.22759873874222025,
+      "raw_score": 4393.697458634014,
+      "hindi_penalty": 2.020244278369681,
+      "adjusted_score": 2174.8347492807593,
+      "evidence_type": "MEASURED",
+      "grid_id": 95
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 5,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_5_4.json",
+      "tokenizer_sha256": "0b3fb743e89a7f49fc2147e37e1036538c60660cba6bd19b328e5c3b2dd53789",
+      "token_counts": {
+        "en": 144229,
+        "hi": 64290,
+        "te": 26617,
+        "bn": 64436
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0778983158289033,
+        "hi": 2.0127735512350897,
+        "te": 2.2524329356012522,
+        "bn": 2.0916704538077
+      },
+      "x_min": 2.0127735512350897,
+      "x_max": 2.2524329356012522,
+      "spread": 0.23965938436616252,
+      "raw_score": 4172.588537038693,
+      "hindi_penalty": 1.9685776810904252,
+      "adjusted_score": 2119.595572539171,
+      "evidence_type": "MEASURED",
+      "grid_id": 11
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 3,
+        "te": 6,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_3_3_6_3.json",
+      "tokenizer_sha256": "2360ed529f6ff4e4c1cff87745cbc297ed5138e290f5dcad3dbb8eacc02d7714",
+      "token_counts": {
+        "en": 139064,
+        "hi": 64487,
+        "te": 26519,
+        "bn": 68075
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.003486479088329,
+        "hi": 2.0189411727873265,
+        "te": 2.2441397985952443,
+        "bn": 2.2097967928325652
+      },
+      "x_min": 2.003486479088329,
+      "x_max": 2.2441397985952443,
+      "spread": 0.24065331950691515,
+      "raw_score": 4155.355106046086,
+      "hindi_penalty": 1.9787215954646664,
+      "adjusted_score": 2100.0200915431346,
+      "evidence_type": "MEASURED",
+      "grid_id": 94
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 5,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_5_3.json",
+      "tokenizer_sha256": "880654485a783ca6715e072517eb662e15d2d44a275a7fd677371ae2b776ecef",
+      "token_counts": {
+        "en": 143467,
+        "hi": 62592,
+        "te": 26604,
+        "bn": 66368
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0669202287821813,
+        "hi": 1.9596130365361135,
+        "te": 2.2513328255902514,
+        "bn": 2.154385509316367
+      },
+      "x_min": 1.9596130365361135,
+      "x_max": 2.2513328255902514,
+      "spread": 0.29171978905413787,
+      "raw_score": 3427.94708320051,
+      "hindi_penalty": 1.8832723280506283,
+      "adjusted_score": 1820.2078542452603,
+      "evidence_type": "MEASURED",
+      "grid_id": 10
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 5,
+        "bn": 2
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_5_2.json",
+      "tokenizer_sha256": "81a62a061a2647bb494d92ebe036a20986ff78df32afdd3b70a796cd7d9c357f",
+      "token_counts": {
+        "en": 140938,
+        "hi": 62031,
+        "te": 26482,
+        "bn": 69139
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0304850816153057,
+        "hi": 1.942049403587865,
+        "te": 2.241008716256241,
+        "bn": 2.2443355190547294
+      },
+      "x_min": 1.942049403587865,
+      "x_max": 2.2443355190547294,
+      "spread": 0.30228611546686435,
+      "raw_score": 3308.1241540173114,
+      "hindi_penalty": 1.8559088144096858,
+      "adjusted_score": 1782.4820531764842,
+      "evidence_type": "MEASURED",
+      "grid_id": 9
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 3,
+        "te": 5,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_3_3_5_3.json",
+      "tokenizer_sha256": "75d3a5bed5e0fbfed41d35387124551d27fe670a9f6e996d89ff5250e7e7e2f3",
+      "token_counts": {
+        "en": 138652,
+        "hi": 64311,
+        "te": 27004,
+        "bn": 67757
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 1.9975508204751409,
+        "hi": 2.0134310134310134,
+        "te": 2.2851823643902853,
+        "bn": 2.199474128416542
+      },
+      "x_min": 1.9975508204751409,
+      "x_max": 2.2851823643902853,
+      "spread": 0.28763154391514445,
+      "raw_score": 3476.6701398196255,
+      "hindi_penalty": 1.969656531110611,
+      "adjusted_score": 1765.1149248134493,
+      "evidence_type": "MEASURED",
+      "grid_id": 90
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 6,
+        "bn": 3
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_3_4_6_3.json",
+      "tokenizer_sha256": "3447bb50c33930efcce497d83e32cb49af49b9708eb9dd271f059f3a0e2f93b1",
+      "token_counts": {
+        "en": 140729,
+        "hi": 62057,
+        "te": 26582,
+        "bn": 69054
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.027474031493567,
+        "hi": 1.942863404401866,
+        "te": 2.2494711009562494,
+        "bn": 2.241576316302019
+      },
+      "x_min": 1.942863404401866,
+      "x_max": 2.2494711009562494,
+      "spread": 0.30660769655438336,
+      "raw_score": 3261.496730962293,
+      "hindi_penalty": 1.8571681675638025,
+      "adjusted_score": 1756.1666131940337,
+      "evidence_type": "MEASURED",
+      "grid_id": 110
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 4,
+        "te": 6,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_4_6_4.json",
+      "tokenizer_sha256": "a36d6859a4b55a83b6d444acf926695208844060f6ff355b30e91a16cc12a5de",
+      "token_counts": {
+        "en": 145760,
+        "hi": 61875,
+        "te": 26566,
+        "bn": 65797
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0999553384910175,
+        "hi": 1.9371653987038602,
+        "te": 2.248117119404248,
+        "bn": 2.1358501590599235
+      },
+      "x_min": 1.9371653987038602,
+      "x_max": 2.248117119404248,
+      "spread": 0.3109517207003878,
+      "raw_score": 3215.9333215703055,
+      "hindi_penalty": 1.8483706086513607,
+      "adjusted_score": 1739.8747342757028,
+      "evidence_type": "MEASURED",
+      "grid_id": 31
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 2,
+        "hi": 3,
+        "te": 4,
+        "bn": 2
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_2_3_4_2.json",
+      "tokenizer_sha256": "2200e7695f2bcacef2360c5b0edc1d466f550175d0e4a80544471e7d0a982c07",
+      "token_counts": {
+        "en": 140887,
+        "hi": 61921,
+        "te": 26619,
+        "bn": 69101
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.0297503277578484,
+        "hi": 1.9386055539901694,
+        "te": 2.2526021832952527,
+        "bn": 2.243101993118224
+      },
+      "x_min": 1.9386055539901694,
+      "x_max": 2.2526021832952527,
+      "spread": 0.3139966293050833,
+      "raw_score": 3184.7475630968847,
+      "hindi_penalty": 1.8505902242171604,
+      "adjusted_score": 1720.9361215793203,
+      "evidence_type": "MEASURED",
+      "grid_id": 5
+    },
+    {
+      "strategy": "weight_search_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 6,
+        "bn": 4
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/02_weight_3_4_6_4.json",
+      "tokenizer_sha256": "1021ba130c53f26646346b252f61aeaf137db92d6df3aefdde28a799c2ceeb82",
+      "token_counts": {
+        "en": 141735,
+        "hi": 62957,
+        "te": 26978,
+        "bn": 66717
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 2.041967411505381,
+        "hi": 1.9710403556557403,
+        "te": 2.282982144368283,
+        "bn": 2.1657144712069076
+      },
+      "x_min": 1.9710403556557403,
+      "x_max": 2.282982144368283,
+      "spread": 0.31194178871254286,
+      "raw_score": 3205.726312358582,
+      "hindi_penalty": 1.9012919517755638,
+      "adjusted_score": 1686.0778847587524,
+      "evidence_type": "MEASURED",
+      "grid_id": 111
+    },
+    {
+      "strategy": "reference_compatible_shared_bpe",
+      "weights": {
+        "en": 3,
+        "hi": 4,
+        "te": 4,
+        "bn": 2
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/01_reference_shared_bpe.json",
+      "tokenizer_sha256": "9d0885126472300df44f833b9c4f4cce678b7da955361f52a001d7842911ebe9",
+      "token_counts": {
+        "en": 138773,
+        "hi": 60918,
+        "te": 27653,
+        "bn": 71340
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 1.9992940600193052,
+        "hi": 1.9072039072039073,
+        "te": 2.34010324109334,
+        "bn": 2.315782639745504
+      },
+      "x_min": 1.9072039072039073,
+      "x_max": 2.34010324109334,
+      "spread": 0.4328993338894327,
+      "raw_score": 2310.0058644474866,
+      "hindi_penalty": 1.8027920271386562,
+      "adjusted_score": 1281.349057280815,
+      "evidence_type": "MEASURED"
+    },
+    {
+      "strategy": "samabpe_inspired_weighted_shared",
+      "weights": {
+        "en": 8,
+        "hi": 4,
+        "te": 4,
+        "bn": 2
+      },
+      "vocabulary_size": 10000,
+      "tokenizer_path": "results/evaluator_candidates/05_samabpe_inspired_weighted.json",
+      "tokenizer_sha256": "d55c51480ffe14c21e3189bb966b887aa3cc1c783592aba8a656c4e6b078b710",
+      "token_counts": {
+        "en": 130643,
+        "hi": 65520,
+        "te": 30495,
+        "bn": 75959
+      },
+      "wordish_counts": {
+        "en": 69411,
+        "hi": 31941,
+        "te": 11817,
+        "bn": 30806
+      },
+      "fertilities": {
+        "en": 1.8821656509775109,
+        "hi": 2.051282051282051,
+        "te": 2.5806042142675807,
+        "bn": 2.4657209634486787
+      },
+      "x_min": 1.8821656509775109,
+      "x_max": 2.5806042142675807,
+      "spread": 0.6984385632900698,
+      "raw_score": 1431.7651581112484,
+      "hindi_penalty": 2.0327747047623617,
+      "adjusted_score": 704.3403062606619,
+      "evidence_type": "MEASURED"
+    }
+  ],
+  "winner": {
+    "strategy": "boundary_aware_search",
+    "weights": {
+      "en": 2,
+      "hi": 2,
+      "te": 6,
+      "bn": 3
+    },
+    "vocabulary_size": 10000,
+    "tokenizer_path": "results/evaluator_candidates/04_boundary_0_-1.json",
+    "tokenizer_sha256": "31fdf2b855ebd8b2d4c5ae4cf6e7780cec1880b1b539c3f3d5c61dbcab0feeff",
+    "token_counts": {
+      "en": 143796,
+      "hi": 66594,
+      "te": 24616,
+      "bn": 66556
+    },
+    "wordish_counts": {
+      "en": 69411,
+      "hi": 31941,
+      "te": 11817,
+      "bn": 30806
+    },
+    "fertilities": {
+      "en": 2.071660111509703,
+      "hi": 2.084906546445008,
+      "te": 2.083100617754083,
+      "bn": 2.1604882165811854
+    },
+    "x_min": 2.071660111509703,
+    "x_max": 2.1604882165811854,
+    "spread": 0.08882810507148253,
+    "raw_score": 11257.698216068791,
+    "hindi_penalty": 2.0905394067626437,
+    "adjusted_score": 5385.068647666478,
+    "evidence_type": "MEASURED",
+    "seed": {
+      "en": 2,
+      "hi": 3,
+      "te": 6,
+      "bn": 3
+    }
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "reviewer_published": {
+    "fertilities": {
+      "en": 5.815,
+      "hi": 4.294,
+      "te": 4.761,
+      "bn": 4.62
+    },
+    "raw_score": 657.5,
+    "hindi_penalty": 13.18,
+    "adjusted_score": 49.9
+  },
+  "scenarios": [
+    {
+      "id": "old_tokenizer_old_corpus_old_denominator",
+      "description": "Custom SamaBPE encoder + plain Wikipedia extract + NFC whitespace word units",
+      "metrics": {
+        "fertilities": {
+          "en": 1.15393735796858,
+          "hi": 1.321119088883387,
+          "te": 1.318199920350458,
+          "bn": 1.6534126487163432
+        },
+        "gap": 0.4994752907477631,
+        "score_old_contract": 2002.1010418811763
+      }
+    },
+    {
+      "id": "old_tokenizer_faithful_corpus_evaluator_denominator",
+      "description": "Custom encoder on wiki-faithful Markdown with evaluator word-ish units",
+      "metrics": {
+        "token_counts": {
+          "en": 219673,
+          "hi": 97445,
+          "te": 38617,
+          "bn": 99568
+        },
+        "wordish_counts": {
+          "en": 69411,
+          "hi": 31941,
+          "te": 11817,
+          "bn": 30806
+        },
+        "fertilities": {
+          "en": 3.1648153750846406,
+          "hi": 3.0507811277042047,
+          "te": 3.267919099602268,
+          "bn": 3.232097643316237
+        },
+        "x_min": 3.0507811277042047,
+        "x_max": 3.267919099602268,
+        "spread": 0.21713797189806305,
+        "raw_score": 4605.36676868962,
+        "hindi_penalty": 4.675413492486887,
+        "adjusted_score": 985.0180686885068
+      },
+      "comparison": {
+        "scenario": "faithful_evaluator",
+        "metrics": {
+          "fertility_en": {
+            "reviewer": 5.815,
+            "reproduced": 3.1648153750846406,
+            "absolute_diff": -2.6501846249153598,
+            "relative_diff": -0.4557497205357454,
+            "status": "divergent"
+          },
+          "fertility_hi": {
+            "reviewer": 4.294,
+            "reproduced": 3.0507811277042047,
+            "absolute_diff": -1.2432188722957949,
+            "relative_diff": -0.2895246558676747,
+            "status": "divergent"
+          },
+          "fertility_te": {
+            "reviewer": 4.761,
+            "reproduced": 3.267919099602268,
+            "absolute_diff": -1.4930809003977323,
+            "relative_diff": -0.313606574332647,
+            "status": "divergent"
+          },
+          "fertility_bn": {
+            "reviewer": 4.62,
+            "reproduced": 3.232097643316237,
+            "absolute_diff": -1.387902356683763,
+            "relative_diff": -0.300411765515966,
+            "status": "divergent"
+          },
+          "raw_score": {
+            "reviewer": 657.5,
+            "reproduced": 4605.36676868962,
+            "absolute_diff": 3947.8667686896197,
+            "relative_diff": 6.004360104470904,
+            "status": "divergent"
+          },
+          "hindi_penalty": {
+            "reviewer": 13.18,
+            "reproduced": 4.675413492486887,
+            "absolute_diff": -8.504586507513114,
+            "relative_diff": -0.6452645301603274,
+            "status": "divergent"
+          },
+          "adjusted_score": {
+            "reviewer": 49.9,
+            "reproduced": 985.0180686885068,
+            "absolute_diff": 935.1180686885068,
+            "relative_diff": 18.7398410558819,
+            "status": "divergent"
+          }
+        }
+      }
+    },
+    {
+      "id": "old_tokenizer_faithful_corpus_old_denominator",
+      "description": "Custom encoder on faithful MD but old NFC whitespace denominator",
+      "metrics": {
+        "token_counts": {
+          "en": 219673,
+          "hi": 97445,
+          "te": 38617,
+          "bn": 99568
+        },
+        "wordish_counts": {
+          "en": 41178,
+          "hi": 19986,
+          "te": 6773,
+          "bn": 17381
+        },
+        "fertilities": {
+          "en": 5.334717567633202,
+          "hi": 4.875662964074852,
+          "te": 5.701609331167872,
+          "bn": 5.728554168344744
+        },
+        "x_min": 4.875662964074852,
+        "x_max": 5.728554168344744,
+        "spread": 0.8528912042698922,
+        "raw_score": 1172.4824866215365,
+        "hindi_penalty": 21.392758353483707,
+        "adjusted_score": 54.807447793687786
+      }
+    },
+    {
+      "id": "simulated_naive_char_tokens",
+      "description": "Illustrative: reviewer could not apply custom merge table — per-char token proxy",
+      "metrics": {
+        "token_counts": {
+          "en": 443707,
+          "hi": 186885,
+          "te": 81154,
+          "bn": 205370
+        },
+        "wordish_counts": {
+          "en": 69411,
+          "hi": 31941,
+          "te": 11817,
+          "bn": 30806
+        },
+        "fertilities": {
+          "en": 6.39245940845111,
+          "hi": 5.850943927867005,
+          "te": 6.867563679444867,
+          "bn": 6.666558462637148
+        },
+        "x_min": 5.850943927867005,
+        "x_max": 6.867563679444867,
+        "spread": 1.0166197515778626,
+        "raw_score": 983.651948969054,
+        "hindi_penalty": 48.220614027881055,
+        "adjusted_score": 20.398992605119226
+      },
+      "comparison": {
+        "scenario": "naive_char_proxy",
+        "metrics": {
+          "fertility_en": {
+            "reviewer": 5.815,
+            "reproduced": 6.39245940845111,
+            "absolute_diff": 0.5774594084511095,
+            "relative_diff": 0.09930514332779183,
+            "status": "divergent"
+          },
+          "fertility_hi": {
+            "reviewer": 4.294,
+            "reproduced": 5.850943927867005,
+            "absolute_diff": 1.556943927867005,
+            "relative_diff": 0.36258591706264676,
+            "status": "divergent"
+          },
+          "fertility_te": {
+            "reviewer": 4.761,
+            "reproduced": 6.867563679444867,
+            "absolute_diff": 2.106563679444867,
+            "relative_diff": 0.442462440547126,
+            "status": "divergent"
+          },
+          "fertility_bn": {
+            "reviewer": 4.62,
+            "reproduced": 6.666558462637148,
+            "absolute_diff": 2.0465584626371482,
+            "relative_diff": 0.44297802221583293,
+            "status": "divergent"
+          },
+          "raw_score": {
+            "reviewer": 657.5,
+            "reproduced": 983.651948969054,
+            "absolute_diff": 326.15194896905405,
+            "relative_diff": 0.4960485915879149,
+            "status": "divergent"
+          },
+          "hindi_penalty": {
+            "reviewer": 13.18,
+            "reproduced": 48.220614027881055,
+            "absolute_diff": 35.040614027881055,
+            "relative_diff": 2.6586201842094885,
+            "status": "divergent"
+          },
+          "adjusted_score": {
+            "reviewer": 49.9,
+            "reproduced": 20.398992605119226,
+            "absolute_diff": -29.501007394880773,
+            "relative_diff": -0.5912025530036227,
+            "status": "divergent"
+          }
+        }
+      }
+    },
+    {
+      "id": "reviewer_arithmetic_from_published_fertilities",
+      "description": "Verify reviewer score arithmetic from published X values",
+      "metrics": {
+        "fertilities": {
+          "en": 5.815,
+          "hi": 4.294,
+          "te": 4.761,
+          "bn": 4.62
+        },
+        "spread": 1.5210000000000008,
+        "raw_score": 657.462195923734,
+        "hindi_penalty": 13.175161248572078,
+        "adjusted_score": 49.90164321480238
+      }
+    }
+  ],
+  "root_cause_analysis": [
+    {
+      "factor": "tokenizer_format",
+      "impact": "high",
+      "detail": "Submitted artefact used custom SamaBPE JSON (character BPE + </w> markers), not HuggingFace Tokenizer.from_file(). Reviewer stated they could only estimate from tokenizer data without executable decoder."
+    },
+    {
+      "factor": "corpus",
+      "impact": "high",
+      "detail": "Prior submission used MediaWiki plain-text extracts (explaintext=true). Evaluator uses wiki-faithful Markdown from REST HTML — different token/structure density."
+    },
+    {
+      "factor": "denominator",
+      "impact": "medium",
+      "detail": "Old contract: NFC + whitespace split, punctuation attached. Evaluator: NFKC + replace non-letter/mark/number runs with space, then split."
+    },
+    {
+      "factor": "normalizer",
+      "impact": "low-medium",
+      "detail": "NFC vs NFKC — compatibility decomposition affects Indic and punctuation adjacency."
+    },
+    {
+      "factor": "scoring",
+      "impact": "high",
+      "detail": "Old contract: score = 1000/(Xmax-Xmin) with English hard cap at training. Evaluator adds hindi_penalty = exp(max(0, X_hi/1.2 - 1)); reviewer Hindi X=4.294 → penalty ≈ 13.18 crushing adjusted score to 49.9."
+    }
+  ],
+  "closest_reproduction_note": "Exact 49.9 requires reviewer fertility vector; arithmetic reproduces from EN=5.815, HI=4.294. Custom encoder on faithful corpus yields different fertilities — see scenario comparisons."
+}

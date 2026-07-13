@@ -1,0 +1,47 @@
+{
+  "frozen_at": "2026-07-13T09:33:00.129937+00:00",
+  "winner": {
+    "strategy": "boundary_aware_search",
+    "weights": {
+      "en": 2,
+      "hi": 2,
+      "te": 6,
+      "bn": 3
+    },
+    "vocabulary_size": 10000,
+    "tokenizer_path": "results/evaluator_candidates/04_boundary_0_-1.json",
+    "tokenizer_sha256": "31fdf2b855ebd8b2d4c5ae4cf6e7780cec1880b1b539c3f3d5c61dbcab0feeff",
+    "token_counts": {
+      "en": 143796,
+      "hi": 66594,
+      "te": 24616,
+      "bn": 66556
+    },
+    "wordish_counts": {
+      "en": 69411,
+      "hi": 31941,
+      "te": 11817,
+      "bn": 30806
+    },
+    "fertilities": {
+      "en": 2.071660111509703,
+      "hi": 2.084906546445008,
+      "te": 2.083100617754083,
+      "bn": 2.1604882165811854
+    },
+    "x_min": 2.071660111509703,
+    "x_max": 2.1604882165811854,
+    "spread": 0.08882810507148253,
+    "raw_score": 11257.698216068791,
+    "hindi_penalty": 2.0905394067626437,
+    "adjusted_score": 5385.068647666478,
+    "evidence_type": "MEASURED",
+    "seed": {
+      "en": 2,
+      "hi": 3,
+      "te": 6,
+      "bn": 3
+    }
+  },
+  "tokenizer_hf_path": "results/tokenizer_hf.json"
+}

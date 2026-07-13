@@ -6,4 +6,6 @@ __pycache__/
 .pytest_cache/
 node_modules/
 web/.netlify/
+results/evaluator_candidates/
+results/evaluator_train.log
 .DS_Store

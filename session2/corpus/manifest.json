@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-07-13T09:31:51.641886+00:00",
+  "languages": [
+    "en",
+    "hi",
+    "te",
+    "bn"
+  ],
+  "corpus_dir": "corpus",
+  "note": "Distinct from data/frozen plain-text corpora — do not replace until analysis complete."
+}
