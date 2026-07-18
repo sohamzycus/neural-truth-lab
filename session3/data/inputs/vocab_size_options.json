@@ -1,0 +1,13 @@
+{
+  "hidden_dim": 5120,
+  "options": [
+    {"vocab": 98304, "label": "96k"},
+    {"vocab": 128000, "label": "128k"},
+    {"vocab": 160000, "label": "160k"},
+    {"vocab": 200000, "label": "200k"},
+    {"vocab": 262144, "label": "256k"}
+  ],
+  "fertility_penalty_per_32k": 0.02,
+  "stability_penalty_above_160k": 0.15,
+  "chosen": 128000
+}

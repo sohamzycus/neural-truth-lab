@@ -1,0 +1,110 @@
+{
+  "stage_count": 16,
+  "stages": [
+    {
+      "id": "L01",
+      "name": "Raw crawl ingest",
+      "yield": 1.0,
+      "reject_if": "robots.txt block"
+    },
+    {
+      "id": "L02",
+      "name": "Document parsing",
+      "yield": 0.92,
+      "reject_if": "parse failure >50%"
+    },
+    {
+      "id": "L03",
+      "name": "Language ID",
+      "yield": 0.94,
+      "reject_if": "confidence <0.85"
+    },
+    {
+      "id": "L04",
+      "name": "Unicode NFC normalization",
+      "yield": 0.99,
+      "reject_if": "invalid UTF-8"
+    },
+    {
+      "id": "L05",
+      "name": "Near-dup MinHash",
+      "yield": 0.78,
+      "reject_if": "Jaccard \u22650.90"
+    },
+    {
+      "id": "L06",
+      "name": "Quality scoring",
+      "yield": 0.68,
+      "reject_if": "ppl > lang p80"
+    },
+    {
+      "id": "L07",
+      "name": "AI-generated detection",
+      "yield": 0.91,
+      "reject_if": "synth score >0.7"
+    },
+    {
+      "id": "L08",
+      "name": "Copyright risk",
+      "yield": 0.96,
+      "reject_if": "license unknown"
+    },
+    {
+      "id": "L09",
+      "name": "Toxicity / hate",
+      "yield": 0.93,
+      "reject_if": "tox >0.4"
+    },
+    {
+      "id": "L10",
+      "name": "Prompt injection strip",
+      "yield": 0.97,
+      "reject_if": "injection patterns"
+    },
+    {
+      "id": "L11",
+      "name": "Instruction leakage",
+      "yield": 0.89,
+      "reject_if": "eval n-gram match"
+    },
+    {
+      "id": "L12",
+      "name": "Code compilation",
+      "yield": 0.72,
+      "reject_if": "syntax fail"
+    },
+    {
+      "id": "L13",
+      "name": "Conversation quality",
+      "yield": 0.85,
+      "reject_if": "turn incoherence"
+    },
+    {
+      "id": "L14",
+      "name": "Indic OCR repair",
+      "yield": 0.88,
+      "reject_if": "CER >0.15"
+    },
+    {
+      "id": "L15",
+      "name": "Human sampling audit",
+      "yield": 0.98,
+      "reject_if": "audit fail 0.5%"
+    },
+    {
+      "id": "L16",
+      "name": "Provenance manifest",
+      "yield": 0.99,
+      "reject_if": "no lineage hash"
+    }
+  ],
+  "path_yields": {
+    "web_nl_skip_L12": 0.2311,
+    "code_full_pipeline": 0.1664
+  },
+  "composite_yield": 0.2224,
+  "composite_yield_percent": 22.2,
+  "over_collection_multiplier": 4.5,
+  "dedup_threshold": 0.9,
+  "strictness_profile": "balanced"
+}

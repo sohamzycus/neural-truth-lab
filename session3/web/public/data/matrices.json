@@ -48,6 +48,191 @@
     ],
     "decision": "Unigram+BPE hybrid"
   },
+  "M10": {
+    "id": "M10",
+    "title": "Cleaning Strictness (Legacy 6-stage ref)",
+    "criteria": [
+      "Final yield",
+      "Indic-Faithfulness",
+      "Timeline"
+    ],
+    "options": [
+      "Permissive",
+      "Balanced",
+      "Strict"
+    ],
+    "scores": {
+      "Permissive": [
+        0.48,
+        0.74,
+        0.95
+      ],
+      "Balanced": [
+        0.34,
+        0.82,
+        0.85
+      ],
+      "Strict": [
+        0.22,
+        0.86,
+        0.6
+      ]
+    },
+    "weights": [
+      0.3,
+      0.45,
+      0.25
+    ],
+    "decision": "Superseded by M5 16-stage DAG; balanced target faithfulness 0.82"
+  },
+  "M11": {
+    "id": "M11",
+    "title": "Near-Duplicate Threshold",
+    "criteria": [
+      "Eval contamination",
+      "Yield",
+      "Storage cost"
+    ],
+    "options": [
+      "Exact only",
+      "MinHash 0.80",
+      "MinHash 0.90",
+      "MinHash 0.95"
+    ],
+    "scores": {
+      "Exact only": [
+        0.5,
+        0.95,
+        0.7
+      ],
+      "MinHash 0.80": [
+        0.75,
+        0.8,
+        0.65
+      ],
+      "MinHash 0.90": [
+        0.92,
+        0.68,
+        0.75
+      ],
+      "MinHash 0.95": [
+        0.98,
+        0.45,
+        0.55
+      ]
+    },
+    "weights": [
+      0.45,
+      0.35,
+      0.2
+    ],
+    "decision": "MinHash 0.90 (L05)"
+  },
+  "M12": {
+    "id": "M12",
+    "title": "Foundation Architecture",
+    "criteria": [
+      "Agentic depth",
+      "India inference TCO",
+      "Indic quality ceiling",
+      "Schedule risk"
+    ],
+    "options": [
+      "8B distill-only",
+      "40B dense",
+      "40B MoE",
+      "70B dense"
+    ],
+    "scores": {
+      "8B distill-only": [
+        0.55,
+        0.95,
+        0.65,
+        0.9
+      ],
+      "40B dense": [
+        0.85,
+        0.82,
+        0.88,
+        0.85
+      ],
+      "40B MoE": [
+        0.8,
+        0.75,
+        0.78,
+        0.65
+      ],
+      "70B dense": [
+        0.92,
+        0.55,
+        0.92,
+        0.6
+      ]
+    },
+    "weights": [
+      0.3,
+      0.3,
+      0.25,
+      0.15
+    ],
+    "decision": "40B dense GQA"
+  },
+  "M2": {
+    "id": "M2",
+    "title": "Vocabulary Size",
+    "criteria": [
+      "Indic fertility",
+      "Embedding memory",
+      "Training stability",
+      "Deploy fit (2\u00d7L40S)"
+    ],
+    "options": [
+      "96k",
+      "128k",
+      "160k",
+      "200k",
+      "256k"
+    ],
+    "scores": {
+      "96k": [
+        0.72,
+        0.95,
+        0.9,
+        0.95
+      ],
+      "128k": [
+        0.88,
+        0.92,
+        0.9,
+        0.92
+      ],
+      "160k": [
+        0.91,
+        0.78,
+        0.85,
+        0.8
+      ],
+      "200k": [
+        0.93,
+        0.65,
+        0.75,
+        0.65
+      ],
+      "256k": [
+        0.94,
+        0.45,
+        0.6,
+        0.5
+      ]
+    },
+    "weights": [
+      0.35,
+      0.25,
+      0.2,
+      0.2
+    ],
+    "decision": "128k"
+  },
   "M3": {
     "id": "M3",
     "title": "Language Weighting Scheme",
@@ -140,6 +325,97 @@
     ],
     "decision": "12%"
   },
+  "M5": {
+    "id": "M5",
+    "title": "Cleaning Strictness Profile",
+    "criteria": [
+      "Indic faithfulness",
+      "Timeline risk",
+      "Raw ingest cost",
+      "Contamination risk"
+    ],
+    "options": [
+      "Permissive",
+      "Balanced",
+      "Strict"
+    ],
+    "scores": {
+      "Permissive": [
+        0.74,
+        0.95,
+        0.9,
+        0.55
+      ],
+      "Balanced": [
+        0.82,
+        0.85,
+        0.75,
+        0.88
+      ],
+      "Strict": [
+        0.86,
+        0.6,
+        0.55,
+        0.95
+      ]
+    },
+    "weights": [
+      0.35,
+      0.25,
+      0.2,
+      0.2
+    ],
+    "decision": "Balanced (16-stage DAG)"
+  },
+  "M6": {
+    "id": "M6",
+    "title": "Synthetic Pretrain Cap",
+    "criteria": [
+      "Indic faithfulness",
+      "Diversity",
+      "Cost",
+      "Contamination risk"
+    ],
+    "options": [
+      "4%",
+      "6%",
+      "8%",
+      "10%"
+    ],
+    "scores": {
+      "4%": [
+        0.88,
+        0.7,
+        0.6,
+        0.95
+      ],
+      "6%": [
+        0.85,
+        0.82,
+        0.75,
+        0.88
+      ],
+      "8%": [
+        0.78,
+        0.88,
+        0.85,
+        0.7
+      ],
+      "10%": [
+        0.7,
+        0.9,
+        0.9,
+        0.55
+      ]
+    },
+    "weights": [
+      0.35,
+      0.25,
+      0.2,
+      0.2
+    ],
+    "decision": "6% cap (>8% rejected: \u22124.2 faithfulness)"
+  },
   "M7": {
     "id": "M7",
     "title": "Alignment Method",
@@ -188,5 +464,103 @@
       0.15
     ],
     "decision": "DPO primary; RLHF safety slice"
+  },
+  "M8": {
+    "id": "M8",
+    "title": "Pretrain Sampling Strategy",
+    "criteria": [
+      "Indic convergence",
+      "Code stability",
+      "Wall-clock",
+      "Eval generalization"
+    ],
+    "options": [
+      "Uniform",
+      "Curriculum",
+      "Two-phase curriculum",
+      "Dynamic mixture"
+    ],
+    "scores": {
+      "Uniform": [
+        0.7,
+        0.85,
+        0.95,
+        0.75
+      ],
+      "Curriculum": [
+        0.85,
+        0.75,
+        0.7,
+        0.8
+      ],
+      "Two-phase curriculum": [
+        0.88,
+        0.82,
+        0.78,
+        0.85
+      ],
+      "Dynamic mixture": [
+        0.9,
+        0.7,
+        0.6,
+        0.78
+      ]
+    },
+    "weights": [
+      0.3,
+      0.25,
+      0.2,
+      0.25
+    ],
+    "decision": "Two-phase: 70% general \u2192 30% India-heavy tail"
+  },
+  "M9": {
+    "id": "M9",
+    "title": "Production Quantization",
+    "criteria": [
+      "SME TCO",
+      "Gov numeric accuracy",
+      "Latency",
+      "Ops complexity"
+    ],
+    "options": [
+      "INT4",
+      "INT8",
+      "FP8",
+      "FP16"
+    ],
+    "scores": {
+      "INT4": [
+        0.95,
+        0.75,
+        0.9,
+        0.85
+      ],
+      "INT8": [
+        0.8,
+        0.88,
+        0.75,
+        0.8
+      ],
+      "FP8": [
+        0.85,
+        0.92,
+        0.82,
+        0.78
+      ],
+      "FP16": [
+        0.5,
+        0.98,
+        0.55,
+        0.7
+      ]
+    },
+    "weights": [
+      0.35,
+      0.25,
+      0.25,
+      0.15
+    ],
+    "decision": "INT4 default; FP8 for government contracts"
   }
 }

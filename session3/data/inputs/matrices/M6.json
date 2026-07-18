@@ -1,0 +1,14 @@
+{
+  "id": "M6",
+  "title": "Synthetic Pretrain Cap",
+  "criteria": ["Indic faithfulness", "Diversity", "Cost", "Contamination risk"],
+  "options": ["4%", "6%", "8%", "10%"],
+  "scores": {
+    "4%": [0.88, 0.7, 0.6, 0.95],
+    "6%": [0.85, 0.82, 0.75, 0.88],
+    "8%": [0.78, 0.88, 0.85, 0.7],
+    "10%": [0.7, 0.9, 0.9, 0.55]
+  },
+  "weights": [0.35, 0.25, 0.2, 0.2],
+  "decision": "6% cap (>8% rejected: −4.2 faithfulness)"
+}

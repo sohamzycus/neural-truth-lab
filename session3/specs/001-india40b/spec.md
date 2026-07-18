@@ -1,6 +1,6 @@
 # India-First 40B Foundation Model — Master Specification
 
-**Status:** Approved for implementation  
+**Status:** Superseded for report structure by `specs/004-report-v2/spec.md` (V2 report live)  
 **Constitution:** session3/.specify/memory/constitution.md
 
 ## Objective
@@ -24,7 +24,7 @@ Seven assignment areas (pretrain data, post-train data, RL/alignment, cleaning, 
 | Architecture | 40B dense decoder, GQA, 128k vocab |
 | Pretrain | 1.2T tokens; 82% NL / 12% code / 4% math / 6% synthetic cap |
 | Tokenizer | Unigram+BPE hybrid, 128k derived allocation |
-| Language weights | 7-factor MCDA (Hindi 21.5%, EN-IN 18.0%) |
+| Language weights | 7-factor MCDA (Hindi **17.9%**, EN-IN **17.4%**) |
 | Cleaning | 6-stage pipeline, MinHash 0.90 dedup |
 | Post-train | SFT → DPO; RLHF for safety slice only |
 | Agents | ToolLoop: plan → execute → reflect |

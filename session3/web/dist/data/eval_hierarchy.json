@@ -1,0 +1,91 @@
+{
+  "hierarchy": [
+    {
+      "capability": "coding",
+      "offline": "HumanEval+, SWE-bench lite",
+      "real_world": "Fix issue in India OSS repo (sandbox)",
+      "human": "Senior dev rates patch correctness",
+      "deployment": "PR merge rate in pilot",
+      "business": "Dev hours saved / SME"
+    },
+    {
+      "capability": "agentic",
+      "offline": "Tool accuracy, planning depth",
+      "real_world": "Gov form fill + UPI query agent",
+      "human": "Task completion blind rating",
+      "deployment": "Agent recovery rate \u22650.70",
+      "business": "Support ticket deflection %"
+    },
+    {
+      "capability": "indic_languages",
+      "offline": "IndicGLUE, FLORES",
+      "real_world": "State portal chat in ta/te/hi",
+      "human": "Native speaker adequacy",
+      "deployment": "Indic-Faithfulness \u22650.82",
+      "business": "Regional adoption rate"
+    },
+    {
+      "capability": "code_switch",
+      "offline": "CS test set (Hinglish/Tanglish)",
+      "real_world": "BPO script adherence",
+      "human": "CS naturalness score",
+      "deployment": "Code-Switch Index \u22650.75",
+      "business": "NPS in multilingual support"
+    },
+    {
+      "capability": "math_science",
+      "offline": "GSM8K, JEE-style set",
+      "real_world": "NCERT tutor session",
+      "human": "Teacher rubric score",
+      "deployment": "Answer accuracy on syllabus",
+      "business": "Ed-tech partner renewal"
+    },
+    {
+      "capability": "gov_edu",
+      "offline": "Policy QA held-out",
+      "real_world": "RBI circular summarization",
+      "human": "Domain expert fact-check",
+      "deployment": "Gov/Edu readiness \u22650.78",
+      "business": "Gov pilot contract milestone"
+    },
+    {
+      "capability": "safety",
+      "offline": "Toxigen, jailbreak suite",
+      "real_world": "Election/religious harm probes",
+      "human": "Red-team pass rate",
+      "deployment": "L1 safety gate pass",
+      "business": "Regulatory approval"
+    },
+    {
+      "capability": "inference",
+      "offline": "Tokens/s on L40S",
+      "real_world": "p99 latency Mumbai edge",
+      "human": "UX satisfaction <800ms",
+      "deployment": "India Inference Efficiency \u22650.65",
+      "business": "\u20b9/query vs generic tokenizer"
+    },
+    {
+      "capability": "hallucination",
+      "offline": "TruthfulQA-IN",
+      "real_world": "RAG over gov corpus",
+      "human": "Citation fidelity audit",
+      "deployment": "Hallucination rate <8%",
+      "business": "Trust score in pilot"
+    },
+    {
+      "capability": "long_context",
+      "offline": "Needle-in-haystack 128k",
+      "real_world": "Contract clause retrieval",
+      "human": "Lawyer review sample",
+      "deployment": "Recall@32k docs",
+      "business": "Legal tech SLA"
+    }
+  ],
+  "capability_count": 10,
+  "ship_gate": "L1 safety pass + L2 aggregate \u22650.78 + L3 agent_recovery \u22650.70 + hallucination <8%",
+  "kill_criteria": [
+    "Indic-Faithfulness <0.75 after 2 retrain cycles",
+    "Agent recovery <0.55 at month 16",
+    "Year-2 TCO savings <10% vs generic tokenizer"
+  ]
+}

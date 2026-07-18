@@ -29,7 +29,7 @@
     "arabic_ur": 0.04,
     "code": 0.14
   },
-  "embedding_table_params": 5120000000000000,
-  "embedding_table_gb_bf16": 9536743.16,
+  "embedding_table_params": 655360000,
+  "embedding_table_gb_bf16": 1.22,
   "derivation": "V_total = S_special + S_byte + \u03a3(script_allocation) + S_code + S_math + S_learned_shared"
 }

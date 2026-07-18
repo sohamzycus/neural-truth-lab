@@ -19,7 +19,8 @@ def derive_vocab_allocation(inputs_dir: Path | None = None) -> dict[str, Any]:
     target = budget["total_vocab"]
     assert total == target, f"Bucket sum {total} != target {target}"
 
-    embedding_params = target * 40_000_000_000  # vocab × hidden (approx for 40B)
+    hidden = 5120  # GQA hidden dim for embedding table only
+    embedding_params = target * hidden
     embedding_gb = embedding_params * 2 / (1024**3)  # bf16
 
     return {

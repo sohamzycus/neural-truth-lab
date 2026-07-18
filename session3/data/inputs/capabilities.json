@@ -1,0 +1,106 @@
+{
+  "capabilities": [
+    {
+      "id": "multilingual_indic",
+      "name": "Multilingual Indic fluency",
+      "required_behaviour": "Coherent 15-language generation; register control (formal gov vs casual)",
+      "training_signal": "Monolingual + parallel + code-switched text",
+      "dataset_types": ["web_licensed", "wikipedia", "news", "gov_portals"],
+      "collection": "MCDA-weighted crawl + NCERT/RBI licensed packs",
+      "pretrain_tokens_b": 984,
+      "rejected": "Population-only weighting (overfits Hindi web noise)"
+    },
+    {
+      "id": "code_switch",
+      "name": "Code-switching (Hinglish, Tanglish, Manglish)",
+      "required_behaviour": "Stable mixed-script output without script collapse",
+      "training_signal": "Token-aligned code-switch pairs",
+      "dataset_types": ["social_filtered", "synthetic_cs", "call_center_transcripts"],
+      "collection": "2B dedicated Hinglish slice + 5% post-train",
+      "pretrain_tokens_b": 28,
+      "rejected": "English-only SFT then hope for CS emergent"
+    },
+    {
+      "id": "indian_reasoning",
+      "name": "Indian contextual reasoning",
+      "required_behaviour": "UPI flows, GST slabs, ONDC, Aadhaar consent language",
+      "training_signal": "Structured QA over policy + commerce docs",
+      "dataset_types": ["rbi_circulars", "gst_portal", "upi_docs", "ondc_specs"],
+      "collection": "Licensed gov + fintech corpora; human-verified QA synthesis",
+      "pretrain_tokens_b": 18,
+      "rejected": "US-centric financial pretrain only"
+    },
+    {
+      "id": "coding",
+      "name": "Software engineering",
+      "required_behaviour": "Repo maintenance, tests, PRs — not LeetCode-only",
+      "training_signal": "File-level code + issue + test triples",
+      "dataset_types": ["github_repos", "issues", "prs", "docs", "stackoverflow", "rfcs"],
+      "collection": "India-heavy stack filter (Python/JS/Java); compile gate",
+      "pretrain_tokens_b": 144,
+      "rejected": "CP >2%; generated code >15% of code slice"
+    },
+    {
+      "id": "math",
+      "name": "Math & exam reasoning",
+      "required_behaviour": "JEE/NEET-style multi-step; bilingual stems",
+      "training_signal": "Worked solutions + proof sketches",
+      "dataset_types": ["textbooks", "exam_papers", "synthetic_verified"],
+      "collection": "NCERT + competitive exam licensed; verifier pass",
+      "pretrain_tokens_b": 48,
+      "rejected": "GSM8K-only English math"
+    },
+    {
+      "id": "science",
+      "name": "Science & health literacy",
+      "required_behaviour": "Indian syllabus science; avoid US drug names",
+      "training_signal": "Textbook + WHO India adaptations",
+      "dataset_types": ["ncert_science", "icmr_guidelines", "agri_extension"],
+      "collection": "Gov education corpus; English + Hindi + regional",
+      "pretrain_tokens_b": 22,
+      "rejected": "Generic English science web only"
+    },
+    {
+      "id": "agentic",
+      "name": "Agentic tool use",
+      "required_behaviour": "Plan → execute → reflect → recover",
+      "training_signal": "Sandbox traces with injected failures",
+      "dataset_types": ["tool_traces", "browser_snapshots", "terminal_logs"],
+      "collection": "10B post-train traces; 8B pretrain agent docs",
+      "pretrain_tokens_b": 12,
+      "rejected": "ReAct-only (41% recovery vs 70% target)"
+    },
+    {
+      "id": "conversation",
+      "name": "Dialogue & instruction",
+      "required_behaviour": "Multi-turn; Indic politeness registers",
+      "training_signal": "Human chat + verified synthetic",
+      "dataset_types": ["human_chat", "customer_support", "tutor_dialogues"],
+      "collection": "Regional BPO partners; redacted logs",
+      "pretrain_tokens_b": 35,
+      "rejected": "Single-turn instruction only"
+    },
+    {
+      "id": "long_context",
+      "name": "Long-context retrieval",
+      "required_behaviour": "32k train → 128k deploy; legal/gov docs",
+      "training_signal": "Needle + multi-doc QA",
+      "dataset_types": ["judiciary_pdfs", "contracts", "policy_compendia"],
+      "collection": "Indian Kanoon licensed subset; chunk curriculum",
+      "pretrain_tokens_b": 15,
+      "rejected": "Uniform 4k context only"
+    },
+    {
+      "id": "planning",
+      "name": "Planning & reflection",
+      "required_behaviour": "JSON plans ≥5 steps; self-critique",
+      "training_signal": "Plan-success and plan-repair pairs",
+      "dataset_types": ["workflow_plans", "failure_recovery"],
+      "collection": "Synthetic planners + human audit 8%",
+      "pretrain_tokens_b": 8,
+      "rejected": "Implicit planning in chat only"
+    }
+  ],
+  "total_pretrain_tokens_b": 1200,
+  "note": "Capability token sums overlap slices; 82% NL / 12% code / 4% math / 6% synthetic is authoritative via data_mix.json"
+}

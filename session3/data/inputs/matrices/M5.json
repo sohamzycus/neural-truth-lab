@@ -1,0 +1,13 @@
+{
+  "id": "M5",
+  "title": "Cleaning Strictness Profile",
+  "criteria": ["Indic faithfulness", "Timeline risk", "Raw ingest cost", "Contamination risk"],
+  "options": ["Permissive", "Balanced", "Strict"],
+  "scores": {
+    "Permissive": [0.74, 0.95, 0.9, 0.55],
+    "Balanced": [0.82, 0.85, 0.75, 0.88],
+    "Strict": [0.86, 0.6, 0.55, 0.95]
+  },
+  "weights": [0.35, 0.25, 0.2, 0.2],
+  "decision": "Balanced (16-stage DAG)"
+}

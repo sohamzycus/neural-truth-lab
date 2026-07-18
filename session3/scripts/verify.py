@@ -47,6 +47,23 @@ def check_report_mentions() -> None:
     assert f"{hi_pct}%" in report or f"{hi_pct:.0f}%" in report, "Report missing Hindi MCDA weight"
 
 
+def check_cleaning() -> None:
+    cp = load("cleaning_pipeline.json")
+    assert cp["stage_count"] == 16
+    assert 20 <= cp["composite_yield_percent"] <= 35
+
+
+def check_vocab_tradeoff() -> None:
+    vt = load("vocab_size_tradeoff.json")
+    assert vt["decision"] == 128_000
+    assert vt["winner_by_score"] == "128k"
+
+
+def check_capability_data() -> None:
+    cd = load("capability_data.json")
+    assert cd["capability_count"] == 10
+
+
 def main() -> None:
     if not DERIVED.exists():
         print("Run derive_all.py first", file=sys.stderr)
@@ -56,6 +73,9 @@ def main() -> None:
     check_language_weights()
     check_data_mix()
     check_training_budget()
+    check_cleaning()
+    check_vocab_tradeoff()
+    check_capability_data()
     check_report_mentions()
     print("verify.py: all checks passed")
 

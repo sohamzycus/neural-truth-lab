@@ -1,0 +1,13 @@
+{
+  "id": "M10",
+  "title": "Cleaning Strictness (Legacy 6-stage ref)",
+  "criteria": ["Final yield", "Indic-Faithfulness", "Timeline"],
+  "options": ["Permissive", "Balanced", "Strict"],
+  "scores": {
+    "Permissive": [0.48, 0.74, 0.95],
+    "Balanced": [0.34, 0.82, 0.85],
+    "Strict": [0.22, 0.86, 0.6]
+  },
+  "weights": [0.3, 0.45, 0.25],
+  "decision": "Superseded by M5 16-stage DAG; balanced target faithfulness 0.82"
+}

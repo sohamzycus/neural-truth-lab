@@ -1,0 +1,15 @@
+{
+  "id": "M2",
+  "title": "Vocabulary Size",
+  "criteria": ["Indic fertility", "Embedding memory", "Training stability", "Deploy fit (2×L40S)"],
+  "options": ["96k", "128k", "160k", "200k", "256k"],
+  "scores": {
+    "96k": [0.72, 0.95, 0.9, 0.95],
+    "128k": [0.88, 0.92, 0.9, 0.92],
+    "160k": [0.91, 0.78, 0.85, 0.8],
+    "200k": [0.93, 0.65, 0.75, 0.65],
+    "256k": [0.94, 0.45, 0.6, 0.5]
+  },
+  "weights": [0.35, 0.25, 0.2, 0.2],
+  "decision": "128k"
+}

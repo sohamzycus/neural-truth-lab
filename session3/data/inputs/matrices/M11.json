@@ -1,0 +1,14 @@
+{
+  "id": "M11",
+  "title": "Near-Duplicate Threshold",
+  "criteria": ["Eval contamination", "Yield", "Storage cost"],
+  "options": ["Exact only", "MinHash 0.80", "MinHash 0.90", "MinHash 0.95"],
+  "scores": {
+    "Exact only": [0.5, 0.95, 0.7],
+    "MinHash 0.80": [0.75, 0.8, 0.65],
+    "MinHash 0.90": [0.92, 0.68, 0.75],
+    "MinHash 0.95": [0.98, 0.45, 0.55]
+  },
+  "weights": [0.45, 0.35, 0.2],
+  "decision": "MinHash 0.90 (L05)"
+}

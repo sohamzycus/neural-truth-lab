@@ -16,4 +16,6 @@ Language weights use deployment signals (internet presence, corpus availability,
 Python models + static Vite viewer. No CMS, no database, no runtime AI.
 
 ## P6 Chapter Template
-Each chapter: Problem → Design Options → Pros/Cons → Decision → Rejected Alternatives → Expected Failure Modes → Decision Summary → Risks → Future Improvements.
+Each chapter: Problem → Design Options → Tradeoff Analysis → Decision Matrix → Chosen Design → Rejected Alternatives → Expected Failure Modes → Validation Plan → Future Improvements.
+
+Report structure governed by `specs/004-report-v2/spec.md`.

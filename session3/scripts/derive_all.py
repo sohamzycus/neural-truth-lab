@@ -10,13 +10,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "models"))
 
+from india40b.capability_data import compute_capability_data
+from india40b.cleaning_pipeline import compute_cleaning_pipeline
 from india40b.data_mix import compute_data_mix
+from india40b.eval_hierarchy import compute_eval_hierarchy
 from india40b.fertility_model import compute_fertility_projections
 from india40b.inference_cost import compute_inference_costs
 from india40b.language_weights import compute_mcda_weights
 from india40b.scorecards import compute_scorecards
 from india40b.training_cost import compute_training_cost
 from india40b.vocab_derivation import derive_vocab_allocation
+from india40b.vocab_size_tradeoff import compute_vocab_size_tradeoff
 
 
 def main() -> None:
@@ -25,11 +29,15 @@ def main() -> None:
 
     outputs = {
         "vocab_allocation.json": derive_vocab_allocation(),
+        "vocab_size_tradeoff.json": compute_vocab_size_tradeoff(),
         "language_weights.json": compute_mcda_weights(),
         "fertility_projections.json": compute_fertility_projections(),
         "training_budget.json": compute_training_cost(),
         "inference_costs.json": compute_inference_costs(),
         "data_mix.json": compute_data_mix(),
+        "capability_data.json": compute_capability_data(),
+        "cleaning_pipeline.json": compute_cleaning_pipeline(),
+        "eval_hierarchy.json": compute_eval_hierarchy(),
         "scorecards.json": compute_scorecards(),
     }
 

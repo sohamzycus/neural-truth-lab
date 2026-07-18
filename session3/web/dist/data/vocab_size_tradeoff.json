@@ -1,0 +1,60 @@
+{
+  "hidden_dim": 5120,
+  "baseline_fertility_128k": 1.14,
+  "options": [
+    {
+      "label": "96k",
+      "vocab": 98304,
+      "embedding_gb_bf16": 0.94,
+      "avg_indic_fertility_est": 1.159,
+      "training_stability": 1.0,
+      "composite_score": 0.743,
+      "chosen": false
+    },
+    {
+      "label": "128k",
+      "vocab": 128000,
+      "embedding_gb_bf16": 1.22,
+      "avg_indic_fertility_est": 1.14,
+      "training_stability": 1.0,
+      "composite_score": 0.746,
+      "chosen": true
+    },
+    {
+      "label": "160k",
+      "vocab": 160000,
+      "embedding_gb_bf16": 1.53,
+      "avg_indic_fertility_est": 1.12,
+      "training_stability": 1.0,
+      "composite_score": 0.717,
+      "chosen": false
+    },
+    {
+      "label": "200k",
+      "vocab": 200000,
+      "embedding_gb_bf16": 1.91,
+      "avg_indic_fertility_est": 1.1099999999999999,
+      "training_stability": 0.8,
+      "composite_score": 0.625,
+      "chosen": false
+    },
+    {
+      "label": "256k",
+      "vocab": 262144,
+      "embedding_gb_bf16": 2.5,
+      "avg_indic_fertility_est": 1.071,
+      "training_stability": 0.5,
+      "composite_score": 0.528,
+      "chosen": false
+    }
+  ],
+  "decision": 128000,
+  "decision_label": "128k",
+  "rejected_rationale": {
+    "96k": "Indic conjunct fragmentation; fertility +0.08 vs 128k",
+    "160k": "Embedding +2.1GB; marginal fertility gain \u22120.02",
+    "200k": "Embedding +4.5GB; stability penalty; SME TCO crosses threshold",
+    "256k": "12.8GB embedding table; inference memory blocks 2\u00d7L40S deploy"
+  },
+  "winner_by_score": "128k"
+}
