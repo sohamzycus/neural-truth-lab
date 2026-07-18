@@ -1,73 +1,66 @@
 # IndiaOne-40B — Internal Research Proposal
 
-**Version:** 2.1 · Spec 004 + Chief Scientist review  
-**Numbers:** `python scripts/derive_all.py` → `data/derived/*.json`
-
-**Spine:** Mission → Capabilities → Data → Cleaning → Tokenizer → Train → Align → Eval → Deploy → Risks
+**v2.2** · `python scripts/derive_all.py` → `data/derived/*.json`
 
 ---
 
 # §0 Why IndiaOne-40B Should Exist
 
-> **vs Gemma:** Gemma optimizes English-centric vocab and global benchmarks. IndiaOne optimizes **script-aware tokenization + deployment TCO** on India-hosted GPUs — problems Gemma cannot fix with fine-tuning alone.
+## Vision
 
-## Mission
+India does not need the highest MMLU score. It needs the **cheapest correct token** on a Mumbai GPU. Every billion parameters that cannot be served at ₹/query is wasted training.
 
-Build a **40B dense GQA** model on **1.2T tokens** whose success metric is **₹/query and gov/SME pilot milestones**, not MMLU rank.
+## 1 — Problem
 
-## Five Design Principles
+Indic text costs **21–45% more tokens/query** on imported tokenizers (1.46 vs 1.14 fertility). At 30M queries/day that is **$13M/year** in inference alone—before SME adoption fails on latency and bandwidth. Government digitization at population scale cannot run on models optimized for English leaderboards.
 
-| # | Principle | Implication |
-|---|-----------|-------------|
-| P1 | **Capabilities before corpora** | Every token budget traces to a capability SLO (§3) |
-| P2 | **Tokenizer is the economic engine** | 128k derived to minimize Indic fertility without blocking 2×L40S deploy (§5–§6) |
-| P3 | **Anti-population data** | MCDA-7: Hindi 17.9% not 39.2%; Dravidian 28.4% (§3) |
-| P4 | **Ship on deployment gates** | L1 safety + L2 ≥0.78 + recovery ≥0.70; benchmarks inform only (§9) |
-| P5 | **Frugal ops by design** | INT4 + 8B/40B blend → **~$19M** Year-2 TCO vs **$64M** generic (§10) |
+## 2 — Why existing models fail
 
-## Ten Engineering Decisions
+| Approach | Fatal flaw |
+|----------|------------|
+| Fine-tune Gemma/Llama/Qwen | Vocabulary is frozen; fertility tax is permanent |
+| Bigger model (70B) | 4×L40S; ~$98M Year-2 TCO |
+| MoE | Indic expert imbalance; +40–80ms p99 on Indian networks |
+| RAG-only 8B | No agent recovery ≥0.70; no foundation flywheel |
 
-| # | Decision | Key number | Matrix |
-|---|----------|------------|--------|
-| D1 | 40B dense GQA | 308,571 H100-hr/run · $679k | M12 |
-| D2 | 1.2T pretrain | 82/12/4/6 | M4, M6 |
-| D3 | MCDA-7 languages | hi **17.9%**, en_in **17.4%** | M3 |
-| D4 | **128k** Unigram+BPE | Beats 160k/192k/200k on deploy composite **0.746** | M1, M2 |
-| D5 | 16-stage cleaning | **22.2%** yield · **4.5×** ingest | M5, M11 |
-| D6 | 6% synthetic cap | >8% → faithfulness −4.2 | M6 |
-| D7 | Two-phase curriculum | 70% general → 30% India tail | M8 |
-| D8 | SFT → DPO; RLHF safety only | $12M alignment | M7 |
-| D9 | Pyramid ship gate | 0.82/0.75/0.78/0.70/0.65 | §9 |
-| D10 | INT4 + FP8 gov | 2× L40S Mumbai/Chennai | M9 |
+**IndiaOne thesis:** optimize **deployable intelligence**—tokenizer → fertility → quant → router—not benchmark intelligence.
 
-## Ten Rejected Alternatives
+## 3 — Five Engineering Laws
 
-70B dense · 40B MoE · 8B-only · population Hindi 39.2% · 20% code · 10% synthetic · **192k/256k vocab** · permissive cleaning · RLHF-primary · FP16 production.
+| Law | Rule | Governs |
+|-----|------|---------|
+| **L1** | Capabilities before corpus | §1, §3 |
+| **L2** | Deployment before leaderboard | §9, §11 |
+| **L3** | Inference economics dominate training | §5, §6, §10 |
+| **L4** | Tokenizer is infrastructure | §5–§6 |
+| **L5** | Every capability has an observable SLO | §1, §8, §9 |
 
-## Major Risks & Kill Criteria
+## 4 — How we know we succeeded
 
-| Risk | Kill / gate |
-|------|-------------|
-| MMLU chase | L2 blocks release |
-| Faithfulness <0.75 after 2 retrains | **Pause program** |
-| Agent recovery <0.55 @ M16 | **Terminate agent track** |
-| TCO savings <10% vs generic | Revisit tokenizer |
-| Kanoon license lapse | Fallback contracts corpus |
+| Question | Answer |
+|----------|--------|
+| Problem? | ₹/query and faithfulness on India-hosted GPUs |
+| Why not incumbents? | Cannot retokenize; optimize wrong objective |
+| Philosophy? | L1–L5; ship on deployment gates not MMLU |
+| Success? | Fertility 1.14 · TCO $51M→$19M blended · Gov ≥0.78 · Recovery ≥0.70 |
 
-## Success Criteria
+## Locked decisions (traceability)
 
-Indic fertility **1.14** (vs 1.46 generic) · Year-2 TCO **$51M** (40B) / **$19M** (blended) · Gov pilot **≥0.78** · Hallucination **<8%** on gov RAG.
+40B dense GQA · 1.2T tokens · MCDA-7 (hi 17.9%, en_in 17.4%) · **128k** Unigram+BPE (composite 0.746; beats 192k) · 16-stage clean 22.2% yield · DPO+RLHF-safety · INT4+8B/40B blend · $100M/18mo.
 
-## India-First Philosophy (not a dataset list)
+**Rejected:** 70B · MoE · population Hindi 39.2% · 256k vocab · RLHF-primary · FP16 prod.
 
-| Driver | Design lever |
-|--------|--------------|
-| Code-switch (Hinglish/Tanglish) | 28B social + 5% post-train; CS gate 0.75 |
-| UPI/GST/ONDC semantics | Structured QA corpora → `indian_reasoning` |
-| SME ₹/query | Fertility → fewer tokens → blended 8B router |
-| Gov numeric accuracy | FP8 tier for GST; INT4 default |
-| Mobile / low bandwidth | 8B edge tier; fertility reduces bytes/query |
-| Regional commerce / procurement | BPO + enterprise email in `conversation` slice |
+**Kill:** faithfulness <0.75 · recovery <0.55 @M16 · TCO savings <10%.
+
+## India is deployment-first (not language-first)
+
+| Constraint | Design lever |
+|------------|--------------|
+| GPU/bandwidth | Fertility 1.14; INT4; 8B edge tier |
+| Mobile/SME | Blended router → ~$19M TCO |
+| Code-switch default | 128k script buckets; CS gate 0.75 |
+| Gov digitization | FP8 GST tier; faithfulness 0.82 |
+| India Stack (UPI/GST/ONDC) | Capability `indian_reasoning`, not a dataset appendix |
 
 ---
 
@@ -494,7 +487,9 @@ L16 ←─ L15 ←─ L14 ←─ L13 ←─ L12 ←─ L09 ←─ L10 ←─ L11
 
 ## 5.1 Problem Statement
 
-**Q4 (part 1): What tokenizer?** Vocabulary design trades embedding memory, per-script fertility, training stability, and deployment fit on 2× L40S. Wrong choice permanently taxes every inference query for the model's lifetime.
+**Law L3/L4:** India's deployment economics require minimizing token count before maximizing benchmark score—tokenizer design is infrastructure, not an NLP detail. Wrong vocabulary permanently taxes every query (embedding memory, fertility, effective context). *Therefore* we derive vocab size from deploy composite on 2× L40S, not from convention.
+
+**Q4 (part 1):** Vocabulary trades embedding memory, per-script fertility, training stability, and edge deploy fit.
 
 ## 5.2 Design Options — Algorithm
 
