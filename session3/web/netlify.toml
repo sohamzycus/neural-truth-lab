@@ -1,8 +1,9 @@
-# India-First 40B — Netlify (GitHub-connected build on Netlify servers)
-# UI: set Base directory to session3/web in Netlify dashboard.
+# India-First 40B — prebuilt dist (session2 pattern)
+# Netlify UI: Base directory = session3/web, link to GitHub repo.
+# Build runs on Netlify servers — no local CLI upload (avoids Zscaler).
 
 [build]
-  command = "npm ci && npm run build"
+  command = "test -f dist/index.html && test -f dist/data/matrices.json && test -d dist/diagrams && echo 'Prebuilt dist OK'"
   publish = "dist"
 
 [build.environment]
