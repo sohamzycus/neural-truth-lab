@@ -256,20 +256,23 @@ export default function App() {
                 <p className="text-[var(--muted)]">Loading report…</p>
               )}
               {currentChapter && chapterMeta && <ChapterTakeaway meta={chapterMeta} />}
-              <div className="mt-8 flex justify-between border-t border-[var(--border)] pt-3 text-sm">
+              <div className="report-chapter-nav">
                 <button
                   type="button"
                   disabled={safeChapter <= 0}
                   onClick={() => goChapter(safeChapter - 1)}
-                  className="font-semibold text-[var(--color-indigo)] disabled:opacity-30"
+                  className="report-chapter-nav__btn"
                 >
                   ← Previous
                 </button>
+                <span className="report-chapter-nav__pos">
+                  {safeChapter + 1} / {chapters.length}
+                </span>
                 <button
                   type="button"
                   disabled={safeChapter >= chapters.length - 1}
                   onClick={() => goChapter(safeChapter + 1)}
-                  className="font-semibold text-[var(--color-indigo)] disabled:opacity-30"
+                  className="report-chapter-nav__btn"
                 >
                   Next →
                 </button>
