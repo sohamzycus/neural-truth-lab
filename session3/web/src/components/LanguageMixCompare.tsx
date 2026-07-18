@@ -26,7 +26,7 @@ export function LanguageMixCompare({ lang }: { lang: LanguageWeights | null }) {
   const max = Math.max(...entries.flatMap((e) => [e.mcda, e.pop]));
 
   return (
-    <section className="rounded border border-[var(--border)] bg-white p-5">
+    <section className="card p-5">
       <h3 className="font-semibold">MCDA vs Population Weighting</h3>
       <p className="mt-1 text-sm text-[var(--muted)]">
         Why Hindi drops from {lang.population_baseline_percent.hi}% (census) to{" "}

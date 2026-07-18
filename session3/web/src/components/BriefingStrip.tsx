@@ -61,7 +61,7 @@ export function BriefingStrip({
           key={c.id}
           type="button"
           onClick={() => onJump(c.jump)}
-          className="rounded border border-[var(--border)] bg-white p-4 text-left transition hover:border-[var(--accent)] hover:shadow-sm"
+          className="card p-4 text-left transition hover:-translate-y-0.5 hover:border-[var(--color-saffron)] hover:shadow-md"
         >
           <p className="text-[10px] font-medium uppercase tracking-widest text-[var(--muted)]">
             {c.label}

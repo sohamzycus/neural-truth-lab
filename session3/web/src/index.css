@@ -1,59 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-ivory: #f7f3e8;
+  --color-ink: #1a1410;
+  --color-saffron: #c45c26;
+  --color-indigo: #2c3e6b;
+  --color-leaf: #2d5a3d;
+  --color-parchment: #ebe4d4;
+}
+
 :root {
-  --ink: #12131a;
-  --paper: #f4f2ec;
-  --accent: #c45c26;
-  --accent-2: #2c3e6b;
+  --ink: var(--color-ink);
+  --paper: var(--color-ivory);
+  --accent: var(--color-saffron);
+  --accent-2: var(--color-indigo);
   --muted: #5c5c66;
-  --border: #ddd9ce;
+  --border: rgba(26, 20, 16, 0.12);
 }
 
 body {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  background: radial-gradient(ellipse at 20% 0%, #fff 0%, var(--paper) 55%);
-  color: var(--ink);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-ivory);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(196, 92, 38, 0.09), transparent 42%),
+    radial-gradient(circle at 88% 92%, rgba(44, 62, 107, 0.08), transparent 40%);
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 code, pre, .font-mono {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
+}
+
+.card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(26, 20, 16, 0.04);
+}
+
+.hero-mesh {
+  background:
+    linear-gradient(135deg, rgba(26, 20, 16, 0.97) 0%, rgba(44, 62, 107, 0.92) 55%, rgba(196, 92, 38, 0.35) 100%);
+}
+
+.script-watermark {
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 700;
+  opacity: 0.04;
+  line-height: 1;
+}
+
+.tab-active {
+  background: linear-gradient(180deg, rgba(196, 92, 38, 0.15), transparent);
+  border-bottom: 2px solid var(--color-saffron);
+  color: var(--color-ink);
+  font-weight: 600;
 }
 
 .report-prose {
-  font-family: "Source Serif 4", Georgia, serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 
 .report-prose h2 {
-  font-size: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--color-saffron);
 }
 
 .report-prose h3 {
+  font-family: var(--font-sans);
   font-size: 1.1rem;
   font-weight: 600;
   margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.report-prose p {
-  margin: 0.75rem 0;
-}
-
-.report-prose ul, .report-prose ol {
-  margin: 0.75rem 0;
-  padding-left: 1.5rem;
-}
-
-.report-prose li {
-  margin: 0.25rem 0;
 }
 
 .report-prose table {
@@ -61,46 +93,42 @@ code, pre, .font-mono {
   border-collapse: collapse;
   margin: 1rem 0;
   font-size: 0.875rem;
+  font-family: var(--font-sans);
 }
 
 .report-prose th,
 .report-prose td {
   border: 1px solid var(--border);
-  padding: 0.4rem 0.6rem;
-  text-align: left;
+  padding: 0.45rem 0.65rem;
 }
 
 .report-prose th {
-  background: var(--paper);
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 0.75rem;
+  background: var(--color-parchment);
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
-.report-prose tr:nth-child(even) td {
-  background: #faf9f6;
+.pipeline-svg text {
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  fill: var(--color-ink);
 }
 
-.report-prose strong {
-  font-weight: 600;
+.pipeline-svg .node {
+  fill: white;
+  stroke: var(--color-indigo);
+  stroke-width: 1.5;
 }
 
-.report-prose hr {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 1.5rem 0;
+.pipeline-svg .node-accent {
+  fill: #fff7f0;
+  stroke: var(--color-saffron);
 }
 
-.report-prose code {
-  font-size: 0.85em;
-  background: var(--paper);
-  padding: 0.1em 0.35em;
-  border-radius: 3px;
-}
-
-/* Mermaid SVG responsive */
-.mermaid svg {
-  max-width: 100%;
-  height: auto;
+.pipeline-svg .arrow {
+  stroke: var(--color-indigo);
+  stroke-width: 1.5;
+  fill: none;
+  marker-end: url(#arrowhead);
 }

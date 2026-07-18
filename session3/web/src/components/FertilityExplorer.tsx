@@ -42,7 +42,7 @@ export function FertilityExplorer({
   if (!fertility || !inference || !calc) return null;
 
   return (
-    <section className="rounded border border-[var(--border)] bg-white p-5">
+    <section className="card p-5">
       <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
           <h3 className="font-semibold">Fertility → TCO Explorer</h3>
