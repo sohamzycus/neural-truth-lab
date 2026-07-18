@@ -1,0 +1,32 @@
+{
+  "total_vocab": 128000,
+  "buckets": {
+    "special_control_chat_tool": 1024,
+    "byte_fallback": 256,
+    "devanagari": 14080,
+    "bengali_assamese": 5760,
+    "telugu": 5120,
+    "tamil": 4864,
+    "gujarati": 3584,
+    "kannada": 3328,
+    "malayalam": 3328,
+    "gurmukhi": 2816,
+    "odia": 2048,
+    "arabic_urdu": 3840,
+    "latin_english_india": 28160,
+    "code_dedicated": 4096,
+    "math_latex_symbols": 1536,
+    "digits_punctuation": 1024,
+    "learned_shared_merges": 43136
+  },
+  "tokenizer_exposure_weights": {
+    "latin_en_in": 0.22,
+    "devanagari": 0.28,
+    "dravidian": 0.22,
+    "eastern_bn_as_or": 0.12,
+    "gujarati_gurmukhi": 0.08,
+    "arabic_ur": 0.04,
+    "code": 0.14
+  },
+  "algorithm": "unigram_bpe_hybrid"
+}

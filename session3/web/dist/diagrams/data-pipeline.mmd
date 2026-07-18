@@ -1,0 +1,25 @@
+flowchart LR
+    subgraph Sources
+        WEB[Web crawl]
+        REPO[Code repos]
+        BOOKS[Books/PDFs]
+        CONV[Conversations]
+        GOV[Gov/Edu corpus]
+    end
+    subgraph Ingest
+        LIC[License filter]
+        META[Metadata tagging]
+    end
+    subgraph Mix
+        MCDA[MCDA language weights]
+        CODE[Code 12%]
+        MATH[Math 4%]
+        SYN[Synthetic cap 6%]
+    end
+    PRETRAIN[Pretrain 1.2T tokens]
+    Sources --> LIC --> META --> MCDA
+    MCDA --> Mix
+    CODE --> Mix
+    MATH --> Mix
+    SYN --> Mix
+    Mix --> PRETRAIN

@@ -1,0 +1,31 @@
+{
+  "serving_config": "40B INT4 GQA, 2\u00d7 L40S per replica (Mumbai/Chennai)",
+  "gpu_cost_india": {
+    "inr_per_hr": 125,
+    "usd_per_hr": 1.5
+  },
+  "configs": {
+    "40b_int4_baseline": {
+      "cost_per_million_tokens_usd": 4.9,
+      "throughput_tok_s": 85
+    },
+    "40b_speculative_7b_draft": {
+      "cost_per_million_tokens_usd": 3.15,
+      "throughput_tok_s": 130
+    },
+    "blended_8b_40b_80_20": {
+      "cost_per_million_tokens_usd": 1.85,
+      "throughput_tok_s": 220
+    }
+  },
+  "year2_scale": {
+    "queries_per_day": 30000000,
+    "avg_tokens": 1200
+  },
+  "annual_tco_usd_millions": {
+    "40b_int4_baseline": 64.4,
+    "40b_speculative_7b_draft": 41.4,
+    "blended_8b_40b_80_20": 24.3
+  },
+  "india_tokenizer_savings_vs_generic_usd_m": 13.5
+}

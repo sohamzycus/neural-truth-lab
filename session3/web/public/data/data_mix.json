@@ -1,0 +1,45 @@
+{
+  "total_tokens": 1200000000000.0,
+  "slices": {
+    "natural_language": 0.82,
+    "code": 0.12,
+    "math_reasoning": 0.04,
+    "synthetic_cap": 0.06
+  },
+  "slice_tokens_billions": {
+    "natural_language": 984.0,
+    "code": 144.0,
+    "math_reasoning": 48.0,
+    "synthetic_cap": 72.0
+  },
+  "language_allocation_billions": {
+    "hi": 176.3,
+    "en_in": 171.7,
+    "bn": 80.8,
+    "te": 79.0,
+    "ta": 91.8,
+    "mr": 66.2,
+    "gu": 54.3,
+    "kn": 52.5,
+    "ml": 56.1,
+    "pa": 39.9,
+    "ur": 35.1,
+    "or": 27.9,
+    "as": 22.1,
+    "sa": 15.6,
+    "other_indic": 14.6
+  },
+  "code_breakdown_billions": {
+    "python": 54.7,
+    "javascript_typescript": 37.4,
+    "java": 20.2,
+    "c_cpp": 11.5,
+    "sql": 7.2,
+    "go": 5.8,
+    "rust": 4.3,
+    "shell_config_other": 2.9
+  },
+  "synthetic_cap_percent": 6.0,
+  "synthetic_quality_gate": 0.85,
+  "rejected_synthetic_above_percent": 8.0
+}

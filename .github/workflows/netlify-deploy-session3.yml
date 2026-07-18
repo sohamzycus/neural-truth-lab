@@ -1,0 +1,43 @@
+name: Deploy India-First 40B to Netlify (session3)
+
+# Create a new Netlify site with base directory session3/web, then set:
+#   NETLIFY_SITE_ID_SESSION3
+#   NETLIFY_AUTH_TOKEN (shared with session2)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'session3/web/**'
+      - 'session3/data/derived/**'
+      - 'session3/report/**'
+      - 'session3/scripts/**'
+      - '.github/workflows/netlify-deploy-session3.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session3/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify prebuilt dist
+        run: |
+          test -f dist/index.html
+          test -f dist/data/matrices.json
+          test -f dist/report.md
+
+      - name: Deploy to Netlify
+        run: |
+          cd dist
+          zip -r ../deploy.zip .
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -H "Content-Type: application/zip" \
+               --data-binary @../deploy.zip \
+               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_SESSION3 }}

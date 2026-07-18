@@ -1,0 +1,70 @@
+{
+  "method": "7-factor MCDA",
+  "factors": {
+    "internet_presence": 0.2,
+    "corpus_availability": 0.2,
+    "economic_impact": 0.15,
+    "deployment_demand": 0.2,
+    "translation_need": 0.1,
+    "code_switching": 0.1,
+    "government_education": 0.05
+  },
+  "weights": {
+    "hi": 0.1792,
+    "en_in": 0.1745,
+    "bn": 0.0821,
+    "te": 0.0803,
+    "ta": 0.0933,
+    "mr": 0.0673,
+    "gu": 0.0552,
+    "kn": 0.0534,
+    "ml": 0.057,
+    "pa": 0.0405,
+    "ur": 0.0357,
+    "or": 0.0284,
+    "as": 0.0225,
+    "sa": 0.0159,
+    "other_indic": 0.0148
+  },
+  "weights_percent": {
+    "hi": 17.9,
+    "en_in": 17.4,
+    "bn": 8.2,
+    "te": 8.0,
+    "ta": 9.3,
+    "mr": 6.7,
+    "gu": 5.5,
+    "kn": 5.3,
+    "ml": 5.7,
+    "pa": 4.0,
+    "ur": 3.6,
+    "or": 2.8,
+    "as": 2.2,
+    "sa": 1.6,
+    "other_indic": 1.5
+  },
+  "population_baseline_percent": {
+    "hi": 39.2,
+    "en_in": 9.1,
+    "bn": 7.3,
+    "te": 6.4,
+    "ta": 5.3,
+    "mr": 6.4,
+    "gu": 4.1,
+    "kn": 3.4,
+    "ml": 2.9,
+    "pa": 2.7,
+    "ur": 4.6,
+    "or": 2.9,
+    "as": 1.2,
+    "sa": 0.1,
+    "other_indic": 4.6
+  },
+  "hindi_mcda_vs_population": {
+    "mcda_percent": 17.9,
+    "population_percent": 39.2,
+    "delta_pp": -21.2
+  },
+  "dravidian_collective_mcda": 28.4,
+  "dravidian_collective_population": 17.9
+}

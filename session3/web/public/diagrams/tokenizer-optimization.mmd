@@ -1,0 +1,7 @@
+flowchart LR
+    UNICODE[Unicode blocks] --> EXP[Exposure weights]
+    EXP --> UNI[Unigram atoms]
+    UNI --> MERGE[BPE merge competition]
+    MERGE --> V128[128k slots]
+    V128 --> FERT[Fertility measure]
+    FERT -->|too high| EXP

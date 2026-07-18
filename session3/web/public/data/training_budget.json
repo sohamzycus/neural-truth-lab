@@ -1,0 +1,46 @@
+{
+  "parameters": 40000000000.0,
+  "total_tokens": 1200000000000.0,
+  "flops": "2.88e+23",
+  "h100_effective_throughput": 350000000000000.0,
+  "raw_gpu_hours_one_run": 228571,
+  "billable_gpu_hours_one_run": 308571,
+  "cost_one_full_pretrain_run_usd": 678857,
+  "budget_allocation_usd_m": {
+    "pretrain_ablations": {
+      "usd_m": 22,
+      "gpu_hours_m": 1.85
+    },
+    "post_train_sft": {
+      "usd_m": 8,
+      "gpu_hours_m": 0.42
+    },
+    "alignment_dpo_rlhf": {
+      "usd_m": 12,
+      "gpu_hours_m": 0.65
+    },
+    "eval_red_team": {
+      "usd_m": 8,
+      "gpu_hours_m": 0.3
+    },
+    "data_acquisition_cleaning": {
+      "usd_m": 15,
+      "gpu_hours_m": 0
+    },
+    "engineering_research": {
+      "usd_m": 20,
+      "gpu_hours_m": 0
+    },
+    "inference_pilot_india": {
+      "usd_m": 5,
+      "gpu_hours_m": 0.15
+    },
+    "contingency": {
+      "usd_m": 10,
+      "gpu_hours_m": 0.4
+    }
+  },
+  "total_budget_usd_m": 100,
+  "total_gpu_hours_m": 3.77,
+  "timeline_months": 18
+}

@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph Human
+        H[Red-team labels]
+        P[Preference pairs]
+    end
+    subgraph Train
+        RM[Reward model]
+        DPO[DPO trainer]
+        RL[PPO safety slice]
+    end
+    subgraph Gate
+        RT[Red-team eval]
+        SHIP[Release]
+    end
+    P --> DPO
+    H --> RM
+    RM --> RL
+    DPO --> RT
+    RL --> RT
+    RT --> SHIP

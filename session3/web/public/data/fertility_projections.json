@@ -1,0 +1,54 @@
+{
+  "baseline_tokenizer": "llama3_generic",
+  "projections": {
+    "llama3_generic": {
+      "fertility_by_lang": {
+        "en": 0.8,
+        "hi": 1.38,
+        "te": 1.52,
+        "bn": 1.45,
+        "ta": 1.48,
+        "avg_indic": 1.46
+      },
+      "avg_indic_fertility": 1.46,
+      "relative_inference_cost": 1.0
+    },
+    "population_weighted": {
+      "fertility_by_lang": {
+        "en": 0.82,
+        "hi": 1.22,
+        "te": 1.35,
+        "bn": 1.28,
+        "ta": 1.32,
+        "avg_indic": 1.29
+      },
+      "avg_indic_fertility": 1.29,
+      "relative_inference_cost": 0.88
+    },
+    "india_first_128k": {
+      "fertility_by_lang": {
+        "en": 0.79,
+        "hi": 1.09,
+        "te": 1.18,
+        "bn": 1.12,
+        "ta": 1.15,
+        "avg_indic": 1.14
+      },
+      "avg_indic_fertility": 1.14,
+      "relative_inference_cost": 0.78
+    },
+    "oracle_theoretical": {
+      "fertility_by_lang": {
+        "en": 0.76,
+        "hi": 1.02,
+        "te": 1.08,
+        "bn": 1.05,
+        "ta": 1.06,
+        "avg_indic": 1.05
+      },
+      "avg_indic_fertility": 1.05,
+      "relative_inference_cost": 0.72
+    }
+  },
+  "india_first_savings_vs_generic": 0.22
+}

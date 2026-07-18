@@ -1,0 +1,9 @@
+flowchart LR
+    EVAL[Eval failure] --> RC[Root cause tag]
+    RC --> DATA[Data fix]
+    RC --> TOK[Tokenizer fix]
+    RC --> ALIGN[Alignment fix]
+    DATA --> REGATE[Re-gate]
+    TOK --> REGATE
+    ALIGN --> REGATE
+    REGATE --> DEPLOY[Deploy]

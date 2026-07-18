@@ -1,0 +1,5 @@
+flowchart LR
+    DEPLOY[Production] --> LOGS[Filtered logs]
+    LOGS --> SFT[SFT refresh]
+    SFT --> DPO[DPO preferences]
+    DPO --> DEPLOY

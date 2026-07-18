@@ -1,0 +1,9 @@
+flowchart TB
+    PT[Pretrain 1.2T] --> MT[Mid-train optional]
+    MT --> SFT[SFT 40B tokens]
+    SFT --> DPO[DPO 200M pairs]
+    DPO --> RL[Safety RLHF slice]
+    RL --> EVAL[Pyramid eval]
+    EVAL -->|pass| EXPORT[Model export]
+    EVAL -->|fail| FB[Failure feedback]
+    FB --> SFT

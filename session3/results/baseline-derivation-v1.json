@@ -1,0 +1,347 @@
+{
+  "vocab_allocation.json": {
+    "total_vocab": 128000,
+    "algorithm": "unigram_bpe_hybrid",
+    "buckets": {
+      "special_control_chat_tool": 1024,
+      "byte_fallback": 256,
+      "devanagari": 14080,
+      "bengali_assamese": 5760,
+      "telugu": 5120,
+      "tamil": 4864,
+      "gujarati": 3584,
+      "kannada": 3328,
+      "malayalam": 3328,
+      "gurmukhi": 2816,
+      "odia": 2048,
+      "arabic_urdu": 3840,
+      "latin_english_india": 28160,
+      "code_dedicated": 4096,
+      "math_latex_symbols": 1536,
+      "digits_punctuation": 1024,
+      "learned_shared_merges": 43136
+    },
+    "exposure_weights": {
+      "latin_en_in": 0.22,
+      "devanagari": 0.28,
+      "dravidian": 0.22,
+      "eastern_bn_as_or": 0.12,
+      "gujarati_gurmukhi": 0.08,
+      "arabic_ur": 0.04,
+      "code": 0.14
+    },
+    "embedding_table_params": 5120000000000000,
+    "embedding_table_gb_bf16": 9536743.16,
+    "derivation": "V_total = S_special + S_byte + \u03a3(script_allocation) + S_code + S_math + S_learned_shared"
+  },
+  "language_weights.json": {
+    "method": "7-factor MCDA",
+    "factors": {
+      "internet_presence": 0.2,
+      "corpus_availability": 0.2,
+      "economic_impact": 0.15,
+      "deployment_demand": 0.2,
+      "translation_need": 0.1,
+      "code_switching": 0.1,
+      "government_education": 0.05
+    },
+    "weights": {
+      "hi": 0.1792,
+      "en_in": 0.1745,
+      "bn": 0.0821,
+      "te": 0.0803,
+      "ta": 0.0933,
+      "mr": 0.0673,
+      "gu": 0.0552,
+      "kn": 0.0534,
+      "ml": 0.057,
+      "pa": 0.0405,
+      "ur": 0.0357,
+      "or": 0.0284,
+      "as": 0.0225,
+      "sa": 0.0159,
+      "other_indic": 0.0148
+    },
+    "weights_percent": {
+      "hi": 17.9,
+      "en_in": 17.4,
+      "bn": 8.2,
+      "te": 8.0,
+      "ta": 9.3,
+      "mr": 6.7,
+      "gu": 5.5,
+      "kn": 5.3,
+      "ml": 5.7,
+      "pa": 4.0,
+      "ur": 3.6,
+      "or": 2.8,
+      "as": 2.2,
+      "sa": 1.6,
+      "other_indic": 1.5
+    },
+    "population_baseline_percent": {
+      "hi": 39.2,
+      "en_in": 9.1,
+      "bn": 7.3,
+      "te": 6.4,
+      "ta": 5.3,
+      "mr": 6.4,
+      "gu": 4.1,
+      "kn": 3.4,
+      "ml": 2.9,
+      "pa": 2.7,
+      "ur": 4.6,
+      "or": 2.9,
+      "as": 1.2,
+      "sa": 0.1,
+      "other_indic": 4.6
+    },
+    "hindi_mcda_vs_population": {
+      "mcda_percent": 17.9,
+      "population_percent": 39.2,
+      "delta_pp": -21.2
+    },
+    "dravidian_collective_mcda": 28.4,
+    "dravidian_collective_population": 17.9
+  },
+  "fertility_projections.json": {
+    "baseline_tokenizer": "llama3_generic",
+    "projections": {
+      "llama3_generic": {
+        "fertility_by_lang": {
+          "en": 0.8,
+          "hi": 1.38,
+          "te": 1.52,
+          "bn": 1.45,
+          "ta": 1.48,
+          "avg_indic": 1.46
+        },
+        "avg_indic_fertility": 1.46,
+        "relative_inference_cost": 1.0
+      },
+      "population_weighted": {
+        "fertility_by_lang": {
+          "en": 0.82,
+          "hi": 1.22,
+          "te": 1.35,
+          "bn": 1.28,
+          "ta": 1.32,
+          "avg_indic": 1.29
+        },
+        "avg_indic_fertility": 1.29,
+        "relative_inference_cost": 0.88
+      },
+      "india_first_128k": {
+        "fertility_by_lang": {
+          "en": 0.79,
+          "hi": 1.09,
+          "te": 1.18,
+          "bn": 1.12,
+          "ta": 1.15,
+          "avg_indic": 1.14
+        },
+        "avg_indic_fertility": 1.14,
+        "relative_inference_cost": 0.78
+      },
+      "oracle_theoretical": {
+        "fertility_by_lang": {
+          "en": 0.76,
+          "hi": 1.02,
+          "te": 1.08,
+          "bn": 1.05,
+          "ta": 1.06,
+          "avg_indic": 1.05
+        },
+        "avg_indic_fertility": 1.05,
+        "relative_inference_cost": 0.72
+      }
+    },
+    "india_first_savings_vs_generic": 0.22
+  },
+  "training_budget.json": {
+    "parameters": 40000000000.0,
+    "total_tokens": 1200000000000.0,
+    "flops": "2.88e+23",
+    "h100_effective_throughput": 350000000000000.0,
+    "raw_gpu_hours_one_run": 228571,
+    "billable_gpu_hours_one_run": 308571,
+    "cost_one_full_pretrain_run_usd": 678857,
+    "budget_allocation_usd_m": {
+      "pretrain_ablations": {
+        "usd_m": 22,
+        "gpu_hours_m": 1.85
+      },
+      "post_train_sft": {
+        "usd_m": 8,
+        "gpu_hours_m": 0.42
+      },
+      "alignment_dpo_rlhf": {
+        "usd_m": 12,
+        "gpu_hours_m": 0.65
+      },
+      "eval_red_team": {
+        "usd_m": 8,
+        "gpu_hours_m": 0.3
+      },
+      "data_acquisition_cleaning": {
+        "usd_m": 15,
+        "gpu_hours_m": 0
+      },
+      "engineering_research": {
+        "usd_m": 20,
+        "gpu_hours_m": 0
+      },
+      "inference_pilot_india": {
+        "usd_m": 5,
+        "gpu_hours_m": 0.15
+      },
+      "contingency": {
+        "usd_m": 10,
+        "gpu_hours_m": 0.4
+      }
+    },
+    "total_budget_usd_m": 100,
+    "total_gpu_hours_m": 3.77,
+    "timeline_months": 18
+  },
+  "inference_costs.json": {
+    "serving_config": "40B INT4 GQA, 2\u00d7 L40S per replica (Mumbai/Chennai)",
+    "gpu_cost_india": {
+      "inr_per_hr": 125,
+      "usd_per_hr": 1.5
+    },
+    "configs": {
+      "40b_int4_baseline": {
+        "cost_per_million_tokens_usd": 4.9,
+        "throughput_tok_s": 85
+      },
+      "40b_speculative_7b_draft": {
+        "cost_per_million_tokens_usd": 3.15,
+        "throughput_tok_s": 130
+      },
+      "blended_8b_40b_80_20": {
+        "cost_per_million_tokens_usd": 1.85,
+        "throughput_tok_s": 220
+      }
+    },
+    "year2_scale": {
+      "queries_per_day": 30000000,
+      "avg_tokens": 1200
+    },
+    "annual_tco_usd_millions": {
+      "40b_int4_baseline": 64.4,
+      "40b_speculative_7b_draft": 41.4,
+      "blended_8b_40b_80_20": 24.3
+    },
+    "india_tokenizer_savings_vs_generic_usd_m": 13.5
+  },
+  "data_mix.json": {
+    "total_tokens": 1200000000000.0,
+    "slices": {
+      "natural_language": 0.82,
+      "code": 0.12,
+      "math_reasoning": 0.04,
+      "synthetic_cap": 0.06
+    },
+    "slice_tokens_billions": {
+      "natural_language": 984.0,
+      "code": 144.0,
+      "math_reasoning": 48.0,
+      "synthetic_cap": 72.0
+    },
+    "language_allocation_billions": {
+      "hi": 176.3,
+      "en_in": 171.7,
+      "bn": 80.8,
+      "te": 79.0,
+      "ta": 91.8,
+      "mr": 66.2,
+      "gu": 54.3,
+      "kn": 52.5,
+      "ml": 56.1,
+      "pa": 39.9,
+      "ur": 35.1,
+      "or": 27.9,
+      "as": 22.1,
+      "sa": 15.6,
+      "other_indic": 14.6
+    },
+    "code_breakdown_billions": {
+      "python": 54.7,
+      "javascript_typescript": 37.4,
+      "java": 20.2,
+      "c_cpp": 11.5,
+      "sql": 7.2,
+      "go": 5.8,
+      "rust": 4.3,
+      "shell_config_other": 2.9
+    },
+    "synthetic_cap_percent": 6.0,
+    "synthetic_quality_gate": 0.85,
+    "rejected_synthetic_above_percent": 8.0
+  },
+  "scorecards.json": {
+    "scorecards": [
+      {
+        "id": "indic_faithfulness",
+        "name": "Indic-Faithfulness Score",
+        "definition": "Fraction of Indic responses preserving factual claims from source context (human+LLM-judge)",
+        "gate": 0.82,
+        "weight": 0.25
+      },
+      {
+        "id": "code_switch_robustness",
+        "name": "Code-Switch Robustness Index",
+        "definition": "Accuracy on Hinglish/Tanglish mixed prompts vs monolingual baseline",
+        "gate": 0.75,
+        "weight": 0.15
+      },
+      {
+        "id": "gov_edu_readiness",
+        "name": "Government/Education Readiness",
+        "definition": "Composite: form-filling accuracy, policy Q&A, textbook alignment",
+        "gate": 0.78,
+        "weight": 0.2
+      },
+      {
+        "id": "agent_recovery_rate",
+        "name": "Agent Recovery Rate",
+        "definition": "Fraction of tool-use trajectories that recover after first tool failure",
+        "gate": 0.7,
+        "weight": 0.2
+      },
+      {
+        "id": "inference_efficiency",
+        "name": "India Inference Efficiency",
+        "definition": "Quality-adjusted tokens/$ at p50 latency < 800ms on L40S",
+        "gate": 0.65,
+        "weight": 0.2
+      }
+    ],
+    "pyramid_levels": {
+      "L1_safety": [
+        "toxicity",
+        "bias_india",
+        "pii_leakage",
+        "jailbreak_resistance"
+      ],
+      "L2_indic_fidelity": [
+        "indic_faithfulness",
+        "code_switch_robustness",
+        "gov_edu_readiness"
+      ],
+      "L3_agents": [
+        "agent_recovery_rate",
+        "tool_use_accuracy",
+        "planning_depth"
+      ],
+      "L4_benchmarks": [
+        "mmlu",
+        "gsm8k",
+        "humaneval",
+        "indicglue"
+      ]
+    },
+    "ship_gate": "L1 pass + L2 aggregate \u2265 0.78 + L3 agent_recovery \u2265 0.70"
+  }
+}

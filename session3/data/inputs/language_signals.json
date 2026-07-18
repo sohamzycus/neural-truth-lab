@@ -1,0 +1,178 @@
+{
+  "factors": {
+    "internet_presence": 0.20,
+    "corpus_availability": 0.20,
+    "economic_impact": 0.15,
+    "deployment_demand": 0.20,
+    "translation_need": 0.10,
+    "code_switching": 0.10,
+    "government_education": 0.05
+  },
+  "languages": {
+    "hi": {
+      "name": "Hindi",
+      "internet_presence": 0.95,
+      "corpus_availability": 0.88,
+      "economic_impact": 0.92,
+      "deployment_demand": 0.98,
+      "translation_need": 0.40,
+      "code_switching": 0.95,
+      "government_education": 0.98,
+      "population_share": 0.43
+    },
+    "en_in": {
+      "name": "English (India context)",
+      "internet_presence": 0.99,
+      "corpus_availability": 0.99,
+      "economic_impact": 0.98,
+      "deployment_demand": 0.95,
+      "translation_need": 0.15,
+      "code_switching": 0.90,
+      "government_education": 0.75,
+      "population_share": 0.10
+    },
+    "bn": {
+      "name": "Bengali",
+      "internet_presence": 0.72,
+      "corpus_availability": 0.65,
+      "economic_impact": 0.70,
+      "deployment_demand": 0.75,
+      "translation_need": 0.55,
+      "code_switching": 0.45,
+      "government_education": 0.80,
+      "population_share": 0.08
+    },
+    "te": {
+      "name": "Telugu",
+      "internet_presence": 0.68,
+      "corpus_availability": 0.58,
+      "economic_impact": 0.72,
+      "deployment_demand": 0.78,
+      "translation_need": 0.60,
+      "code_switching": 0.50,
+      "government_education": 0.75,
+      "population_share": 0.07
+    },
+    "ta": {
+      "name": "Tamil",
+      "internet_presence": 0.75,
+      "corpus_availability": 0.62,
+      "economic_impact": 0.78,
+      "deployment_demand": 0.82,
+      "translation_need": 0.58,
+      "code_switching": 0.48,
+      "government_education": 0.78,
+      "population_share": 0.058
+    },
+    "mr": {
+      "name": "Marathi",
+      "internet_presence": 0.65,
+      "corpus_availability": 0.55,
+      "economic_impact": 0.68,
+      "deployment_demand": 0.70,
+      "translation_need": 0.50,
+      "code_switching": 0.55,
+      "government_education": 0.72,
+      "population_share": 0.07
+    },
+    "gu": {
+      "name": "Gujarati",
+      "internet_presence": 0.58,
+      "corpus_availability": 0.48,
+      "economic_impact": 0.75,
+      "deployment_demand": 0.65,
+      "translation_need": 0.52,
+      "code_switching": 0.40,
+      "government_education": 0.68,
+      "population_share": 0.045
+    },
+    "kn": {
+      "name": "Kannada",
+      "internet_presence": 0.55,
+      "corpus_availability": 0.45,
+      "economic_impact": 0.72,
+      "deployment_demand": 0.68,
+      "translation_need": 0.55,
+      "code_switching": 0.42,
+      "government_education": 0.65,
+      "population_share": 0.037
+    },
+    "ml": {
+      "name": "Malayalam",
+      "internet_presence": 0.62,
+      "corpus_availability": 0.50,
+      "economic_impact": 0.70,
+      "deployment_demand": 0.66,
+      "translation_need": 0.53,
+      "code_switching": 0.38,
+      "government_education": 0.70,
+      "population_share": 0.032
+    },
+    "pa": {
+      "name": "Punjabi",
+      "internet_presence": 0.52,
+      "corpus_availability": 0.42,
+      "economic_impact": 0.65,
+      "deployment_demand": 0.60,
+      "translation_need": 0.48,
+      "code_switching": 0.35,
+      "government_education": 0.62,
+      "population_share": 0.03
+    },
+    "ur": {
+      "name": "Urdu",
+      "internet_presence": 0.48,
+      "corpus_availability": 0.40,
+      "economic_impact": 0.55,
+      "deployment_demand": 0.58,
+      "translation_need": 0.65,
+      "code_switching": 0.30,
+      "government_education": 0.55,
+      "population_share": 0.05
+    },
+    "or": {
+      "name": "Odia",
+      "internet_presence": 0.42,
+      "corpus_availability": 0.35,
+      "economic_impact": 0.50,
+      "deployment_demand": 0.52,
+      "translation_need": 0.70,
+      "code_switching": 0.25,
+      "government_education": 0.60,
+      "population_share": 0.032
+    },
+    "as": {
+      "name": "Assamese",
+      "internet_presence": 0.38,
+      "corpus_availability": 0.30,
+      "economic_impact": 0.45,
+      "deployment_demand": 0.48,
+      "translation_need": 0.72,
+      "code_switching": 0.22,
+      "government_education": 0.55,
+      "population_share": 0.013
+    },
+    "sa": {
+      "name": "Sanskrit",
+      "internet_presence": 0.25,
+      "corpus_availability": 0.55,
+      "economic_impact": 0.30,
+      "deployment_demand": 0.35,
+      "translation_need": 0.40,
+      "code_switching": 0.15,
+      "government_education": 0.85,
+      "population_share": 0.001
+    },
+    "other_indic": {
+      "name": "Other Indic",
+      "internet_presence": 0.30,
+      "corpus_availability": 0.25,
+      "economic_impact": 0.35,
+      "deployment_demand": 0.40,
+      "translation_need": 0.75,
+      "code_switching": 0.20,
+      "government_education": 0.50,
+      "population_share": 0.05
+    }
+  }
+}

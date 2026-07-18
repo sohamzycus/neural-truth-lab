@@ -1,0 +1,14 @@
+# India-First 40B report — static Vite app
+# Set Netlify UI base directory to session3/web (NOT repo root).
+
+[build]
+  command = "test -f dist/index.html && test -f dist/data/matrices.json && test -f dist/report.md && test -d dist/diagrams && echo 'Prebuilt dist OK'"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
