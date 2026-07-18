@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { BriefingStrip } from "./components/BriefingStrip";
 import { DecisionMatrix } from "./components/DecisionMatrix";
 import { DiagramGallery, DiagramTabs } from "./components/PipelineDiagrams";
@@ -26,12 +27,13 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "explore", label: "Explore" },
 ];
 
-const TRUST = [
-  "Python-derived numbers",
-  "128k India tokenizer",
-  "7-factor MCDA weights",
-  "13-chapter proposal",
-];
+function TabPanel({ active, children }: { active: boolean; children: ReactNode }) {
+  return (
+    <div className={active ? "tab-panel tab-panel--active" : "tab-panel"} hidden={!active}>
+      {children}
+    </div>
+  );
+}
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("overview");
@@ -55,19 +57,23 @@ export default function App() {
     if (!Number.isNaN(ch) && ch >= 0) setChapterIdx(ch);
   }, []);
 
-  const navigate = (nextTab: Tab, ch?: number) => {
-    setTab(nextTab);
-    if (ch !== undefined) setChapterIdx(ch);
+  const setUrl = (nextTab: Tab, ch?: number) => {
     const url = new URL(window.location.href);
     url.searchParams.set("tab", nextTab);
     if (ch !== undefined) url.searchParams.set("chapter", String(ch));
     window.history.replaceState({}, "", url);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const switchTab = (nextTab: Tab) => {
+    if (nextTab === tab) return;
+    setTab(nextTab);
+    setUrl(nextTab, nextTab === "report" ? chapterIdx : undefined);
   };
 
   const goChapter = (i: number) => {
     setChapterIdx(i);
-    navigate("report", i);
+    if (tab !== "report") setTab("report");
+    setUrl("report", i);
   };
 
   useEffect(() => {
@@ -106,72 +112,36 @@ export default function App() {
         </div>
       )}
 
-      <header className="hero-mesh relative overflow-hidden text-white">
-        <span className="script-watermark font-devanagari left-2 top-6 text-white">४०B</span>
-        <span className="script-watermark right-6 top-20 font-devanagari text-white">भारत</span>
-        <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-12 md:pt-16">
-          <p className="animate-in text-[10px] font-bold uppercase tracking-[0.35em] text-[var(--color-saffron)]">
-            Internal Research Proposal · IN-40B-2026
-          </p>
-          <h1 className="font-display mt-4 text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[0.95] tracking-tight">
-            India-First
-            <span className="block bg-gradient-to-r from-[var(--color-saffron)] via-[#ffd4a8] to-white bg-clip-text text-transparent">
-              40B Foundation
-            </span>
-          </h1>
-          <p className="animate-in mt-4 max-w-2xl text-lg font-medium text-white/85 md:text-xl" style={{ animationDelay: "0.1s" }}>
-            Forty billion parameters. One deployment constraint:{" "}
-            <span className="font-devanagari font-bold text-[var(--color-saffron)]">भारत</span>.
-          </p>
-          <p className="animate-in mt-2 max-w-xl text-sm text-white/55" style={{ animationDelay: "0.15s" }}>
-            Spec-driven $100M program — tokenizer fertility, MCDA language weights, inference TCO.
-            Every number from <code className="rounded bg-white/10 px-1.5 py-0.5 text-white/80">derive_all.py</code>.
-          </p>
-
+      <header className="hero-mesh relative text-white">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-3 px-4 py-4 md:py-5">
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--color-saffron)]">
+              IN-40B-2026 · Internal Proposal
+            </p>
+            <h1 className="text-2xl font-extrabold tracking-tight md:text-3xl">
+              India-First <span className="text-[var(--color-saffron)]">40B</span>
+            </h1>
+          </div>
           {budget && inference && (
-            <div className="animate-in mt-8 flex flex-wrap gap-3" style={{ animationDelay: "0.2s" }}>
-              <div className="stat-pill">
-                <span className="label">Parameters</span>
-                <span className="value accent">40B dense</span>
-              </div>
-              <div className="stat-pill">
-                <span className="label">Budget</span>
-                <span className="value">${budget.total_budget_usd_m}M</span>
-              </div>
-              <div className="stat-pill">
-                <span className="label">Vocab</span>
-                <span className="value">128k</span>
-              </div>
-              <div className="stat-pill">
-                <span className="label">TCO savings</span>
-                <span className="value accent">22%</span>
-              </div>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="stat-pill-compact">${budget.total_budget_usd_m}M · {budget.timeline_months}mo</span>
+              <span className="stat-pill-compact">128k vocab</span>
+              <span className="stat-pill-compact">22% TCO ↓</span>
             </div>
           )}
-
-          <ul className="animate-in mt-6 flex flex-wrap gap-2" style={{ animationDelay: "0.25s" }}>
-            {TRUST.map((t) => (
-              <li
-                key={t}
-                className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        <nav className="relative border-t border-white/15 bg-black/20 backdrop-blur-md">
-          <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4">
+        <nav className="sticky top-0 z-20 border-t border-white/10 bg-[var(--color-indigo-deep)]/95 backdrop-blur-sm">
+          <div className="mx-auto flex max-w-6xl gap-0.5 overflow-x-auto px-4">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 type="button"
-                onClick={() => navigate(t.id)}
-                className={`shrink-0 px-5 py-3.5 text-sm font-semibold transition ${
+                onClick={() => switchTab(t.id)}
+                className={`shrink-0 border-b-2 px-4 py-2.5 text-sm font-semibold transition-colors ${
                   tab === t.id
-                    ? "border-b-2 border-[var(--color-saffron)] text-white"
-                    : "text-white/55 hover:text-white"
+                    ? "border-[var(--color-saffron)] text-white"
+                    : "border-transparent text-white/50 hover:text-white/80"
                 }`}
               >
                 {t.label}
@@ -181,36 +151,35 @@ export default function App() {
         </nav>
       </header>
 
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        {tab === "overview" && (
-          <div className="space-y-10">
+      <main className="mx-auto max-w-6xl px-4 py-6">
+        <TabPanel active={tab === "overview"}>
+          <div className="space-y-6">
             <UspSection />
             <BriefingStrip budget={budget} inference={inference} scorecards={scorecards} onJump={goChapter} />
             <section>
-              <h2 className="font-display mb-1 text-xl font-bold text-[var(--color-indigo)]">Training pipeline</h2>
-              <p className="mb-4 text-sm text-[var(--muted)]">Interactive architecture — click Architecture tab for all 8 diagrams.</p>
+              <h2 className="section-title">Training pipeline</h2>
               <DiagramGallery featuredOnly />
             </section>
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="grid gap-5 lg:grid-cols-2">
               <FertilityExplorer fertility={fertility} inference={inference} />
               <LanguageMixCompare lang={lang} />
             </div>
           </div>
-        )}
+        </TabPanel>
 
-        {tab === "report" && (
-          <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-            <aside className="lg:sticky lg:top-4 lg:self-start">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
+        <TabPanel active={tab === "report"}>
+          <div className="grid gap-5 lg:grid-cols-[220px_1fr]">
+            <aside className="lg:sticky lg:top-14 lg:self-start">
+              <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
                 {chapters.length} chapters
               </p>
-              <nav className="card max-h-[70vh] space-y-0.5 overflow-y-auto p-2 text-sm">
+              <nav className="card max-h-[calc(100vh-5rem)] space-y-0.5 overflow-y-auto p-1.5 text-sm">
                 {chapters.map((ch, i) => (
                   <button
                     key={ch.id}
                     type="button"
                     onClick={() => goChapter(i)}
-                    className={`block w-full rounded-lg px-3 py-2 text-left transition ${
+                    className={`block w-full rounded-md px-2.5 py-1.5 text-left transition-colors ${
                       safeChapter === i
                         ? "bg-[var(--color-indigo)] font-semibold text-white"
                         : "text-[var(--muted)] hover:bg-white"
@@ -221,13 +190,24 @@ export default function App() {
                 ))}
               </nav>
             </aside>
-            <article className="card report-prose p-6 md:p-10">
+            <article className="card report-prose min-w-0 p-5 md:p-7">
               {currentChapter ? (
-                <ReactMarkdown>{currentChapter.markdown}</ReactMarkdown>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    table: ({ children }) => (
+                      <div className="table-wrap">
+                        <table>{children}</table>
+                      </div>
+                    ),
+                  }}
+                >
+                  {currentChapter.markdown}
+                </ReactMarkdown>
               ) : (
                 <p className="text-[var(--muted)]">Loading report…</p>
               )}
-              <div className="mt-10 flex justify-between border-t border-[var(--border)] pt-4 font-sans text-sm">
+              <div className="mt-8 flex justify-between border-t border-[var(--border)] pt-3 text-sm">
                 <button
                   type="button"
                   disabled={safeChapter <= 0}
@@ -247,42 +227,33 @@ export default function App() {
               </div>
             </article>
           </div>
-        )}
+        </TabPanel>
 
-        {tab === "diagrams" && (
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-extrabold text-[var(--color-indigo)]">Architecture diagrams</h2>
-              <p className="mt-1 text-sm text-[var(--muted)]">
-                Eight pipelines from the design proposal — objectives through deployment.
-              </p>
-            </div>
+        <TabPanel active={tab === "diagrams"}>
+          <div className="space-y-4">
+            <h2 className="section-title">Architecture diagrams</h2>
             <DiagramTabs />
-            <DiagramGallery />
           </div>
-        )}
+        </TabPanel>
 
-        {tab === "explore" && (
-          <div className="space-y-8">
+        <TabPanel active={tab === "explore"}>
+          <div className="space-y-6">
             <FertilityExplorer fertility={fertility} inference={inference} />
             <LanguageMixCompare lang={lang} />
             {Object.values(matrices).length > 0 && (
               <section>
-                <h2 className="text-xl font-bold">Decision matrices</h2>
-                <p className="mb-4 text-sm text-[var(--muted)]">
-                  Drag criterion weights — see if locked decisions still win.
-                </p>
+                <h2 className="section-title">Decision matrices</h2>
                 {Object.values(matrices).map((m) => (
                   <DecisionMatrix key={m.id} matrix={m} />
                 ))}
               </section>
             )}
           </div>
-        )}
-      </div>
+        </TabPanel>
+      </main>
 
-      <footer className="border-t border-[var(--border)] py-8 text-center text-xs text-[var(--muted)]">
-        erav5 session3 · <a href="?tab=overview" className="text-[var(--color-indigo)] underline">Overview</a>
+      <footer className="border-t border-[var(--border)] py-5 text-center text-xs text-[var(--muted)]">
+        erav5 session3
       </footer>
     </div>
   );

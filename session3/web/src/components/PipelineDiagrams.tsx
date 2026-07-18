@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Node = {
   id: string;
@@ -8,6 +8,16 @@ type Node = {
   y: number;
   accent?: boolean;
   w?: number;
+};
+
+type DiagramDef = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  nodes: Node[];
+  edges: [string, string][];
+  width?: number;
+  height?: number;
 };
 
 function edgePath(a: Node, b: Node, aw = 120, ah = 44) {
@@ -20,98 +30,90 @@ function edgePath(a: Node, b: Node, aw = 120, ah = 44) {
 }
 
 function PipelineSvg({
-  title,
-  subtitle,
-  nodes,
-  edges,
-  width = 760,
-  height = 200,
+  diagram,
+  uid,
+  expanded = false,
+  onExpand,
 }: {
-  title: string;
-  subtitle?: string;
-  nodes: Node[];
-  edges: [string, string][];
-  width?: number;
-  height?: number;
+  diagram: DiagramDef;
+  uid: string;
+  expanded?: boolean;
+  onExpand?: () => void;
 }) {
+  const { title, subtitle, nodes, edges, width = 760, height = 200 } = diagram;
   const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
   const nw = 120;
   const nh = 44;
+  const scale = expanded ? 1.35 : 1;
+  const vbW = width * scale;
+  const vbH = height * scale;
 
   return (
-    <figure className="card card-glow overflow-hidden">
-      <figcaption className="flex items-baseline justify-between gap-3 border-b border-[var(--border)] bg-gradient-to-r from-[var(--color-parchment)] to-white px-5 py-3">
-        <div>
-          <p className="font-display text-sm font-bold tracking-tight text-[var(--color-indigo)]">{title}</p>
-          {subtitle && <p className="mt-0.5 text-[10px] text-[var(--muted)]">{subtitle}</p>}
+    <figure className="card overflow-hidden">
+      <figcaption className="flex items-center justify-between gap-2 border-b border-[var(--border)] bg-[var(--color-parchment)]/60 px-3 py-2">
+        <div className="min-w-0">
+          <p className="truncate text-sm font-bold text-[var(--color-indigo)]">{title}</p>
+          {subtitle && <p className="truncate text-[10px] text-[var(--muted)]">{subtitle}</p>}
         </div>
-        <span className="rounded-full bg-[var(--color-indigo)]/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-[var(--color-indigo)]">
-          {nodes.length} stages
-        </span>
+        {onExpand && (
+          <button type="button" className="diagram-expand-btn shrink-0" onClick={onExpand} aria-label={`Expand ${title}`}>
+            {expanded ? "Close" : "Expand"}
+          </button>
+        )}
       </figcaption>
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`0 0 ${vbW} ${vbH}`}
         className="pipeline-canvas w-full"
+        style={{ minHeight: expanded ? 280 : 120 }}
         role="img"
         aria-label={title}
       >
         <defs>
-          <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="100%" stopColor="#f0ebe0" />
-          </linearGradient>
-          <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#fff4eb" />
-            <stop offset="100%" stopColor="#ffe8d4" />
-          </linearGradient>
-          <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#2c3e6b" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#e86f2a" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#2c3e6b" stopOpacity="0.3" />
-          </linearGradient>
-          <marker id="arrowDot" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <circle cx="3" cy="3" r="2.5" fill="#e86f2a" />
+          <marker id={`arrow-${uid}`} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill="#2c3e6b" />
           </marker>
         </defs>
-        {edges.map(([a, b], i) => {
-          const A = byId[a];
-          const B = byId[b];
-          if (!A || !B) return null;
-          return (
-            <path
-              key={i}
-              d={edgePath(A, B, nw, nh)}
-              className="pipeline-edge"
-              markerEnd="url(#arrowDot)"
-            />
-          );
-        })}
-        {nodes.map((n) => (
-          <g key={n.id}>
-            <rect
-              x={n.x}
-              y={n.y}
-              width={n.w ?? nw}
-              height={nh}
-              rx={10}
-              className={n.accent ? "pipeline-stage-accent" : "pipeline-stage"}
-            />
-            <text x={n.x + (n.w ?? nw) / 2} y={n.y + (n.sub ? 18 : 26)} textAnchor="middle" className="pipeline-label">
-              {n.label}
-            </text>
-            {n.sub && (
-              <text x={n.x + (n.w ?? nw) / 2} y={n.y + 32} textAnchor="middle" className="pipeline-sublabel">
-                {n.sub}
+        <g transform={expanded ? `scale(${scale})` : undefined}>
+          {edges.map(([a, b], i) => {
+            const A = byId[a];
+            const B = byId[b];
+            if (!A || !B) return null;
+            return (
+              <path
+                key={i}
+                d={edgePath(A, B, nw, nh)}
+                className="pipeline-edge"
+                markerEnd={`url(#arrow-${uid})`}
+              />
+            );
+          })}
+          {nodes.map((n) => (
+            <g key={n.id}>
+              <rect
+                x={n.x}
+                y={n.y}
+                width={n.w ?? nw}
+                height={nh}
+                rx={8}
+                className={n.accent ? "pipeline-stage-accent" : "pipeline-stage"}
+              />
+              <text x={n.x + (n.w ?? nw) / 2} y={n.y + (n.sub ? 18 : 26)} textAnchor="middle" className="pipeline-label">
+                {n.label}
               </text>
-            )}
-          </g>
-        ))}
+              {n.sub && (
+                <text x={n.x + (n.w ?? nw) / 2} y={n.y + 32} textAnchor="middle" className="pipeline-sublabel">
+                  {n.sub}
+                </text>
+              )}
+            </g>
+          ))}
+        </g>
       </svg>
     </figure>
   );
 }
 
-const DIAGRAMS = [
+const DIAGRAMS: DiagramDef[] = [
   {
     id: "data",
     title: "Data Pipeline",
@@ -122,8 +124,8 @@ const DIAGRAMS = [
       { id: "c", label: "MCDA mix", sub: "7 factors", x: 284, y: 78, accent: true },
       { id: "d", label: "1.2T pretrain", x: 420, y: 78 },
       { id: "e", label: "Shard + clean", x: 556, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]],
   },
   {
     id: "training",
@@ -136,8 +138,8 @@ const DIAGRAMS = [
       { id: "d", label: "Safety RLHF", x: 380, y: 78 },
       { id: "e", label: "Pyramid eval", x: 504, y: 78 },
       { id: "f", label: "Export", x: 628, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "f"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "f"]],
     width: 780,
   },
   {
@@ -151,8 +153,8 @@ const DIAGRAMS = [
       { id: "d", label: "L4 Quality", x: 380, y: 28 },
       { id: "e", label: "L5 OCR", x: 504, y: 28 },
       { id: "f", label: "L6 Provenance", sub: "audit", x: 600, y: 28, accent: true, w: 130 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "f"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "f"]],
     width: 780,
     height: 110,
   },
@@ -166,8 +168,8 @@ const DIAGRAMS = [
       { id: "c", label: "Unigram+BPE", sub: "hybrid", x: 292, y: 78, accent: true },
       { id: "d", label: "128k vocab", x: 428, y: 78 },
       { id: "e", label: "Fertility ↓", sub: "1.46→1.14", x: 564, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]],
     width: 780,
   },
   {
@@ -179,8 +181,8 @@ const DIAGRAMS = [
       { id: "b", label: "L3 Agents", x: 300, y: 62 },
       { id: "c", label: "L2 Indic", sub: "IN-Eval", x: 300, y: 112, accent: true },
       { id: "d", label: "L1 Safety", sub: "red-team", x: 300, y: 162 },
-    ] as Node[],
-    edges: [["d", "c"], ["c", "b"], ["b", "a"]] as [string, string][],
+    ],
+    edges: [["d", "c"], ["c", "b"], ["b", "a"]],
     width: 720,
     height: 230,
   },
@@ -194,8 +196,8 @@ const DIAGRAMS = [
       { id: "c", label: "Filter", x: 312, y: 78 },
       { id: "d", label: "SFT + DPO", sub: "fine-tune", x: 448, y: 78, accent: true },
       { id: "e", label: "Redeploy", x: 584, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]],
     width: 780,
   },
   {
@@ -208,8 +210,8 @@ const DIAGRAMS = [
       { id: "c", label: "DPO", x: 284, y: 78, accent: true },
       { id: "d", label: "Safety RLHF", sub: "14 langs", x: 420, y: 78 },
       { id: "e", label: "Gate L1–L3", x: 556, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]],
     width: 780,
   },
   {
@@ -222,54 +224,71 @@ const DIAGRAMS = [
       { id: "c", label: "Root cause", sub: "taxonomy", x: 312, y: 78, accent: true },
       { id: "d", label: "Data patch", x: 448, y: 78 },
       { id: "e", label: "Retrain", x: 584, y: 78 },
-    ] as Node[],
-    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "a"]] as [string, string][],
+    ],
+    edges: [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "a"]],
     width: 780,
   },
 ];
 
-export function DiagramGallery({ featuredOnly = false }: { featuredOnly?: boolean }) {
-  if (featuredOnly) {
-    const d = DIAGRAMS[1];
-    return <PipelineSvg title={d.title} subtitle={d.subtitle} nodes={d.nodes} edges={d.edges} width={d.width} height={d.height} />;
-  }
+function DiagramModal({ diagram, onClose }: { diagram: DiagramDef; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      {DIAGRAMS.map((d) => (
-        <PipelineSvg
-          key={d.id}
-          title={d.title}
-          subtitle={d.subtitle}
-          nodes={d.nodes}
-          edges={d.edges}
-          width={d.width}
-          height={d.height}
-        />
-      ))}
+    <div className="diagram-modal" role="dialog" aria-modal onClick={onClose}>
+      <div className="diagram-modal-inner" onClick={(e) => e.stopPropagation()}>
+        <PipelineSvg diagram={diagram} uid={`modal-${diagram.id}`} expanded onExpand={onClose} />
+      </div>
     </div>
+  );
+}
+
+export function DiagramGallery({ featuredOnly = false }: { featuredOnly?: boolean }) {
+  const [expanded, setExpanded] = useState<DiagramDef | null>(null);
+  const list = featuredOnly ? [DIAGRAMS[1]] : DIAGRAMS;
+
+  return (
+    <>
+      <div className={featuredOnly ? "" : "grid gap-4 lg:grid-cols-2"}>
+        {list.map((d) => (
+          <PipelineSvg key={d.id} diagram={d} uid={d.id} onExpand={() => setExpanded(d)} />
+        ))}
+      </div>
+      {expanded && <DiagramModal diagram={expanded} onClose={() => setExpanded(null)} />}
+    </>
   );
 }
 
 export function DiagramTabs() {
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const d = DIAGRAMS[active];
+
   return (
-    <section className="space-y-5">
-      <div className="flex flex-wrap gap-2">
+    <section className="space-y-3">
+      <div className="flex flex-wrap gap-1.5">
         {DIAGRAMS.map((diag, i) => (
           <button
             key={diag.id}
             type="button"
             onClick={() => setActive(i)}
-            className={`rounded-full px-3.5 py-2 text-xs font-semibold transition ${
-              i === active ? "diagram-tab-active" : "card text-[var(--muted)] hover:text-[var(--color-ink)]"
+            className={`rounded-md px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+              i === active ? "diagram-tab-active" : "border border-[var(--border)] bg-white text-[var(--muted)] hover:text-[var(--color-ink)]"
             }`}
           >
             {diag.title}
           </button>
         ))}
       </div>
-      <PipelineSvg title={d.title} subtitle={d.subtitle} nodes={d.nodes} edges={d.edges} width={d.width} height={d.height} />
+      <PipelineSvg diagram={d} uid={`tab-${d.id}`} onExpand={() => setExpanded(true)} />
+      {expanded && <DiagramModal diagram={d} onClose={() => setExpanded(false)} />}
     </section>
   );
 }
