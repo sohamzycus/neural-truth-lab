@@ -1,54 +1,35 @@
-# Deployment — India-First 40B (session3)
+# India-First 40B — Netlify Deploy
 
-**Production:** https://india-40b-erav5.netlify.app  
-**Netlify project:** https://app.netlify.com/projects/india-40b-erav5
+CLI file upload is blocked on corporate networks (Zscaler → `403 Forbidden`). Use **Git-connected Netlify builds** (same pattern as session2 SamaBPE).
 
-Static Vite/React report viewer. Metrics ship in `public/data/`; production bundle in `web/dist/` (committed for Netlify).
+## One-time Netlify setup
 
-## Netlify site settings
+1. Open [Netlify → Add new site → Import an existing project](https://app.netlify.com/start)
+2. Connect **GitHub** → `sohamzycus/neural-truth-lab`
+3. Site name: `india-40b-erav5` (or link existing site `f2cbbb76-00cd-4b8a-ab7b-d1861387ef06`)
+4. **Build settings:**
+   - **Base directory:** `session3/web`
+   - **Build command:** leave **empty** (uses `netlify.toml`)
+   - **Publish directory:** leave **empty**
+5. Deploy
 
-| Setting | Value |
-|---------|--------|
-| **Base directory** | `session3/web` |
-| **Build command** | empty (uses `netlify.toml`) |
-| **Publish directory** | empty (uses `netlify.toml`) |
-| **Env vars** | None required |
+`session3/web/netlify.toml` verifies committed `dist/` — no `npm install` on Netlify (~seconds).
 
-Config: `session3/web/netlify.toml`
-
-## After changes
+## After UI changes
 
 ```bash
 cd session3
-python3 scripts/derive_all.py
-python3 scripts/export_report_data.py
-cd web && npm ci && npm run build:netlify
-git add dist/ public/ && git commit && git push
+python3 scripts/export_report_data.py   # refresh JSON + report
+cd web && npm run build
+git add dist/ && git commit -m "chore(session3): rebuild dist" && git push
 ```
 
-Then either:
+Netlify auto-deploys on push to `main`.
 
-**Option A — Git push** (after adding `NETLIFY_SITE_ID_SESSION3=f2cbbb76-00cd-4b8a-ab7b-d1861387ef06` to GitHub secrets):
+## Live URL
 
-```bash
-git add session3/web/dist session3/web/public && git commit && git push
-```
+https://india-40b-erav5.netlify.app
 
-**Option B — Manual drag-drop:** Netlify → india-40b-erav5 → Deploys → drag `session3/web/dist` folder.
+## Site ID
 
-**Option C — Zip deploy** (if `NETLIFY_AUTH_TOKEN` is set):
-
-```bash
-cd session3/web/dist && zip -r ../deploy.zip .
-curl -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
-     -H "Content-Type: application/zip" \
-     --data-binary @../deploy.zip \
-     "https://api.netlify.com/api/v1/sites/f2cbbb76-00cd-4b8a-ab7b-d1861387ef06/deploys"
-```
-
-## Local preview
-
-```bash
-cd session3/web
-npm ci && npm run build && npx serve dist
-```
+`f2cbbb76-00cd-4b8a-ab7b-d1861387ef06`

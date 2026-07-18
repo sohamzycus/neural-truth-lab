@@ -107,24 +107,49 @@ export default function App() {
       )}
 
       <header className="hero-mesh relative overflow-hidden text-white">
-        <span className="script-watermark left-4 top-8 text-white">४०B</span>
-        <span className="script-watermark right-8 top-24 font-[family-name:var(--font-serif)] text-white">भारत</span>
-        <div className="relative mx-auto max-w-6xl px-4 pb-8 pt-10 md:pt-14">
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--color-saffron)]">
+        <span className="script-watermark font-devanagari left-2 top-6 text-white">४०B</span>
+        <span className="script-watermark right-6 top-20 font-devanagari text-white">भारत</span>
+        <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-12 md:pt-16">
+          <p className="animate-in text-[10px] font-bold uppercase tracking-[0.35em] text-[var(--color-saffron)]">
             Internal Research Proposal · IN-40B-2026
           </p>
-          <h1 className="mt-3 text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight">
-            India-First 40B
+          <h1 className="font-display mt-4 text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[0.95] tracking-tight">
+            India-First
+            <span className="block bg-gradient-to-r from-[var(--color-saffron)] via-[#ffd4a8] to-white bg-clip-text text-transparent">
+              40B Foundation
+            </span>
           </h1>
-          <p className="mt-3 max-w-2xl text-lg font-semibold text-white/90 md:text-xl">
+          <p className="animate-in mt-4 max-w-2xl text-lg font-medium text-white/85 md:text-xl" style={{ animationDelay: "0.1s" }}>
             Forty billion parameters. One deployment constraint:{" "}
-            <span className="text-[var(--color-saffron)]">India.</span>
+            <span className="font-devanagari font-bold text-[var(--color-saffron)]">भारत</span>.
           </p>
-          <p className="mt-2 max-w-xl text-sm text-white/65">
-            Spec-driven $100M foundation model design — tokenizer fertility, MCDA language weights,
-            inference TCO. Every number from <code className="text-white/80">derive_all.py</code>.
+          <p className="animate-in mt-2 max-w-xl text-sm text-white/55" style={{ animationDelay: "0.15s" }}>
+            Spec-driven $100M program — tokenizer fertility, MCDA language weights, inference TCO.
+            Every number from <code className="rounded bg-white/10 px-1.5 py-0.5 text-white/80">derive_all.py</code>.
           </p>
-          <ul className="mt-6 flex flex-wrap gap-2">
+
+          {budget && inference && (
+            <div className="animate-in mt-8 flex flex-wrap gap-3" style={{ animationDelay: "0.2s" }}>
+              <div className="stat-pill">
+                <span className="label">Parameters</span>
+                <span className="value accent">40B dense</span>
+              </div>
+              <div className="stat-pill">
+                <span className="label">Budget</span>
+                <span className="value">${budget.total_budget_usd_m}M</span>
+              </div>
+              <div className="stat-pill">
+                <span className="label">Vocab</span>
+                <span className="value">128k</span>
+              </div>
+              <div className="stat-pill">
+                <span className="label">TCO savings</span>
+                <span className="value accent">22%</span>
+              </div>
+            </div>
+          )}
+
+          <ul className="animate-in mt-6 flex flex-wrap gap-2" style={{ animationDelay: "0.25s" }}>
             {TRUST.map((t) => (
               <li
                 key={t}
@@ -162,7 +187,8 @@ export default function App() {
             <UspSection />
             <BriefingStrip budget={budget} inference={inference} scorecards={scorecards} onJump={goChapter} />
             <section>
-              <h2 className="mb-4 text-lg font-bold text-[var(--color-indigo)]">Training pipeline</h2>
+              <h2 className="font-display mb-1 text-xl font-bold text-[var(--color-indigo)]">Training pipeline</h2>
+              <p className="mb-4 text-sm text-[var(--muted)]">Interactive architecture — click Architecture tab for all 8 diagrams.</p>
               <DiagramGallery featuredOnly />
             </section>
             <div className="grid gap-6 lg:grid-cols-2">
@@ -228,7 +254,7 @@ export default function App() {
             <div>
               <h2 className="text-2xl font-extrabold text-[var(--color-indigo)]">Architecture diagrams</h2>
               <p className="mt-1 text-sm text-[var(--muted)]">
-                Six pipelines from the design proposal — objectives through deployment.
+                Eight pipelines from the design proposal — objectives through deployment.
               </p>
             </div>
             <DiagramTabs />
