@@ -16,6 +16,7 @@
   "dependencies": {
     "html2pdf.js": "^0.14.0",
     "marked": "^18.0.6",
+    "mermaid": "^11.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.0",

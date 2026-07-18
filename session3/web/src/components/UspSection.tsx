@@ -1,26 +1,41 @@
-const USPS = [
-  { n: "01", title: "Spec-driven quant pipeline", body: "Python owns every number — web never invents metrics.", color: "var(--color-indigo)" },
-  { n: "02", title: "Fertility = budget line item", body: "128k India tokenizer → 22% Year-2 TCO savings.", color: "var(--color-saffron)" },
-  { n: "03", title: "Anti-population weighting", body: "Hindi 39% census → 18% MCDA. Dravidian +11pp.", color: "var(--color-leaf)" },
-  { n: "04", title: "Stress-testable decisions", body: "12 matrices with adjustable weights.", color: "var(--color-indigo)" },
-  { n: "05", title: "Pyramid eval gates", body: "5 scorecards gate L1→L3 release.", color: "var(--color-saffron)" },
-  { n: "06", title: "Session2 → Session3 arc", body: "SamaBPE fertility → $100M deployment economics.", color: "var(--color-leaf)" },
+const LAWS = [
+  { id: "L1", text: "Capabilities define data—not the reverse." },
+  { id: "L2", text: "Ship on deployment gates; benchmarks inform only." },
+  { id: "L3", text: "Inference tokens are deployment currency." },
+  { id: "L4", text: "Tokenizer is permanent infrastructure." },
+  { id: "L5", text: "Unmeasured capability is uncommitted." },
+];
+
+const KPIS = [
+  { label: "Fertility", value: "1.14" },
+  { label: "Year-2 TCO", value: "$19M" },
+  { label: "Budget", value: "$100M" },
+  { label: "Gov gate", value: "≥0.78" },
 ];
 
 export function UspSection() {
   return (
-    <section className="card p-4 md:p-5">
-      <h2 className="section-title">Why this submission is different</h2>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {USPS.map((u) => (
-          <div
-            key={u.n}
-            className="rounded-md border border-[var(--border)] bg-white p-3"
-            style={{ borderLeftWidth: 3, borderLeftColor: u.color }}
-          >
-            <span className="font-mono text-[10px] font-bold" style={{ color: u.color }}>{u.n}</span>
-            <h3 className="mt-1 text-sm font-bold">{u.title}</h3>
-            <p className="mt-1 text-xs text-[var(--muted)]">{u.body}</p>
+    <section className="hero-panel">
+      <p className="hero-panel__eyebrow">Deployable Intelligence</p>
+      <h2 className="hero-panel__title">
+        Useful work per rupee of inference—not MMLU rank.
+      </h2>
+      <p className="hero-panel__sub">
+        IndiaOne co-designs tokenizer, capabilities, and ship gates for Mumbai GPUs under bandwidth and code-switch constraints.
+      </p>
+      <div className="hero-panel__kpis">
+        {KPIS.map((k) => (
+          <div key={k.label} className="kpi-card">
+            <span className="kpi-card__value">{k.value}</span>
+            <span className="kpi-card__label">{k.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="hero-panel__laws">
+        {LAWS.map((l) => (
+          <div key={l.id} className="law-card">
+            <span className="law-card__id">{l.id}</span>
+            <span className="law-card__text">{l.text}</span>
           </div>
         ))}
       </div>

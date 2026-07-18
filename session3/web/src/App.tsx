@@ -1,13 +1,15 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BriefingStrip } from "./components/BriefingStrip";
+import { ChapterChrome, ChapterTakeaway } from "./components/ChapterChrome";
 import { DecisionMatrix } from "./components/DecisionMatrix";
 import { DiagramGallery, DiagramTabs } from "./components/PipelineDiagrams";
 import { FertilityExplorer } from "./components/FertilityExplorer";
 import { LanguageMixCompare } from "./components/LanguageMixCompare";
+import { ReadingProgress } from "./components/ReadingProgress";
+import { ReportMarkdown } from "./components/ReportMarkdown";
 import { UspSection } from "./components/UspSection";
 import { downloadReportPdf } from "./lib/downloadPdf";
+import { CHAPTER_META } from "./lib/chapterMeta";
 import { parseChapters } from "./lib/parseReport";
 import {
   loadJson,
@@ -48,6 +50,8 @@ export default function App() {
   const [scorecards, setScorecards] = useState<Scorecards | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [pdfBusy, setPdfBusy] = useState(false);
+  const [readProgress, setReadProgress] = useState(0);
+  const articleRef = useRef<HTMLElement>(null);
 
   const chapters = useMemo(() => parseChapters(reportMd), [reportMd]);
 
@@ -117,9 +121,30 @@ export default function App() {
 
   const safeChapter = Math.min(chapterIdx, Math.max(0, chapters.length - 1));
   const currentChapter = chapters[safeChapter];
+  const chapterMeta = currentChapter ? CHAPTER_META[currentChapter.num] : undefined;
+
+  useEffect(() => {
+    const el = articleRef.current;
+    if (!el || tab !== "report") return;
+    const onScroll = () => {
+      const max = el.scrollHeight - el.clientHeight;
+      setReadProgress(max > 0 ? el.scrollTop / max : 0);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [tab, safeChapter]);
+
+  useEffect(() => {
+    articleRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    setReadProgress(0);
+  }, [safeChapter]);
 
   return (
     <div className="min-h-screen">
+      {tab === "report" && (
+        <ReadingProgress progress={(safeChapter + readProgress) / Math.max(chapters.length, 1)} />
+      )}
       {loadError && (
         <div className="bg-red-100 px-4 py-2 text-center text-sm text-red-800">
           Run <code>python3 scripts/export_report_data.py</code> — {loadError}
@@ -202,34 +227,25 @@ export default function App() {
                     key={ch.id}
                     type="button"
                     onClick={() => goChapter(i)}
-                    className={`block w-full rounded-md px-2.5 py-1.5 text-left transition-colors ${
-                      safeChapter === i
-                        ? "bg-[var(--color-indigo)] font-semibold text-white"
-                        : "text-[var(--muted)] hover:bg-white"
-                    }`}
+                    className={`chapter-nav-btn ${safeChapter === i ? "chapter-nav-btn--active" : ""}`}
                   >
-                    {ch.title}
+                    <span className="chapter-nav-btn__num">{ch.shortTitle}</span>
+                    <span className="chapter-nav-btn__label">{ch.title.replace(/^§\d+\s*/, "")}</span>
                   </button>
                 ))}
               </nav>
             </aside>
-            <article className="card report-prose min-w-0 p-5 md:p-7">
+            <article
+              ref={articleRef}
+              className="card report-prose report-article min-w-0 p-5 md:p-7"
+            >
+              {currentChapter && chapterMeta && <ChapterChrome meta={chapterMeta} />}
               {currentChapter ? (
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    table: ({ children }) => (
-                      <div className="table-wrap">
-                        <table>{children}</table>
-                      </div>
-                    ),
-                  }}
-                >
-                  {currentChapter.markdown}
-                </ReactMarkdown>
+                <ReportMarkdown markdown={currentChapter.markdown} />
               ) : (
                 <p className="text-[var(--muted)]">Loading report…</p>
               )}
+              {currentChapter && chapterMeta && <ChapterTakeaway meta={chapterMeta} />}
               <div className="mt-8 flex justify-between border-t border-[var(--border)] pt-3 text-sm">
                 <button
                   type="button"

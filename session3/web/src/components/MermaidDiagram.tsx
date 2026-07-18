@@ -7,9 +7,17 @@ function ensureMermaid() {
   if (!mermaidReady) {
     mermaid.initialize({
       startOnLoad: false,
-      theme: "neutral",
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#ebe4d4",
+        primaryTextColor: "#1a1410",
+        primaryBorderColor: "#2c3e6b",
+        lineColor: "#2c3e6b",
+        secondaryColor: "#fff7f0",
+        tertiaryColor: "#f7f3e8",
+        fontFamily: "Manrope, sans-serif",
+      },
       securityLevel: "loose",
-      fontFamily: "IBM Plex Sans, sans-serif",
     });
     mermaidReady = true;
   }
@@ -37,11 +45,9 @@ export function MermaidDiagram({ code, title }: { code: string; title: string })
   }, [code, id]);
 
   return (
-    <figure className="overflow-hidden rounded-lg border border-[var(--border)] bg-white">
-      <figcaption className="border-b border-[var(--border)] bg-[var(--paper)] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--accent-2)]">
-        {title}
-      </figcaption>
-      <div className="flex min-h-[200px] items-center justify-center overflow-x-auto p-4">
+    <figure className="mermaid-figure">
+      <figcaption className="mermaid-figure__caption">{title}</figcaption>
+      <div className="mermaid-figure__body">
         {err ? (
           <pre className="text-xs text-red-600">{err}</pre>
         ) : svg ? (

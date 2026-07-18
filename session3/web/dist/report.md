@@ -36,13 +36,15 @@ Population-scale gov digitization and SME automation need models that are **mult
 
 ## Causal spine
 
-```
-India constraints          Deployable Intelligence        Evidence chain
-(GPU scarcity,      →     (optimization philosophy)   →    L1–L5 → Capabilities
- bandwidth, code-switch,                                   → Data → Cleaning
- SME ₹, mobile)                                           → Tokenizer → Train
-                                                          → Align → Eval pyramid
-                                                          → Deploy router → Flywheel
+```mermaid
+flowchart TB
+  IC[India Constraints] --> DI[Deployable Intelligence]
+  DI --> LAWS[L1-L5 Laws]
+  LAWS --> CAP[Capabilities]
+  CAP --> TR[Train & Eval]
+  TR --> DEP[Deploy Router]
+  DEP --> VAL[Economic Value]
+  DEP --> FLY[Production Flywheel]
 ```
 
 **India-only objective:** minimize **tokens per correct answer** under code-switch + frugal edge—objective does not exist for US-cloud EN-first models.
@@ -580,15 +582,17 @@ Hidden dim: 5,120 → embedding table = vocab × hidden × 2 bytes (bf16).
 **Upstream:** §5 128k tokenizer.  
 **Downstream:** §10 deployment economics, §11 kill criteria (TCO savings <10%).
 
-### Causal Chain (why fertility is an India-first decision)
+### Causal chain (L3)
 
-```
-Higher Indic fertility → more tokens/query → lower effective context
-  → higher GPU seconds → higher ₹/query & latency
-    → SME & mobile tiers unaffordable → adoption fails
+```mermaid
+flowchart LR
+  F[Higher fertility] --> T[More tokens]
+  T --> C[Lower context]
+  C --> G[Higher GPU cost]
+  G --> R[Higher rupee per query]
 ```
 
-**21% fertility reduction (1.46→1.14)** ≈ **$13M/yr** at 30M queries/day — often **> entire pretrain compute**.
+**21% reduction (1.46→1.14)** ≈ **$13M/yr** at 30M queries/day.
 
 ## 6.1 Problem Statement
 
@@ -1220,6 +1224,30 @@ Complete traceability from decision matrices M1–M12 to report sections.
 | **M10** | Cleaning (legacy 6-stage) | Superseded by M5 | §4 | Faithfulness 0.82 target |
 | **M11** | Dedup threshold | MinHash 0.90 (L05) | §4 | Contamination 0.92 |
 | **M12** | Foundation architecture | 40B dense GQA | §2 | M12 score 0.83 |
+
+---
+
+# Closing
+
+> **We are not optimizing Benchmark Intelligence. We are optimizing Deployable Intelligence.**
+
+```mermaid
+flowchart LR
+  P[Production] --> T[Telemetry]
+  T --> F[Failures]
+  F --> D[Data]
+  D --> R[Retrain]
+  R --> V2[IndiaOne V2]
+```
+
+| Metric | Target |
+|--------|--------|
+| Fertility | 1.14 |
+| Blended TCO | ~$19M |
+| Gov/Edu | ≥0.78 |
+| Recovery | ≥0.70 |
+
+**Key Takeaway:** Every engineering choice in this report exists to maximize useful work per rupee of inference under India's deployment constraints.
 
 ---
 
