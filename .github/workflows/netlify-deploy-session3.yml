@@ -1,8 +1,6 @@
 name: Deploy India-First 40B to Netlify (session3)
 
-# Create a new Netlify site with base directory session3/web, then set:
-#   NETLIFY_SITE_ID_SESSION3
-#   NETLIFY_AUTH_TOKEN (shared with session2)
+# Uses NETLIFY_AUTH_TOKEN (shared with session2). Site ID is public.
 
 on:
   push:
