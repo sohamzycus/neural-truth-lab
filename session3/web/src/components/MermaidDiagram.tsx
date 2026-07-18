@@ -2,6 +2,7 @@ import { useEffect, useId, useState } from "react";
 import mermaid from "mermaid";
 
 let mermaidReady = false;
+const svgCache = new Map<string, string>();
 
 function ensureMermaid() {
   if (!mermaidReady) {
@@ -25,16 +26,26 @@ function ensureMermaid() {
 
 export function MermaidDiagram({ code, title }: { code: string; title: string }) {
   const id = useId().replace(/:/g, "");
-  const [svg, setSvg] = useState<string>("");
+  const [svg, setSvg] = useState(() => svgCache.get(code) ?? "");
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
+    const hit = svgCache.get(code);
+    if (hit) {
+      setSvg(hit);
+      setErr(null);
+      return;
+    }
     ensureMermaid();
     let cancelled = false;
     mermaid
-      .render(`mmd-${id}`, code)
+      .render(`mmd-${id}-${svgCache.size}`, code)
       .then(({ svg: s }) => {
-        if (!cancelled) setSvg(s);
+        if (!cancelled) {
+          svgCache.set(code, s);
+          setSvg(s);
+          setErr(null);
+        }
       })
       .catch((e) => {
         if (!cancelled) setErr(String(e));
@@ -53,7 +64,7 @@ export function MermaidDiagram({ code, title }: { code: string; title: string })
         ) : svg ? (
           <div dangerouslySetInnerHTML={{ __html: svg }} />
         ) : (
-          <span className="text-sm text-[var(--muted)]">Rendering diagram…</span>
+          <span className="mermaid-figure__loading">Rendering diagram…</span>
         )}
       </div>
     </figure>

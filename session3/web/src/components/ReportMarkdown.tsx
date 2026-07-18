@@ -1,4 +1,4 @@
-import { Children, isValidElement, type ReactNode } from "react";
+import { Children, isValidElement, memo, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { MermaidDiagram } from "./MermaidDiagram";
@@ -41,7 +41,7 @@ function Callout({ kind, children }: { kind: CalloutKind; children: ReactNode })
   );
 }
 
-export function ReportMarkdown({ markdown }: { markdown: string }) {
+export const ReportMarkdown = memo(function ReportMarkdown({ markdown }: { markdown: string }) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
@@ -82,4 +82,4 @@ export function ReportMarkdown({ markdown }: { markdown: string }) {
       {markdown}
     </ReactMarkdown>
   );
-}
+});

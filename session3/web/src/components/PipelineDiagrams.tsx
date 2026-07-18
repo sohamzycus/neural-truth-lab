@@ -279,9 +279,7 @@ export function DiagramTabs() {
             key={diag.id}
             type="button"
             onClick={() => setActive(i)}
-            className={`rounded-md px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-              i === active ? "diagram-tab-active" : "border border-[var(--border)] bg-white text-[var(--muted)] hover:text-[var(--color-ink)]"
-            }`}
+            className={`diagram-tab ${i === active ? "diagram-tab-active" : ""}`}
           >
             {diag.title}
           </button>

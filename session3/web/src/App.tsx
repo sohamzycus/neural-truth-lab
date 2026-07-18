@@ -4,6 +4,7 @@ import { ChapterChrome, ChapterTakeaway } from "./components/ChapterChrome";
 import { DecisionMatrix } from "./components/DecisionMatrix";
 import { DiagramGallery, DiagramTabs } from "./components/PipelineDiagrams";
 import { FertilityExplorer } from "./components/FertilityExplorer";
+import { InfographicPanels } from "./components/InfographicPanels";
 import { LanguageMixCompare } from "./components/LanguageMixCompare";
 import { ReadingProgress } from "./components/ReadingProgress";
 import { ReportMarkdown } from "./components/ReportMarkdown";
@@ -52,6 +53,8 @@ export default function App() {
   const [pdfBusy, setPdfBusy] = useState(false);
   const [readProgress, setReadProgress] = useState(0);
   const articleRef = useRef<HTMLElement>(null);
+  const chapterNavRef = useRef<HTMLDivElement>(null);
+  const chapterBtnRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const chapters = useMemo(() => parseChapters(reportMd), [reportMd]);
 
@@ -136,8 +139,14 @@ export default function App() {
   }, [tab, safeChapter]);
 
   useEffect(() => {
-    articleRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    const el = articleRef.current;
+    if (!el) return;
+    el.scrollTop = 0;
     setReadProgress(0);
+  }, [safeChapter]);
+
+  useEffect(() => {
+    chapterBtnRefs.current[safeChapter]?.scrollIntoView({ block: "nearest" });
   }, [safeChapter]);
 
   return (
@@ -179,18 +188,14 @@ export default function App() {
           )}
         </div>
 
-        <nav className="sticky top-0 z-20 border-t border-white/10 bg-[var(--color-indigo-deep)]/95 backdrop-blur-sm">
-          <div className="mx-auto flex max-w-6xl gap-0.5 overflow-x-auto px-4">
+        <nav className="site-tabs sticky top-0 z-20 border-t border-white/10 bg-[var(--color-indigo-deep)]/95 backdrop-blur-md">
+          <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 type="button"
                 onClick={() => switchTab(t.id)}
-                className={`shrink-0 border-b-2 px-4 py-2.5 text-sm font-semibold transition-colors ${
-                  tab === t.id
-                    ? "border-[var(--color-saffron)] text-white"
-                    : "border-transparent text-white/50 hover:text-white/80"
-                }`}
+                className={`site-tab ${tab === t.id ? "site-tab--active" : ""}`}
               >
                 {t.label}
               </button>
@@ -203,6 +208,7 @@ export default function App() {
         <TabPanel active={tab === "overview"}>
           <div className="space-y-6">
             <UspSection />
+            <InfographicPanels budget={budget} inference={inference} scorecards={scorecards} />
             <BriefingStrip budget={budget} inference={inference} scorecards={scorecards} onJump={goChapter} />
             <section>
               <h2 className="section-title">Training pipeline</h2>
@@ -217,17 +223,21 @@ export default function App() {
 
         <TabPanel active={tab === "report"}>
           <div className="grid gap-5 lg:grid-cols-[220px_1fr]">
-            <aside className="lg:sticky lg:top-14 lg:self-start">
+            <aside className="lg:sticky lg:top-[4.25rem] lg:self-start">
               <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
                 {chapters.length} chapters
               </p>
-              <nav className="card max-h-[calc(100vh-5rem)] space-y-0.5 overflow-y-auto p-1.5 text-sm">
+              <nav ref={chapterNavRef} className="chapter-nav card max-h-[calc(100vh-5.5rem)] space-y-0.5 overflow-y-auto p-1.5 text-sm">
                 {chapters.map((ch, i) => (
                   <button
                     key={ch.id}
                     type="button"
+                    ref={(el) => {
+                      chapterBtnRefs.current[i] = el;
+                    }}
                     onClick={() => goChapter(i)}
                     className={`chapter-nav-btn ${safeChapter === i ? "chapter-nav-btn--active" : ""}`}
+                    aria-current={safeChapter === i ? "true" : undefined}
                   >
                     <span className="chapter-nav-btn__num">{ch.shortTitle}</span>
                     <span className="chapter-nav-btn__label">{ch.title.replace(/^§\d+\s*/, "")}</span>
