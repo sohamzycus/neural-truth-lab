@@ -66,6 +66,15 @@
         "chosen": false
       },
       {
+        "label": "192k",
+        "vocab": 192000,
+        "embedding_gb_bf16": 1.83,
+        "avg_indic_fertility_est": 1.115,
+        "training_stability": 0.84,
+        "composite_score": 0.642,
+        "chosen": false
+      },
+      {
         "label": "200k",
         "vocab": 200000,
         "embedding_gb_bf16": 1.91,
@@ -88,8 +97,9 @@
     "decision_label": "128k",
     "rejected_rationale": {
       "96k": "Indic conjunct fragmentation; fertility +0.08 vs 128k",
-      "160k": "Embedding +2.1GB; marginal fertility gain \u22120.02",
-      "200k": "Embedding +4.5GB; stability penalty; SME TCO crosses threshold",
+      "160k": "Embedding +0.31 GB; marginal fertility \u22120.02",
+      "192k": "Fertility \u22120.03 vs 128k but deploy_fit 0.68; loses to 128k on composite",
+      "200k": "Embedding +0.69 GB; stability penalty 0.80",
       "256k": "12.8GB embedding table; inference memory blocks 2\u00d7L40S deploy"
     },
     "winner_by_score": "128k"

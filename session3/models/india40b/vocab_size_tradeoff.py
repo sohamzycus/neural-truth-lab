@@ -54,8 +54,9 @@ def compute_vocab_size_tradeoff(inputs_dir: Path | None = None) -> dict[str, Any
         "decision_label": "128k",
         "rejected_rationale": {
             "96k": "Indic conjunct fragmentation; fertility +0.08 vs 128k",
-            "160k": "Embedding +2.1GB; marginal fertility gain −0.02",
-            "200k": "Embedding +4.5GB; stability penalty; SME TCO crosses threshold",
+            "160k": "Embedding +0.31 GB; marginal fertility −0.02",
+            "192k": "Fertility −0.03 vs 128k but deploy_fit 0.68; loses to 128k on composite",
+            "200k": "Embedding +0.69 GB; stability penalty 0.80",
             "256k": "12.8GB embedding table; inference memory blocks 2×L40S deploy",
         },
         "winner_by_score": winner["label"],

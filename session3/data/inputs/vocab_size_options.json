@@ -4,6 +4,7 @@
     {"vocab": 98304, "label": "96k"},
     {"vocab": 128000, "label": "128k"},
     {"vocab": 160000, "label": "160k"},
+    {"vocab": 192000, "label": "192k"},
     {"vocab": 200000, "label": "200k"},
     {"vocab": 262144, "label": "256k"}
   ],

@@ -1,116 +1,73 @@
-# India-First 40B Foundation Model — Internal Research Proposal
+# IndiaOne-40B — Internal Research Proposal
 
-**Classification:** Confidential · Internal Research Proposal  
-**Audience:** Senior AI researchers, program sponsors evaluating ~$100M allocation  
-**Version:** 2.0 (Spec 004 spine)  
-**Derivation source:** `data/derived/*.json` via `python scripts/derive_all.py`  
-**Upstream spec:** `specs/004-report-v2/spec.md`
+**Version:** 2.1 · Spec 004 + Chief Scientist review  
+**Numbers:** `python scripts/derive_all.py` → `data/derived/*.json`
 
----
-
-## Document Map
-
-| § | Title | Assignment | Primary artefact |
-|---|-------|------------|------------------|
-| 0 | Engineering Summary | — | All derived JSON |
-| 1 | Mission & Capability Contract | — | `capability_data.json` |
-| 2 | Model Architecture & Training Objectives | — | `training_budget.json`, M12 |
-| 3 | Data Derivation Atlas | **Q1** | `capability_data.json`, `data_mix.json`, `language_weights.json` |
-| 4 | Industrial Cleaning DAG | **Q2** | `cleaning_pipeline.json` |
-| 5 | Tokenizer & Vocabulary Economics | **Q4** | `vocab_allocation.json`, `vocab_size_tradeoff.json`, M1, M2 |
-| 6 | Fertility → Context → Inference TCO | **Q4** | `fertility_projections.json`, `inference_costs.json` |
-| 7 | Training Strategy | — | `training_budget.json`, M8 |
-| 8 | Post-Training, Alignment & Agentic Recipes | — | `capability_data.json`, M7 |
-| 9 | Evaluation Hierarchy | **Q3** | `eval_hierarchy.json`, `scorecards.json` |
-| 10 | India Deployment & Frugal Operations | — | `inference_costs.json`, M9 |
-| 11 | Budget, Risks & Kill Criteria | — | `training_budget.json`, `eval_hierarchy.json` |
-| A | Decision Log | — | M1–M12 |
-
-**Narrative spine (mandatory dependency chain):**
-
-```
-Mission → Capabilities → Training Objectives → Data → Cleaning → Tokenizer
-  → Training Strategy → Alignment → Evaluation → Deployment → Risks
-```
-
-Every chapter cites upstream dependency and downstream consumer.
+**Spine:** Mission → Capabilities → Data → Cleaning → Tokenizer → Train → Align → Eval → Deploy → Risks
 
 ---
 
-# §0 Engineering Summary (One Page)
+# §0 Why IndiaOne-40B Should Exist
 
-## Thesis
+> **vs Gemma:** Gemma optimizes English-centric vocab and global benchmarks. IndiaOne optimizes **script-aware tokenization + deployment TCO** on India-hosted GPUs — problems Gemma cannot fix with fine-tuning alone.
 
-Train a **40B-parameter dense GQA decoder** on **1.2T tokens** with an **India-first tokenizer (128k Unigram+BPE)** and **7-factor MCDA language weights** so that deployment economics—not English leaderboard rank—determines success. At Year-2 scale (30M queries/day, 1,200 avg tokens), the India-first tokenizer reduces annual inference TCO from **$64M → $51M** (21% fertility savings); a blended **8B/40B router** further reduces blended TCO to **~$19M**.
+## Mission
 
-## Ten Locked Decisions
+Build a **40B dense GQA** model on **1.2T tokens** whose success metric is **₹/query and gov/SME pilot milestones**, not MMLU rank.
+
+## Five Design Principles
+
+| # | Principle | Implication |
+|---|-----------|-------------|
+| P1 | **Capabilities before corpora** | Every token budget traces to a capability SLO (§3) |
+| P2 | **Tokenizer is the economic engine** | 128k derived to minimize Indic fertility without blocking 2×L40S deploy (§5–§6) |
+| P3 | **Anti-population data** | MCDA-7: Hindi 17.9% not 39.2%; Dravidian 28.4% (§3) |
+| P4 | **Ship on deployment gates** | L1 safety + L2 ≥0.78 + recovery ≥0.70; benchmarks inform only (§9) |
+| P5 | **Frugal ops by design** | INT4 + 8B/40B blend → **~$19M** Year-2 TCO vs **$64M** generic (§10) |
+
+## Ten Engineering Decisions
 
 | # | Decision | Key number | Matrix |
 |---|----------|------------|--------|
-| D1 | 40B dense GQA foundation | 40B params, 2.88×10²³ FLOPs | M12 |
-| D2 | 1.2T token pretrain budget | 82/12/4/6 slice mix | M4, M6 |
-| D3 | MCDA-7 language weighting | Hindi **17.9%**, EN-IN **17.4%**, Dravidian collective **28.4%** | M3 |
-| D4 | 128k Unigram+BPE hybrid tokenizer | 1.22 GB embedding (bf16) | M1, M2 |
-| D5 | 16-stage balanced cleaning DAG | 22.2% composite yield, 4.5× over-collection | M5, M11 |
-| D6 | 6% synthetic pretrain cap | Quality gate 0.85; >8% rejected | M6 |
-| D7 | Two-phase curriculum sampling | 70% general → 30% India-heavy tail | M8 |
-| D8 | SFT → DPO alignment; RLHF safety slice only | $12M alignment budget | M7 |
-| D9 | Pyramid eval ship gate L1–L3 | Scorecard gates 0.82/0.75/0.78/0.70/0.65 | — |
-| D10 | INT4 default deploy; FP8 for gov contracts | 2× L40S per replica | M9 |
+| D1 | 40B dense GQA | 308,571 H100-hr/run · $679k | M12 |
+| D2 | 1.2T pretrain | 82/12/4/6 | M4, M6 |
+| D3 | MCDA-7 languages | hi **17.9%**, en_in **17.4%** | M3 |
+| D4 | **128k** Unigram+BPE | Beats 160k/192k/200k on deploy composite **0.746** | M1, M2 |
+| D5 | 16-stage cleaning | **22.2%** yield · **4.5×** ingest | M5, M11 |
+| D6 | 6% synthetic cap | >8% → faithfulness −4.2 | M6 |
+| D7 | Two-phase curriculum | 70% general → 30% India tail | M8 |
+| D8 | SFT → DPO; RLHF safety only | $12M alignment | M7 |
+| D9 | Pyramid ship gate | 0.82/0.75/0.78/0.70/0.65 | §9 |
+| D10 | INT4 + FP8 gov | 2× L40S Mumbai/Chennai | M9 |
 
 ## Ten Rejected Alternatives
 
-| # | Rejected | Why |
-|---|----------|-----|
-| R1 | 70B dense | Inference TCO crosses SME viability; 4× L40S vs 2× |
-| R2 | 40B MoE 8/128 | Uneven Indic expert routing; +40–80ms p99 on Indian networks |
-| R3 | 8B distill-only | Agent recovery ceiling <0.55; planning depth insufficient |
-| R4 | Population-proportional language mix | Hindi 39.2% overfits web noise; Dravidian under-served |
-| R5 | 20% code slice | EN contamination risk; train instability |
-| R6 | 10% synthetic cap | −4.2 Indic-Faithfulness in ablation |
-| R7 | 256k vocabulary | 2.5 GB embedding; blocks 2×L40S deploy |
-| R8 | Permissive cleaning (48% yield) | Indic-Faithfulness 0.74 < 0.82 gate |
-| R9 | RLHF-primary alignment | 2.1× cost vs DPO; slower iteration |
-| R10 | FP16-only production | $4.90/M tokens; SME TCO non-viable |
+70B dense · 40B MoE · 8B-only · population Hindi 39.2% · 20% code · 10% synthetic · **192k/256k vocab** · permissive cleaning · RLHF-primary · FP16 production.
 
-## Quantitative Targets
+## Major Risks & Kill Criteria
 
-| Metric | Target | Gate / kill |
-|--------|--------|-------------|
-| Indic-Faithfulness | ≥ 0.82 | Kill < 0.75 after 2 retrains |
-| Code-Switch Index | ≥ 0.75 | — |
-| Gov/Edu Readiness | ≥ 0.78 | — |
-| Agent Recovery Rate | ≥ 0.70 | Kill < 0.55 at month 16 |
-| India Inference Efficiency | ≥ 0.65 | Kill if TCO savings < 10% vs generic |
-| Hallucination (gov RAG) | < 8% | — |
-| Avg Indic fertility | 1.14 (vs 1.46 generic) | 21% token savings |
-| Pretrain composite yield | 22.2% | 4.5× raw ingest |
-| Program budget | $100M / 18 months | — |
-| Full pretrain run cost | $679k (308,571 billable H100-hr) | 2 full + 3 partial reserved |
+| Risk | Kill / gate |
+|------|-------------|
+| MMLU chase | L2 blocks release |
+| Faithfulness <0.75 after 2 retrains | **Pause program** |
+| Agent recovery <0.55 @ M16 | **Terminate agent track** |
+| TCO savings <10% vs generic | Revisit tokenizer |
+| Kanoon license lapse | Fallback contracts corpus |
 
-## Top Risks
+## Success Criteria
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| MMLU chase pulls EN-heavy data | High | Indic gates fail | Pyramid L2 blocks release |
-| OCR repair corrupts Devanagari conjuncts | Medium | Faithfulness drop | L14 script-specific models; 0.5% audit |
-| Synthetic Hindi instruction leakage | Medium | Eval contamination | L11 n-gram holdout match |
-| Agent traces insufficient diversity | Medium | Recovery < 0.70 | 25% post-train budget; sandbox failures |
-| Year-2 query mix shifts to English | Low | TCO savings erode | Blended 8B/40B router |
-| License block on judiciary corpus | Medium | Long-context gap | Kanoon commercial subset + chunk curriculum |
+Indic fertility **1.14** (vs 1.46 generic) · Year-2 TCO **$51M** (40B) / **$19M** (blended) · Gov pilot **≥0.78** · Hallucination **<8%** on gov RAG.
 
-## India-First USP (Deployment Moat)
+## India-First Philosophy (not a dataset list)
 
-| Domain | Tokens (B) | Capability served |
-|--------|----------:|-------------------|
-| UPI/NPCI specs | 2.1 | `indian_reasoning`, `agentic` |
-| GST portal | 1.8 | `indian_reasoning`, `gov_edu` |
-| RBI circulars | 3.2 | `indian_reasoning`, `long_context` |
-| NCERT textbooks | 4.5 | `math`, `science`, `gov_edu` |
-| Judiciary (Kanoon) | 2.8 | `long_context`, `planning` |
-| Hinglish social (filtered) | 28.0 | `code_switch`, `conversation` |
-
-**Downstream consumers:** §4 cleaning → §5 tokenizer training corpus → §8 agent eval → §9 ship gates → §10 Mumbai/Chennai edge deploy.
+| Driver | Design lever |
+|--------|--------------|
+| Code-switch (Hinglish/Tanglish) | 28B social + 5% post-train; CS gate 0.75 |
+| UPI/GST/ONDC semantics | Structured QA corpora → `indian_reasoning` |
+| SME ₹/query | Fertility → fewer tokens → blended 8B router |
+| Gov numeric accuracy | FP8 tier for GST; INT4 default |
+| Mobile / low bandwidth | 8B edge tier; fertility reduces bytes/query |
+| Regional commerce / procurement | BPO + enterprise email in `conversation` slice |
 
 ---
 
@@ -134,6 +91,7 @@ Existing models (Llama-3, Mistral, Qwen) optimize English MMLU. Indic fertility 
 
 | Option | Capabilities covered | Train cost | Inference TCO | India differentiation |
 |--------|---------------------|------------|---------------|----------------------|
+| Fine-tune Gemma 27B | Partial (EN vocab) | Low | Medium | Weak—Indic fertility + no gov data flywheel |
 | Fine-tune foreign 70B | Partial (no tokenizer) | Low | High | Weak—fertility unchanged |
 | 40B India-first (proposed) | Full 10-capability contract | Medium | Medium | Strong—MCDA + tokenizer |
 | 40B MoE | Full but uneven | Medium-low active | Complex | Medium—routing risk |
@@ -193,12 +151,6 @@ No standalone matrix for mission framing; architecture choice deferred to **M12*
 - Map each capability to ≥1 row in `eval_hierarchy.json` (10/10 covered).
 - Pre-train milestone reviews at 25%/50%/75% tokens: per-capability loss curves vs EN slice.
 - Sponsor sign-off on capability SLO table before data collection contracts.
-
-## 1.9 Future Improvements
-
-- Capability #11: **Voice** (ASR-TTS loop) — deferred; requires separate audio budget.
-- Dynamic capability reweighting from deployment flywheel (§9 D7).
-- State-specific dialect packs (Bhojpuri, Konkani) as post-train adapters.
 
 ---
 
@@ -288,11 +240,6 @@ Agentic depth ↑  ←———————————————————�
 - Mid-train checkpoint eval on `eval_hierarchy.json` L4 benchmarks.
 - Memory profiling on 2× L40S INT4 before ship gate.
 
-## 2.9 Future Improvements
-
-- Distilled **8B sibling** from layer 20 for blended router (§10).
-- Speculative decoding with 7B draft model ($41M Year-2 TCO path).
-- FP8 path for government numeric-accuracy contracts.
 
 ---
 
@@ -369,132 +316,24 @@ Sharpening exponent: 2.8 (prevents single-factor dominance).
 | **M4** Code percentage | 12% (not 8% or 16%) |
 | **M6** Synthetic cap | 6% (>8% rejected: −4.2 faithfulness) |
 
-## 3.5 Chosen Design — Capability→Data Derivation Chains
+## 3.5 Chosen Design — Capability→Data Matrix
 
-### Chain 1: `multilingual_indic`
+| Capability | Required behaviour | Training signal | Dataset class | Cleaning focus | Tokens (B) | Validation |
+|------------|-------------------|-----------------|---------------|----------------|----------:|------------|
+| `multilingual_indic` | 15-lang generation | Monolingual + parallel | web, wiki, gov | L04–L06 script repair | 984 | IndicGLUE |
+| `code_switch` | Stable Hinglish/Tanglish | CS pairs | social, call-center | L13 conversation quality | 28 | CS Index ≥0.75 |
+| `indian_reasoning` | UPI/GST/ONDC flows | Structured QA | RBI, GST, UPI specs | L08 copyright + L09 injection | 18 | Gov/Edu 0.78 |
+| `coding` | Repo maintenance | file+issue+test | GitHub, SO, RFCs | **L12 compile** | 144 | SWE-bench lite |
+| `math` | JEE/NEET bilingual | Worked solutions | NCERT, exams | L10 instruction leak | 48 | JEE held-out |
+| `science` | India syllabus | Textbook + ICMR | NCERT science | L04 OCR | 22 | Human rubric |
+| `agentic` | Plan→execute→recover | Sandbox traces | tool/browser/terminal | L09 injection | 12+10† | Recovery ≥0.70 |
+| `conversation` | Indic registers | Multi-turn chat | BPO, support | L13 + L15 PII | 35 | Human A/B |
+| `long_context` | 128k deploy | Multi-doc QA | Kanoon, contracts | L04 + dedup | 15 | Needle 32k |
+| `planning` | ≥5-step JSON plans | Plan/repair pairs | workflows | L11 leak | 8 | Plan depth audit |
 
-```
-Capability: coherent 15-language generation
-  → Training signal: monolingual + parallel + code-switched text
-    → Dataset types: web_licensed, wikipedia, news, gov_portals
-      → Collection: MCDA-weighted crawl + NCERT/RBI licensed packs
-        → Budget: 984B tokens (82% NL slice, MCDA table above)
-```
+†12B pretrain agent docs + 10B post-train ToolLoop traces.
 
-### Chain 2: `code_switch`
-
-```
-Capability: stable Hinglish/Tanglish/Manglish output
-  → Training signal: token-aligned code-switch pairs
-    → Dataset types: social_filtered, synthetic_cs, call_center_transcripts
-      → Collection: 2B dedicated Hinglish + 28B filtered social
-        → Budget: 28B pretrain tokens
-```
-
-### Chain 3: `indian_reasoning`
-
-```
-Capability: UPI flows, GST slabs, ONDC, Aadhaar consent language
-  → Training signal: structured QA over policy + commerce docs
-    → Dataset types: rbi_circulars, gst_portal, upi_docs, ondc_specs
-      → Collection: licensed gov + fintech; human-verified QA synthesis
-        → Budget: 18B tokens
-          → India-first sources: UPI 2.1B, GST 1.8B, RBI 3.2B
-```
-
-### Chain 4: `coding` (144B tokens)
-
-```
-Capability: repo maintenance, tests, PRs — not LeetCode-only
-  → Training signal: file-level code + issue + test triples
-    → Dataset types: github_repos, issues, prs, docs, stackoverflow, rfcs
-      → Collection: India-heavy stack filter (Python/JS/Java); L12 compile gate
-        → Budget: 144B tokens (12% slice)
-```
-
-#### Code Subsource Breakdown (144B)
-
-| Subsource | % | Tokens (B) | Rationale |
-|-----------|--:|-----------:|-----------|
-| Repositories | 42 | 60.5 | Primary maintenance signal |
-| Documentation | 18 | 25.9 | API context, README |
-| Issues | 12 | 17.3 | Bug triage patterns |
-| StackOverflow | 10 | 14.4 | Q&A; license-filtered |
-| Tests | 8 | 11.5 | Assertion patterns |
-| RFCs / package specs | 5 | 7.2 | Protocol grounding |
-| Verified synthetic | 5 | 7.2 | Teacher-generated; compile-gated |
-
-#### Code Language Mix (within 144B)
-
-| Language | % | Tokens (B) |
-|----------|--:|-----------:|
-| Python | 38 | 54.7 |
-| JavaScript/TypeScript | 26 | 37.4 |
-| Java | 14 | 20.2 |
-| C/C++ | 8 | 11.5 |
-| SQL | 5 | 7.2 |
-| Go | 4 | 5.8 |
-| Rust | 3 | 4.3 |
-| Shell/config/other | 2 | 2.9 |
-
-### Chain 5: `math`
-
-```
-Capability: JEE/NEET multi-step; bilingual stems
-  → Training signal: worked solutions + proof sketches
-    → Dataset types: textbooks, exam_papers, synthetic_verified
-      → Collection: NCERT + competitive exam licensed; verifier pass
-        → Budget: 48B tokens
-```
-
-### Chain 6: `science`
-
-```
-Capability: Indian syllabus science; avoid US drug names
-  → Training signal: textbook + WHO India adaptations
-    → Dataset types: ncert_science, icmr_guidelines, agri_extension
-      → Budget: 22B tokens
-```
-
-### Chain 7: `agentic`
-
-```
-Capability: plan → execute → reflect → recover
-  → Training signal: sandbox traces with injected failures
-    → Dataset types: tool_traces, browser_snapshots, terminal_logs
-      → Collection: 8B pretrain agent docs + 10B post-train traces
-        → Budget: 12B pretrain + 10B post-train
-```
-
-### Chain 8: `conversation`
-
-```
-Capability: multi-turn; Indic politeness registers
-  → Training signal: human chat + verified synthetic
-    → Dataset types: human_chat, customer_support, tutor_dialogues
-      → Collection: regional BPO partners; redacted logs
-        → Budget: 35B tokens
-```
-
-### Chain 9: `long_context`
-
-```
-Capability: 32k train → 128k deploy; legal/gov docs
-  → Training signal: needle + multi-doc QA
-    → Dataset types: judiciary_pdfs, contracts, policy_compendia
-      → Collection: Indian Kanoon licensed subset; chunk curriculum
-        → Budget: 15B tokens (Kanoon 2.8B)
-```
-
-### Chain 10: `planning`
-
-```
-Capability: JSON plans ≥5 steps; self-critique
-  → Training signal: plan-success and plan-repair pairs
-    → Dataset types: workflow_plans, failure_recovery
-      → Collection: synthetic planners + 8% human audit
-        → Budget: 8B tokens
-```
+**Code subsources (144B):** repos 42% · docs 18% · issues 12% · SO 10% · tests 8% · RFCs 5% · synthetic 5% (compile-gated). **Lang mix:** Py 38% · JS/TS 26% · Java 14% · C/C++ 8% · SQL 5% · Go 4% · Rust 3% · other 2%.
 
 ### India-First Source Registry
 
@@ -533,12 +372,6 @@ Capability: JSON plans ≥5 steps; self-critique
 - Per-capability held-out sets (5k prompts each) evaluated at 25/50/75% pretrain.
 - Code subsource audit: random 1k files per subsource, compile + license check.
 - India-first source legal review before ingest contracts.
-
-## 3.9 Future Improvements
-
-- Deployment flywheel: redacted query logs → §4 L01 ingest (with consent).
-- ONDC spec expansion as marketplace matures.
-- Regional agricultural extension corpora (state-specific).
 
 ---
 
@@ -651,11 +484,6 @@ L16 ←─ L15 ←─ L14 ←─ L13 ←─ L12 ←─ L09 ←─ L10 ←─ L11
 - OCR gold set: 500 Kanoon pages; CER before/after L14.
 - Composite yield Monte Carlo across paths → target 22.2% ±1%.
 
-## 4.9 Future Improvements
-
-- Active learning on L06 failures (failure feedback loop).
-- Differential privacy on L15 audit logs.
-- GPU-accelerated MinHash for L05 at ingest scale.
 
 ---
 
@@ -684,6 +512,7 @@ L16 ←─ L15 ←─ L14 ←─ L13 ←─ L12 ←─ L09 ←─ L10 ←─ L11
 | 96k | 98,304 | 0.94 | 1.159 | 1.00 | 0.743 |
 | **128k** | **128,000** | **1.22** | **1.14** | **1.00** | **0.746** |
 | 160k | 160,000 | 1.53 | 1.12 | 1.00 | 0.717 |
+| 192k | 192,000 | 1.84 | 1.11 | 0.90 | 0.642 |
 | 200k | 200,000 | 1.91 | 1.11 | 0.80 | 0.625 |
 | 256k | 262,144 | 2.50 | 1.07 | 0.50 | 0.528 |
 
@@ -741,6 +570,7 @@ Hidden dim: 5,120 → embedding table = vocab × hidden × 2 bytes (bf16).
 |--------|----------------|
 | 96k | Indic conjunct fragmentation; fertility +0.08 vs 128k |
 | 160k | Embedding +0.31 GB; marginal fertility −0.02 |
+| 192k | deploy_fit 0.68; composite 0.642 — loses Pareto to 128k |
 | 200k | Embedding +0.69 GB; stability penalty 0.80 |
 | 256k | 2.50 GB embedding; blocks 2×L40S deploy |
 | Pure BPE (M1) | Indic fertility variance 0.70 vs 0.92 hybrid |
@@ -756,15 +586,10 @@ Hidden dim: 5,120 → embedding table = vocab × hidden × 2 bytes (bf16).
 
 ## 5.8 Validation Plan
 
-- Train tokenizers at 96k/128k/160k on 10B-token sample; measure fertility per script.
+- Train tokenizers at 96k/128k/160k/**192k** on 10B-token sample; measure fertility per script.
 - `vocab_size_tradeoff.json` composite scores must match M2 ranking.
 - Embedding memory profiling on 2× L40S with 1.22 GB table.
 
-## 5.9 Future Improvements
-
-- Dynamic vocab expansion for ONDC/new gov schemas (reserved 1k special tokens).
-- On-device tokenizer quantization (INT8 lookup).
-- Per-state dialect subword packs as optional adapter vocab.
 
 ---
 
@@ -772,6 +597,16 @@ Hidden dim: 5,120 → embedding table = vocab × hidden × 2 bytes (bf16).
 
 **Upstream:** §5 128k tokenizer.  
 **Downstream:** §10 deployment economics, §11 kill criteria (TCO savings <10%).
+
+### Causal Chain (why fertility is an India-first decision)
+
+```
+Higher Indic fertility → more tokens/query → lower effective context
+  → higher GPU seconds → higher ₹/query & latency
+    → SME & mobile tiers unaffordable → adoption fails
+```
+
+**21% fertility reduction (1.46→1.14)** ≈ **$13M/yr** at 30M queries/day — often **> entire pretrain compute**.
 
 ## 6.1 Problem Statement
 
@@ -857,11 +692,6 @@ Longer context increases per-query tokens → fertility savings compound.
 - Production shadow: route 5% traffic through India tokenizer for 30 days; measure tokens/query.
 - TCO model sensitivity: ±20% query volume, ±30% avg tokens.
 
-## 6.9 Future Improvements
-
-- Speculative decoding ($41M path) as intermediate step.
-- Query complexity classifier to optimize 8B/40B blend ratio.
-- On-device 8B distill for mobile (₹/query target <0.3).
 
 ---
 
@@ -951,11 +781,6 @@ Longer context increases per-query tokens → fertility savings compound.
 - Checkpoint eval at 300B/600B/900B/1200B tokens.
 - GPU-hour tracking vs 308,571 budget ±3%.
 
-## 7.9 Future Improvements
-
-- Mid-train tokenizer refresh (frozen embeddings for stability).
-- Expert parallelism for Phase 2 long-context packs.
-- Automated curriculum from eval regression signals.
 
 ---
 
@@ -1019,6 +844,22 @@ Base checkpoint → SFT (instruction + tools) → DPO (preferences) → RLHF (sa
 | Agent recovery | Retry vs abandon |
 | Safety | Refuse vs comply (harmful) |
 
+### Agentic Sub-Capabilities & Training Data
+
+| Sub-capability | Behaviour | Training signal | Data source | Volume |
+|----------------|-----------|-----------------|-------------|-------:|
+| **Planning** | ≥5-step JSON plans | plan-success + plan-repair | workflow_synth, gov forms | 2B |
+| **Tool calling** | Schema-valid args | tool traces | sandbox APIs | 3B |
+| **Parallel tools** | fan-out/fan-in | multi-tool traces | browser+search parallel | 1B |
+| **Memory** | scratchpad across turns | stateful episodes | customer-support logs | 1.5B |
+| **Reflection** | self-critique before act | critique→revise pairs | synthetic planner | 1B |
+| **Verification** | check answer vs source | verify/cite pairs | RBI/GST RAG | 0.8B |
+| **Critique** | reject bad tool output | preference pairs | DPO harm/faith | 200k pairs |
+| **Recovery** | retry after injected fail | failure→recovery | ToolLoop 30% inject | 3B |
+| **Browser** | DOM navigation | snapshot→action | headless Chrome | 1.2B |
+| **Terminal** | shell workflows | command logs | dev sandboxes | 0.8B |
+| **Workflow** | multi-app orchestration | end-to-end traces | UPI+GST sandboxes | 1.5B |
+
 ### Agentic Recipe — ToolLoop Format
 
 ```json
@@ -1069,11 +910,6 @@ Base checkpoint → SFT (instruction + tools) → DPO (preferences) → RLHF (sa
 - Red-team safety slice: 500 jailbreak prompts × 15 languages.
 - A/B vs ReAct baseline on gov form-fill sandbox.
 
-## 8.9 Future Improvements
-
-- Online DPO from deployment feedback (with consent).
-- Multi-agent orchestration (planner + executor split).
-- Regional tool packs (state portal APIs).
 
 ---
 
@@ -1160,13 +996,7 @@ No single matrix; scorecard gates derived from capability SLOs. Synthetic cap va
 - Inter-rater reliability κ > 0.7 on human evals.
 - Ship review board: sign-off on all five scorecard gates.
 
-## 9.9 Future Improvements
-
-- **D7 Data flywheel:** deployment logs → new eval cases (with consent).
-- Continuous red-team subscription.
-- Per-state eval packs (Karnataka GST, TN e-governance).
-
-### Kill Criteria (from `eval_hierarchy.json`)
+## 9.9 Kill Criteria (from `eval_hierarchy.json`)
 
 | Criterion | Threshold | Timeline |
 |-----------|-----------|----------|
@@ -1280,11 +1110,6 @@ Model must serve **30M queries/day** from Mumbai/Chennai edge with p99 < 800ms, 
 - GST numeric gold set: 1k calculations INT4 vs FP8.
 - Failover drill: Chennai → Mumbai reroute < 30s.
 
-## 10.9 Future Improvements
-
-- Speculative 7B draft ($41M path).
-- Quantized KV cache for 128k context.
-- BharatNet edge caching for Tier 1 8B.
 
 ---
 
@@ -1392,11 +1217,6 @@ Architecture **M12**, alignment **M7**, cleaning **M5**, synthetic **M6** collec
 - Kill criteria dashboard at program steering committee.
 - `verify.py` + `derive_all.py` in CI for number consistency.
 
-## 11.9 Future Improvements
-
-- Phase 2 funding request tied to gov pilot milestones.
-- Open-weight release subset (8B distill) for ecosystem leverage.
-- Revenue offset from enterprise API (Year 3+).
 
 ---
 
@@ -1407,7 +1227,7 @@ Complete traceability from decision matrices M1–M12 to report sections.
 | Matrix | Title | Decision | Report section | Key metric |
 |--------|-------|----------|----------------|------------|
 | **M1** | Tokenizer algorithm | Unigram+BPE hybrid | §5 | Indic fertility variance 0.92 |
-| **M2** | Vocabulary size | 128k (composite 0.746) | §5 | 1.22 GB embedding |
+| **M2** | Vocabulary size | 128k (composite 0.746; beats 192k) | §5 | 1.22 GB embedding |
 | **M3** | Language weighting | MCDA-7 sharpening | §3 | Hindi 17.9%, EN-IN 17.4% |
 | **M4** | Code data % | 12% | §3 | 144B code tokens |
 | **M5** | Cleaning strictness | Balanced 16-stage | §4 | 22.2% yield |
@@ -1418,44 +1238,6 @@ Complete traceability from decision matrices M1–M12 to report sections.
 | **M10** | Cleaning (legacy 6-stage) | Superseded by M5 | §4 | Faithfulness 0.82 target |
 | **M11** | Dedup threshold | MinHash 0.90 (L05) | §4 | Contamination 0.92 |
 | **M12** | Foundation architecture | 40B dense GQA | §2 | M12 score 0.83 |
-
-### Cross-Section Dependency Graph
-
-```
-§1 Capabilities
-  └─→ §3 Data (Q1) ──→ §4 Cleaning (Q2) ──→ §5 Tokenizer (Q4)
-        │                      │                      │
-        └──────────────────────┴──────────────────────┘
-                               │
-                               ▼
-                    §6 Fertility/TCO (Q4)
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-           §7 Train         §8 Align          §9 Eval (Q3)
-              │                │                │
-              └────────────────┴────────────────┘
-                               │
-                               ▼
-                    §10 Deploy → §11 Budget/Risks
-```
-
-### Artefact Verification Checklist
-
-| Artefact | Path | Sections |
-|----------|------|----------|
-| Capabilities (10) | `data/derived/capability_data.json` | §1, §3, §8 |
-| Data mix | `data/derived/data_mix.json` | §3, §7 |
-| Language weights | `data/derived/language_weights.json` | §3 |
-| Cleaning pipeline | `data/derived/cleaning_pipeline.json` | §4 |
-| Vocab allocation | `data/derived/vocab_allocation.json` | §5 |
-| Vocab tradeoff | `data/derived/vocab_size_tradeoff.json` | §5 |
-| Fertility | `data/derived/fertility_projections.json` | §6 |
-| Inference costs | `data/derived/inference_costs.json` | §6, §10 |
-| Training budget | `data/derived/training_budget.json` | §7, §11 |
-| Eval hierarchy | `data/derived/eval_hierarchy.json` | §9 |
-| Scorecards | `data/derived/scorecards.json` | §9 |
-| Matrices M1–M12 | `data/inputs/matrices/M*.json` | All |
 
 ---
 

@@ -7,6 +7,7 @@ import { DiagramGallery, DiagramTabs } from "./components/PipelineDiagrams";
 import { FertilityExplorer } from "./components/FertilityExplorer";
 import { LanguageMixCompare } from "./components/LanguageMixCompare";
 import { UspSection } from "./components/UspSection";
+import { downloadReportPdf } from "./lib/downloadPdf";
 import { parseChapters } from "./lib/parseReport";
 import {
   loadJson,
@@ -46,6 +47,7 @@ export default function App() {
   const [budget, setBudget] = useState<TrainingBudget | null>(null);
   const [scorecards, setScorecards] = useState<Scorecards | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [pdfBusy, setPdfBusy] = useState(false);
 
   const chapters = useMemo(() => parseChapters(reportMd), [reportMd]);
 
@@ -74,6 +76,18 @@ export default function App() {
     setChapterIdx(i);
     if (tab !== "report") setTab("report");
     setUrl("report", i);
+  };
+
+  const handleDownloadPdf = async () => {
+    if (!reportMd || pdfBusy) return;
+    setPdfBusy(true);
+    try {
+      await downloadReportPdf(reportMd);
+    } catch (e) {
+      setLoadError(`PDF export failed: ${e}`);
+    } finally {
+      setPdfBusy(false);
+    }
   };
 
   useEffect(() => {
@@ -123,10 +137,19 @@ export default function App() {
             </h1>
           </div>
           {budget && inference && (
-            <div className="flex flex-wrap gap-2 text-xs">
+            <div className="flex flex-wrap items-center gap-2 text-xs">
               <span className="stat-pill-compact">${budget.total_budget_usd_m}M · {budget.timeline_months}mo</span>
               <span className="stat-pill-compact">128k vocab</span>
               <span className="stat-pill-compact">22% TCO ↓</span>
+              <button
+                type="button"
+                onClick={handleDownloadPdf}
+                disabled={!reportMd || pdfBusy}
+                className="stat-pill-compact cursor-pointer border-[var(--color-saffron)]/50 bg-[var(--color-saffron)]/20 font-semibold text-white transition hover:bg-[var(--color-saffron)]/35 disabled:cursor-wait disabled:opacity-50"
+                title="Download full report as PDF"
+              >
+                {pdfBusy ? "Generating PDF…" : "↓ PDF"}
+              </button>
             </div>
           )}
         </div>
