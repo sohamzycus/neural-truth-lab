@@ -1,66 +1,51 @@
 # IndiaOne-40B — Internal Research Proposal
 
-**v2.2** · `python scripts/derive_all.py` → `data/derived/*.json`
+**v2.3** · `python scripts/derive_all.py` → `data/derived/*.json`
 
 ---
 
-# §0 Why IndiaOne-40B Should Exist
+# §0 Why IndiaOne Should Exist
 
-## Vision
+> **Deployable Intelligence** — maximize useful work completed per rupee of inference, not benchmark score, under India's GPU-scarce, bandwidth-limited, code-switching deployment reality.
 
-India does not need the highest MMLU score. It needs the **cheapest correct token** on a Mumbai GPU. Every billion parameters that cannot be served at ₹/query is wasted training.
+## Observation
 
-## 1 — Problem
+India's binding constraint is not pretraining data—it is **served tokens per correct answer**. Imported tokenizers impose **21–45% more Indic tokens/query** (1.46→1.14 fertility). At scale that is **$13M/year** inference tax—often exceeding pretrain compute—before SMEs fail on latency and mobile bandwidth.
 
-Indic text costs **21–45% more tokens/query** on imported tokenizers (1.46 vs 1.14 fertility). At 30M queries/day that is **$13M/year** in inference alone—before SME adoption fails on latency and bandwidth. Government digitization at population scale cannot run on models optimized for English leaderboards.
+## Hypothesis
 
-## 2 — Why existing models fail
+Co-designing **tokenizer + capability contract + ship gates** around **₹/query** makes a 40B model viable on **2×L40S** where fine-tuned Gemma/Llama/Qwen cannot: vocabulary is **infrastructure**, not a fine-tuning patch. Competing "Gemma-India" or "Llama-Bharat" proposals optimize **training loss**; IndiaOne optimizes **deployment economics**.
 
-| Approach | Fatal flaw |
-|----------|------------|
-| Fine-tune Gemma/Llama/Qwen | Vocabulary is frozen; fertility tax is permanent |
-| Bigger model (70B) | 4×L40S; ~$98M Year-2 TCO |
-| MoE | Indic expert imbalance; +40–80ms p99 on Indian networks |
-| RAG-only 8B | No agent recovery ≥0.70; no foundation flywheel |
+## Problem
 
-**IndiaOne thesis:** optimize **deployable intelligence**—tokenizer → fertility → quant → router—not benchmark intelligence.
+Population-scale gov digitization and SME automation need models that are **multilingual, faithful, and cheap to serve** on India-hosted hardware. Leaderboard models optimize English MMLU—a different objective.
 
-## 3 — Five Engineering Laws
+## Five Engineering Laws
 
-| Law | Rule | Governs |
-|-----|------|---------|
-| **L1** | Capabilities before corpus | §1, §3 |
-| **L2** | Deployment before leaderboard | §9, §11 |
-| **L3** | Inference economics dominate training | §5, §6, §10 |
-| **L4** | Tokenizer is infrastructure | §5–§6 |
-| **L5** | Every capability has an observable SLO | §1, §8, §9 |
+| Law | Statement | Governs |
+|-----|-----------|---------|
+| **L1** | Capabilities define data—not the reverse. | §1, §3 |
+| **L2** | Ship on deployment gates; benchmarks inform only. | §9, §11 |
+| **L3** | Inference tokens are the fundamental currency of deployment. | §5–§6, §10 |
+| **L4** | Tokenizer choice is permanent infrastructure. | §5–§6 |
+| **L5** | Unmeasured capability is uncommitted capability. | §1, §8, §9 |
 
-## 4 — How we know we succeeded
+## Success metric
 
-| Question | Answer |
-|----------|--------|
-| Problem? | ₹/query and faithfulness on India-hosted GPUs |
-| Why not incumbents? | Cannot retokenize; optimize wrong objective |
-| Philosophy? | L1–L5; ship on deployment gates not MMLU |
-| Success? | Fertility 1.14 · TCO $51M→$19M blended · Gov ≥0.78 · Recovery ≥0.70 |
+**Fertility 1.14** · **TCO $64M→$19M** (blended) · **Gov/Edu ≥0.78** · **Recovery ≥0.70** · **Kill:** faithfulness <0.75 · recovery <0.55 @M16 · TCO savings <10% vs generic.
 
-## Locked decisions (traceability)
+## Causal spine
 
-40B dense GQA · 1.2T tokens · MCDA-7 (hi 17.9%, en_in 17.4%) · **128k** Unigram+BPE (composite 0.746; beats 192k) · 16-stage clean 22.2% yield · DPO+RLHF-safety · INT4+8B/40B blend · $100M/18mo.
+```
+India constraints          Deployable Intelligence        Evidence chain
+(GPU scarcity,      →     (optimization philosophy)   →    L1–L5 → Capabilities
+ bandwidth, code-switch,                                   → Data → Cleaning
+ SME ₹, mobile)                                           → Tokenizer → Train
+                                                          → Align → Eval pyramid
+                                                          → Deploy router → Flywheel
+```
 
-**Rejected:** 70B · MoE · population Hindi 39.2% · 256k vocab · RLHF-primary · FP16 prod.
-
-**Kill:** faithfulness <0.75 · recovery <0.55 @M16 · TCO savings <10%.
-
-## India is deployment-first (not language-first)
-
-| Constraint | Design lever |
-|------------|--------------|
-| GPU/bandwidth | Fertility 1.14; INT4; 8B edge tier |
-| Mobile/SME | Blended router → ~$19M TCO |
-| Code-switch default | 128k script buckets; CS gate 0.75 |
-| Gov digitization | FP8 GST tier; faithfulness 0.82 |
-| India Stack (UPI/GST/ONDC) | Capability `indian_reasoning`, not a dataset appendix |
+**India-only objective:** minimize **tokens per correct answer** under code-switch + frugal edge—objective does not exist for US-cloud EN-first models.
 
 ---
 
@@ -154,7 +139,9 @@ No standalone matrix for mission framing; architecture choice deferred to **M12*
 
 ## 2.1 Problem Statement
 
-Architecture must deliver agentic planning depth, 128k deploy context, and fit in **2× L40S INT4** replicas at Mumbai edge—while staying within **$679k per full pretrain run** (308,571 billable H100-hours).
+**Law L3:** Inference tokens are the currency—architecture must fit **2× L40S INT4** (Mumbai) before parameter count wins benchmarks. **Why not MoE?** Indic expert imbalance + 40–80ms routing on Indian networks. **Why not 70B?** 4×L40S; ~$98M TCO.
+
+Agentic depth, 128k deploy context, and **$679k/full pretrain run** (308,571 H100-hr) must coexist.
 
 ## 2.2 Design Options
 
