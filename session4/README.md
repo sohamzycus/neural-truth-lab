@@ -2,6 +2,8 @@
 
 Engineering a production-ready bird knowledge corpus for future multimodal AI.
 
+**Portal:** `web/` — see [web/README.md](web/README.md) for pipeline stages, scrub algorithms, training-readiness formulas, and data file reference.
+
 ## Run locally
 
 ```bash
