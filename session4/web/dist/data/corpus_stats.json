@@ -1,0 +1,102 @@
+{
+  "languages": [
+    {
+      "name": "English",
+      "value": 62
+    },
+    {
+      "name": "Hindi",
+      "value": 14
+    },
+    {
+      "name": "Tamil",
+      "value": 6
+    },
+    {
+      "name": "Malayalam",
+      "value": 5
+    },
+    {
+      "name": "Bengali",
+      "value": 4
+    },
+    {
+      "name": "Other",
+      "value": 9
+    }
+  ],
+  "species": [
+    {
+      "name": "Black Drongo",
+      "value": 12400
+    },
+    {
+      "name": "Asian Koel",
+      "value": 9800
+    },
+    {
+      "name": "Purple Sunbird",
+      "value": 8600
+    },
+    {
+      "name": "Indian Robin",
+      "value": 7200
+    },
+    {
+      "name": "House Crow",
+      "value": 6900
+    },
+    {
+      "name": "Indian Pitta",
+      "value": 3100
+    },
+    {
+      "name": "Sarus Crane",
+      "value": 2400
+    },
+    {
+      "name": "Great Hornbill",
+      "value": 1800
+    }
+  ],
+  "qualityTimeline": [
+    {
+      "stage": "Raw",
+      "score": 0.42
+    },
+    {
+      "stage": "Extract",
+      "score": 0.55
+    },
+    {
+      "stage": "Filter",
+      "score": 0.68
+    },
+    {
+      "stage": "Dedupe",
+      "score": 0.79
+    },
+    {
+      "stage": "PII",
+      "score": 0.84
+    },
+    {
+      "stage": "Final",
+      "score": 0.91
+    }
+  ],
+  "dedupeSavings": [
+    {
+      "label": "Exact",
+      "before": 184720,
+      "after": 151102
+    },
+    {
+      "label": "Near",
+      "before": 151102,
+      "after": 128440
+    }
+  ],
+  "readinessScore": 0.91,
+  "tokenReductionPct": 18.4
+}

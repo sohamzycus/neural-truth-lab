@@ -1,0 +1,110 @@
+[
+  {
+    "id": "raw",
+    "name": "Raw Observations",
+    "purpose": "Ingest community notes as written.",
+    "technique": "JSONL dump + checklist export parsers",
+    "input": "Checklists, free-text notes, media refs",
+    "output": "Immutable raw shard",
+    "challenges": "Encoding drift, partial uploads"
+  },
+  {
+    "id": "extract",
+    "name": "Content Extraction",
+    "purpose": "Pull note body from wrappers.",
+    "technique": "DOM/boilerplate strip, field maps",
+    "input": "Raw HTML/app exports",
+    "output": "Plain note text + metadata columns",
+    "challenges": "App version differences"
+  },
+  {
+    "id": "unicode",
+    "name": "Unicode Normalization",
+    "purpose": "Canonical character forms.",
+    "technique": "NFKC + punctuation fold",
+    "input": "Extracted text",
+    "output": "Normalized UTF-8",
+    "challenges": "Indic scripts, OCR ligatures"
+  },
+  {
+    "id": "lang",
+    "name": "Language Detection",
+    "purpose": "Tag primary/secondary languages.",
+    "technique": "FastText + script heuristics",
+    "input": "Normalized notes",
+    "output": "lang codes + confidence",
+    "challenges": "Code-switching Hindi/English"
+  },
+  {
+    "id": "quality",
+    "name": "Quality Filtering",
+    "purpose": "Drop empty/garbage notes.",
+    "technique": "Length, entropy, lexicon scores",
+    "input": "Language-tagged notes",
+    "output": "Quality-gated subset",
+    "challenges": "Short but valid heard-only notes"
+  },
+  {
+    "id": "exact",
+    "name": "Exact Deduplication",
+    "purpose": "Remove identical strings.",
+    "technique": "SHA-256 of normalized text",
+    "input": "Quality-gated notes",
+    "output": "Unique exact set",
+    "challenges": "Whitespace-only variants"
+  },
+  {
+    "id": "near",
+    "name": "Near Duplicate Detection",
+    "purpose": "Collapse paraphrases/templates.",
+    "technique": "MinHash + LSH",
+    "input": "Exact-unique notes",
+    "output": "Cluster representatives",
+    "challenges": "Legitimate similar habitat phrases"
+  },
+  {
+    "id": "pii",
+    "name": "PII Removal",
+    "purpose": "Strip emails, phones, names.",
+    "technique": "Regex + NER masks",
+    "input": "Cluster reps",
+    "output": "PII-safe text",
+    "challenges": "Place names vs person names"
+  },
+  {
+    "id": "ghost",
+    "name": "Ghost Tag Normalization",
+    "purpose": "Clean orphan HTML/markdown tags.",
+    "technique": "Tag balancer + entity decode",
+    "input": "PII-safe text",
+    "output": "Tag-clean notes",
+    "challenges": "Partial tags from OCR"
+  },
+  {
+    "id": "decontam",
+    "name": "Benchmark Decontamination",
+    "purpose": "Remove eval leakage.",
+    "technique": "n-gram overlap vs held-out quizzes",
+    "input": "Clean notes",
+    "output": "Train-safe corpus",
+    "challenges": "Popular species templates"
+  },
+  {
+    "id": "manifest",
+    "name": "Manifest Generation",
+    "purpose": "Ship reproducible shards.",
+    "technique": "Parquet/JSONL + SHA manifests",
+    "input": "Train-safe docs",
+    "output": "Versioned manifests",
+    "challenges": "Schema evolution"
+  },
+  {
+    "id": "train",
+    "name": "Training Corpus",
+    "purpose": "Final pack for pretraining.",
+    "technique": "Packing, packing stats, token counts",
+    "input": "Manifest shards",
+    "output": "Ataavi text corpus v0.4",
+    "challenges": "Mix ratios with future multimodal"
+  }
+]

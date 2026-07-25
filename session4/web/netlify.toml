@@ -1,8 +1,9 @@
-# Ataavi Corpus Forge — Vite static site
-# Netlify UI: Base directory = session4/web
+# Ataavi Corpus Forge — prebuilt dist (session2/3 pattern)
+# Netlify UI: Base directory = session4/web, link to GitHub repo.
+# Build verifies committed dist — no npm on Netlify (avoids Zscaler).
 
 [build]
-  command = "npm ci && npm run build"
+  command = "test -f dist/index.html && test -f dist/data/dataset_stats.json && echo 'Prebuilt dist OK'"
   publish = "dist"
 
 [build.environment]

@@ -1,0 +1,37 @@
+name: Deploy Ataavi Corpus Forge to Netlify (session4)
+
+# Uses NETLIFY_AUTH_TOKEN (shared with session2/3). Site ID is public.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'session4/web/**'
+      - '.github/workflows/netlify-deploy-session4.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session4/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify prebuilt dist
+        run: |
+          test -f dist/index.html
+          test -f dist/data/dataset_stats.json
+
+      - name: Deploy to Netlify
+        run: |
+          cd dist
+          zip -r ../deploy.zip .
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -H "Content-Type: application/zip" \
+               --data-binary @../deploy.zip \
+               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 5b66323b-3d13-4ef1-b1a8-95448d36aef2

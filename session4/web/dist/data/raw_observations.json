@@ -1,0 +1,78 @@
+[
+  {
+    "id": "r1",
+    "title": "GPS + observer leak",
+    "issues": [
+      "GPS",
+      "PII",
+      "Name"
+    ],
+    "text": "Indian Robin at 18.5204, 73.8567 — observed by Priya Sharma (priya.sharma@mail.com). Male singing from wire.",
+    "meta": {
+      "source": "checklist paste"
+    }
+  },
+  {
+    "id": "r2",
+    "title": "HTML paste",
+    "issues": [
+      "HTML",
+      "Boilerplate"
+    ],
+    "text": "<div class=\"note\"><b>Black Drongo</b> chasing <i>bee-eater</i></div><br/>Posted via app&nbsp;&nbsp;v3.2"
+  },
+  {
+    "id": "r3",
+    "title": "Repeated paste",
+    "issues": [
+      "Duplicate",
+      "Whitespace"
+    ],
+    "text": "Purple Sunbird at nectar bush. Purple Sunbird at nectar bush. Purple Sunbird at nectar bush.\n\n\nEnd."
+  },
+  {
+    "id": "r4",
+    "title": "Taxonomy chaos",
+    "issues": [
+      "Synonym",
+      "Scientific"
+    ],
+    "text": "Saw Indian robin / Indian Robin / Saxicoloides fulicatus near scrub. Also listed as Copsychus fulicatus in older book."
+  },
+  {
+    "id": "r5",
+    "title": "Unicode / OCR",
+    "issues": [
+      "Unicode",
+      "OCR"
+    ],
+    "text": "Himalayan Monal — café near trailhead. OCR: H1malayan M0nal. Fancy: ﬁde for fide. Dashes: — – -"
+  },
+  {
+    "id": "r6",
+    "title": "Mixed language",
+    "issues": [
+      "Multilingual",
+      "Formatting"
+    ],
+    "text": "एशियन कोयल (Asian Koel) सुबह 5:40 — loud kuoo from mango. Likely male. Weather: हल्की धुंध."
+  },
+  {
+    "id": "r7",
+    "title": "Broken media refs",
+    "issues": [
+      "Media",
+      "Broken links"
+    ],
+    "text": "Recording: /media/calls/missing_001.wav  Spectrogram: [broken]. Note: call like chee-chee / cheeeee."
+  },
+  {
+    "id": "r8",
+    "title": "Global dupe seed",
+    "issues": [
+      "Near-dupe",
+      "Benchmark risk"
+    ],
+    "text": "American Robin on lawn. Same template as India notes used in public quiz sets — keep for decontam tests."
+  }
+]

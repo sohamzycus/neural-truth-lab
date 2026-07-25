@@ -1,0 +1,49 @@
+{
+  "name": "Bird Observation Corpus",
+  "inspiredBy": "Community bird observations (eBird-style field notes)",
+  "observationCount": 184720,
+  "countries": 31,
+  "languages": 14,
+  "species": 1842,
+  "observationYears": "2008–2025",
+  "averageNoteLength": 86,
+  "observerCount": 12840,
+  "samples": [
+    {
+      "id": "obs-1042",
+      "species": "Indian Robin",
+      "location": "Pune, Maharashtra",
+      "excerpt": "Male on fence post at dawn, cocked tail, short chee-chee then drop to ground."
+    },
+    {
+      "id": "obs-2811",
+      "species": "Indian Pitta",
+      "location": "Thattekad, Kerala",
+      "excerpt": "Heard only — sharp whistle from dense understory after overnight rain."
+    },
+    {
+      "id": "obs-3904",
+      "species": "Himalayan Monal",
+      "location": "Tungnath trail, Uttarakhand",
+      "excerpt": "Iridescent male foraging on slope; pair moved upslope as trekkers approached."
+    },
+    {
+      "id": "obs-4410",
+      "species": "Sarus Crane",
+      "location": "Keoladeo, Rajasthan",
+      "excerpt": "Pair trumpeting over flooded field; juveniles nearby. Confirmed visual."
+    },
+    {
+      "id": "obs-5122",
+      "species": "Great Hornbill",
+      "location": "Valparai, Tamil Nadu",
+      "excerpt": "Loud wingbeats overhead; fruiting fig. Local name: மலை இருவாய்ச்சி."
+    },
+    {
+      "id": "obs-6201",
+      "species": "American Robin",
+      "location": "Central Park, NYC (global slice)",
+      "excerpt": "Thin global sample for decontamination tests — not India-primary."
+    }
+  ]
+}

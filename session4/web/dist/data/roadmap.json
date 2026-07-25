@@ -1,0 +1,42 @@
+[
+  {
+    "id": "m1",
+    "label": "Bird Audio",
+    "description": "Vocalization clips aligned to species and call phrases."
+  },
+  {
+    "id": "m2",
+    "label": "Spectrogram",
+    "description": "Time–frequency views paired with normalized call text."
+  },
+  {
+    "id": "m3",
+    "label": "Images",
+    "description": "Field photographs with taxonomy and plumage cues."
+  },
+  {
+    "id": "m4",
+    "label": "Observation Notes",
+    "description": "This cleaned textual corpus — behavior, habitat, uncertainty."
+  },
+  {
+    "id": "m5",
+    "label": "Habitat",
+    "description": "Normalized habitat + environmental context layers."
+  },
+  {
+    "id": "m6",
+    "label": "Migration",
+    "description": "Seasonal movement tracks and phenology enrichment."
+  },
+  {
+    "id": "m7",
+    "label": "Multimodal Bird Foundation Model",
+    "description": "Joint training across modalities for bird intelligence."
+  },
+  {
+    "id": "m8",
+    "label": "Ataavi AI Assistant",
+    "description": "Downstream assistant for ID help, conservation, and research."
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "observations": 184720,
+  "languages": 14,
+  "species": 1842,
+  "duplicateClusters": 11204,
+  "piiRemoved": 3821,
+  "unicodeFixes": 29140,
+  "gpsMasked": 640,
+  "scientificNamesNormalized": 17520,
+  "averageQualityScore": 0.87
+}

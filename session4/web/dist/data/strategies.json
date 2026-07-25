@@ -1,0 +1,112 @@
+[
+  {
+    "id": "s1",
+    "title": "Unicode & NFKC normalization",
+    "why": "Ligatures and compatibility chars fragment vocab.",
+    "algorithms": [
+      "NFKC",
+      "punctuation fold"
+    ],
+    "before": "café ﬁle — H1malayan",
+    "after": "cafe file - Himalayan"
+  },
+  {
+    "id": "s2",
+    "title": "Language identification",
+    "why": "Mix ratios and filters need language tags.",
+    "algorithms": [
+      "FastText",
+      "script heuristics"
+    ],
+    "before": "एशियन कोयल loud kuoo",
+    "after": "lang=hi-en confidence=0.81"
+  },
+  {
+    "id": "s3",
+    "title": "Quality filtering",
+    "why": "Empty/spam notes waste tokens.",
+    "algorithms": [
+      "min length",
+      "entropy",
+      "species lexicon"
+    ],
+    "before": "ok",
+    "after": "[dropped: too short]"
+  },
+  {
+    "id": "s4",
+    "title": "Exact deduplication",
+    "why": "Copy-paste floods dominate loss.",
+    "algorithms": [
+      "SHA-256 on normalized text"
+    ],
+    "before": "note A\\nnote A\\nnote A",
+    "after": "note A (kept once)"
+  },
+  {
+    "id": "s5",
+    "title": "Near-duplicate detection",
+    "why": "Template checklists differ by one word.",
+    "algorithms": [
+      "MinHash",
+      "LSH clustering"
+    ],
+    "before": "Sunbird at nectar bush #1/#2/#3",
+    "after": "cluster rep: Sunbird at nectar bush"
+  },
+  {
+    "id": "s6",
+    "title": "PII removal",
+    "why": "Emails/phones must never enter pretraining.",
+    "algorithms": [
+      "regex",
+      "NER masks"
+    ],
+    "before": "call me +91 98765 43210",
+    "after": "call me [PHONE]"
+  },
+  {
+    "id": "s7",
+    "title": "HTML & boilerplate strip",
+    "why": "App chrome is not bird knowledge.",
+    "algorithms": [
+      "tag strip",
+      "entity decode"
+    ],
+    "before": "<b>Drongo</b>&nbsp;v3.2",
+    "after": "Drongo"
+  },
+  {
+    "id": "s8",
+    "title": "Length & repetition filters",
+    "why": "Extreme outliers skew batches.",
+    "algorithms": [
+      "token caps",
+      "repeat collapse"
+    ],
+    "before": "koel koel koel ×40",
+    "after": "koel (repeat collapsed)"
+  },
+  {
+    "id": "s9",
+    "title": "Benchmark decontamination",
+    "why": "Prevent train/test leakage.",
+    "algorithms": [
+      "13-gram overlap",
+      "quiz set filter"
+    ],
+    "before": "quiz template robin lawn",
+    "after": "[removed: eval overlap]"
+  },
+  {
+    "id": "s10",
+    "title": "Manifest & schema packing",
+    "why": "Training needs reproducible shards.",
+    "algorithms": [
+      "JSONL shards",
+      "SHA-256 manifest"
+    ],
+    "before": "loose files/",
+    "after": "corpus_v0.4/manifest.json"
+  }
+]
