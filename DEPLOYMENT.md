@@ -6,7 +6,7 @@ Separate **Netlify sites**, same GitHub repo (`sohamzycus/neural-truth-lab`).
 |------|-----|------------------------|-------------|
 | Session 1 — Neural Truth Lab | https://llmlab.netlify.app | **`session1`** | `session1/netlify.toml` |
 | Session 2 — SamaBPE | https://sama-bpe-tokenizer.netlify.app | **`session2/web`** | `session2/web/netlify.toml` |
-| Session 4 — Ataavi Corpus Forge | *(create site)* | **`session4/web`** | `session4/web/netlify.toml` |
+| Session 4 — Ataavi Corpus Forge | https://ataavi-corpus-forge.netlify.app | **`session4/web`** | `session4/web/netlify.toml` |
 
 **There is no repo-root `netlify.toml`.** A root file with `base = "session2/web"` caused llmlab to publish session2 — do not add one back.
 
