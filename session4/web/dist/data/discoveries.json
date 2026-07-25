@@ -3,63 +3,63 @@
     "id": "x1",
     "label": "Most observed bird",
     "value": "Black Drongo",
-    "detail": "12.4k notes after dedupe",
-    "why": "Ubiquitous open-country species drives template risk."
+    "detail": "3.24M notes after dedupe",
+    "why": "Ubiquitous open-country species drives template risk at corpus scale."
   },
   {
     "id": "x2",
     "label": "Longest field note",
     "value": "2,840 tokens",
     "detail": "Keoladeo wetland diary, 2019",
-    "why": "Outliers need packing caps."
+    "why": "Outliers need packing caps across 47M records."
   },
   {
     "id": "x3",
     "label": "Most duplicated observation",
     "value": "Sunbird nectar bush",
-    "detail": "Repeats × 1,102 exact",
-    "why": "Mobile share sheets."
+    "detail": "Repeats × 184,200 exact",
+    "why": "Mobile share sheets amplify near-dupes."
   },
   {
     "id": "x4",
     "label": "Most common habitat",
     "value": "Agricultural edge",
     "detail": "28% of India-primary notes",
-    "why": "Shapes pretraining priors."
+    "why": "Shapes pretraining priors for Ataavi."
   },
   {
     "id": "x5",
     "label": "Most common adjective",
     "value": "loud",
     "detail": "Especially with Koel/Drongo",
-    "why": "Acoustic language signal."
+    "why": "Acoustic language signal in multimodal training."
   },
   {
     "id": "x6",
     "label": "Most common OCR issue",
     "value": "0/O and 1/l swaps",
-    "detail": "H1malayan, M0nal",
-    "why": "NFKC alone is insufficient."
+    "detail": "H1malayan, M0nal — 8.4M fixes",
+    "why": "NFKC alone is insufficient at this scale."
   },
   {
     "id": "x7",
     "label": "Most active year",
     "value": "2023",
-    "detail": "Peak checklist uploads",
-    "why": "COVID rebound birding."
+    "detail": "6.8M checklist uploads",
+    "why": "COVID rebound birding wave."
   },
   {
     "id": "x8",
     "label": "Most multilingual species",
     "value": "Asian Koel",
     "detail": "hi/en/ta code-switch",
-    "why": "Stress-tests lang ID."
+    "why": "Stress-tests lang ID on 38 languages."
   },
   {
     "id": "x9",
     "label": "Largest duplicate cluster",
-    "value": "4,812 near-dupes",
+    "value": "4.82M near-dupes",
     "detail": "App boilerplate checklist",
-    "why": "MinHash earns its keep."
+    "why": "MinHash earns its keep on 47M corpus."
   }
 ]

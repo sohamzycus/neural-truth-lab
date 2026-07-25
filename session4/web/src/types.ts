@@ -2,6 +2,7 @@ export type DatasetStats = {
   name: string;
   inspiredBy: string;
   observationCount: number;
+  rawShardRecords?: number;
   countries: number;
   languages: number;
   species: number;

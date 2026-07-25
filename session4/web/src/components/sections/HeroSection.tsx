@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Bird, Database, Sparkles } from "lucide-react";
+import type { RawObservation } from "../../types";
+import { AnimatedCount } from "../ui/AnimatedCount";
+import { MarqueeTicker } from "../ui/IngestionTicker";
 
 const FLOW = [
   { label: "Community bird notes", detail: "eBird-style observations from India & beyond" },
@@ -8,11 +11,25 @@ const FLOW = [
   { label: "Ataavi foundation model", detail: "Multimodal bird intelligence" },
 ];
 
-export function HeroSection() {
+export function HeroSection({
+  observationCount,
+  observerCount,
+  rawSample,
+}: {
+  observationCount: number;
+  observerCount: number;
+  rawSample: RawObservation[];
+}) {
   return (
-    <section id="hero" className="relative overflow-hidden px-4 pb-20 pt-16 sm:px-6 lg:px-8">
+    <section id="hero" className="relative overflow-hidden px-4 pb-8 pt-16 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-[var(--color-accent)]/10 blur-3xl" />
       <div className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-[var(--color-accent-warm)]/10 blur-3xl" />
+      <div className="pointer-events-none absolute right-[12%] top-[18%] float-bird opacity-[0.07]">
+        <Bird className="h-24 w-24 text-[var(--color-accent)]" />
+      </div>
+      <div className="pointer-events-none absolute left-[8%] top-[42%] float-bird-delay opacity-[0.05]">
+        <Bird className="h-16 w-16 text-[var(--color-accent-sky)]" />
+      </div>
 
       <div className="relative mx-auto max-w-6xl">
         <motion.div
@@ -44,6 +61,39 @@ export function HeroSection() {
           The internal data-engineering portal where we turn noisy bird observation notes into a production-ready
           knowledge corpus — the textual foundation for Ataavi&apos;s multimodal bird AI.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.12 }}
+          className="mt-8 grid gap-4 sm:grid-cols-3"
+        >
+          <div className="panel-accent panel shimmer-border p-5 text-center sm:text-left">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)]">Corpus scale</div>
+            <div className="mt-2 font-mono text-4xl font-semibold tracking-tight text-[var(--color-accent)] sm:text-5xl">
+              <AnimatedCount value={observationCount} compact />
+            </div>
+            <div className="mt-1 text-xs text-[var(--color-muted)]">raw observations ingested</div>
+          </div>
+          <div className="panel p-5 text-center sm:text-left">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)]">Contributors</div>
+            <div className="mt-2 font-mono text-3xl font-semibold text-[var(--color-text)]">
+              <AnimatedCount value={observerCount} compact />
+            </div>
+            <div className="mt-1 text-xs text-[var(--color-muted)]">field observers worldwide</div>
+          </div>
+          <div className="panel p-5 text-center sm:text-left">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)]">Pipeline status</div>
+            <div className="mt-2 flex items-center justify-center gap-2 sm:justify-start">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-ok)] opacity-70" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-ok)]" />
+              </span>
+              <span className="font-mono text-lg text-[var(--color-ok)]">Ingesting</span>
+            </div>
+            <div className="mt-1 text-xs text-[var(--color-muted)]">India-primary · global decontamination slice</div>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -111,6 +161,8 @@ export function HeroSection() {
           ))}
         </div>
       </div>
+
+      <MarqueeTicker observations={rawSample} />
     </section>
   );
 }

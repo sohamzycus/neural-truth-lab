@@ -119,10 +119,14 @@ export default function App() {
 
   return (
     <AppShell>
-      <HeroSection />
+      <HeroSection
+        observationCount={data.dataset.observationCount}
+        observerCount={data.dataset.observerCount}
+        rawSample={data.raw}
+      />
       <WhyNotesSection />
       <DatasetSection data={data.dataset} />
-      <RawSection data={data.raw} />
+      <RawSection data={data.raw} totalCorpus={data.dataset.observationCount} />
       <StrategiesSection strategies={data.strategies} />
       <DomainSection items={data.domain} />
       <SurgerySection metrics={data.surgery} />
