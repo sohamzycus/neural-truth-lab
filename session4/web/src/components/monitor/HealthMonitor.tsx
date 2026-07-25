@@ -2,7 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { Activity, ChevronDown, ChevronUp, RefreshCw } from "lucide-react";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { computeCorpusHealth, type HealthMetric } from "../../lib/corpusHealth";
-import type { CorpusStats, DatasetStats, HealthSyncConfig, RawObservation, SurgeryMetrics } from "../../types";
+import type { CorpusStats, DatasetStats, HealthSyncConfig, SurgeryMetrics } from "../../types";
+
+type DatasetManifest = {
+  shardMetaTaggedPct?: number;
+};
 
 function Meter({ label, value, invert }: { label: string; value: number; invert?: boolean }) {
   const mv = useMotionValue(value);
@@ -66,13 +70,20 @@ export function HealthMonitor({ config }: { config: HealthSyncConfig }) {
     setSyncing(true);
     setSyncError(null);
     try {
-      const [surgery, stats, dataset, raw] = await Promise.all([
+      const [surgery, stats, dataset, manifest] = await Promise.all([
         loadJson<SurgeryMetrics>("/data/surgery_metrics.json"),
         loadJson<CorpusStats>("/data/corpus_stats.json"),
         loadJson<DatasetStats>("/data/dataset_stats.json"),
-        loadJson<RawObservation[]>("/data/raw_observations.json"),
+        loadJson<DatasetManifest>("/data/dataset_manifest.json"),
       ]);
-      setMetrics(computeCorpusHealth(surgery, stats, dataset, raw));
+      setMetrics(
+        computeCorpusHealth({
+          surgery,
+          stats,
+          dataset,
+          shardMetaTaggedPct: manifest.shardMetaTaggedPct,
+        }),
+      );
       setLastSync(new Date());
     } catch (e) {
       setSyncError(e instanceof Error ? e.message : "Sync failed");

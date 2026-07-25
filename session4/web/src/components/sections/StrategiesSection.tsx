@@ -11,7 +11,7 @@ export function StrategiesSection({ strategies }: { strategies: Strategy[] }) {
       id="strategies"
       eyebrow="Cleaning playbook"
       title="Corpus Cleaning Strategies"
-      subtitle="Ten preprocessing strategies we apply before text enters Ataavi pretraining — expand for algorithms and before/after examples."
+      subtitle={`${strategies.length} preprocessing strategies we apply before text enters Ataavi pretraining — expand for why, algorithms, and before/after examples.`}
     >
       <div className="space-y-2">
         {strategies.map((s) => (

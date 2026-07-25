@@ -38,17 +38,26 @@ export function ExpandableCard({
   onToggle: () => void;
   children: ReactNode;
 }) {
+  const panelId = `expand-${title.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="panel overflow-hidden">
       <button
         type="button"
         onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={panelId}
         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-white/[0.02]"
       >
         <span className="font-medium">{title}</span>
-        <span className="font-mono text-xs text-[var(--color-muted)]">{open ? "−" : "+"}</span>
+        <span className="font-mono text-xs text-[var(--color-muted)]" aria-hidden>
+          {open ? "−" : "+"}
+        </span>
       </button>
-      {open ? <div className="border-t border-[var(--color-border)] px-5 py-4 text-sm text-[var(--color-muted)]">{children}</div> : null}
+      {open ? (
+        <div id={panelId} className="border-t border-[var(--color-border)] px-5 py-4 text-sm text-[var(--color-muted)]">
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -139,6 +148,7 @@ export function PipelineNode({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={`w-full rounded-lg border px-4 py-3 text-left text-sm transition ${
         active
           ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-text)]"
@@ -162,13 +172,11 @@ export function InsightTile({
   why: string;
 }) {
   return (
-    <article className="panel group relative p-5 transition hover:border-white/15">
+    <article className="panel p-5">
       <div className="text-[11px] uppercase tracking-[0.16em] text-[var(--color-muted)]">{label}</div>
       <div className="mt-2 text-lg font-medium text-[var(--color-text)]">{value}</div>
       <p className="mt-2 text-sm text-[var(--color-muted)]">{detail}</p>
-      <p className="mt-3 max-h-0 overflow-hidden text-xs text-[var(--color-accent)] opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
-        {why}
-      </p>
+      <p className="mt-3 text-xs text-[var(--color-accent)]">{why}</p>
     </article>
   );
 }

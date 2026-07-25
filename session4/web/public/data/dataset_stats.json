@@ -1,6 +1,7 @@
 {
   "name": "Bird Observation Corpus",
   "inspiredBy": "Community bird observations (eBird-style) · India-primary with global decontamination slice",
+  "whyChosen": "Community bird checklists pair free-text field notes with species, place, and time — the richest textual signal for Ataavi. India-primary coverage matches our launch geography; a thin global slice supports benchmark decontamination without diluting regional language mix.",
   "observationCount": 47200000,
   "rawShardRecords": 5000,
   "countries": 142,

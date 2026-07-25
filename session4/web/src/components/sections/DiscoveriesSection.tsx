@@ -3,13 +3,24 @@ import type { Discovery } from "../../types";
 import { Section } from "../shell/AppShell";
 import { InsightTile } from "../ui";
 
-export function DiscoveriesSection({ items }: { items: Discovery[] }) {
+export function DiscoveriesSection({
+  items,
+  observationCount,
+}: {
+  items: Discovery[];
+  observationCount: number;
+}) {
+  const scale =
+    observationCount >= 1_000_000
+      ? `${(observationCount / 1_000_000).toFixed(1)}M+`
+      : observationCount.toLocaleString();
+
   return (
     <Section
       id="discoveries"
       eyebrow="Corpus insights"
       title="Interesting Discoveries"
-      subtitle="Browse corpus curiosities from 47M+ observations. Hover a tile for why it matters."
+      subtitle={`Browse corpus curiosities from ${scale} observations. Each tile explains why it matters for training.`}
     >
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((d, i) => (

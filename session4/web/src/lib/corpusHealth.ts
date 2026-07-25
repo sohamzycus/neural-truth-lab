@@ -1,4 +1,4 @@
-import type { CorpusStats, DatasetStats, RawObservation, SurgeryMetrics } from "../types";
+import type { CorpusStats, DatasetStats, SurgeryMetrics } from "../types";
 
 export type HealthMetric = {
   key: string;
@@ -7,13 +7,20 @@ export type HealthMetric = {
   invert?: boolean;
 };
 
+export type CorpusHealthInput = {
+  surgery: SurgeryMetrics;
+  stats: CorpusStats;
+  dataset: DatasetStats;
+  shardMetaTaggedPct?: number;
+};
+
 /** Derive monitor metrics from corpus manifests — no random jitter. */
-export function computeCorpusHealth(
-  surgery: SurgeryMetrics,
-  stats: CorpusStats,
-  dataset: DatasetStats,
-  raw: RawObservation[],
-): HealthMetric[] {
+export function computeCorpusHealth({
+  surgery,
+  stats,
+  dataset,
+  shardMetaTaggedPct = 0.9,
+}: CorpusHealthInput): HealthMetric[] {
   const observations = Number(surgery.observations) || dataset.observationCount;
   const duplicateRatio = observations > 0 ? (Number(surgery.duplicateClusters) / observations) * 100 : 0;
   const piiPerObs = observations > 0 ? Number(surgery.piiRemoved) / observations : 0;
@@ -28,10 +35,9 @@ export function computeCorpusHealth(
   const maxEntropy = Math.log2(Math.max(shares.length, 2));
   const languageBalance = Math.round((entropy / maxEntropy) * 100);
 
-  const metaTagged = raw.filter((r) => r.meta && Object.keys(r.meta).length > 0).length;
-  const sampleMeta = raw.length > 0 ? metaTagged / raw.length : 0;
+  const metaTagged = shardMetaTaggedPct;
   const metadataCompleteness = Math.round(
-    Math.min(100, sampleMeta * 35 + (dataset.countries / 40) * 30 + (dataset.languages / 20) * 35),
+    Math.min(100, metaTagged * 35 + (dataset.countries / 40) * 30 + (dataset.languages / 20) * 35),
   );
 
   const piiRisk = Math.round(Math.min(100, piiPerObs * 500 + 4));

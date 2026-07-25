@@ -42,6 +42,12 @@ export function DatasetSection({ data }: { data: DatasetStats }) {
       title="Dataset Explorer"
       subtitle={`${data.name} — ${data.inspiredBy}`}
     >
+      {data.whyChosen ? (
+        <p className="measure -mt-6 mb-8 text-sm text-[var(--color-text)]">
+          <span className="font-medium text-[var(--color-accent)]">Why this dataset · </span>
+          {data.whyChosen}
+        </p>
+      ) : null}
       <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-3 py-1">
         <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-accent)]">
           {data.rawShardRecords?.toLocaleString() ?? "—"}-record live shard ·{" "}

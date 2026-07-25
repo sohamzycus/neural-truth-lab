@@ -5,6 +5,7 @@ import { HeroSection } from "./components/sections/HeroSection";
 import { WhyNotesSection } from "./components/sections/WhyNotesSection";
 import { DatasetSection } from "./components/sections/DatasetSection";
 import { RawSection } from "./components/sections/RawSection";
+import { PipelineSection } from "./components/sections/PipelineSection";
 import { StrategiesSection } from "./components/sections/StrategiesSection";
 import { DomainSection } from "./components/sections/DomainSection";
 import { SurgerySection } from "./components/sections/SurgerySection";
@@ -21,6 +22,7 @@ import type {
   DomainEnhancement,
   HealthSyncConfig,
   Lesson,
+  PipelineStage,
   RawObservation,
   RoadmapItem,
   ScrubSample,
@@ -37,6 +39,7 @@ async function loadJson<T>(path: string): Promise<T> {
 type Bundle = {
   dataset: DatasetStats;
   raw: RawObservation[];
+  pipeline: PipelineStage[];
   strategies: Strategy[];
   domain: DomainEnhancement[];
   surgery: SurgeryMetrics;
@@ -57,6 +60,7 @@ export default function App() {
     Promise.all([
       loadJson<DatasetStats>("/data/dataset_stats.json"),
       loadJson<RawObservation[]>("/data/raw_observations.json"),
+      loadJson<PipelineStage[]>("/data/pipeline_stages.json"),
       loadJson<Strategy[]>("/data/strategies.json"),
       loadJson<DomainEnhancement[]>("/data/domain_enhancements.json"),
       loadJson<SurgeryMetrics>("/data/surgery_metrics.json"),
@@ -72,6 +76,7 @@ export default function App() {
         ([
           dataset,
           raw,
+          pipeline,
           strategies,
           domain,
           surgery,
@@ -86,6 +91,7 @@ export default function App() {
           setData({
             dataset,
             raw,
+            pipeline,
             strategies,
             domain,
             surgery,
@@ -127,11 +133,12 @@ export default function App() {
       <WhyNotesSection />
       <DatasetSection data={data.dataset} />
       <RawSection data={data.raw} totalCorpus={data.dataset.observationCount} />
+      <PipelineSection stages={data.pipeline} />
       <StrategiesSection strategies={data.strategies} />
       <DomainSection items={data.domain} />
       <SurgerySection metrics={data.surgery} />
       <CompareSection comparisons={data.comparisons} samples={data.scrub} />
-      <DiscoveriesSection items={data.discoveries} />
+      <DiscoveriesSection items={data.discoveries} observationCount={data.dataset.observationCount} />
       <StatsSection stats={data.stats} />
       <RoadmapSection items={data.roadmap} />
       <LessonsSection lessons={data.lessons} />

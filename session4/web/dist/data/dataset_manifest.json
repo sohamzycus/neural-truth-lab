@@ -2,6 +2,7 @@
   "corpusVersion": "ataavi-text-v0.4",
   "totalObservations": 47200000,
   "rawShardRecords": 5000,
+  "shardMetaTaggedPct": 0.94,
   "format": "json",
   "note": "Portal displays and downloads a representative noisy shard; full corpus ships as versioned manifests."
 }

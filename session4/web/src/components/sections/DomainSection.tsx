@@ -8,7 +8,7 @@ export function DomainSection({ items }: { items: DomainEnhancement[] }) {
       id="domain"
       eyebrow="Bird-specific"
       title="Domain Enhancements"
-      subtitle="Taxonomy, habitat, calls, confidence, GPS masking, and conservation — beyond generic text cleaning."
+      subtitle={`${items.length} bird-specific preprocessing layers beyond generic text cleaning — taxonomy, habitat, calls, confidence, GPS masking, and conservation.`}
     >
       <div className="grid gap-4 md:grid-cols-2">
         {items.map((item) => (

@@ -100,6 +100,7 @@ export function RawSection({
           <input
             type="search"
             value={query}
+            aria-label="Search observations"
             onChange={(e) => {
               setQuery(e.target.value);
               setPage(0);

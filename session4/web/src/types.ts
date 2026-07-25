@@ -1,6 +1,7 @@
 export type DatasetStats = {
   name: string;
   inspiredBy: string;
+  whyChosen?: string;
   observationCount: number;
   rawShardRecords?: number;
   countries: number;

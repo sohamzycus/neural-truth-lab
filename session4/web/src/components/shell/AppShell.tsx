@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Bird } from "lucide-react";
+import { Bird, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 const NAV = [
@@ -7,6 +7,7 @@ const NAV = [
   { id: "why-notes", label: "Why notes" },
   { id: "dataset", label: "Dataset" },
   { id: "raw", label: "Raw noise" },
+  { id: "pipeline", label: "Pipeline" },
   { id: "strategies", label: "Cleaning" },
   { id: "domain", label: "Bird domain" },
   { id: "surgery", label: "Surgery" },
@@ -28,13 +29,15 @@ export function ProgressBar({ progress }: { progress: number }) {
   );
 }
 
-export function SectionNav({ activeId }: { activeId: string }) {
+export function SectionNav({ activeId, onNavigate }: { activeId: string; onNavigate?: () => void }) {
   return (
-    <nav className="hidden gap-1 overflow-x-auto lg:flex">
+    <nav className="flex gap-1 overflow-x-auto" aria-label="Page sections">
       {NAV.map((item) => (
         <a
           key={item.id}
           href={`#${item.id}`}
+          onClick={onNavigate}
+          aria-current={activeId === item.id ? "true" : undefined}
           className={`whitespace-nowrap rounded-md px-2.5 py-1 text-xs transition ${
             activeId === item.id
               ? "bg-[var(--color-accent)]/15 text-[var(--color-accent)]"
@@ -80,6 +83,7 @@ export function Section({
 export function AppShell({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState(0);
   const [activeId, setActiveId] = useState("hero");
+  const [menuOpen, setMenuOpen] = useState(false);
   const ids = useMemo(() => NAV.map((n) => n.id), []);
 
   useEffect(() => {
@@ -103,19 +107,47 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen text-[var(--color-text)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-surface)] focus:px-3 focus:py-2 focus:text-sm focus:text-[var(--color-text)]"
+      >
+        Skip to main content
+      </a>
       <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <a href="#hero" className="flex items-center gap-2">
-            <Bird className="h-4 w-4 text-[var(--color-accent)]" />
+            <Bird className="h-4 w-4 text-[var(--color-accent)]" aria-hidden />
             <span className="text-sm font-semibold tracking-tight">Ataavi</span>
             <span className="text-sm text-[var(--color-muted)]">/</span>
             <span className="text-sm text-[var(--color-muted)]">Corpus Forge</span>
           </a>
-          <SectionNav activeId={activeId} />
+          <div className="hidden lg:block">
+            <SectionNav activeId={activeId} />
+          </div>
+          <button
+            type="button"
+            className="rounded-md border border-[var(--color-border)] p-2 text-[var(--color-muted)] lg:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+            {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
+        {menuOpen ? (
+          <div id="mobile-nav" className="border-t border-[var(--color-border)] px-4 py-3 lg:hidden">
+            <SectionNav activeId={activeId} onNavigate={() => setMenuOpen(false)} />
+          </div>
+        ) : null}
         <ProgressBar progress={progress} />
       </header>
-      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+      <motion.main
+        id="main-content"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+      >
         {children}
       </motion.main>
       <footer className="border-t border-[var(--color-border)] px-4 py-10 text-center text-sm text-[var(--color-muted)]">
