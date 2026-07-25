@@ -1,0 +1,14 @@
+# Ataavi Corpus Forge — Vite static site
+# Netlify UI: Base directory = session4/web
+
+[build]
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

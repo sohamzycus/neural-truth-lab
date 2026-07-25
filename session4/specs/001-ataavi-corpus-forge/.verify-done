@@ -1,0 +1,17 @@
+# Verify — Ataavi Corpus Forge
+
+**Date:** 2026-07-25  
+**Verdict:** PASS
+
+## Checks
+
+- [x] `npm run selfcheck` — scrub selfcheck OK
+- [x] `npm run typecheck` — clean
+- [x] `npm run build` — `dist/index.html` + `dist/data/*.json` present
+- [x] Spec sections US1–US5 implemented in `session4/web`
+- [x] Constitution: JSON-backed content, static stack, Netlify config
+
+## Notes
+
+- Bundle size warning (~743KB JS) from Recharts — acceptable for portfolio; optional code-split later
+- Health monitor uses simulated jitter per design

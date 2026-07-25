@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sc1",
+    "label": "Email + HTML",
+    "text": "Saw <b>Indian Robin</b> — email me birder@example.com for pin."
+  },
+  {
+    "id": "sc2",
+    "label": "Phone + unicode",
+    "text": "Café trailhead Monal — call +91 98765 43210. Fancy ﬁde note."
+  },
+  {
+    "id": "sc3",
+    "label": "Whitespace spam",
+    "text": "Koel   koel\n\n\n   loud    kuoo   from   mango."
+  },
+  {
+    "id": "sc4",
+    "label": "Observer name",
+    "text": "Ananya Reddy observed Purple Sunbird at forest edge nectar bush."
+  }
+]

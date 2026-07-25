@@ -1,0 +1,84 @@
+[
+  {
+    "id": "d1",
+    "title": "Species synonym normalization",
+    "description": "Map common-name variants and scientific aliases to canonical taxonomy.",
+    "inputs": [
+      "Indian Robin",
+      "Indian robin",
+      "Saxicoloides fulicatus"
+    ],
+    "output": "Canonical: Copsychus fulicatus (Indian Robin)"
+  },
+  {
+    "id": "d2",
+    "title": "Habitat normalization",
+    "description": "Collapse habitat paraphrases to a controlled vocabulary.",
+    "inputs": [
+      "Forest edge",
+      "Forest boundary",
+      "Edge of woodland"
+    ],
+    "output": "Forest Edge"
+  },
+  {
+    "id": "d3",
+    "title": "Bird call transcription normalization",
+    "description": "Normalize onomatopoeia for acoustic-language alignment.",
+    "inputs": [
+      "chee-chee",
+      "chee chee",
+      "cheeeee"
+    ],
+    "output": "Normalized acoustic description: chee-chee (short repeated)"
+  },
+  {
+    "id": "d4",
+    "title": "Observer confidence scoring",
+    "description": "Map certainty language to a quality prior.",
+    "inputs": [
+      "Confirmed",
+      "Likely",
+      "Possible"
+    ],
+    "output": "Quality score ∈ {1.0, 0.7, 0.4}"
+  },
+  {
+    "id": "d5",
+    "title": "Sensitive GPS masking",
+    "description": "Reduce precision for endangered / sensitive species.",
+    "inputs": [
+      "Exact 30.0xxxx, 79.2xxxx for Monal nest"
+    ],
+    "output": "Masked to ~1km grid cell",
+    "note": "Conservation: precise nests must not leak in open corpora."
+  },
+  {
+    "id": "d6",
+    "title": "Season enrichment",
+    "description": "Infer migration / breeding season from date + region.",
+    "inputs": [
+      "2024-03-12 · Bharatpur"
+    ],
+    "output": "season=pre-monsoon_migration"
+  },
+  {
+    "id": "d7",
+    "title": "Taxonomy reconciliation",
+    "description": "Align common names with IOC/Clements scientific names.",
+    "inputs": [
+      "Asian Koel",
+      "Eudynamys scolopaceus"
+    ],
+    "output": "Linked taxon record"
+  },
+  {
+    "id": "d8",
+    "title": "Broken media removal",
+    "description": "Detect missing recordings and dead spectrogram links.",
+    "inputs": [
+      "/media/calls/missing_001.wav"
+    ],
+    "output": "media_ref=null; text retained"
+  }
+]

@@ -1,0 +1,55 @@
+# Ataavi Corpus Forge — SpecKit Fleet (UI-only, no sibling repos)
+default_workflow: feature-touchless
+execution:
+  default_mode: touchless
+
+workflow_aliases:
+  touchless-feature: feature-touchless
+
+workflows:
+  feature-touchless:
+    phases:
+      - id: specify
+        speckit_command: speckit.specify
+      - id: clarify
+        speckit_command: speckit.clarify
+      - id: plan
+        speckit_command: speckit.plan
+      - id: checklist
+        speckit_command: speckit.checklist
+      - id: tasks
+        speckit_command: speckit.tasks
+      - id: analyze
+        speckit_command: speckit.analyze
+      - id: review
+        speckit_command: speckit.fleet.review
+      - id: implement
+        speckit_command: speckit.implement
+      - id: verify
+        speckit_command: speckit.verify
+
+parallel:
+  max_concurrency: 3
+
+jira:
+  enabled: false
+
+pull_requests:
+  enabled: false
+
+reference_repos: {}
+
+superpowers:
+  enabled: true
+  skills_by_phase_id:
+    tasks:
+      - dispatching-parallel-agents
+    implement:
+      - subagent-driven-development
+      - verification-before-completion
+    review:
+      - requesting-code-review
+
+models:
+  primary: auto
+  review: skip

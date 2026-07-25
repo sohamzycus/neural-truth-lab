@@ -1,0 +1,27 @@
+[
+  {
+    "id": "l1",
+    "title": "Data quality matters more than model size",
+    "body": "A smaller model on a clean bird corpus outperforms a larger one on duplicated, PII-laden notes."
+  },
+  {
+    "id": "l2",
+    "title": "Cleaning must be reproducible",
+    "body": "Manifests, hashes, and versioned shards turn corpus work into engineering — not a one-off notebook."
+  },
+  {
+    "id": "l3",
+    "title": "Metadata is essential",
+    "body": "Language, confidence, habitat, and season tags unlock filtering and multimodal alignment later."
+  },
+  {
+    "id": "l4",
+    "title": "Domain-specific preprocessing improves downstream AI",
+    "body": "Taxonomy, call normalization, and GPS masking are not optional extras for bird intelligence."
+  },
+  {
+    "id": "l5",
+    "title": "Community datasets require trust engineering",
+    "body": "Observers share generously; the corpus pipeline must repay that with privacy and conservation care."
+  }
+]

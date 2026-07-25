@@ -1,0 +1,22 @@
+# Analyze — Ataavi Corpus Forge
+
+**Date:** 2026-07-25  
+**Verdict:** PASS — no CRITICAL issues
+
+## Consistency
+
+- Spec US1–US5 align with plan architecture and tasks T011–T024
+- Constitution P1–P6 reflected in requirements (JSON data, static stack, Netlify)
+- Design doc decisions match Clarifications in spec.md
+- No sibling-repo / Java-adapter tasks (UI-only project)
+
+## Gaps addressed
+
+- Fonts pinned: DM Sans + JetBrains Mono
+- Build: `vite build`; typecheck separate
+- Review model: skipped per fleet-config (`models.review: skip`)
+
+## Advisory
+
+- Charts via Recharts adds bundle weight — acceptable for portfolio polish
+- Health monitor uses simulated jitter, not live pipeline metrics (documented in plan)

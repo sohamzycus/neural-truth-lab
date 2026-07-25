@@ -1,0 +1,36 @@
+[
+  {
+    "id": "c1",
+    "title": "PII + HTML surgery",
+    "raw": "Saw <b>Indian Robin</b> — Priya Sharma priya.sharma@mail.com at 18.5204,73.8567",
+    "clean": "Saw Indian Robin at [GPS_MASKED]. Observer identity removed.",
+    "transforms": [
+      "HTML strip",
+      "Email mask",
+      "Name mask",
+      "GPS mask"
+    ]
+  },
+  {
+    "id": "c2",
+    "title": "Taxonomy + habitat",
+    "raw": "indian robin on forest boundary / Saxicoloides fulicatus",
+    "clean": "Indian Robin (Copsychus fulicatus) · habitat=Forest Edge",
+    "transforms": [
+      "Synonym normalize",
+      "Scientific reconcile",
+      "Habitat normalize"
+    ]
+  },
+  {
+    "id": "c3",
+    "title": "Call + confidence",
+    "raw": "Possible koel — cheeeee from mango. Likely same bird.",
+    "clean": "Asian Koel · call=chee-chee (elongated) · confidence=0.55",
+    "transforms": [
+      "Call normalize",
+      "Confidence score",
+      "Species link"
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-bg: #0b100e;
+  --color-bg-warm: #101814;
+  --color-surface: #141c18;
+  --color-surface-2: #1a2620;
+  --color-border: rgb(255 255 255 / 0.1);
+  --color-text: #eef3ef;
+  --color-muted: #93a39a;
+  --color-accent: #5ec9a8;
+  --color-accent-sky: #7eb8ff;
+  --color-accent-warm: #e8b86d;
+  --color-warn: #d4a574;
+  --color-danger: #e07a7a;
+  --color-ok: #6fbf8a;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgb(94 201 168 / 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 20%, rgb(126 184 255 / 0.06), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 0% 80%, rgb(232 184 109 / 0.05), transparent 45%),
+    var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(94 201 168 / 0.28);
+}
+
+code,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.measure {
+  max-width: 65ch;
+}
+
+.panel {
+  background: linear-gradient(165deg, rgb(26 38 32 / 0.9), rgb(20 28 24 / 0.95));
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset;
+}
+
+.panel-accent {
+  border-color: rgb(94 201 168 / 0.25);
+  background: linear-gradient(165deg, rgb(94 201 168 / 0.08), rgb(20 28 24 / 0.95));
+}
+
+.hairline {
+  border-color: var(--color-border);
+}
+
+.ataavi-glow {
+  box-shadow: 0 0 40px rgb(94 201 168 / 0.08);
+}
