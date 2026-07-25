@@ -19,7 +19,7 @@ import type {
   DatasetStats,
   Discovery,
   DomainEnhancement,
-  HealthBaseline,
+  HealthSyncConfig,
   Lesson,
   RawObservation,
   RoadmapItem,
@@ -45,7 +45,7 @@ type Bundle = {
   stats: CorpusStats;
   roadmap: RoadmapItem[];
   lessons: Lesson[];
-  health: HealthBaseline;
+  health: HealthSyncConfig;
   scrub: ScrubSample[];
 };
 
@@ -65,7 +65,7 @@ export default function App() {
       loadJson<CorpusStats>("/data/corpus_stats.json"),
       loadJson<RoadmapItem[]>("/data/roadmap.json"),
       loadJson<Lesson[]>("/data/lessons.json"),
-      loadJson<HealthBaseline>("/data/health_baseline.json"),
+      loadJson<HealthSyncConfig>("/data/health_sync.json"),
       loadJson<ScrubSample[]>("/data/scrub_samples.json"),
     ])
       .then(
@@ -131,7 +131,7 @@ export default function App() {
       <StatsSection stats={data.stats} />
       <RoadmapSection items={data.roadmap} />
       <LessonsSection lessons={data.lessons} />
-      <HealthMonitor baseline={data.health} />
+      <HealthMonitor config={data.health} />
     </AppShell>
   );
 }

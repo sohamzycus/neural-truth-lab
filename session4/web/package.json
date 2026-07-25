@@ -13,7 +13,7 @@
     "typecheck": "tsc -b --pretty false",
     "lint": "oxlint",
     "preview": "vite preview",
-    "selfcheck": "npx tsx src/lib/scrub/selfcheck.ts"
+    "selfcheck": "npx tsx src/lib/scrub/selfcheck.ts && npx tsx src/lib/corpusHealth.selfcheck.ts"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

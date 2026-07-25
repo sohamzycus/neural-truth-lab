@@ -86,14 +86,7 @@ export type Lesson = {
   body: string;
 };
 
-export type HealthBaseline = {
-  metrics: {
-    key: string;
-    label: string;
-    value: number;
-    jitter: number;
-    invert?: boolean;
-  }[];
+export type HealthSyncConfig = {
   intervalMs: number;
 };
 
