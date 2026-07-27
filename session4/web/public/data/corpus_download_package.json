@@ -1,0 +1,69 @@
+{
+  "corpusVersion": "ataavi-text-v0.4",
+  "totalObservations": 47200000,
+  "scaleLabel": "47.2M observations (10–100M class bird corpus)",
+  "rawShardRecords": 5000,
+  "trainSafeShardRecords": 1092,
+  "generatedAt": "2026-07-27T06:56:22.231Z",
+  "downloads": [
+    {
+      "id": "raw-shard-json",
+      "label": "Raw observation shard (JSON)",
+      "path": "/data/raw_observations.json",
+      "description": "5,000 noisy community notes — representative sample of the 47.2M corpus",
+      "format": "json",
+      "records": 5000
+    },
+    {
+      "id": "raw-shard-jsonl",
+      "label": "Raw observation shard (JSONL)",
+      "path": "/data/raw_observations.jsonl",
+      "description": "Same 5k shard, newline-delimited for streaming pipelines",
+      "format": "jsonl",
+      "records": 5000
+    },
+    {
+      "id": "train-safe-jsonl",
+      "label": "Train-safe corpus shard (JSONL)",
+      "path": "/data/train_safe_corpus.jsonl",
+      "description": "Pipeline-processed, deduped, decontaminated records from the 5k shard",
+      "format": "jsonl",
+      "records": 1092
+    },
+    {
+      "id": "corpus-manifest",
+      "label": "Corpus manifest (SHA-256)",
+      "path": "/data/corpus_manifest.json",
+      "description": "Versioned manifest with file hashes for reproducible training packs",
+      "format": "json"
+    },
+    {
+      "id": "dataset-stats",
+      "label": "Dataset statistics",
+      "path": "/data/dataset_stats.json",
+      "description": "Full corpus scale, languages, species, observers",
+      "format": "json"
+    },
+    {
+      "id": "pipeline-run",
+      "label": "Shard pipeline run report",
+      "path": "/data/shard_pipeline_run.json",
+      "description": "Verified algorithm output on all 5k raw records",
+      "format": "json"
+    },
+    {
+      "id": "surgery-metrics",
+      "label": "Surgery metrics (corpus-scale)",
+      "path": "/data/surgery_metrics.json",
+      "description": "Post-pipeline counts extrapolated to 47.2M",
+      "format": "json"
+    },
+    {
+      "id": "corpus-stats",
+      "label": "Final corpus statistics",
+      "path": "/data/corpus_stats.json",
+      "description": "Language mix, quality timeline, readiness score",
+      "format": "json"
+    }
+  ]
+}

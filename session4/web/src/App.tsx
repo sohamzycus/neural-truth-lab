@@ -3,6 +3,7 @@ import { AppShell } from "./components/shell/AppShell";
 import { HealthMonitor } from "./components/monitor/HealthMonitor";
 import { HeroSection } from "./components/sections/HeroSection";
 import { WhyNotesSection } from "./components/sections/WhyNotesSection";
+import { CorpusDownloadSection } from "./components/sections/CorpusDownloadSection";
 import { DatasetSection } from "./components/sections/DatasetSection";
 import { RawSection } from "./components/sections/RawSection";
 import { PipelineSection } from "./components/sections/PipelineSection";
@@ -13,6 +14,7 @@ import { CompareSection } from "./components/sections/CompareSection";
 import { DiscoveriesSection } from "./components/sections/DiscoveriesSection";
 import { StatsSection } from "./components/sections/StatsSection";
 import { RoadmapSection } from "./components/sections/RoadmapSection";
+import { ShardEvidenceSection } from "./components/sections/ShardEvidenceSection";
 import { LessonsSection } from "./components/sections/LessonsSection";
 import type {
   Comparison,
@@ -28,6 +30,9 @@ import type {
   ScrubSample,
   Strategy,
   SurgeryMetrics,
+  ShardPipelineRun,
+  BenchmarkQuiz,
+  CorpusDownloadPackage,
 } from "./types";
 
 async function loadJson<T>(path: string): Promise<T> {
@@ -50,6 +55,9 @@ type Bundle = {
   lessons: Lesson[];
   health: HealthSyncConfig;
   scrub: ScrubSample[];
+  shardRun: ShardPipelineRun;
+  quiz: BenchmarkQuiz;
+  downloadPkg: CorpusDownloadPackage;
 };
 
 export default function App() {
@@ -71,6 +79,9 @@ export default function App() {
       loadJson<Lesson[]>("/data/lessons.json"),
       loadJson<HealthSyncConfig>("/data/health_sync.json"),
       loadJson<ScrubSample[]>("/data/scrub_samples.json"),
+      loadJson<ShardPipelineRun>("/data/shard_pipeline_run.json"),
+      loadJson<BenchmarkQuiz>("/data/benchmark_quiz.json"),
+      loadJson<CorpusDownloadPackage>("/data/corpus_download_package.json"),
     ])
       .then(
         ([
@@ -87,6 +98,9 @@ export default function App() {
           lessons,
           health,
           scrub,
+          shardRun,
+          quiz,
+          downloadPkg,
         ]) =>
           setData({
             dataset,
@@ -102,6 +116,9 @@ export default function App() {
             lessons,
             health,
             scrub,
+            shardRun,
+            quiz,
+            downloadPkg,
           }),
       )
       .catch((e: Error) => setError(e.message));
@@ -132,12 +149,14 @@ export default function App() {
       />
       <WhyNotesSection />
       <DatasetSection data={data.dataset} />
+      <CorpusDownloadSection pkg={data.downloadPkg} observationCount={data.dataset.observationCount} />
       <RawSection data={data.raw} totalCorpus={data.dataset.observationCount} />
       <PipelineSection stages={data.pipeline} />
       <StrategiesSection strategies={data.strategies} />
       <DomainSection items={data.domain} />
       <SurgerySection metrics={data.surgery} />
-      <CompareSection comparisons={data.comparisons} samples={data.scrub} />
+      <ShardEvidenceSection run={data.shardRun} />
+      <CompareSection comparisons={data.comparisons} samples={data.scrub} quizPhrases={data.quiz.phrases} />
       <DiscoveriesSection items={data.discoveries} observationCount={data.dataset.observationCount} />
       <StatsSection stats={data.stats} />
       <RoadmapSection items={data.roadmap} />

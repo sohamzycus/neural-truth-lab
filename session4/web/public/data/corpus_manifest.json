@@ -1,0 +1,39 @@
+{
+  "corpusVersion": "ataavi-text-v0.4",
+  "totalObservations": 47200000,
+  "scaleLabel": "47.2M observations (10–100M class)",
+  "rawShardRecords": 5000,
+  "trainSafeShardRecords": 1092,
+  "generatedAt": "2026-07-27T06:56:22.231Z",
+  "files": [
+    {
+      "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/raw_observations.json",
+      "sha256": "20d8324281620cd39bff729f9d3adfcdba5c4a74cae8e9953c732cb6f22510b3",
+      "bytes": 1816264,
+      "records": 5000
+    },
+    {
+      "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/raw_observations.jsonl",
+      "sha256": "04afecf3b279f531e73db131f5e85a9be6c8cfc743120eb010c2c6cf352ced71",
+      "bytes": 1816263,
+      "records": 5000
+    },
+    {
+      "path": "train_safe_corpus.jsonl",
+      "sha256": "793dd9c588c41a8197486e29873f15e7e63593f523d3bc737dced2c5494aa482",
+      "bytes": 305343,
+      "records": 1092
+    },
+    {
+      "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/dataset_stats.json",
+      "sha256": "12412d92edfd0e129c8e1003b95814bbcaea04f415f5e01df436f00e6f803300",
+      "bytes": 2661
+    },
+    {
+      "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/shard_pipeline_run.json",
+      "sha256": "9212c868d0617d8b696996fcaa18b3adfd0b44587e4a192838f48a7b66c14b15",
+      "bytes": 2135
+    }
+  ],
+  "note": "Full 47.2M corpus ships as versioned object-store shards; this portal bundles verified 5k sample + train-safe output."
+}

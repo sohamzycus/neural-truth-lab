@@ -33,12 +33,12 @@ export function ExpandableCard({
   onToggle,
   children,
 }: {
-  title: string;
+  title: ReactNode;
   open: boolean;
   onToggle: () => void;
   children: ReactNode;
 }) {
-  const panelId = `expand-${title.replace(/\s+/g, "-").toLowerCase()}`;
+  const panelId = `expand-${typeof title === "string" ? title.replace(/\s+/g, "-").toLowerCase() : "card"}`;
   return (
     <div className="panel overflow-hidden">
       <button

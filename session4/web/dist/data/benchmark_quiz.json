@@ -1,0 +1,13 @@
+{
+  "description": "Held-out bird-ID quiz phrases for 13-gram benchmark decontamination (eval leakage check).",
+  "phrases": [
+    "which bird has a red breast in spring migration",
+    "identify the songbird by its distinctive call pattern",
+    "select the correct species from the photograph quiz",
+    "what is the scientific name of this common garden bird",
+    "match the bird song to the correct species option",
+    "which raptor is shown in the identification challenge",
+    "name the waterbird in this wetland species quiz",
+    "choose the endemic species from the checklist template"
+  ]
+}

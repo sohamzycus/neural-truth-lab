@@ -62,6 +62,17 @@ export function HeroSection({
           knowledge corpus — the textual foundation for Ataavi&apos;s multimodal bird AI.
         </motion.p>
 
+        <motion.a
+          href="#downloads"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.12 }}
+          className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/10 px-4 py-2 text-sm font-medium text-[var(--color-accent)] transition hover:bg-[var(--color-accent)]/20"
+        >
+          <Database className="h-4 w-4" />
+          Download 47.2M corpus package →
+        </motion.a>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}

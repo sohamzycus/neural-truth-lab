@@ -8,7 +8,7 @@ export function DomainSection({ items }: { items: DomainEnhancement[] }) {
       id="domain"
       eyebrow="Bird-specific"
       title="Domain Enhancements"
-      subtitle={`${items.length} bird-specific preprocessing layers beyond generic text cleaning — taxonomy, habitat, calls, confidence, GPS masking, and conservation.`}
+      subtitle={`${items.length} bird-specific layers — implemented in src/lib/pipeline/domain.ts (taxonomy, GPS mask, call norm, confidence, media).`}
     >
       <div className="grid gap-4 md:grid-cols-2">
         {items.map((item) => (

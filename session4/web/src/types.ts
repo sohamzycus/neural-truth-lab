@@ -97,3 +97,41 @@ export type ScrubSample = {
   label: string;
   text: string;
 };
+
+export type ShardPipelineRun = {
+  processedAt: string;
+  algorithms: string[];
+  inputRecords: number;
+  qualityRejected: number;
+  decontamRejected: number;
+  exactDupRemoved: number;
+  nearDupClusters: number;
+  nearDupRecords: number;
+  acceptedRecords: number;
+  piiMasked: number;
+  languageDistribution: Record<string, number>;
+  corpusTotalObservations?: number;
+  sampleTraces: { id: string; accepted: boolean; steps: string[] }[];
+};
+
+export type BenchmarkQuiz = {
+  description: string;
+  phrases: string[];
+};
+
+export type CorpusDownloadPackage = {
+  corpusVersion: string;
+  totalObservations: number;
+  scaleLabel: string;
+  rawShardRecords: number;
+  trainSafeShardRecords: number;
+  generatedAt: string;
+  downloads: {
+    id: string;
+    label: string;
+    path: string;
+    description: string;
+    format: string;
+    records?: number;
+  }[];
+};

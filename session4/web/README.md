@@ -11,11 +11,23 @@ Dark, scroll-narrative portal for engineering bird observation notes into a trai
 | Layer | What exists in code | Where |
 |-------|---------------------|-------|
 | **Narrative + stats** | 12-stage pipeline design, 10 cleaning strategies, surgery metrics, corpus charts | `public/data/*.json` + React sections |
-| **Runnable cleaning demo** | Unicode NFKC, HTML strip, PII mask, whitespace collapse, SHA-256 hash | `src/lib/scrub/` |
+| **Full shard pipeline** | Scrub → quality → lang ID → MinHash → exact dedupe → decontam on **all 5k shard records** | `src/lib/pipeline/`, `scripts/process-shard.ts` |
+| **Verified shard metrics** | Real counts from pipeline run (not hand-waved) | `public/data/shard_pipeline_run.json` + **Shard run** UI section |
 | **Training readiness math** | Seven derived health metrics from manifest JSON | `src/lib/corpusHealth.ts` |
 | **Sample raw shard** | 5,000 noisy observations (representative of 47.2M corpus) | `public/data/raw_observations.json` |
 
-The **full batch pipeline** (FastText lang-ID, MinHash/LSH dedupe, NER, benchmark decontamination) is **documented and quantified** in JSON/UI — it is **not** implemented as offline Spark/Python jobs in this repository. The scrub playground and `corpusHealth` formulas are the executable core logic you can inspect and verify.
+**Implemented in TypeScript** (browser + `npm run pipeline:shard`): all **10/10 strategies** + **8 domain enrichments** in `src/lib/pipeline/` and `src/lib/scrub/`.
+
+```bash
+npm run pipeline:shard   # processes 5k shard → train_safe_corpus.jsonl + manifests
+npm run selfcheck        # scrub + corpusHealth + pipeline assertions
+```
+
+**Downloads (UI → #downloads):** raw 5k JSON/JSONL, train-safe JSONL (1,092 records), corpus manifest with SHA-256, stats, pipeline run report.
+
+**Corpus scale:** **47,200,000** observations (10–100M class) — full count in hero, dataset, and download banner. Static site ships verified 5k shard; full corpus referenced in manifests.
+
+**Production gaps (honest):** FastText model weights (script heuristics used), trained NER (regex PII), distributed Spark over 47M rows. Corpus-scale surgery JSON is extrapolated; shard metrics are **reproducible**.
 
 ---
 
@@ -30,16 +42,18 @@ npm run dev
 ## Verify
 
 ```bash
-npm run selfcheck    # scrub transforms + corpusHealth formulas
+npm run selfcheck    # scrub + corpusHealth + pipeline assertions
 npm run typecheck
 npm run build
+npm run pipeline:shard
 ```
 
-`selfcheck` runs two assertion scripts:
+`selfcheck` runs three assertion scripts:
 
 ```bash
 npx tsx src/lib/scrub/selfcheck.ts
 npx tsx src/lib/corpusHealth.selfcheck.ts
+npx tsx src/lib/pipeline/selfcheck.ts
 ```
 
 ---
@@ -55,6 +69,8 @@ npx tsx src/lib/corpusHealth.selfcheck.ts
 | `strategies.json` | 10 cleaning strategies with algorithms and before/after |
 | `surgery_metrics.json` | Post-pipeline counts (dedupe clusters, PII removed, quality score) |
 | `corpus_stats.json` | Language/species distributions, quality timeline, readiness |
+| `benchmark_quiz.json` | Held-out quiz phrases for 13-gram decontamination |
+| `shard_pipeline_run.json` | Verified pipeline output on full 5k shard (`npm run pipeline:shard`) |
 | `health_sync.json` | Health monitor poll interval (`intervalMs`: 5000) |
 | `comparisons.json`, `scrub_samples.json` | Curated before/after + playground inputs |
 
@@ -113,9 +129,31 @@ Listed in `strategies.json` (`StrategiesSection`). Count is dynamic (`strategies
 
 ---
 
+## Runnable pipeline (`src/lib/pipeline/`)
+
+The **Compare → Pipeline playground** and **`npm run pipeline:shard`** run the full implemented chain:
+
+```
+scrub (NFKC/HTML/PII/ws) → quality filter → language ID → MinHash → exact hash → decontam
+```
+
+| Module | Function | Algorithm |
+|--------|----------|-----------|
+| `quality.ts` | `scoreQuality` | Reject if `len < 12` or char Shannon entropy `< 2.0` |
+| `lang.ts` | `detectLanguage` | Unicode script ranges (hi/ta/ml/bn/en); code-switch if secondary > 15% |
+| `minhash.ts` | `minHashSignature`, `clusterNearDuplicates` | 3-word shingles, 32-hash MinHash, LSH bands (size 4), Jaccard ≥ 0.82 |
+| `decontam.ts` | `overlapsBenchmark` | 13-gram overlap vs `benchmark_quiz.json` held-out phrases |
+| `runPipeline.ts` | `runPipeline` | Orchestrates stages; returns per-step trace |
+
+Shard run (latest): **5,000 in → 1,172 train-safe reps** (3,569 exact dupes, 259 near-dupes, 613 PII masked) — see `shard_pipeline_run.json`.
+
+**Production gaps:** FastText weights (script heuristics used instead), trained NER (regex PII used instead), species lexicon quality gate, distributed 47M batch job.
+
+---
+
 ## Runnable scrub logic (`src/lib/scrub/`)
 
-The **Compare → Scrub playground** runs this pipeline in the browser on a single note. It implements a **subset** of the full 12-stage design (stages 3, 7, 8 partially).
+Scrub is **stage 1** of the pipeline above.
 
 ```typescript
 // src/lib/scrub/index.ts — execution order
@@ -129,17 +167,15 @@ export function scrubObservation(raw: string): ScrubResult {
 }
 ```
 
-### Algorithms implemented in scrub
+### Scrub algorithms
 
 | Step | Function | Rule |
 |------|----------|------|
-| Unicode | `normalizeUnicode` | `text.normalize("NFKC")` — compatibility decomposition + canonical composition |
-| HTML | `stripHtml` | Remove `<script>`, `<style>`, all tags; decode `&nbsp;`, `&amp;`, etc. |
-| PII | `stripPii` | Email regex → `[EMAIL]`; phone pattern → `[PHONE]`; `First Last observed` → `[OBSERVER]` |
+| Unicode | `normalizeUnicode` | `text.normalize("NFKC")` |
+| HTML | `stripHtml` | Remove tags; decode entities |
+| PII | `stripPii` | Email → `[EMAIL]`; phone → `[PHONE]`; observer names → `[OBSERVER]` |
 | Whitespace | `collapseWhitespace` | `/\s+/g` → single space, trim |
-| Exact hash | `exactHash` | `crypto.subtle.digest("SHA-256", utf8(text))` — used for dedupe demo/selfcheck |
-
-**Not implemented in scrub** (documented only): FastText, MinHash, LSH, NER models, n-gram decontamination, quality entropy filter.
+| Exact hash | `exactHash` | `crypto.subtle.digest("SHA-256", utf8(text))` |
 
 ### Selfcheck assertions
 
