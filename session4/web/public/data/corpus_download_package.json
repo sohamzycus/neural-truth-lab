@@ -3,8 +3,8 @@
   "totalObservations": 47200000,
   "scaleLabel": "47.2M observations (10–100M class bird corpus)",
   "rawShardRecords": 5000,
-  "trainSafeShardRecords": 1092,
-  "generatedAt": "2026-07-27T06:56:22.231Z",
+  "trainSafeShardRecords": 262,
+  "generatedAt": "2026-07-27T07:27:22.984Z",
   "downloads": [
     {
       "id": "raw-shard-json",
@@ -28,7 +28,7 @@
       "path": "/data/train_safe_corpus.jsonl",
       "description": "Pipeline-processed, deduped, decontaminated records from the 5k shard",
       "format": "jsonl",
-      "records": 1092
+      "records": 262
     },
     {
       "id": "corpus-manifest",

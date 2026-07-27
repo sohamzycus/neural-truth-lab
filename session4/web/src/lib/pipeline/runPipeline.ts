@@ -92,9 +92,9 @@ export async function runPipeline(
 
   const lang = detectLanguage(text);
   steps.push({
-    stage: "Language ID",
-    detail: `${lang.primary} (conf=${lang.confidence})`,
-    ok: lang.primary !== "unknown",
+    stage: "FastText lang ID",
+    detail: `${lang.fastTextLabel} p=${lang.fastTextConfidence.toFixed(2)} → tag=${lang.primary}`,
+    ok: lang.fastTextLabel !== "unknown",
   });
 
   const shingles = wordShingles(text);

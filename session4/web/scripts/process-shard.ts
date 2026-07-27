@@ -31,7 +31,7 @@ const langCounts: Record<string, number> = {};
 
 for (const obs of raw) {
   const result = await runPipeline(obs.id, obs.text, exactHash);
-  if (result.steps.some((s) => s.stage === "PII removal")) piiMasked++;
+  if (result.steps.some((s) => s.stage.includes("NER"))) piiMasked++;
   if (result.steps.some((s) => s.stage === "Repeat collapse")) repeatCollapsed++;
   if (result.steps.some((s) => s.stage === "Length cap")) lengthTruncated++;
   if (!result.quality?.pass) {
@@ -84,7 +84,8 @@ const algorithms = [
   "NFKC + HTML/PII scrub + ghost tags",
   "length cap + repeat collapse",
   "quality filter (length + entropy + species lexicon)",
-  "script-heuristic language ID",
+    "FastText char-ngram language ID + script heuristics",
+    "gazetteer + pattern NER (PERSON/LOC/ORG/EMAIL/PHONE)",
   "SHA-256 exact dedupe",
   "MinHash + LSH near-dedupe",
   "13-gram benchmark decontamination",

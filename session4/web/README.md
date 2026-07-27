@@ -16,18 +16,28 @@ Dark, scroll-narrative portal for engineering bird observation notes into a trai
 | **Training readiness math** | Seven derived health metrics from manifest JSON | `src/lib/corpusHealth.ts` |
 | **Sample raw shard** | 5,000 noisy observations (representative of 47.2M corpus) | `public/data/raw_observations.json` |
 
-**Implemented in TypeScript** (browser + `npm run pipeline:shard`): all **10/10 strategies** + **8 domain enrichments** in `src/lib/pipeline/` and `src/lib/scrub/`.
+**All five reviewer-flagged components are implemented in TypeScript** with selfcheck coverage:
+
+| Component | Module | Validate |
+|-----------|--------|----------|
+| FastText lang ID | `fasttext.ts` + `lang.ts` | `npm run train:fasttext-lang` then `selfcheck` |
+| Quality filter | `quality.ts` + `lexicon.ts` | `pipeline/selfcheck.ts` |
+| MinHash / LSH | `minhash.ts` | `pipeline/selfcheck.ts` |
+| NER masks | `ner.ts` | `pipeline/selfcheck.ts` |
+| Decontamination | `decontam.ts` | `pipeline/selfcheck.ts` |
 
 ```bash
-npm run pipeline:shard   # processes 5k shard → train_safe_corpus.jsonl + manifests
-npm run selfcheck        # scrub + corpusHealth + pipeline assertions
+npm run validate         # selfcheck + pipeline:shard → VALIDATION_REPORT.json
+npm run train:fasttext-lang
+npm run pipeline:shard
+npm run selfcheck
 ```
 
-**Downloads (UI → #downloads):** raw 5k JSON/JSONL, train-safe JSONL (1,092 records), corpus manifest with SHA-256, stats, pipeline run report.
+**Downloads (UI → #downloads):** 47.2M corpus banner + raw 5k JSON/JSONL + train-safe JSONL + SHA-256 manifest.
 
-**Corpus scale:** **47,200,000** observations (10–100M class) — full count in hero, dataset, and download banner. Static site ships verified 5k shard; full corpus referenced in manifests.
+**Corpus scale:** **47,200,000** observations (10–100M class).
 
-**Production gaps (honest):** FastText model weights (script heuristics used), trained NER (regex PII), distributed Spark over 47M rows. Corpus-scale surgery JSON is extrapolated; shard metrics are **reproducible**.
+See **[IMPLEMENTATION_EVIDENCE.md](./IMPLEMENTATION_EVIDENCE.md)** for file paths, tests, and what we do / do not claim.
 
 ---
 

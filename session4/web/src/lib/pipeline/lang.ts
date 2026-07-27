@@ -1,40 +1,46 @@
-/** Script-heuristic language ID (ponytail: not FastText — Unicode ranges + ratio voting). */
-
-const RANGES: { id: string; re: RegExp }[] = [
-  { id: "hi", re: /[\u0900-\u097F]/ },
-  { id: "ta", re: /[\u0B80-\u0BFF]/ },
-  { id: "ml", re: /[\u0D00-\u0D7F]/ },
-  { id: "bn", re: /[\u0980-\u09FF]/ },
-  { id: "en", re: /[A-Za-z]/ },
-];
+import { fastTextPredict, charNgramFeatures } from "./fasttext";
+import { scriptDetect } from "./script";
 
 export type LangResult = {
   primary: string;
   secondary?: string;
   confidence: number;
-  scripts: Record<string, number>;
+  fastTextLabel: string;
+  fastTextConfidence: number;
+  fastTextProbabilities: Record<string, number>;
+  script: Record<string, number>;
+  method: string;
 };
 
+/** FastText char-ngram model + script heuristics for code-switch tags. */
 export function detectLanguage(text: string): LangResult {
-  const counts: Record<string, number> = {};
-  let letters = 0;
-  for (const { id, re } of RANGES) {
-    const m = text.match(new RegExp(re.source, "g"));
-    const n = m?.length ?? 0;
-    if (n > 0) counts[id] = n;
-    letters += n;
-  }
-  if (letters === 0) return { primary: "unknown", confidence: 0, scripts: counts };
+  const ft = fastTextPredict(text);
+  const script = scriptDetect(text);
 
-  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-  const [primary, pCount] = sorted[0]!;
-  const [secondary, sCount] = sorted[1] ?? [undefined, 0];
-  const confidence = pCount / letters;
-  const codeSwitch = secondary && sCount / letters > 0.15;
+  const sorted = Object.entries(script.counts).sort((a, b) => b[1] - a[1]);
+  const scriptPrimary = sorted[0]?.[0];
+  const scriptSecondary = sorted[1]?.[0];
+  const scriptShare = sorted[1] ? sorted[1][1] / Math.max(script.total, 1) : 0;
+
+  let primary = ft.label;
+  let secondary: string | undefined;
+  if (scriptShare > 0.15 && scriptSecondary && scriptSecondary !== ft.label) {
+    primary = `${ft.label}-${scriptSecondary}`;
+    secondary = scriptSecondary;
+  } else if (ft.confidence < 0.45 && scriptPrimary) {
+    primary = scriptPrimary;
+  }
+
   return {
-    primary: codeSwitch ? `${primary}-${secondary}` : primary,
-    secondary: codeSwitch ? secondary : undefined,
-    confidence: Math.round(confidence * 100) / 100,
-    scripts: counts,
+    primary,
+    secondary,
+    confidence: Math.round(ft.confidence * 100) / 100,
+    fastTextLabel: ft.label,
+    fastTextConfidence: ft.confidence,
+    fastTextProbabilities: ft.probabilities,
+    script: script.counts,
+    method: "fasttext-char-ngram+script-heuristic",
   };
 }
+
+export { charNgramFeatures };

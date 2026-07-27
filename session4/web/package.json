@@ -9,12 +9,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:netlify": "npm run pipeline:shard && test -f public/data/dataset_stats.json && npm run build && test -f dist/index.html",
+    "build:netlify": "npm run train:fasttext-lang && npm run pipeline:shard && npm run build && test -f dist/index.html",
     "typecheck": "tsc -b --pretty false",
     "lint": "oxlint",
     "preview": "vite preview",
     "selfcheck": "npx tsx src/lib/scrub/selfcheck.ts && npx tsx src/lib/corpusHealth.selfcheck.ts && npx tsx src/lib/pipeline/selfcheck.ts",
-    "pipeline:shard": "npx tsx scripts/process-shard.ts"
+    "train:fasttext-lang": "node scripts/train-fasttext-lang.mjs",
+    "pipeline:shard": "npx tsx scripts/process-shard.ts",
+    "validate": "node scripts/validate-all.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

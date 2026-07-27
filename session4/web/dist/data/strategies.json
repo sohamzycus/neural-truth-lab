@@ -15,7 +15,7 @@
     "title": "Language identification",
     "why": "Mix ratios and filters need language tags.",
     "algorithms": [
-      "FastText",
+      "char-ngram FastText-style classifier",
       "script heuristics"
     ],
     "before": "एशियन कोयल loud kuoo",
@@ -60,7 +60,8 @@
     "why": "Emails/phones must never enter pretraining.",
     "algorithms": [
       "regex",
-      "NER masks"
+      "gazetteer NER",
+      "pattern PERSON"
     ],
     "before": "call me +91 98765 43210",
     "after": "call me [PHONE]"

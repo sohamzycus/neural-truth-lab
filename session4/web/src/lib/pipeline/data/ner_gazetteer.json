@@ -1,0 +1,20 @@
+{
+  "persons": [
+    "Rajesh Kumar",
+    "Priya Sharma",
+    "Amit Patel",
+    "Sneha Reddy",
+    "Vikram Singh",
+    "Ananya Iyer",
+    "Rahul Menon",
+    "Deepak Nair"
+  ],
+  "locations": [
+    "Pune", "Maharashtra", "Thattekad", "Kerala", "Bharatpur", "Rajasthan",
+    "Valparai", "Tamil Nadu", "Chilika", "Odisha", "Eaglenest", "Arunachal Pradesh",
+    "Rann of Kutch", "Gujarat", "Hemis", "Ladakh", "Sundarbans", "West Bengal",
+    "Nainital", "Uttarakhand", "Keoladeo", "Bharatpur", "Kaziranga", "Assam",
+    "Central Park", "NYC", "London Wetland Centre"
+  ],
+  "organizations": ["BNHS", "eBird", "BirdLife"]
+}

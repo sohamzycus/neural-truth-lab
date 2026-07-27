@@ -3,8 +3,8 @@
   "totalObservations": 47200000,
   "scaleLabel": "47.2M observations (10–100M class)",
   "rawShardRecords": 5000,
-  "trainSafeShardRecords": 1092,
-  "generatedAt": "2026-07-27T06:56:22.231Z",
+  "trainSafeShardRecords": 262,
+  "generatedAt": "2026-07-27T07:27:22.983Z",
   "files": [
     {
       "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/raw_observations.json",
@@ -20,9 +20,9 @@
     },
     {
       "path": "train_safe_corpus.jsonl",
-      "sha256": "793dd9c588c41a8197486e29873f15e7e63593f523d3bc737dced2c5494aa482",
-      "bytes": 305343,
-      "records": 1092
+      "sha256": "306c31e63b1e3f8697bd4c495de096d11414b23bcf9882ac317c3fda25646c26",
+      "bytes": 71515,
+      "records": 262
     },
     {
       "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/dataset_stats.json",
@@ -31,8 +31,8 @@
     },
     {
       "path": "/Users/soham.niyogi/Soham/codebase/erav5/session4/web/public/data/shard_pipeline_run.json",
-      "sha256": "9212c868d0617d8b696996fcaa18b3adfd0b44587e4a192838f48a7b66c14b15",
-      "bytes": 2135
+      "sha256": "5b734c457b83cf6b54bfd6daab72cbe196fd72ce56a495248e3865c1718d4e0e",
+      "bytes": 2254
     }
   ],
   "note": "Full 47.2M corpus ships as versioned object-store shards; this portal bundles verified 5k sample + train-safe output."

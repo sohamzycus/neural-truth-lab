@@ -1,11 +1,12 @@
 {
-  "processedAt": "2026-07-27T06:56:22.225Z",
+  "processedAt": "2026-07-27T07:27:22.978Z",
   "algorithms": [
     "content extraction",
     "NFKC + HTML/PII scrub + ghost tags",
     "length cap + repeat collapse",
     "quality filter (length + entropy + species lexicon)",
-    "script-heuristic language ID",
+    "FastText char-ngram language ID + script heuristics",
+    "gazetteer + pattern NER (PERSON/LOC/ORG/EMAIL/PHONE)",
     "SHA-256 exact dedupe",
     "MinHash + LSH near-dedupe",
     "13-gram benchmark decontamination",
@@ -14,16 +15,16 @@
   "inputRecords": 5000,
   "qualityRejected": 0,
   "decontamRejected": 0,
-  "exactDupRemoved": 3644,
-  "nearDupClusters": 120,
-  "nearDupRecords": 264,
-  "acceptedRecords": 1092,
-  "piiMasked": 613,
+  "exactDupRemoved": 4571,
+  "nearDupClusters": 17,
+  "nearDupRecords": 167,
+  "acceptedRecords": 262,
+  "piiMasked": 3167,
   "repeatCollapsed": 0,
   "lengthTruncated": 0,
   "languageDistribution": {
-    "en": 1164,
-    "en-hi": 192
+    "en": 395,
+    "en-hi": 34
   },
   "corpusTotalObservations": 47200000,
   "sampleTraces": [
@@ -31,12 +32,12 @@
       "id": "raw-000001",
       "accepted": true,
       "steps": [
-        "Pass-through: No transforms triggered",
+        "NER / PII removal: Masked entities: LOC",
         "Species lexicon: boost score→1.00",
-        "Quality filter: score=1.00 entropy=4.13",
-        "Language ID: en (conf=1)",
-        "MinHash: 12 shingles → 32-dim sig",
-        "Exact hash: 2b850f14730d66e1…",
+        "Quality filter: score=1.00 entropy=4.06",
+        "FastText lang ID: en p=0.94 → tag=en",
+        "MinHash: 11 shingles → 32-dim sig",
+        "Exact hash: e55948dd04eadf47…",
         "Benchmark decontam: no overlap"
       ]
     },
@@ -44,12 +45,12 @@
       "id": "raw-000002",
       "accepted": true,
       "steps": [
-        "Pass-through: No transforms triggered",
+        "NER / PII removal: Masked entities: LOC",
         "Domain enrichment: Taxonomy: indian robin → Copsychus fulicatus",
-        "Quality filter: score=1.00 entropy=4.99",
-        "Language ID: en-hi (conf=0.75)",
+        "Quality filter: score=1.00 entropy=4.98",
+        "FastText lang ID: en p=0.67 → tag=en-hi",
         "MinHash: 13 shingles → 32-dim sig",
-        "Exact hash: 85b086929d0727ec…",
+        "Exact hash: de25e83722e772e1…",
         "Benchmark decontam: no overlap"
       ]
     },
@@ -58,13 +59,13 @@
       "accepted": true,
       "steps": [
         "HTML strip: Removed markup and entities",
-        "PII removal: Masked emails, phones, observer names",
+        "NER / PII removal: Masked entities: EMAIL, LOC",
         "Whitespace: Collapsed runs and trimmed",
         "Species lexicon: boost score→1.00",
         "Quality filter: score=1.00 entropy=4.26",
-        "Language ID: en (conf=1)",
+        "FastText lang ID: en p=0.69 → tag=en",
         "MinHash: 8 shingles → 32-dim sig",
-        "Exact hash: 4eca7ff6fd81b1ca…",
+        "Exact hash: 8d282494eba2b60d…",
         "Benchmark decontam: no overlap"
       ]
     }

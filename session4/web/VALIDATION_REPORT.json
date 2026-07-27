@@ -1,0 +1,95 @@
+{
+  "validatedAt": "2026-07-27T07:27:23.003Z",
+  "selfcheck": "pass",
+  "corpusTotalObservations": 47200000,
+  "rawShardRecords": 5000,
+  "trainSafeRecords": 262,
+  "fastText": {
+    "method": "fasttext-char-ngram-linear",
+    "trainAccuracy": 1,
+    "labels": [
+      "en",
+      "hi",
+      "ta",
+      "ml",
+      "bn"
+    ]
+  },
+  "pipeline": {
+    "algorithms": [
+      "content extraction",
+      "NFKC + HTML/PII scrub + ghost tags",
+      "length cap + repeat collapse",
+      "quality filter (length + entropy + species lexicon)",
+      "FastText char-ngram language ID + script heuristics",
+      "gazetteer + pattern NER (PERSON/LOC/ORG/EMAIL/PHONE)",
+      "SHA-256 exact dedupe",
+      "MinHash + LSH near-dedupe",
+      "13-gram benchmark decontamination",
+      "SHA-256 manifest generation"
+    ],
+    "inputRecords": 5000,
+    "acceptedRecords": 262,
+    "exactDupRemoved": 4571,
+    "nearDupRecords": 167
+  },
+  "implementations": {
+    "fastText": {
+      "file": "src/lib/pipeline/fasttext.ts",
+      "status": "implemented"
+    },
+    "ner": {
+      "file": "src/lib/pipeline/ner.ts",
+      "status": "implemented"
+    },
+    "minHashLsh": {
+      "file": "src/lib/pipeline/minhash.ts",
+      "status": "implemented"
+    },
+    "decontamination": {
+      "file": "src/lib/pipeline/decontam.ts",
+      "status": "implemented"
+    },
+    "qualityFilter": {
+      "file": "src/lib/pipeline/quality.ts",
+      "status": "implemented"
+    }
+  },
+  "downloads": [
+    {
+      "id": "raw-shard-json",
+      "path": "/data/raw_observations.json",
+      "records": 5000
+    },
+    {
+      "id": "raw-shard-jsonl",
+      "path": "/data/raw_observations.jsonl",
+      "records": 5000
+    },
+    {
+      "id": "train-safe-jsonl",
+      "path": "/data/train_safe_corpus.jsonl",
+      "records": 262
+    },
+    {
+      "id": "corpus-manifest",
+      "path": "/data/corpus_manifest.json"
+    },
+    {
+      "id": "dataset-stats",
+      "path": "/data/dataset_stats.json"
+    },
+    {
+      "id": "pipeline-run",
+      "path": "/data/shard_pipeline_run.json"
+    },
+    {
+      "id": "surgery-metrics",
+      "path": "/data/surgery_metrics.json"
+    },
+    {
+      "id": "corpus-stats",
+      "path": "/data/corpus_stats.json"
+    }
+  ]
+}

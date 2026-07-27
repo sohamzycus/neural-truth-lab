@@ -1,3 +1,5 @@
+import { maskNer } from "../pipeline/ner";
+
 export function normalizeUnicode(text: string): string {
   return text.normalize("NFKC");
 }
@@ -15,10 +17,7 @@ export function stripHtml(text: string): string {
 }
 
 export function stripPii(text: string): string {
-  return text
-    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[EMAIL]")
-    .replace(/\+?\d[\d\s().-]{8,}\d/g, "[PHONE]")
-    .replace(/\b[A-Z][a-z]+ [A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\b(?=\s*(?:observed|saw|reported))/g, "[OBSERVER]");
+  return maskNer(text).text;
 }
 
 export function collapseWhitespace(text: string): string {
@@ -33,7 +32,6 @@ export async function exactHash(text: string): Promise<string> {
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
   }
-  // Node fallback for selfcheck
   let h = 0;
   for (let i = 0; i < text.length; i++) h = (Math.imul(31, h) + text.charCodeAt(i)) | 0;
   return `fallback-${h}`;
@@ -56,9 +54,12 @@ export function scrubObservation(raw: string): ScrubResult {
   if (afterHtml !== text) steps.push({ name: "HTML strip", detail: "Removed markup and entities" });
   text = afterHtml;
 
-  const afterPii = stripPii(text);
-  if (afterPii !== text) steps.push({ name: "PII removal", detail: "Masked emails, phones, observer names" });
-  text = afterPii;
+  const ner = maskNer(text);
+  if (ner.text !== text) {
+    const types = [...new Set(ner.entities.map((e) => e.type))].join(", ");
+    steps.push({ name: "NER / PII removal", detail: `Masked entities: ${types}` });
+  }
+  text = ner.text;
 
   const afterWs = collapseWhitespace(text);
   if (afterWs !== text) steps.push({ name: "Whitespace", detail: "Collapsed runs and trimmed" });
