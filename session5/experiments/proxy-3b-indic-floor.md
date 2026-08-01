@@ -2,6 +2,19 @@
 
 **Hypothesis (DDL-017, DDL-022):** Always-on Indic floor (18%) plus 4k→32k context curriculum prevents tail-language collapse and needle recall failure at 3B scale.
 
+## Reproducibility Protocol
+
+| Field | Specification |
+|-------|---------------|
+| **Hypothesis** | Floors + LC ramp prevent tail-lang and needle collapse vs OPUS-free baseline |
+| **Independent variables** | Indic floor 18% on/off; context ramp 4k→32k on/off; agentic floor 3% |
+| **Controls** | Condition A: no floors, fixed 4k; same 3B arch and 90B token budget |
+| **Dependent metrics** | Lang tail proxy (pp); needle proxy @32k; agent recovery proxy |
+| **Acceptance criteria** | Tail Δ ≥ +4.0pp; needle ≥ 0.75; grad-norm instability = 0 |
+| **Failure criteria** | Needle < 0.55 OR tail Δ < +2.0pp OR >2 grad-norm events |
+| **Decision rule** | PASS → keep floors §14 + context ramp §13; FAIL → raise floor to 20% and re-proxy |
+| **Follow-up** | Full 1B GPU 30B tokens with real IndicGLUE; needle@32k on legal held-out |
+
 ## Setup
 
 | Parameter | Value |

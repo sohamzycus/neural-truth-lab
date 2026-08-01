@@ -2,6 +2,19 @@
 
 **Hypothesis (DDL-021):** Two-phase curriculum (70% general → 20% India-heavy → 10% anneal) beats uniform sampling on Indic convergence without sacrificing code stability.
 
+## Reproducibility Protocol
+
+| Field | Specification |
+|-------|---------------|
+| **Hypothesis** | Two-phase scheduler improves Indic signal ≥3pp vs uniform without code collapse >2pp |
+| **Independent variables** | Phase weight schedule (70/20/10 vs uniform); OPUS drift model on/off |
+| **Controls** | Uniform 82/12/4/6 constant mix; fixed 1B tokenizer (S3); locked floors in all conditions |
+| **Dependent metrics** | Indic signal (pp); code signal (pp); phase-boundary loss spike |
+| **Acceptance criteria** | Indic Δ ≥ +3.0pp; code Δ ≥ −2.0pp; boundary spike < 0.15 |
+| **Failure criteria** | Indic Δ < +3.0pp OR code Δ < −5.0pp OR boundary spike > 0.25 |
+| **Decision rule** | PASS → keep 70/20/10; FAIL → revert to uniform + re-proxy |
+| **Follow-up** | 3B GPU run with real IndicGLUE per-lang at 90B tokens |
+
 ## Setup
 
 | Parameter | Value |

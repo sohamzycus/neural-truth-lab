@@ -1,0 +1,12 @@
+flowchart TD
+    BUDGET[Fixed 1080B token budget]
+    BUDGET --> CODE[Increase Code]
+    BUDGET --> WEB[Increase Web]
+    BUDGET --> IND[Increase Indic]
+    BUDGET --> LC[Increase Long Context]
+    BUDGET --> AGT[Increase Agentic]
+    CODE --> LOSE1[Lose general knowledge / Indic]
+    WEB --> LOSE2[Lose coding / agentic depth]
+    IND --> LOSE3[Higher repetition / synth pressure]
+    LC --> LOSE4[Higher compute / batch cost]
+    AGT --> LOSE5[Lower web diversity]

@@ -1,0 +1,8 @@
+flowchart LR
+    BENCH[Ship gate benchmark]
+    BENCH --> CAP[Capability lane]
+    CAP --> DATA[Dataset + tier]
+    DATA --> CURR[Curriculum phase]
+    CURR --> TRAIN[Pretrain batch]
+    TRAIN --> EVAL[Checkpoint eval]
+    EVAL --> BENCH

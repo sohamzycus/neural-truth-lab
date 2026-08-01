@@ -1,0 +1,12 @@
+flowchart TD
+    SHARD[Training shard] --> GHOST[Ghost model utility score]
+    GHOST --> BENCH[Benchmark loss delta proxy]
+    BENCH --> GRAD[Gradient similarity check]
+    GRAD --> BATCH[Batch composition]
+    BATCH --> FLOOR{Below always-on floor?}
+    FLOOR -->|yes| ACCEPT[Accept - floor protected]
+    FLOOR -->|no| THRESH{Utility above 0.15?}
+    THRESH -->|yes| ACCEPT
+    THRESH -->|no| REJECT[Reject shard]
+    ACCEPT --> TRAIN[Pretrain step]
+    REJECT --> DISCARD[Discard queue]
