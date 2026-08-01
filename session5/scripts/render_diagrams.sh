@@ -8,4 +8,4 @@ for f in reviewer-journey dvp-pipeline capability-pie indic-tier-pie curriculum-
   npx -y @mermaid-js/mermaid-cli@11 -i "${f}.mmd" -o "${f}.svg" -b white
 done
 echo "Done. PNG + SVG in session5/assets/"
-python3 "$(dirname "$0")/embed_readme_images.py"
+echo "README uses assets/*.png paths (GitHub-compatible). For Cursor-only preview: python3 scripts/embed_readme_images.py"
