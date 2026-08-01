@@ -1,0 +1,36 @@
+{
+  "experiment": "proxy-3b-indic-floor",
+  "method": "Integrated weights + context ramp (scheduler proxy)",
+  "conditions": {
+    "A": {
+      "lang_tail_proxy": 12.87,
+      "needle_proxy": 0.548,
+      "agentic_pct": 2.16
+    },
+    "B": {
+      "lang_tail_proxy": 17.95,
+      "needle_proxy": 0.603,
+      "agentic_pct": 2.75
+    },
+    "C": {
+      "lang_tail_proxy": 17.39,
+      "needle_proxy": 0.777,
+      "agentic_pct": 2.66
+    }
+  },
+  "delta_C_vs_A": {
+    "lang_tail_proxy": 4.52,
+    "needle_proxy": 0.229
+  },
+  "pass_criteria": {
+    "lang_tail_delta_min": 4.0,
+    "needle_min": 0.75
+  },
+  "verdict": "PASS",
+  "floors_enforced": {
+    "indic_multilingual": 18,
+    "agentic": 3,
+    "code_switch": 4,
+    "long_context": 2
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": "v5-session5-1.0",
+  "total_tokens_b": 1200,
+  "anneal_reserve_pct": 10,
+  "anneal_reserve_tokens_b": 120,
+  "active_pretrain_tokens_b": 1080,
+  "synthetic_global_cap_pct": 6,
+  "synthetic_global_cap_tokens_b": 72,
+  "always_on_floor": {
+    "indic_multilingual": { "pct": 18, "tokens_b": 194.4, "rationale": "MCDA tail languages starve under EN/code gradient" },
+    "agentic": { "pct": 3, "tokens_b": 32.4, "rationale": "Tool-use docs must survive OPUS downsampling" },
+    "code_switch": { "pct": 4, "tokens_b": 43.2, "rationale": "Hinglish/Tanglish deployment signal" },
+    "long_context": { "pct": 2, "tokens_b": 21.6, "rationale": "128k RoPE extension needs doc-length exposure" }
+  },
+  "capability_lanes": [
+    {
+      "id": "web_general",
+      "name": "Web & General NL",
+      "pct": 38,
+      "tokens_b": 410.4,
+      "benchmarks": ["MMLU", "TruthfulQA-IN", "HellaSwag"],
+      "datasets": [
+        { "id": "en_in_web", "name": "EN-IN licensed web crawl", "supply_b": 180, "repeat_factor": 1.0 },
+        { "id": "wiki_en", "name": "Wikipedia EN (filtered)", "supply_b": 95, "repeat_factor": 1.2 },
+        { "id": "books_docs", "name": "Books & high-quality docs", "supply_b": 62, "repeat_factor": 1.1 },
+        { "id": "news_licensed", "name": "Licensed news (India + global)", "supply_b": 48, "repeat_factor": 1.0 },
+        { "id": "ataavi_nature", "name": "Ataavi bird observation corpus (S4)", "supply_b": 0.004, "repeat_factor": 5400, "note": "47.2M obs → ~4M tokens cleaned; upsampled for domain specialist slot" }
+      ],
+      "curriculum_stage": "phase1_early",
+      "supply_gap": "Ataavi requires 5400× repeat or expansion to 120M observations by M8"
+    },
+    {
+      "id": "indic_multilingual",
+      "name": "Indic Multilingual",
+      "pct": 22,
+      "tokens_b": 237.6,
+      "benchmarks": ["IndicGLUE", "FLORES", "Indic-Faithfulness"],
+      "indic_tier_split": {
+        "verified": { "pct": 35, "tokens_b": 83.2, "examples": ["NCERT hi/ta/te", "RBI circulars hi", "Gov portal licensed"] },
+        "unverified": { "pct": 40, "tokens_b": 95.0, "examples": ["MCDA-weighted web crawl", "Wikipedia Indic", "News hi/ta/te/kn/ml"] },
+        "translated": { "pct": 15, "tokens_b": 35.6, "examples": ["IndicTrans EN→ta", "NLLB back-translated STEM", "Parallel wiki"] },
+        "synthetic": { "pct": 10, "tokens_b": 23.8, "examples": ["Human-audited 8% QA pairs", "Register-controlled dialogue synth"] }
+      },
+      "datasets": [
+        { "id": "mcda_web", "name": "MCDA-weighted Indic web", "supply_b": 420, "repeat_factor": 0.23 },
+        { "id": "gov_verified", "name": "Gov + NCERT verified packs", "supply_b": 12, "repeat_factor": 6.9 },
+        { "id": "wiki_indic", "name": "Wikipedia 15 Indic langs", "supply_b": 28, "repeat_factor": 1.5 },
+        { "id": "indic_translated", "name": "Licensed parallel / back-trans", "supply_b": 45, "repeat_factor": 0.79 },
+        { "id": "indic_synthetic", "name": "Verifier-passed synthetic", "supply_b": 8, "repeat_factor": 2.98 }
+      ],
+      "curriculum_stage": "phase1_mid",
+      "always_on_floor_pct": 18
+    },
+    {
+      "id": "coding",
+      "name": "Code & Software Engineering",
+      "pct": 10,
+      "tokens_b": 108,
+      "benchmarks": ["HumanEval+", "SWE-bench lite", "MBPP"],
+      "datasets": [
+        { "id": "github_repos", "name": "GitHub repos (India stack filter)", "supply_b": 280, "repeat_factor": 0.18 },
+        { "id": "github_docs", "name": "Repo docs + README", "supply_b": 95, "repeat_factor": 0.20 },
+        { "id": "issues_prs", "name": "Issues + PRs", "supply_b": 65, "repeat_factor": 0.20 },
+        { "id": "stackoverflow", "name": "StackOverflow (license-safe)", "supply_b": 42, "repeat_factor": 0.26 },
+        { "id": "code_synthetic", "name": "Compile-gated synthetic", "supply_b": 12, "repeat_factor": 0.45 }
+      ],
+      "curriculum_stage": "phase1_late",
+      "subsources_pct": { "repos": 42, "docs": 18, "issues": 12, "stackoverflow": 10, "tests": 8, "rfcs": 5, "synthetic": 5 }
+    },
+    {
+      "id": "stem",
+      "name": "STEM (Math + Science)",
+      "pct": 8,
+      "tokens_b": 86.4,
+      "benchmarks": ["GSM8K", "JEE-style held-out", "NCERT science rubric"],
+      "datasets": [
+        { "id": "ncert_math", "name": "NCERT + exam math (bilingual)", "supply_b": 18, "repeat_factor": 1.6 },
+        { "id": "ncert_science", "name": "NCERT science + ICMR", "supply_b": 14, "repeat_factor": 1.2 },
+        { "id": "arxiv_stem", "name": "arXiv STEM (India-relevant filter)", "supply_b": 55, "repeat_factor": 0.5 },
+        { "id": "stem_synthetic", "name": "Verifier-passed worked solutions", "supply_b": 6, "repeat_factor": 2.0 }
+      ],
+      "curriculum_stage": "phase1_late"
+    },
+    {
+      "id": "reasoning",
+      "name": "Reasoning & Policy QA",
+      "pct": 6,
+      "tokens_b": 64.8,
+      "benchmarks": ["GSM8K", "Gov/Edu readiness", "Indian contextual reasoning"],
+      "datasets": [
+        { "id": "rbi_gst_upi", "name": "RBI + GST + UPI + ONDC specs", "supply_b": 9.1, "repeat_factor": 2.0 },
+        { "id": "cot_synthetic", "name": "Verified chain-of-thought (JEE/GST)", "supply_b": 4, "repeat_factor": 3.5 },
+        { "id": "policy_qa", "name": "Structured policy QA", "supply_b": 3.2, "repeat_factor": 2.8 }
+      ],
+      "curriculum_stage": "phase2_early",
+      "supply_gap": "CoT synthetic requires verifier pipeline — 3.5× repeat until M10"
+    },
+    {
+      "id": "agentic",
+      "name": "Agentic (Pretrain Docs)",
+      "pct": 4,
+      "tokens_b": 43.2,
+      "benchmarks": ["Tool accuracy", "Agent recovery ≥0.70", "Planning depth"],
+      "datasets": [
+        { "id": "tool_docs", "name": "API/tool documentation", "supply_b": 22, "repeat_factor": 0.8 },
+        { "id": "agent_traces_pretrain", "name": "Sandbox traces (assistant-loss only)", "supply_b": 8, "repeat_factor": 2.5 },
+        { "id": "browser_terminal_logs", "name": "Browser/terminal log interpretation", "supply_b": 5, "repeat_factor": 1.5 },
+        { "id": "upi_agent_docs", "name": "UPI/NPCI agent playbooks", "supply_b": 2.1, "repeat_factor": 2.0 }
+      ],
+      "curriculum_stage": "phase2_mid",
+      "always_on_floor_pct": 3,
+      "note": "Post-train: +10B ToolLoop traces (not in this 1.08T mix)"
+    },
+    {
+      "id": "long_context",
+      "name": "Long Context",
+      "pct": 3,
+      "tokens_b": 32.4,
+      "benchmarks": ["Needle-in-haystack 32k/128k", "Recall@32k docs"],
+      "datasets": [
+        { "id": "kanoon_legal", "name": "Indian Kanoon licensed subset", "supply_b": 2.8, "repeat_factor": 4.0 },
+        { "id": "contracts_policy", "name": "Contracts + policy compendia", "supply_b": 6, "repeat_factor": 2.5 },
+        { "id": "multi_doc_qa", "name": "Multi-doc QA (synthetic needles)", "supply_b": 1.5, "repeat_factor": 5.0 }
+      ],
+      "curriculum_stage": "phase2_late",
+      "always_on_floor_pct": 2,
+      "context_curriculum": ["4k", "8k", "16k", "32k"]
+    },
+    {
+      "id": "conversation_cs",
+      "name": "Conversation & Code-Switch",
+      "pct": 5,
+      "tokens_b": 54,
+      "benchmarks": ["Code-Switch Index ≥0.75", "BPO adherence", "Human A/B"],
+      "datasets": [
+        { "id": "hinglish_social", "name": "Hinglish social (filtered)", "supply_b": 28, "repeat_factor": 0.6 },
+        { "id": "bpo_support", "name": "BPO customer support (redacted)", "supply_b": 8, "repeat_factor": 1.2 },
+        { "id": "tutor_dialogues", "name": "Tutor dialogues (Indic registers)", "supply_b": 5, "repeat_factor": 1.0 }
+      ],
+      "curriculum_stage": "phase2_mid",
+      "always_on_floor_pct": 4
+    },
+    {
+      "id": "planning",
+      "name": "Planning & Reflection",
+      "pct": 2,
+      "tokens_b": 21.6,
+      "benchmarks": ["Plan depth audit", "JSON plan ≥5 steps"],
+      "datasets": [
+        { "id": "workflow_plans", "name": "Workflow plans (human audit 8%)", "supply_b": 3, "repeat_factor": 2.5 },
+        { "id": "failure_recovery", "name": "Plan-repair pairs", "supply_b": 2, "repeat_factor": 3.0 }
+      ],
+      "curriculum_stage": "phase2_late"
+    },
+    {
+      "id": "domain_ataavi",
+      "name": "Domain Specialist (Ataavi / Nature)",
+      "pct": 2,
+      "tokens_b": 21.6,
+      "benchmarks": ["Species ID accuracy", "Habitat QA", "Indic field-note fluency"],
+      "datasets": [
+        { "id": "ataavi_corpus", "name": "Ataavi train-safe corpus v0.4", "supply_b": 0.004, "repeat_factor": 5400 },
+        { "id": "ataavi_synthetic", "name": "Species/habitat synthetic (lexicon-gated)", "supply_b": 0.5, "repeat_factor": 40 }
+      ],
+      "curriculum_stage": "phase2_mid",
+      "cleaning_target": "47.2M → 120M observations by M8; readiness 0.92 → 0.95"
+    }
+  ],
+  "difficulty_bands": [
+    { "id": "D1", "name": "Recall", "pct": 30, "example": "What is the scientific name of Asian Koel?" },
+    { "id": "D2", "name": "Single-hop", "pct": 35, "example": "Which habitat does Purple Sunbird prefer in Western Ghats?" },
+    { "id": "D3", "name": "Multi-hop", "pct": 25, "example": "Given monsoon timing in Bharatpur, which migrant species arrive first and why?" },
+    { "id": "D4", "name": "Adversarial", "pct": 10, "example": "Distinguish juvenile Indian Robin from Oriental Magpie-Robin under poor light." }
+  ],
+  "reasoning_bands": [
+    { "id": "R0", "name": "Fast", "tokens": "≤64", "pct": 40, "example": "GST slab for ₹8.5L annual turnover?" },
+    { "id": "R1", "name": "Medium", "tokens": "65–256", "pct": 30, "example": "Compute EMI for ₹15L home loan at 8.5% for 20 years with step-by-step." },
+    { "id": "R2", "name": "High", "tokens": "257–1024", "pct": 20, "example": "JEE-style projectile problem with bilingual stem and full derivation." },
+    { "id": "R3", "name": "Ultra", "tokens": "1025+", "pct": 10, "example": "Multi-doc RBI circular analysis: impact on NBFC liquidity coverage ratio." }
+  ],
+  "curriculum_phases": [
+    { "id": "phase1", "token_pct": 70, "tokens_b": 840, "months": "1–12", "emphasis": "Web, broad Indic, code foundation, STEM base" },
+    { "id": "phase2", "token_pct": 20, "tokens_b": 240, "months": "10–14", "emphasis": "India-heavy tail, reasoning, agentic, long-context ramp" },
+    { "id": "anneal", "token_pct": 10, "tokens_b": 120, "months": "14–15", "emphasis": "High-quality docs, verified Indic, cooldown LR decay" }
+  ],
+  "opus_strategy": {
+    "method": "Per-shard utility score = weighted benchmark delta proxy",
+    "protected_lanes": ["indic_multilingual", "agentic", "code_switch", "long_context"],
+    "discard_threshold": 0.15,
+    "note": "OPUS cannot drop protected lanes below always-on floor"
+  }
+}

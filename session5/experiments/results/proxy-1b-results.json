@@ -1,0 +1,23 @@
+{
+  "experiment": "proxy-1b-two-phase",
+  "method": "Integrated mixture weights over 1000 steps (scheduler proxy)",
+  "conditions": {
+    "A_uniform_opus_drift": {
+      "indic": 21.9,
+      "code": 13.45
+    },
+    "B_two_phase_floored_P2": {
+      "indic": 24.89,
+      "code": 11.91
+    }
+  },
+  "delta": {
+    "indic_signal_pp": 2.99,
+    "code_signal_pp": -1.54
+  },
+  "pass_criteria": {
+    "indic_delta_min_pp": 3.0,
+    "code_delta_min_pp": -2.0
+  },
+  "verdict": "PASS"
+}

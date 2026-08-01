@@ -1,0 +1,40 @@
+flowchart TB
+    subgraph INV["Inventory"]
+        S3["Session 3 inventory"]
+        S4["Session 4 Ataavi corpus"]
+    end
+    subgraph LANES["Capability lanes"]
+        WEB["Web 38pct"]
+        IND["Indic 22pct"]
+        CODE["Code 10pct"]
+        STEM["STEM 8pct"]
+        REA["Reasoning 6pct"]
+        AGT["Agentic 4pct"]
+        LC["Long context 3pct"]
+        ATA["Ataavi 2pct"]
+    end
+    subgraph GATES["Gates"]
+        OPUS["OPUS selector"]
+        FLOOR["Always-on floors"]
+        ANN["Anneal 120B"]
+    end
+    S3 --> WEB
+    S3 --> IND
+    S3 --> CODE
+    S3 --> STEM
+    S3 --> REA
+    S3 --> AGT
+    S3 --> LC
+    S4 --> WEB
+    S4 --> ATA
+    WEB --> OPUS
+    IND --> OPUS
+    CODE --> OPUS
+    STEM --> OPUS
+    REA --> OPUS
+    AGT --> OPUS
+    LC --> OPUS
+    ATA --> OPUS
+    FLOOR --> OPUS
+    OPUS --> PT["Pretrain 1080B"]
+    ANN --> COOL["Cooldown"]

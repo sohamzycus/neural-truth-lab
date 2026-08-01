@@ -1,0 +1,85 @@
+{
+  "version": "v1",
+  "session4_readiness": 0.92,
+  "session4_observations": 47200000,
+  "target_observations": 120000000,
+  "pipeline": "session4/web \u2014 FastText, MinHash, NER, decontam",
+  "starved_lanes": [
+    {
+      "lane_id": "web_general",
+      "budget_tokens_b": 410.4,
+      "max_repeat_factor": 5400,
+      "gap": "Ataavi requires 5400\u00d7 repeat or expansion to 120M observations by M8",
+      "cleaning_actions": [
+        "Extend S4 cleaning pipeline to lane datasets"
+      ],
+      "priority": "P0"
+    },
+    {
+      "lane_id": "domain_ataavi",
+      "budget_tokens_b": 21.6,
+      "max_repeat_factor": 5400,
+      "gap": "47.2M \u2192 120M observations by M8; readiness 0.92 \u2192 0.95",
+      "cleaning_actions": [
+        "Scale S4 pipeline 47.2M \u2192 120M observations",
+        "Run npm run validate in session4/web",
+        "Regenerate train_safe_corpus.jsonl"
+      ],
+      "priority": "P0"
+    },
+    {
+      "lane_id": "indic_multilingual",
+      "budget_tokens_b": 237.6,
+      "max_repeat_factor": 6.9,
+      "gap": "repeat up to 6.9x",
+      "cleaning_actions": [
+        "Gov/NCERT verified pack cleaning sprint",
+        "Extend S4 FastText + script heuristics to gov shards"
+      ],
+      "priority": "P1"
+    },
+    {
+      "lane_id": "long_context",
+      "budget_tokens_b": 32.4,
+      "max_repeat_factor": 5.0,
+      "gap": "repeat up to 5.0x",
+      "cleaning_actions": [
+        "Expand Kanoon licensed subset",
+        "Generate needle-in-haystack synth pairs"
+      ],
+      "priority": "P1"
+    },
+    {
+      "lane_id": "reasoning",
+      "budget_tokens_b": 64.8,
+      "max_repeat_factor": 3.5,
+      "gap": "CoT synthetic requires verifier pipeline \u2014 3.5\u00d7 repeat until M10",
+      "cleaning_actions": [
+        "Build RBI/GST CoT verifier pipeline",
+        "Human audit 8% of synthetic CoT"
+      ],
+      "priority": "P1"
+    },
+    {
+      "lane_id": "planning",
+      "budget_tokens_b": 21.6,
+      "max_repeat_factor": 3.0,
+      "gap": "repeat up to 3.0x",
+      "cleaning_actions": [
+        "Human audit workflow plans (8%)"
+      ],
+      "priority": "P1"
+    },
+    {
+      "lane_id": "agentic",
+      "budget_tokens_b": 43.2,
+      "max_repeat_factor": 2.5,
+      "gap": "repeat up to 2.5x",
+      "cleaning_actions": [
+        "Collect sandbox traces (assistant-loss only)",
+        "Extend UPI/NPCI agent playbooks"
+      ],
+      "priority": "P2"
+    }
+  ]
+}
