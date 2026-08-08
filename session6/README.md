@@ -58,6 +58,8 @@ flowchart LR
 | 4 | **Hash-verified replay** | Prove re-runs are identical without trusting the trainer |
 | 5 | **Time Machine** | Debug "what was the model eating at step N?" without re-running |
 
+See [`RUBRIC.md`](RUBRIC.md) for the full 1,000-point evaluation mapping and proof structure.
+
 ## Quick Start
 
 ```bash

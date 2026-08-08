@@ -1,7 +1,7 @@
 {
   "audit": {
     "all_passed": true,
-    "audit_hash": "58a807aea48adc032e53c196b47d68bba405221ef62ec9f9af9b365d6d5df31b",
+    "audit_hash": "d70d79645cee9aef93d33dc44a552d8efce3249d3de8b9f28470535c2cb06118",
     "checks": [
       {
         "detail": "7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0",
@@ -44,7 +44,7 @@
         "passed": true
       },
       {
-        "detail": "ec1fdde6-1f6e-48b5-adf6-188ba5f1a1b2",
+        "detail": "4555bef0-f1df-43bd-b262-34e3bf48aaa3",
         "name": "checkpoint_saved",
         "passed": true
       },
@@ -64,42 +64,582 @@
         "passed": true
       },
       {
+        "detail": "125 events",
+        "name": "consumption_ledger_recorded",
+        "passed": true
+      },
+      {
+        "detail": "125 events",
+        "name": "learning_ledger_recorded",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "no_duplicate_batches",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "no_skipped_batches",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "protected_floors_active",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "metrics_reconstructable",
+        "passed": true
+      },
+      {
         "detail": "",
         "name": "audit_completed",
         "passed": true
       }
     ],
     "failed": 0,
-    "passed": 13,
-    "timestamp": "2026-08-08T03:35:11.663220+00:00",
-    "total_checks": 13
+    "passed": 19,
+    "timestamp": "2026-08-08T03:45:58.484142+00:00",
+    "total_checks": 19
   },
-  "evidence_hash": "9549036584db470b82f02b11851fd2091ec75f895799ae985ce1c0785f640fb6",
-  "manifest_hash": "39a9ad0be71b5f8a91d8b4bf9bf8d14e099511570df33ab498aa87c1da33d453",
+  "consumption_integrity": {
+    "batch_ids_in_order": [
+      "6983c383-eeca-473a-b97d-6e1652e7b4e1",
+      "a4cb07aa-b6ae-486d-b5dc-b5192b0da31f",
+      "2a6ee909-7632-4c9b-b39e-6ad1cc1f9865",
+      "c722fe10-bb41-448c-aec7-966f2be0e6d4",
+      "ccbc5960-4b3f-4680-a10d-15de841f900c",
+      "52a165de-98bf-493f-964b-5ca4bf60d759",
+      "ae81f0c3-db58-458f-bfd5-4add7c32b35d",
+      "748e488c-0aa9-47e1-bdb1-dc2ff69375c6",
+      "19ee748e-a842-4f55-bcbe-460f31d0b536",
+      "918a2648-d961-4408-9f40-d218628b63f3",
+      "0ddbf925-08de-4d31-92bd-832111dc22d6",
+      "efe666e5-6e67-4432-a7f7-474b32f0764d",
+      "f106a46f-0ec6-4c33-8921-f452076665da",
+      "a676bd66-d4ff-4040-ba48-1bb64954d7f7",
+      "cf678747-8198-408a-9d00-abac1258a16e",
+      "595b4fda-593a-47c0-bf27-3ea8e93c0c02",
+      "7ab2d3ff-8067-4163-a33a-1c5514bf1bd4",
+      "804f0111-f3a0-48ef-8d8a-eba5670f91d2",
+      "049c8ebc-a5ff-4520-951f-57948836fbc9",
+      "6eede2e8-c163-495a-ad89-e80537e2228d",
+      "ed28ddb7-0765-4b9e-9aad-61b98b5c5e26",
+      "61100e24-6ea4-405f-9c6a-030c616eb116",
+      "18c911d2-6efc-4679-9660-d409cb4c9b4f",
+      "de3c9e49-61c7-4694-a185-1d10168c122e",
+      "53c87566-7fa2-4247-ba50-1dacd73baf7f"
+    ],
+    "duplicate_indices": [],
+    "event_count": 125,
+    "global_batch_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "ledger_hash": "5ed219c25d2645b68bd4b09964034dfaa886c2933900205cfab6e539d1166424",
+    "missing_indices": [],
+    "no_duplicate_global_batches": true,
+    "no_missing_global_batches": true,
+    "unique_batches": 25
+  },
+  "evidence_hash": "c31cd2e07e72aeff49a4b0a6c5f5708c7a522864a6ccea5d02d23c854d75dbe5",
+  "manifest_hash": "75d7efe1a2e7a2804b622ac24d2967000b943bc83b405a17c6e66f1994fd640e",
   "metrics": {
-    "avg_batch_time_sec": 0.0083,
+    "avg_batch_time_sec": 0.0072,
     "avg_packing_utilization": 67.19,
-    "checkpoint_time_sec": 0.0063,
-    "loss_bearing_tokens_per_sec": 5180.6,
+    "checkpoint_time_sec": 0.0056,
+    "loss_bearing_tokens_per_sec": 5940.91,
     "packing_utilization_pct": 67.19,
     "replay_time_sec": 0.001,
-    "resume_time_sec": 0.0687,
+    "resume_time_sec": 0.0702,
     "total_batches": 25,
     "total_padded_tokens": 525,
     "total_useful_tokens": 1075,
-    "useful_tokens_per_sec": 5180.6
+    "useful_tokens_per_sec": 5940.91
+  },
+  "metrics_verification": {
+    "all_match": true,
+    "checks": {
+      "batch_count_match": true,
+      "packing_pct_match": true,
+      "padded_tokens_match": true,
+      "useful_tokens_match": true
+    },
+    "recomputed_from_batches": {
+      "packing_utilization_pct": 67.19,
+      "total_batches": 25,
+      "total_padded_tokens": 525,
+      "total_useful_tokens": 1075
+    },
+    "reported": {
+      "avg_batch_time_sec": 0.0072,
+      "avg_packing_utilization": 67.19,
+      "checkpoint_time_sec": 0.0056,
+      "loss_bearing_tokens_per_sec": 5940.91,
+      "packing_utilization_pct": 67.19,
+      "replay_time_sec": 0.001,
+      "resume_time_sec": 0.0702,
+      "total_batches": 25,
+      "total_padded_tokens": 525,
+      "total_useful_tokens": 1075,
+      "useful_tokens_per_sec": 5940.91
+    }
+  },
+  "packing": {
+    "avg_utilization": 0.671875,
+    "batches": 1,
+    "max_utilization": 0.671875,
+    "min_utilization": 0.671875,
+    "total_padded_tokens": 21,
+    "total_useful_tokens": 43
+  },
+  "provenance": {
+    "how_to_reconstruct": {
+      "batch_sequence_verified": true,
+      "checkpoint_at_crash": "83812913-7d02-4a17-81bc-575362f74016",
+      "consumption_ledger_path": "/Users/soham.niyogi/Soham/codebase/erav5/session6/project/submission_artifacts/ledgers/consumption.jsonl",
+      "fork_id": "c16e353f-c70f-4aaf-a6bc-837fb15dc820",
+      "learning_ledger_path": "/Users/soham.niyogi/Soham/codebase/erav5/session6/project/submission_artifacts/ledgers/learning.jsonl",
+      "ledger_offset_at_crash": 125,
+      "manifest_hash": "75d7efe1a2e7a2804b622ac24d2967000b943bc83b405a17c6e66f1994fd640e",
+      "manifest_path": "/Users/soham.niyogi/Soham/codebase/erav5/session6/project/submission_artifacts/manifests/primary_manifest.json",
+      "mixture_hash": "4eef4185b2017bab9eabeb0ea75036fe9dcb64f9e3b02249c48b380f742021d1",
+      "resume_from_batch": 25,
+      "steps": [
+        "Load tokenizer and verify hash",
+        "Load manifest and verify manifest_hash",
+        "Read consumption ledger \u2014 batch_ids_in_order defines training sequence",
+        "Read learning ledger \u2014 loss/perplexity per batch with OPUS attribution",
+        "Load checkpoint at crash point \u2014 resume from current_batch offset",
+        "Replay: recompute batch hashes from registry without regeneration"
+      ],
+      "tokenizer_hash": "7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0"
+    },
+    "what_consumed": {
+      "checkpoint_ids_referenced": [
+        "1fd4da64-c71b-4692-a2cb-9366f302209c",
+        "4555bef0-f1df-43bd-b262-34e3bf48aaa3",
+        "a99f4ac6-9b50-4b20-99c5-30e17164338c",
+        "b06a60ab-27c5-40fe-8fba-2acc0b40ff5e",
+        "b9bedc22-7311-4730-8a96-729335d3b2f3"
+      ],
+      "event_count": 125,
+      "ledger_hash": "5ed219c25d2645b68bd4b09964034dfaa886c2933900205cfab6e539d1166424",
+      "shard_consumption_counts": {
+        "01a59c3b-bdbc-4f28-b9f9-523fb339ac18": 25,
+        "03425830-4504-4835-8cd0-0b1272a37f25": 25,
+        "45a31e33-74b5-4bb1-b392-2f146575ee5a": 25,
+        "efda5450-2f23-42b6-82eb-e3cbf81ce135": 25,
+        "fe7b4735-c004-4b2d-a2dd-aab334f96ed6": 25
+      },
+      "unique_shards_consumed": 5
+    },
+    "what_learned": {
+      "curriculum_stages_seen": [
+        "stage_a"
+      ],
+      "event_count": 125,
+      "final_loss": 4.520712083956399,
+      "final_perplexity": 91.9010159228735,
+      "ledger_hash": "b1961257535e0356e1e96cb790a5b4f7374a024fb890ca6be8e6add23fe10d63",
+      "opus_decision_counts": {
+        "accept": 50,
+        "protected_override": 75
+      },
+      "samples": [
+        {
+          "attention_mask_hash": "2d60fec886e09d247516223a45fe222f0155c526a46c22c3f221d90d0fef74d0",
+          "avg_loss": 4.520712828862658,
+          "batch_id": "6983c383-eeca-473a-b97d-6e1652e7b4e1",
+          "curriculum_stage": "stage_a",
+          "loss": 4.520712828862658,
+          "opus_decisions": [
+            "accept",
+            "protected_override",
+            "protected_override",
+            "accept",
+            "protected_override"
+          ],
+          "perplexity": 91.90108438054101,
+          "token_spans": [
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "attention_mask_hash": "2d60fec886e09d247516223a45fe222f0155c526a46c22c3f221d90d0fef74d0",
+          "avg_loss": 4.520712813340362,
+          "batch_id": "a4cb07aa-b6ae-486d-b5dc-b5192b0da31f",
+          "curriculum_stage": "stage_a",
+          "loss": 4.520712797818066,
+          "opus_decisions": [
+            "accept",
+            "protected_override",
+            "protected_override",
+            "accept",
+            "protected_override"
+          ],
+          "perplexity": 91.9010815275094,
+          "token_spans": [
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "attention_mask_hash": "2d60fec886e09d247516223a45fe222f0155c526a46c22c3f221d90d0fef74d0",
+          "avg_loss": 4.520712797818265,
+          "batch_id": "2a6ee909-7632-4c9b-b39e-6ad1cc1f9865",
+          "curriculum_stage": "stage_a",
+          "loss": 4.52071276677407,
+          "opus_decisions": [
+            "accept",
+            "protected_override",
+            "protected_override",
+            "accept",
+            "protected_override"
+          ],
+          "perplexity": 91.90107867453257,
+          "token_spans": [
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "attention_mask_hash": "2d60fec886e09d247516223a45fe222f0155c526a46c22c3f221d90d0fef74d0",
+          "avg_loss": 4.520712782296364,
+          "batch_id": "c722fe10-bb41-448c-aec7-966f2be0e6d4",
+          "curriculum_stage": "stage_a",
+          "loss": 4.5207127357306645,
+          "opus_decisions": [
+            "accept",
+            "protected_override",
+            "protected_override",
+            "accept",
+            "protected_override"
+          ],
+          "perplexity": 91.90107582161019,
+          "token_spans": [
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "attention_mask_hash": "2d60fec886e09d247516223a45fe222f0155c526a46c22c3f221d90d0fef74d0",
+          "avg_loss": 4.520712766774663,
+          "batch_id": "ccbc5960-4b3f-4680-a10d-15de841f900c",
+          "curriculum_stage": "stage_a",
+          "loss": 4.520712704687854,
+          "opus_decisions": [
+            "accept",
+            "protected_override",
+            "protected_override",
+            "accept",
+            "protected_override"
+          ],
+          "perplexity": 91.9010729687426,
+          "token_spans": [
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              0,
+              8
+            ]
+          ]
+        }
+      ],
+      "unique_batches": 25
+    },
+    "why_consumed": {
+      "mixture": {
+        "actual": {
+          "code": 0.36363636363636365,
+          "english": 0.36363636363636365,
+          "indic": 0.2727272727272727
+        },
+        "mixture_hash": "4eef4185b2017bab9eabeb0ea75036fe9dcb64f9e3b02249c48b380f742021d1",
+        "planned": {
+          "code": 0.2,
+          "english": 0.4,
+          "indic": 0.4
+        },
+        "protected_floors": {
+          "code": 5,
+          "english": 10,
+          "indic": 15
+        },
+        "stage": "stage_a",
+        "stage_idx": 0
+      },
+      "opus": {
+        "decision_counts": {
+          "accept": 2,
+          "deferred": 8,
+          "protected_override": 3
+        },
+        "decisions": [
+          {
+            "decision": "deferred",
+            "difficulty": 0.08016528925619835,
+            "evaluation": false,
+            "lane": "english",
+            "novelty": 1.0,
+            "quality": 0.55,
+            "reason": "difficulty_too_low",
+            "shard_id": "c5f8f5fa-5575-449c-b9d6-143e7dab8067"
+          },
+          {
+            "decision": "accept",
+            "difficulty": 0.3017283950617284,
+            "evaluation": false,
+            "lane": "english",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "passed_all_gates",
+            "shard_id": "01a59c3b-bdbc-4f28-b9f9-523fb339ac18"
+          },
+          {
+            "decision": "accept",
+            "difficulty": 0.699375,
+            "evaluation": false,
+            "lane": "english",
+            "novelty": 1.0,
+            "quality": 0.4,
+            "reason": "passed_all_gates",
+            "shard_id": "fe7b4735-c004-4b2d-a2dd-aab334f96ed6"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "code",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "difficulty_too_high",
+            "shard_id": "200aa1a5-fe2c-4bbd-b67d-0f03ebb33861"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "code",
+            "novelty": 1.0,
+            "quality": 0.4,
+            "reason": "difficulty_too_high",
+            "shard_id": "2bc02358-19ed-4189-ad9c-fc414ac8b5d7"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "code",
+            "novelty": 1.0,
+            "quality": 0.4,
+            "reason": "difficulty_too_high",
+            "shard_id": "54a2463f-e18b-41dd-b327-e5a295f5646b"
+          },
+          {
+            "decision": "protected_override",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "indic",
+            "novelty": 1.0,
+            "quality": 0.4,
+            "reason": "protected_floor_override:indic",
+            "shard_id": "03425830-4504-4835-8cd0-0b1272a37f25"
+          },
+          {
+            "decision": "protected_override",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "indic",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "protected_floor_override:indic",
+            "shard_id": "efda5450-2f23-42b6-82eb-e3cbf81ce135"
+          },
+          {
+            "decision": "protected_override",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "indic",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "protected_floor_override:indic",
+            "shard_id": "45a31e33-74b5-4bb1-b392-2f146575ee5a"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "agent",
+            "novelty": 1.0,
+            "quality": 0.5,
+            "reason": "difficulty_too_high",
+            "shard_id": "8c504d4a-5bcc-4387-be6a-b92f94c06aac"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": false,
+            "lane": "agent",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "difficulty_too_high",
+            "shard_id": "74b6b4ff-8851-426d-9bd8-cc3830190511"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": true,
+            "lane": "english",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "evaluation_shard_deferred",
+            "shard_id": "4ffe12bd-4a24-42db-bc6f-b1e8ee038365"
+          },
+          {
+            "decision": "deferred",
+            "difficulty": 1.0,
+            "evaluation": true,
+            "lane": "code",
+            "novelty": 1.0,
+            "quality": 0.45,
+            "reason": "evaluation_shard_deferred",
+            "shard_id": "c352809a-935f-4faf-a1ec-45a1bed69f5d"
+          }
+        ],
+        "decisions_hash": "e941e9ee9b8078340ba0e973d2e14da48a2ff248d2b5c6ed418c3868793e9969",
+        "total_decisions": 13
+      },
+      "protected_floors": {
+        "code": 5,
+        "english": 10,
+        "indic": 15
+      }
+    }
   },
   "replay": {
     "all_matched": true,
     "ledger_consistent": true,
     "mismatches": [],
-    "replay_hash": "bcfdd3dee085650d9baf21408bf972c0a420ee5b8a85f77bdd8d16d0d7a49f0b",
-    "replay_time_sec": 0.0010099169885506853,
+    "replay_hash": "64dfe7558a3e894fa7209373ff31be8270fafa0820e9fbad857752ee4da92e32",
+    "replay_time_sec": 0.0009715420019347221,
     "total_batches": 25,
     "verified": 25
   },
   "system": "Training Data Execution System",
-  "timestamp": "2026-08-08T03:35:11.663348+00:00",
+  "timestamp": "2026-08-08T03:45:58.486478+00:00",
   "tokenizer_hash": "7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -24,6 +24,7 @@ from core.audit_engine import AuditEngine
 from core.batch_engine import BatchEngine, EvalFirewallViolation
 from core.checkpoint_engine import CheckpointEngine
 from core.curriculum_engine import CurriculumEngine
+from core.evidence_engine import build_full_evidence
 from core.fork_engine import ForkEngine
 from core.manifest_engine import ManifestEngine
 from core.metrics_engine import MetricsCollector
@@ -88,30 +89,87 @@ def generate_evidence(
     tokenizer_hash: str,
     manifest_hash: str,
     replay_result: dict[str, Any],
+    *,
+    mixture: dict[str, Any],
+    opus_decisions: list[dict[str, Any]],
+    consumption: ConsumptionLedger,
+    learning: LearningLedger,
+    batch_registry: dict[str, Any],
+    checkpoint: dict[str, Any] | None,
+    fork_record: dict[str, Any] | None,
+    artifacts_dir: Path,
+    packing_report: dict[str, Any],
 ) -> dict[str, Any]:
-    evidence = {
-        "system": "Training Data Execution System",
-        "version": "1.0.0",
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "tokenizer_hash": tokenizer_hash,
-        "manifest_hash": manifest_hash,
-        "audit": audit_report,
-        "metrics": metrics,
-        "replay": replay_result,
-        "evidence_hash": "",
-    }
-    evidence["evidence_hash"] = sha256_json(
-        {k: v for k, v in evidence.items() if k != "evidence_hash"}
+    return build_full_evidence(
+        audit_report=audit_report,
+        metrics=metrics,
+        replay_result=replay_result,
+        tokenizer_hash=tokenizer_hash,
+        manifest_hash=manifest_hash,
+        mixture=mixture,
+        opus_decisions=opus_decisions,
+        consumption=consumption,
+        learning=learning,
+        batch_registry=batch_registry,
+        checkpoint=checkpoint,
+        fork_record=fork_record,
+        artifacts_dir=artifacts_dir,
+        packing_report=packing_report,
     )
-    return evidence
 
 
 def evidence_markdown(evidence: dict[str, Any]) -> str:
+    prov = evidence.get("provenance", {})
     lines = [
         "# Training Data Execution System — Evidence Report",
         "",
-        f"**Generated:** {evidence['timestamp']}",
+        f"**Generated:** {evidence.get('timestamp', 'see audit.timestamp')}",
         f"**Evidence Hash:** `{evidence['evidence_hash'][:32]}…`",
+        "",
+        "## What Was Consumed",
+        "",
+        f"- Consumption events: {prov.get('what_consumed', {}).get('event_count', 0)}",
+        f"- Unique shards: {prov.get('what_consumed', {}).get('unique_shards_consumed', 0)}",
+        f"- Ledger hash: `{prov.get('what_consumed', {}).get('ledger_hash', '')[:32]}…`",
+        "",
+        "## Why It Was Consumed",
+        "",
+    ]
+    mixture = prov.get("why_consumed", {}).get("mixture", {})
+    lines.extend([
+        f"- Curriculum stage: **{mixture.get('stage', 'n/a')}**",
+        f"- Planned mixture: `{mixture.get('planned', {})}`",
+        f"- Actual mixture: `{mixture.get('actual', {})}`",
+        f"- Protected floors: `{mixture.get('protected_floors', {})}`",
+        "",
+        "### OPUS Decisions",
+        "",
+    ])
+    opus = prov.get("why_consumed", {}).get("opus", {})
+    for decision, count in opus.get("decision_counts", {}).items():
+        lines.append(f"- {decision}: {count}")
+    lines.extend([
+        "",
+        "## What The Model Learned",
+        "",
+    ])
+    learned = prov.get("what_learned", {})
+    lines.extend([
+        f"- Learning events: {learned.get('event_count', 0)}",
+        f"- Final loss: {learned.get('final_loss', 'n/a')}",
+        f"- Final perplexity: {learned.get('final_perplexity', 'n/a')}",
+        f"- OPUS in learning ledger: `{learned.get('opus_decision_counts', {})}`",
+        "",
+        "## How To Reconstruct",
+        "",
+    ])
+    recon = prov.get("how_to_reconstruct", {})
+    for i, step in enumerate(recon.get("steps", []), 1):
+        lines.append(f"{i}. {step}")
+    lines.extend([
+        "",
+        f"- Resume from batch: {recon.get('resume_from_batch')}",
+        f"- Batch sequence verified: {recon.get('batch_sequence_verified')}",
         "",
         "## Audit Results",
         "",
@@ -121,19 +179,20 @@ def evidence_markdown(evidence: dict[str, Any]) -> str:
         "",
         "### Check Details",
         "",
-    ]
+    ])
     for check in evidence["audit"]["checks"]:
         status = "✅" if check["passed"] else "❌"
         lines.append(f"- {status} **{check['name']}**: {check.get('detail', '')}")
+    mv = evidence.get("metrics_verification", {})
     lines.extend([
         "",
-        "## Performance Metrics",
+        "## Metrics Verification (recomputed from batches)",
         "",
-        f"- Packing utilization: {evidence['metrics']['packing_utilization_pct']}%",
-        f"- Useful tokens/sec: {evidence['metrics']['useful_tokens_per_sec']}",
-        f"- Replay time: {evidence['metrics']['replay_time_sec']}s",
-        f"- Resume time: {evidence['metrics']['resume_time_sec']}s",
-        f"- Avg batch time: {evidence['metrics']['avg_batch_time_sec']}s",
+        f"- All metrics match: **{mv.get('all_match', False)}**",
+        f"- Useful tokens: reported={evidence['metrics'].get('total_useful_tokens')} "
+        f"recomputed={mv.get('recomputed_from_batches', {}).get('total_useful_tokens')}",
+        f"- Packing %: reported={evidence['metrics'].get('packing_utilization_pct')}% "
+        f"recomputed={mv.get('recomputed_from_batches', {}).get('packing_utilization_pct')}%",
         "",
         "## Replay Verification",
         "",
@@ -366,6 +425,7 @@ def run_pipeline(time_machine_offset: int | None = None) -> dict[str, Any]:
     # ── 11. Fork ──────────────────────────────────────────────────────────
     log("=== Phase 11: Fork ===", log_lines)
     fork_engine = ForkEngine(root)
+    fork_record = None
     if trainer.last_checkpoint:
         fork_result = fork_engine.fork(
             parent_checkpoint=trainer.last_checkpoint,
@@ -373,32 +433,53 @@ def run_pipeline(time_machine_offset: int | None = None) -> dict[str, Any]:
             branch_name="fork_best_fit",
             shards=accepted_shards[:6],
         )
-        fork_engine.verify_fork_integrity(
-            fork_result["fork_record"], trainer.last_checkpoint
-        )
+        fork_record = fork_result["fork_record"]
+        fork_engine.verify_fork_integrity(fork_record, trainer.last_checkpoint)
         audit.audit_fork(1)
         log(f"[PASS] fork_created ({fork_result['fork_record']['fork_id'][:8]}…)", log_lines)
 
     # ── 12. Audit & Evidence ──────────────────────────────────────────────
     log("=== Phase 12: Audit & Evidence ===", log_lines)
-    audit_report = audit.generate_report()
-    perf_report = metrics.generate_report()
-
-    evidence = generate_evidence(
-        audit_report, perf_report, tokenizer_hash, manifest_hash, replay_result
+    from core.evidence_engine import (
+        reconstruct_metrics_from_batches,
+        verify_consumption_ledger,
+        verify_metrics_claims,
     )
+    cons_verify = verify_consumption_ledger(consumption)
+    audit.check("consumption_ledger_recorded", cons_verify["event_count"] > 0, f"{cons_verify['event_count']} events")
+    audit.check("learning_ledger_recorded", learning.offset > 0, f"{learning.offset} events")
+    audit.check("no_duplicate_batches", cons_verify["no_duplicate_global_batches"])
+    audit.check("no_skipped_batches", cons_verify["no_missing_global_batches"])
+    audit.check("protected_floors_active", bool(mixture.get("protected_floors")))
+    recomputed = reconstruct_metrics_from_batches(
+        trainer.batch_registry, cons_verify["batch_ids_in_order"]
+    )
+    perf_report = metrics.generate_report()
+    mv = verify_metrics_claims(perf_report, recomputed)
+    audit.check("metrics_reconstructable", mv["all_match"])
+
+    audit_report = audit.generate_report()
 
     artifacts = dirs["artifacts"]
-    (artifacts / "evidence.json").write_text(
-        json.dumps(evidence, indent=2, sort_keys=True), encoding="utf-8"
+    evidence = generate_evidence(
+        audit_report,
+        perf_report,
+        tokenizer_hash,
+        manifest_hash,
+        replay_result,
+        mixture=mixture,
+        opus_decisions=opus.decisions,
+        consumption=consumption,
+        learning=learning,
+        batch_registry=trainer.batch_registry,
+        checkpoint=trainer.last_checkpoint,
+        fork_record=fork_record,
+        artifacts_dir=artifacts,
+        packing_report=util_report,
     )
-    (artifacts / "evidence.md").write_text(evidence_markdown(evidence), encoding="utf-8")
-    (artifacts / "performance.json").write_text(
-        json.dumps(perf_report, indent=2, sort_keys=True), encoding="utf-8"
-    )
-    (artifacts / "run.log").write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+    evidence["timestamp"] = datetime.now(timezone.utc).isoformat()
 
-    # Copy ledgers and checkpoints to submission
+    # Copy ledgers and checkpoints to submission before writing evidence paths
     for src_name, src_dir in [("ledgers", dirs["ledgers"]), ("checkpoints", dirs["checkpoints"])]:
         dest = artifacts / src_name
         if dest.exists():
@@ -410,9 +491,25 @@ def run_pipeline(time_machine_offset: int | None = None) -> dict[str, Any]:
     manifest_dest.mkdir(exist_ok=True)
     shutil.copy(manifest_path, manifest_dest / "primary_manifest.json")
 
+    (artifacts / "evidence.json").write_text(
+        json.dumps(evidence, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    (artifacts / "evidence.md").write_text(evidence_markdown(evidence), encoding="utf-8")
+    (artifacts / "performance.json").write_text(
+        json.dumps({**perf_report, "verification": mv}, indent=2, sort_keys=True), encoding="utf-8"
+    )
+
     for line in audit.format_run_log():
         if line not in log_lines:
             log(line, log_lines)
+
+    (artifacts / "run.log").write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+
+    # Sync public submission copies for GitHub links
+    submission_public = root.parent / "submission"
+    submission_public.mkdir(parents=True, exist_ok=True)
+    for name in ("run.log", "evidence.json", "evidence.md"):
+        shutil.copy(artifacts / name, submission_public / name)
 
     return {
         "audit": audit_report,

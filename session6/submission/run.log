@@ -3,7 +3,7 @@
 === Phase 2: Shards ===
 [PASS] shards_created (13 shards)
 === Phase 3: Manifests ===
-[PASS] manifests_verified (39a9ad0be71b5f8a…)
+[PASS] manifests_verified (75d7efe1a2e7a280…)
 === Phase 4: Curriculum ===
 [PASS] mixture_compiled (stage=stage_a)
 === Phase 5: OPUS ===
@@ -15,10 +15,24 @@
 === Phase 8: Training ===
 [PASS] crash_simulated (after batch 17)
 === Phase 9: Resume ===
-[PASS] checkpoint_saved (ec1fdde6…)
+[PASS] checkpoint_saved (4555bef0…)
 [PASS] resume_next_batch_matched
 === Phase 10: Replay ===
 [PASS] replay_hash_matched
 === Phase 11: Fork ===
-[PASS] fork_created (c71b8244…)
+[PASS] fork_created (c16e353f…)
 === Phase 12: Audit & Evidence ===
+[PASS] tokenizer_hash_verified (7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0)
+[PASS] manifests_verified (1 manifests)
+[PASS] mixture_compiled (stage_a)
+[PASS] eval_shard_blocked (2 eval shards blocked)
+[PASS] crash_simulated
+[PASS] checkpoint_saved (4555bef0-f1df-43bd-b262-34e3bf48aaa3)
+[PASS] fork_created (1 forks)
+[PASS] consumption_ledger_recorded (125 events)
+[PASS] learning_ledger_recorded (125 events)
+[PASS] no_duplicate_batches
+[PASS] no_skipped_batches
+[PASS] protected_floors_active
+[PASS] metrics_reconstructable
+[PASS] audit_completed
