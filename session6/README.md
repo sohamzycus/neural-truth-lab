@@ -19,7 +19,7 @@ This is **not a DataLoader**. The table below contrasts what reviewers typically
 | **Experimentation** | Change code, lose trace | Fork from checkpoint — independent branch + independent ledger |
 | **Debugging** | Print statements | Time Machine — inspect full state at any ledger offset |
 
-### vs. a typical assignment
+### vs. a typical training data pipeline
 
 ```mermaid
 flowchart LR
@@ -48,7 +48,7 @@ flowchart LR
 
 ![DataLoader vs Training Data OS](assets/differentiators.png)
 
-### The five things no assignment does
+### The five things no typical training data pipeline does
 
 | # | Differentiator | Why it matters |
 |---|----------------|----------------|
