@@ -65,6 +65,15 @@ cd session6/project
 python3 run_demo.py
 ```
 
+**Push to GitHub** (if port 22 is blocked on your network):
+
+```bash
+# from repo root
+bash scripts/push.sh
+```
+
+See [`session6/PUSH.md`](PUSH.md) for all push methods.
+
 Time machine (debugger for training state at ledger offset N):
 
 ```bash
