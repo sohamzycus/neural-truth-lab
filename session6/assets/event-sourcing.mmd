@@ -1,0 +1,35 @@
+flowchart TB
+    subgraph GIT["Git mental model"]
+        G1["Documents = commits"]
+        G2["Shards = blobs"]
+        G3["Manifests = trees"]
+        G4["Checkpoints = tags"]
+        G5["Fork = branch"]
+    end
+
+    subgraph KAFKA["Kafka mental model"]
+        K1["Consumption events = topic A"]
+        K2["Learning events = topic B"]
+        K3["Monotonic offset per event"]
+        K4["Replay = consumer rewind"]
+    end
+
+    subgraph ES["Event Sourcing mental model"]
+        E1["State = fold over events"]
+        E2["Ledgers = source of truth"]
+        E3["Batches reconstructed, not regenerated"]
+        E4["Audit = verify event chain"]
+    end
+
+    GIT --- KAFKA --- ES
+
+    subgraph RESULT["Combined in this system"]
+        R1["Write once · hash everything"]
+        R2["Append only · never overwrite"]
+        R3["Replay recomputes · must match"]
+        R4["Fork copies checkpoint · new ledger stream"]
+    end
+
+    GIT --> RESULT
+    KAFKA --> RESULT
+    ES --> RESULT

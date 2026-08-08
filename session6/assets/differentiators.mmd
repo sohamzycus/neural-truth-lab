@@ -1,0 +1,22 @@
+flowchart LR
+    subgraph TYPICAL["❌ Typical Assignment / DataLoader"]
+        T1[Read files]
+        T2[Tokenize]
+        T3[Yield batches]
+        T4[Train]
+        T1 --> T2 --> T3 --> T4
+    end
+
+    subgraph THIS["✅ Training Data OS — this project"]
+        direction TB
+        D1["Immutable artifacts<br/>every stage hashed"]
+        D2["Event-sourced ledgers<br/>append-only, never mutate"]
+        D3["OPUS admission gate<br/>no random accept"]
+        D4["Eval firewall<br/>held-out never in loss"]
+        D5["Crash → Resume → Replay<br/>identical hashes proven"]
+        D6["Fork branches<br/>independent ledgers"]
+        D7["Time Machine<br/>debug any ledger offset"]
+        D1 --> D2 --> D3 --> D4 --> D5 --> D6 --> D7
+    end
+
+    TYPICAL -.->|"not comparable"| THIS

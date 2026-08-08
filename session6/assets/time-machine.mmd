@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph LEDGER["Consumption + Learning Ledgers"]
+        E0["offset 0"]
+        E1["offset 1"]
+        E2["offset …"]
+        EN["offset N"]
+        E0 --> E1 --> E2 --> EN
+    end
+
+    TM["⏱️ Time Machine<br/>python run_demo.py --time-machine N"]
+
+    EN --> TM
+
+    subgraph SNAPSHOT["State at offset N"]
+        S1["Current batch"]
+        S2["Current checkpoint"]
+        S3["Curriculum stage + mixture"]
+        S4["OPUS decision"]
+        S5["Loss + perplexity"]
+        S6["Ledger event count"]
+    end
+
+    TM --> SNAPSHOT
+
+    NOTE["Like a debugger breakpoint<br/>for training data consumption"]
+
+    SNAPSHOT --> NOTE

@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant T as Trainer
+    participant L as Ledgers
+    participant C as Checkpoint
+    participant X as Crash
+    participant R as Resume
+    participant P as Replay
+
+    T->>L: append consumption + learning events
+    T->>C: save checkpoint every 5 batches
+    loop batches 1–17
+        T->>L: record batch hash + loss
+    end
+    T->>C: save checkpoint at batch 17
+    T->>X: 💥 simulated crash
+    Note over X: process dies — state only in C + L
+
+    R->>C: load model · RNG · ledger offset
+    R->>T: resume from batch 18
+    loop batches 18–25
+        T->>L: append (no duplicates)
+    end
+
+    P->>L: read all events
+    P->>P: recompute batch hashes
+    Note over P: ✅ replay_hash_matched

@@ -1,0 +1,61 @@
+flowchart TB
+    subgraph INGEST["① Ingestion Layer — immutable from first byte"]
+        DOC[("📄 Documents")]
+        TOK["🔒 Frozen Tokenizer<br/>SHA-256 verified"]
+        SHARD["📦 Tokenized Shards<br/>content_hash · lane · stage"]
+        MAN["📋 Manifests<br/>manifest_hash"]
+    end
+
+    subgraph SCHEDULE["② Scheduling Layer — what to train, when"]
+        CURR["📅 Curriculum Engine<br/>Stage → Lane → Weight → Floor"]
+        OPUS["⚖️ OPUS Admission<br/>quality · novelty · difficulty"]
+        MIX["🎯 Mixture Compiler<br/>planned vs actual"]
+    end
+
+    subgraph EXECUTE["③ Execution Layer — batches into training"]
+        PACK["🧩 Packing Policies<br/>Pad · Concat · Greedy · BestFit · Struct"]
+        BATCH["📊 Batches<br/>batch_hash · shard_map"]
+        FIREWALL{"🛡️ Eval Firewall"}
+        TRAIN["🧠 Tiny Trainer<br/>Embedding + MLP"]
+    end
+
+    subgraph PERSIST["④ Persistence Layer — never overwrite history"]
+        CONS[("📒 Consumption Ledger<br/>append-only JSONL")]
+        LEARN[("📗 Learning Ledger<br/>loss · perplexity · OPUS")]
+        CKPT[("💾 Checkpoints<br/>model · RNG · offset")]
+        STORE[("🗄️ Immutable Store<br/>content-addressed SHA-256")]
+    end
+
+    subgraph RESILIENCE["⑤ Resilience Layer — production survival"]
+        CRASH["💥 Crash @ batch 17"]
+        RESUME["▶️ Resume<br/>no skip · no duplicate"]
+        REPLAY["🔁 Replay<br/>recompute hashes · verify"]
+        FORK["🌿 Fork<br/>new branch · new ledger"]
+    end
+
+    subgraph OBSERVE["⑥ Observability Layer"]
+        TM["⏱️ Time Machine<br/>--time-machine N"]
+        AUDIT["✅ Audit Engine"]
+        EVID["📑 Evidence Bundle<br/>run.log · evidence.json"]
+    end
+
+    DOC --> TOK --> SHARD --> MAN
+    MAN --> CURR --> OPUS --> MIX
+    MIX --> PACK --> BATCH
+    BATCH --> FIREWALL
+    FIREWALL -->|"eval shard"| BLOCK["❌ eval_shard_blocked"]
+    FIREWALL -->|"training shard"| TRAIN
+    TRAIN --> CONS & LEARN
+    TRAIN --> CKPT
+    SHARD & MAN & BATCH & CKPT --> STORE
+    CKPT --> CRASH --> RESUME --> REPLAY
+    CKPT --> FORK
+    CONS & LEARN & CKPT --> TM
+    CONS & LEARN & REPLAY & FORK --> AUDIT --> EVID
+
+    classDef immutable fill:#e8f4fd,stroke:#1a73e8,stroke-width:2px
+    classDef ledger fill:#fef7e0,stroke:#f9ab00,stroke-width:2px
+    classDef unique fill:#e6f4ea,stroke:#34a853,stroke-width:2px
+    class SHARD,MAN,BATCH,CKPT,STORE immutable
+    class CONS,LEARN ledger
+    class TM,OPUS,FIREWALL,FORK,REPLAY unique
