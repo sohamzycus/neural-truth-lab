@@ -1,0 +1,105 @@
+{
+  "audit": {
+    "all_passed": true,
+    "audit_hash": "58a807aea48adc032e53c196b47d68bba405221ef62ec9f9af9b365d6d5df31b",
+    "checks": [
+      {
+        "detail": "7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0",
+        "name": "tokenizer_hash_verified",
+        "passed": true
+      },
+      {
+        "detail": "13 shards",
+        "name": "shards_created",
+        "passed": true
+      },
+      {
+        "detail": "1 manifests",
+        "name": "manifests_verified",
+        "passed": true
+      },
+      {
+        "detail": "stage_a",
+        "name": "mixture_compiled",
+        "passed": true
+      },
+      {
+        "detail": "13 decisions",
+        "name": "opus_decisions_recorded",
+        "passed": true
+      },
+      {
+        "detail": "2 eval shards blocked",
+        "name": "eval_shard_blocked",
+        "passed": true
+      },
+      {
+        "detail": "util=67.19%",
+        "name": "packing_completed",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "crash_simulated",
+        "passed": true
+      },
+      {
+        "detail": "ec1fdde6-1f6e-48b5-adf6-188ba5f1a1b2",
+        "name": "checkpoint_saved",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "resume_next_batch_matched",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "replay_hash_matched",
+        "passed": true
+      },
+      {
+        "detail": "1 forks",
+        "name": "fork_created",
+        "passed": true
+      },
+      {
+        "detail": "",
+        "name": "audit_completed",
+        "passed": true
+      }
+    ],
+    "failed": 0,
+    "passed": 13,
+    "timestamp": "2026-08-08T03:35:11.663220+00:00",
+    "total_checks": 13
+  },
+  "evidence_hash": "9549036584db470b82f02b11851fd2091ec75f895799ae985ce1c0785f640fb6",
+  "manifest_hash": "39a9ad0be71b5f8a91d8b4bf9bf8d14e099511570df33ab498aa87c1da33d453",
+  "metrics": {
+    "avg_batch_time_sec": 0.0083,
+    "avg_packing_utilization": 67.19,
+    "checkpoint_time_sec": 0.0063,
+    "loss_bearing_tokens_per_sec": 5180.6,
+    "packing_utilization_pct": 67.19,
+    "replay_time_sec": 0.001,
+    "resume_time_sec": 0.0687,
+    "total_batches": 25,
+    "total_padded_tokens": 525,
+    "total_useful_tokens": 1075,
+    "useful_tokens_per_sec": 5180.6
+  },
+  "replay": {
+    "all_matched": true,
+    "ledger_consistent": true,
+    "mismatches": [],
+    "replay_hash": "bcfdd3dee085650d9baf21408bf972c0a420ee5b8a85f77bdd8d16d0d7a49f0b",
+    "replay_time_sec": 0.0010099169885506853,
+    "total_batches": 25,
+    "verified": 25
+  },
+  "system": "Training Data Execution System",
+  "timestamp": "2026-08-08T03:35:11.663348+00:00",
+  "tokenizer_hash": "7fa988eb7af48db8993c942c04c0f40bb552a8044ec652e9958309fadb8a31f0",
+  "version": "1.0.0"
+}

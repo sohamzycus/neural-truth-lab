@@ -1,0 +1,24 @@
+=== Phase 1: Tokenizer ===
+[PASS] tokenizer_hash_verified (7fa988eb7af48db8…)
+=== Phase 2: Shards ===
+[PASS] shards_created (13 shards)
+=== Phase 3: Manifests ===
+[PASS] manifests_verified (39a9ad0be71b5f8a…)
+=== Phase 4: Curriculum ===
+[PASS] mixture_compiled (stage=stage_a)
+=== Phase 5: OPUS ===
+[PASS] opus_decisions_recorded (13 decisions)
+=== Phase 6: Evaluation Firewall ===
+[PASS] eval_shard_blocked (2 blocked)
+=== Phase 7: Packing & Batches ===
+[PASS] packing_completed (util=67.19%)
+=== Phase 8: Training ===
+[PASS] crash_simulated (after batch 17)
+=== Phase 9: Resume ===
+[PASS] checkpoint_saved (ec1fdde6…)
+[PASS] resume_next_batch_matched
+=== Phase 10: Replay ===
+[PASS] replay_hash_matched
+=== Phase 11: Fork ===
+[PASS] fork_created (c71b8244…)
+=== Phase 12: Audit & Evidence ===
