@@ -1,0 +1,225 @@
+{
+  "seed": 42,
+  "languages": {
+    "english": {
+      "count": 15,
+      "avg_utf8_bytes": 9.67,
+      "fixed_avg_waste_ratio": 0.6979,
+      "fixed_truncation_rate": 0.0,
+      "dynamic_truncation_rate": 0.0,
+      "dynamic_collision_groups": 0,
+      "fixed_collision_groups": 0,
+      "reconstruction_test": {
+        "count": 27,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 14.4074,
+        "length_preserved_rate": 1.0,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 14,
+            "length_preserved": true,
+            "original_byte_length": 14,
+            "decoded_byte_length": 42,
+            "truncated_input": false,
+            "byte_length": 14
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 20,
+            "length_preserved": true,
+            "original_byte_length": 20,
+            "decoded_byte_length": 60,
+            "truncated_input": false,
+            "byte_length": 20
+          }
+        ]
+      }
+    },
+    "hindi": {
+      "count": 10,
+      "avg_utf8_bytes": 20.1,
+      "fixed_avg_waste_ratio": 0.3875,
+      "fixed_truncation_rate": 0.2,
+      "dynamic_truncation_rate": 0.0,
+      "dynamic_collision_groups": 0,
+      "fixed_collision_groups": 0,
+      "reconstruction_test": {
+        "count": 5,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 17.0,
+        "length_preserved_rate": 0.0,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 22,
+            "length_preserved": false,
+            "original_byte_length": 22,
+            "decoded_byte_length": 66,
+            "truncated_input": false,
+            "byte_length": 22
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 13,
+            "length_preserved": false,
+            "original_byte_length": 13,
+            "decoded_byte_length": 39,
+            "truncated_input": false,
+            "byte_length": 13
+          }
+        ]
+      }
+    },
+    "telugu": {
+      "count": 7,
+      "avg_utf8_bytes": 22.71,
+      "fixed_avg_waste_ratio": 0.3259,
+      "fixed_truncation_rate": 0.2857,
+      "dynamic_truncation_rate": 0.0,
+      "dynamic_collision_groups": 0,
+      "fixed_collision_groups": 0,
+      "reconstruction_test": {
+        "count": 5,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 20.0,
+        "length_preserved_rate": 0.0,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 25,
+            "length_preserved": false,
+            "original_byte_length": 25,
+            "decoded_byte_length": 75,
+            "truncated_input": false,
+            "byte_length": 25
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 10,
+            "length_preserved": false,
+            "original_byte_length": 10,
+            "decoded_byte_length": 30,
+            "truncated_input": false,
+            "byte_length": 10
+          }
+        ]
+      }
+    },
+    "bengali": {
+      "count": 7,
+      "avg_utf8_bytes": 18.86,
+      "fixed_avg_waste_ratio": 0.4286,
+      "fixed_truncation_rate": 0.1429,
+      "dynamic_truncation_rate": 0.0,
+      "dynamic_collision_groups": 0,
+      "fixed_collision_groups": 0,
+      "reconstruction_test": {
+        "count": 8,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 16.25,
+        "length_preserved_rate": 0.0,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 15,
+            "length_preserved": false,
+            "original_byte_length": 15,
+            "decoded_byte_length": 45,
+            "truncated_input": false,
+            "byte_length": 15
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 10,
+            "length_preserved": false,
+            "original_byte_length": 10,
+            "decoded_byte_length": 30,
+            "truncated_input": false,
+            "byte_length": 10
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 22,
+            "length_preserved": false,
+            "original_byte_length": 22,
+            "decoded_byte_length": 66,
+            "truncated_input": false,
+            "byte_length": 22
+          }
+        ]
+      }
+    }
+  }
+}

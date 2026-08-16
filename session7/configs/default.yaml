@@ -1,0 +1,7 @@
+seed: 42
+latent_dim: 64
+fixed_capacity: 32
+dynamic_max_bytes: 256
+decoder_steps: 2500
+decoder_full_epoch_steps: 120
+train_test_split: held_out_strings in datasets/multilingual_corpus.py

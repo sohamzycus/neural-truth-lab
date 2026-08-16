@@ -1,0 +1,1036 @@
+{
+  "latent_dims": [
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "seed": 42,
+  "results": [
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 16,
+      "trainable_parameters_decoder": 26673,
+      "train_time_sec": 2.422,
+      "final_train_loss": 4.985978,
+      "validation_loss": 4.149005,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 32,
+      "trainable_parameters_decoder": 28225,
+      "train_time_sec": 2.767,
+      "final_train_loss": 4.97109,
+      "validation_loss": 4.131123,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 64,
+      "trainable_parameters_decoder": 31329,
+      "train_time_sec": 2.702,
+      "final_train_loss": 4.97108,
+      "validation_loss": 4.129703,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 128,
+      "trainable_parameters_decoder": 37537,
+      "train_time_sec": 3.942,
+      "final_train_loss": 4.967454,
+      "validation_loss": 4.129238,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 256,
+      "trainable_parameters_decoder": 49953,
+      "train_time_sec": 4.079,
+      "final_train_loss": 4.966809,
+      "validation_loss": 4.130005,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 512,
+      "trainable_parameters_decoder": 74785,
+      "train_time_sec": 5.852,
+      "final_train_loss": 4.968349,
+      "validation_loss": 4.129745,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    },
+    {
+      "decoder_kind": "position_mlp",
+      "latent_dim": 1024,
+      "trainable_parameters_decoder": 124449,
+      "train_time_sec": 9.661,
+      "final_train_loss": 4.965892,
+      "validation_loss": 4.129665,
+      "train_eval": {
+        "count": 312,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.2468,
+        "length_preserved_rate": 0.4583,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 1,
+            "length_preserved": true,
+            "original_byte_length": 1,
+            "decoded_byte_length": 3,
+            "truncated_input": false,
+            "byte_length": 1
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 5,
+            "length_preserved": true,
+            "original_byte_length": 5,
+            "decoded_byte_length": 15,
+            "truncated_input": false,
+            "byte_length": 5
+          }
+        ]
+      },
+      "val_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 13.3696,
+        "length_preserved_rate": 0.5,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": false,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 6,
+            "length_preserved": true,
+            "original_byte_length": 6,
+            "decoded_byte_length": 18,
+            "truncated_input": false,
+            "byte_length": 6
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 128,
+            "length_preserved": true,
+            "original_byte_length": 128,
+            "decoded_byte_length": 384,
+            "truncated_input": false,
+            "byte_length": 128
+          }
+        ]
+      },
+      "test_eval": {
+        "count": 46,
+        "string_exact_match_rate": 0.0,
+        "avg_byte_accuracy": 0.0,
+        "avg_char_accuracy": 0.0,
+        "avg_edit_distance": 15.3913,
+        "length_preserved_rate": 0.587,
+        "samples": [
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 19,
+            "length_preserved": true,
+            "original_byte_length": 19,
+            "decoded_byte_length": 57,
+            "truncated_input": false,
+            "byte_length": 19
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 18,
+            "length_preserved": false,
+            "original_byte_length": 18,
+            "decoded_byte_length": 54,
+            "truncated_input": false,
+            "byte_length": 18
+          },
+          {
+            "byte_exact_match": false,
+            "string_exact_match": false,
+            "byte_accuracy": 0.0,
+            "char_accuracy": 0.0,
+            "edit_distance": 21,
+            "length_preserved": false,
+            "original_byte_length": 21,
+            "decoded_byte_length": 63,
+            "truncated_input": false,
+            "byte_length": 21
+          }
+        ]
+      }
+    }
+  ]
+}

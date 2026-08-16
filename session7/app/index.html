@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic Reversible Kronecker — Research Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <h1>Dynamic Reversible Kronecker</h1>
+    <p class="subtitle">Can we remove fixed-window waste without losing information?</p>
+    <p class="headline" id="headline"></p>
+    <div class="grid" id="hero-cards"></div>
+    <div class="story-diagram" id="story-diagram"></div>
+    <div class="distinction-callout" id="distinction-callout"></div>
+  </header>
+
+  <nav class="nav" id="main-nav">
+    <a href="#question">Question</a>
+    <a href="#why">Why</a>
+    <a href="#dynamic">Dynamic</a>
+    <a href="#collisions">Collisions</a>
+    <a href="#reversibility">Reversibility</a>
+    <a href="#capacity">Capacity</a>
+    <a href="#decoder">Decoder</a>
+    <a href="#paths">Paths</a>
+    <a href="#languages">Languages</a>
+    <a href="#fourier">Fourier</a>
+    <a href="#failure">Failure</a>
+    <a href="#scoreboard">Hypotheses</a>
+    <a href="#conclusion">Conclusion</a>
+    <a href="https://github.com/sohamzycus/neural-truth-lab/tree/main/session7" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/sohamzycus/neural-truth-lab/blob/main/session7/README.md" target="_blank" rel="noopener">README</a>
+  </nav>
+
+  <main>
+    <section id="question">
+      <h2>Research Question</h2>
+      <p id="research-question" class="lead"></p>
+    </section>
+
+    <section id="why">
+      <h2>Why This Problem?</h2>
+      <div class="grid two-col">
+        <div class="card">
+          <h3>Fixed 32-byte bucket</h3>
+          <div class="byte-bar" id="fixed-bar-why"></div>
+          <p class="muted">Unused slots waste capacity; overflow truncates bytes.</p>
+        </div>
+        <div class="card">
+          <h3>Dynamic (actual bytes only)</h3>
+          <div class="byte-bar" id="dynamic-bar-why"></div>
+          <p class="muted">Length-aware encoding preserves complete UTF-8 sequence (within max_bytes).</p>
+        </div>
+      </div>
+      <div class="card highlight-telugu" id="telugu-callout"></div>
+    </section>
+
+    <section id="dynamic">
+      <h2>Fixed vs Dynamic</h2>
+      <label>Category</label>
+      <select id="waste-lang"></select>
+      <pre id="waste-stats" class="mono"></pre>
+    </section>
+
+    <section id="collisions">
+      <h2>Collision Lab</h2>
+      <p class="lead">Measured on <strong id="collision-n"></strong> strings. We report <em>observed</em> collisions — not mathematical injectivity.</p>
+      <div class="grid" id="collision-cards"></div>
+      <pre id="collision-examples" class="mono"></pre>
+    </section>
+
+    <section id="reversibility">
+      <h2>Reversibility Lab</h2>
+      <div class="grid two-col contrast">
+        <div class="card branch-pass">
+          <h3>A — Deterministic inverse</h3>
+          <div class="flow">Original → Dynamic features → Deterministic inverse → Original</div>
+          <div class="big-metric pass" id="det-metric">—</div>
+          <p class="muted">Explicit parse of byte layout. Not a learned result.</p>
+        </div>
+        <div class="card branch-fail">
+          <h3>B — Learned decoder</h3>
+          <div class="flow">Original → Dynamic features → Neural decoder → Reconstruction</div>
+          <div class="big-metric fail" id="learned-metric">—</div>
+          <p class="muted">Position-MLP, 64-d latent, 2,000 steps (see meta).</p>
+        </div>
+      </div>
+      <label>Try deterministic inverse (client-side)</label>
+      <textarea id="lab-input" rows="2">నమస్కారం</textarea>
+      <pre id="lab-output" class="mono"></pre>
+    </section>
+
+    <section id="capacity">
+      <h2>Reversibility Frontier</h2>
+      <p class="lead" id="capacity-note"></p>
+      <div class="chart-wrap"><canvas id="chart-frontier"></canvas></div>
+      <div class="chart-wrap"><canvas id="chart-byte-acc"></canvas></div>
+    </section>
+
+    <section id="decoder">
+      <h2>Decoder Ablation</h2>
+      <p class="lead">Encoder fixed (64-d dynamic). Decoder family varied.</p>
+      <div class="chart-wrap"><canvas id="chart-decoder"></canvas></div>
+      <pre id="decoder-table" class="mono"></pre>
+    </section>
+
+    <section id="paths">
+      <h2>Representation Paths</h2>
+      <div class="grid three-col" id="path-cards"></div>
+    </section>
+
+    <section id="languages">
+      <h2>Multilingual Lab</h2>
+      <div class="tabs" id="lang-tabs"></div>
+      <pre id="lang-detail" class="mono"></pre>
+    </section>
+
+    <section id="fourier">
+      <h2>Fourier Comparison</h2>
+      <div class="grid" id="fourier-cards"></div>
+      <p class="muted">Magnitude-only encoding can collide on permutations (e.g. ab/ba). Phase information reduces observed collisions in this test but does not establish universal injectivity.</p>
+    </section>
+
+    <section id="failure">
+      <h2>What Failed?</h2>
+      <div id="failure-content"></div>
+      <div class="callout-warning" id="inverse-disclaimer"></div>
+    </section>
+
+    <section id="scoreboard">
+      <h2>Hypothesis Scoreboard</h2>
+      <div class="scoreboard" id="hypothesis-board"></div>
+    </section>
+
+    <section id="conclusion">
+      <h2>What We Learned</h2>
+      <ol id="learned-list"></ol>
+      <h3>Remaining limitations</h3>
+      <ul id="limits-list"></ul>
+    </section>
+  </main>
+
+  <footer>
+    Data: <code>app/data/results.json</code> · Regenerate: <code>python experiments/run_all.py</code>
+    <span id="meta-footer"></span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
