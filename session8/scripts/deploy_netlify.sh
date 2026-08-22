@@ -8,8 +8,8 @@ cd "$ROOT/web"
 echo "Building session8/web..."
 npm run build
 
-SITE_ID="${NETLIFY_SITE_ID:-15eab089-7b3f-4d94-87bc-14d18bdbbb5f}"
-SITE_NAME="${NETLIFY_SITE_NAME:-attention-evolution-erav5}"
+SITE_ID="${NETLIFY_SITE_ID:-23eb2bfe-1bd9-4d30-ac96-57564b9dee0f}"
+SITE_NAME="${NETLIFY_SITE_NAME:-attention-evolution-session8}"
 
 if [[ -z "$SITE_ID" ]]; then
   echo "Creating Netlify site: ${SITE_NAME}"
