@@ -11,7 +11,7 @@ export function PositionStory() {
     { name: "Sinusoidal", problem: "Fixed encoding without params", sacrifice: "Weak far extrapolation" },
     { name: "RoPE", problem: "Relative distance in QᵀK", sacrifice: "Needs PI/YaRN for long context" },
     { name: "ALiBi", problem: "Train short, test long", sacrifice: "Different bias than RoPE" },
-    { name: "DroPE", problem: "Is explicit position necessary?", sacrifice: "Experimental, not universal" },
+    { name: "DroPE", problem: "RoPE scaffolds training but blocks length extrapolation", sacrifice: "Recalibration step; not yet production default" },
   ];
 
   return (
@@ -103,6 +103,7 @@ export function ContextWars() {
     { name: "Global Attention", limit: "Escape hatches needed — Longformer, BigBird." },
     { name: "Top-k", limit: "Which k tokens? Selection overhead." },
     { name: "NSA", limit: "Hardware-aligned sparsity — still choosing connections." },
+    { name: "DSA / CSA", limit: "Learned + compressed sparsity for million-token scale." },
   ];
 
   return (

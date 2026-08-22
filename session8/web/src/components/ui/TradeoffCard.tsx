@@ -1,6 +1,10 @@
 import type { ChronologyEntry } from "../../data/chronology";
+import { getNextEntry } from "../../data/chronology";
 
 export function TradeoffCard({ entry }: { entry: ChronologyEntry }) {
+  const next = getNextEntry(entry.id);
+  const nextFix = entry.nextFix ?? (next ? `→ ${next.title}: ${next.motivation}` : undefined);
+
   return (
     <div className="panel panel-glow p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
@@ -11,6 +15,17 @@ export function TradeoffCard({ entry }: { entry: ChronologyEntry }) {
         <span className="rounded-full bg-white/5 px-2 py-1 text-[10px] uppercase tracking-wide text-muted">
           {entry.category}
         </span>
+      </div>
+
+      <div className="mt-4 rounded-lg border border-white/8 bg-black/20 p-4 text-sm">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-violet">Causal chain</p>
+        <ol className="mt-2 space-y-2 text-muted">
+          <li><span className="text-text">Problem:</span> {entry.motivation}</li>
+          <li><span className="text-text">Why change:</span> {entry.mechanism}</li>
+          <li><span className="trade-plus">Cheaper / better:</span> {entry.buys}</li>
+          <li><span className="trade-minus">Worse / trade-off:</span> {entry.givesUp}</li>
+          {nextFix && <li><span className="text-cyan">Next paper fixes:</span> {nextFix}</li>}
+        </ol>
       </div>
 
       <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">

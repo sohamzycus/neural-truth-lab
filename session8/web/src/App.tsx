@@ -73,7 +73,8 @@ function App() {
             <div className="panel p-6 text-sm text-muted">
               <p>
                 The field is converging on <strong className="text-text">hybrid stacks</strong>: dense local attention + sparse global paths,
-                RoPE with YaRN extension, GQA or MLA for KV, FlashAttention for IO, and recurrent layers (Mamba/DeltaNet) for infinite context segments.
+                RoPE with YaRN extension, GQA or MLA for KV, FlashAttention for IO, learned sparsity (DSA/CSA) for million-token paths,
+                and recurrent layers (Mamba/DeltaNet) for infinite context segments.
               </p>
               <p className="mt-4">
                 No single mechanism wins. The question is always: <em>which bottleneck are you paying for right now?</em>

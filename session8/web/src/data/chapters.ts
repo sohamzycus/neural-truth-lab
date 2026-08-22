@@ -31,11 +31,11 @@ export const FAMILY_TREE = {
     },
     {
       name: "MEMORY",
-      children: ["MQA", "GQA", "MLA", "DeltaNet"],
+      children: ["MQA", "GQA", "MLA", "Sinks", "DeltaNet"],
     },
     {
       name: "COMPUTE",
-      children: ["Sparse", "Linear", "Flash", "Top-k"],
+      children: ["Sparse", "Sliding Window", "Top-k", "DSA/CSA", "Flash"],
     },
   ],
 };
