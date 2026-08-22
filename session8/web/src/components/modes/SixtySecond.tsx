@@ -26,7 +26,7 @@ export function SixtySecondMode() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-label="60 second explanation"
@@ -57,7 +57,7 @@ function SixtySecondPlayer({ onClose }: { onClose: () => void }) {
       <div className="mt-6 flex items-center justify-between">
         <div className="flex gap-1">
           {STEPS.map((_, i) => (
-            <div key={i} className={`h-1 w-4 rounded ${i <= step ? "bg-cyan" : "bg-white/15"}`} />
+            <div key={i} className={`h-1 w-4 rounded transition-colors ${i <= step ? "bg-[var(--color-accent)]" : "bg-[var(--color-border)]"}`} />
           ))}
         </div>
         <div className="flex gap-2">

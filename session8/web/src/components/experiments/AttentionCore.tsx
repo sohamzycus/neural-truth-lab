@@ -43,7 +43,7 @@ export function OpeningSequence() {
         className="max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
       >
         Every token wants to know one thing:
-        <span className="mt-2 block text-cyan">Who should I listen to?</span>
+        <span className="mt-2 block text-[var(--color-accent)]">Who should I listen to?</span>
       </motion.h1>
 
       <div className="mt-10 panel panel-glow p-6 sm:p-8">
@@ -105,7 +105,7 @@ export function OpeningSequence() {
               key={i}
               type="button"
               onClick={() => setStep(i)}
-              className={`focus-ring h-2 w-8 rounded-full ${i <= step ? "bg-cyan" : "bg-white/15"}`}
+              className={`focus-ring h-2 w-8 rounded-full transition-colors ${i <= step ? "bg-[var(--color-accent)]" : "bg-[var(--color-border)]"}`}
               aria-label={`Opening step ${i + 1}`}
             />
           ))}
@@ -168,7 +168,7 @@ function BankDisambiguation() {
 export function QKVExperiment() {
   const { mode } = useApp();
   const [query, setQuery] = useState("Where is the animal?");
-  const [showMath, setShowMath] = useState(false);
+  const [showMath, setShowMath] = useState(mode === "expert");
 
   const weights = useMemo(() => {
     const vec = QUERY_VECS[query] ?? QUERY_VECS["Where is the animal?"];
@@ -178,14 +178,18 @@ export function QKVExperiment() {
   return (
     <div className="panel p-6">
       <h3 className="text-lg font-bold">Q / K / V Experiment</h3>
-      <p className="mt-1 text-sm text-muted">Change the query. Watch attention weights move. Then reveal the math.</p>
+      <p className="mt-1 text-sm text-muted">
+        {mode === "beginner"
+          ? "Change the query — watch which keys light up. Expert mode shows the equation."
+          : "Change the query. Watch attention weights move. Equation visible in expert mode."}
+      </p>
 
       <label className="mt-4 block text-sm">
         <span className="text-muted">Query:</span>
         <select
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="focus-ring mt-1 w-full rounded-lg border border-white/10 bg-surface px-3 py-2"
+          className="focus-ring mt-1 w-full rounded-lg border border-theme bg-surface px-3 py-2"
           aria-label="Select query"
         >
           {Object.keys(QUERY_VECS).map((q) => (
@@ -198,7 +202,7 @@ export function QKVExperiment() {
         {KEYS.map((k, i) => (
           <div key={k} className="flex items-center gap-3">
             <span className="w-16 font-mono text-xs text-violet">K:{k}</span>
-            <div className="h-3 flex-1 overflow-hidden rounded-full bg-white/5">
+            <div className="h-3 flex-1 overflow-hidden rounded-full bg-[var(--color-surface-2)]">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-cyan to-violet"
                 animate={{ width: `${weights[i] * 100}%` }}
@@ -211,15 +215,17 @@ export function QKVExperiment() {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={() => setShowMath(!showMath)}
-        className="focus-ring mt-6 text-sm text-cyan hover:underline"
-      >
-        {showMath ? "Hide" : "Reveal"} equation →
-      </button>
+      {mode === "beginner" && (
+        <button
+          type="button"
+          onClick={() => setShowMath(!showMath)}
+          className="focus-ring mt-6 text-sm text-[var(--color-accent)] hover:underline"
+        >
+          {showMath ? "Hide" : "Reveal"} equation →
+        </button>
+      )}
 
-      {showMath && (
+      {(showMath || mode === "expert") && (
         <div className="mt-4 space-y-2 font-mono text-sm">
           <p>Attention(Q,K,V) = softmax(QKᵀ / √dₖ) V</p>
           {mode === "expert" && (
