@@ -56,7 +56,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       document.documentElement.dataset.theme = resolved;
       document.querySelector('meta[name="theme-color"]')?.setAttribute(
         "content",
-        resolved === "light" ? "#f4f6fb" : "#06080f",
+        resolved === "light" ? "#f7f5f0" : "#121110",
       );
     };
     apply();

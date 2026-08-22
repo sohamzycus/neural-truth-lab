@@ -39,7 +39,7 @@ export function TryItOut() {
   return (
     <section id="try-it-out" className="scroll-mt-24 mt-16">
       <FadeIn>
-        <h2 className="text-2xl font-bold">Try It Out</h2>
+        <h2 className="font-serif text-2xl font-semibold">Try It Out</h2>
         <p className="mt-2 text-muted">
           Six workloads. Pick attention, position, KV, and kernel — then check your reasoning.
         </p>

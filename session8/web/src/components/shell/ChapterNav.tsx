@@ -25,7 +25,7 @@ export function ChapterNav() {
           if (!Number.isNaN(num)) setActiveChapter(num);
         }
       },
-      { rootMargin: "-20% 0px -55% 0px", threshold: [0, 0.25, 0.5] },
+      { rootMargin: "-18% 0px -58% 0px", threshold: [0, 0.2, 0.45] },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -37,27 +37,32 @@ export function ChapterNav() {
     document.getElementById(`chapter-${id}`)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const progress = (activeChapter / (NAV_CHAPTERS.length - 1)) * 100;
+
   return (
-    <nav
-      className="sticky top-[57px] z-40 border-b border-theme bg-[var(--header-bg)] backdrop-blur-md"
-      aria-label="All chapters"
-    >
-      <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 sm:px-6 scrollbar-thin">
-        {NAV_CHAPTERS.map((c) => (
-          <button
-            key={c.id}
-            type="button"
-            onClick={() => go(c.id)}
-            className={`focus-ring shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
-              activeChapter === c.id
-                ? "bg-[var(--color-accent-soft)] text-[var(--color-accent)] shadow-sm"
-                : "text-muted hover:bg-[var(--color-surface-2)] hover:text-text"
-            }`}
-            aria-current={activeChapter === c.id ? "true" : undefined}
-          >
-            <span className="font-mono opacity-60">{c.id}.</span> {c.title}
-          </button>
-        ))}
+    <nav className="chapter-nav" aria-label="Chapter navigation">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="chapter-nav-grid">
+          {NAV_CHAPTERS.map((c) => {
+            const active = activeChapter === c.id;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => go(c.id)}
+                title={`Ch. ${c.id}: ${c.title}`}
+                className={`chapter-nav-item focus-ring ${active ? "chapter-nav-item-active" : ""}`}
+                aria-current={active ? "true" : undefined}
+              >
+                <span className="chapter-nav-num">{c.id}</span>
+                <span className="chapter-nav-label">{c.navLabel}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="chapter-nav-progress" aria-hidden>
+          <div className="chapter-nav-progress-fill" style={{ width: `${progress}%` }} />
+        </div>
       </div>
     </nav>
   );

@@ -36,14 +36,14 @@ export function OpeningSequence() {
   ];
 
   return (
-    <section id="chapter-0" className="scroll-mt-20 min-h-[85vh] flex flex-col justify-center">
+    <section id="chapter-0" className="scroll-mt-40 min-h-[85vh] flex flex-col justify-center">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
+        className="font-serif max-w-3xl text-4xl font-semibold leading-[1.15] tracking-tight sm:text-5xl lg:text-[3.25rem]"
       >
         Every token wants to know one thing:
-        <span className="mt-2 block text-[var(--color-accent)]">Who should I listen to?</span>
+        <span className="mt-3 block text-[var(--color-accent)]">Who should I listen to?</span>
       </motion.h1>
 
       <div className="mt-10 panel panel-glow p-6 sm:p-8">

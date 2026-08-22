@@ -12,7 +12,7 @@ export function TradeoffCard({ entry }: { entry: ChronologyEntry }) {
     <div className="panel panel-glow p-5 transition-shadow hover:shadow-md">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-lg font-bold">{entry.title}</h3>
+          <h3 className="font-serif text-lg font-semibold">{entry.title}</h3>
           <ExpertOnly>
             <p className="text-sm text-muted">{entry.fullName}</p>
           </ExpertOnly>

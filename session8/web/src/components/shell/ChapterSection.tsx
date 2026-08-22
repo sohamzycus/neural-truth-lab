@@ -25,19 +25,19 @@ export function ChapterSection({
   return (
     <motion.section
       id={`chapter-${id}`}
-      className="scroll-mt-28 border-t border-theme py-16 first:border-0 first:pt-8"
+      className="scroll-mt-40 border-t border-theme py-16 first:border-0 first:pt-8"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.4 }}
     >
       <FadeIn>
-        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)]">Chapter {id}</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight">{title ?? chapter?.title}</h2>
-        <p className="mt-2 text-lg text-muted">{subtitle ?? chapter?.subtitle}</p>
+        <p className="chapter-kicker">Chapter {id}</p>
+        <h2 className="font-serif mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{title ?? chapter?.title}</h2>
+        <p className="mt-3 text-base font-medium text-muted sm:text-lg">{subtitle ?? chapter?.subtitle}</p>
         {chapter?.hook && (
-          <p className="mt-1 text-sm italic text-violet">
-            {mode === "beginner" ? `💡 ${chapter.hook}` : chapter.hook}
+          <p className="mt-2 text-sm leading-relaxed text-muted italic">
+            {chapter.hook}
           </p>
         )}
       </FadeIn>
