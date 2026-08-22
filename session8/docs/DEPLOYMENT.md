@@ -1,8 +1,8 @@
 # Session 8 — Netlify Deployment
 
-**Site:** [attention-evolution-session8](https://app.netlify.com/projects/attention-evolution-session8)  
-**URL:** https://attention-evolution-session8.netlify.app  
-**Site ID:** `23eb2bfe-1bd9-4d30-ac96-57564b9dee0f` (personal account — PAT zip deploy)
+**Site:** [attention-evolution-erav5](https://app.netlify.com/projects/attention-evolution-erav5)  
+**URL:** https://attention-evolution-erav5.netlify.app  
+**Site ID:** `15eab089-7b3f-4d94-87bc-14d18bdbbb5f`
 
 ## Netlify UI settings
 
@@ -34,14 +34,14 @@ gh workflow run netlify-deploy-session8.yml -R sohamzycus/neural-truth-lab
 ```bash
 cd session8/web
 npm run build
-npx netlify-cli@17 link --id 23eb2bfe-1bd9-4d30-ac96-57564b9dee0f
+npx netlify-cli@17 link --id 15eab089-7b3f-4d94-87bc-14d18bdbbb5f
 bash ../scripts/deploy_netlify.sh
 ```
 
 ### 3. Netlify UI drag-and-drop
 
 1. `cd session8/web && npm run build`
-2. Open https://app.netlify.com/projects/attention-evolution-session8/deploys
+2. Open https://app.netlify.com/projects/attention-evolution-erav5/deploys
 3. Drag `session8/web/dist/` onto the deploy dropzone
 
 ### 4. Netlify MCP (Cursor)

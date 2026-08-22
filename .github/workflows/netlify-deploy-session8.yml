@@ -34,4 +34,4 @@ jobs:
                "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: 23eb2bfe-1bd9-4d30-ac96-57564b9dee0f
+          NETLIFY_SITE_ID: 15eab089-7b3f-4d94-87bc-14d18bdbbb5f

@@ -4,9 +4,9 @@ Interactive causal history of how attention mechanisms evolved from Bahdanau ali
 
 ## Live URL
 
-https://attention-evolution-session8.netlify.app
+https://attention-evolution-erav5.netlify.app
 
-Netlify dashboard: https://app.netlify.com/projects/attention-evolution-session8
+Netlify dashboard: https://app.netlify.com/projects/attention-evolution-erav5
 
 ## GitHub
 
