@@ -27,8 +27,10 @@ jobs:
 
       - name: Install and build
         run: |
-          npm ci
+          npm ci --include=dev
           npm run build
+        env:
+          NODE_ENV: development
 
       - name: Deploy to Netlify
         run: |
