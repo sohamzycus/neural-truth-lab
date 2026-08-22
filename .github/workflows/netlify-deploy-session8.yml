@@ -1,0 +1,43 @@
+name: Deploy Attention Evolution to Netlify (session8)
+
+# Uses NETLIFY_AUTH_TOKEN (shared with session2/3/4). Set NETLIFY_SITE_ID after first site create.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'session8/web/**'
+      - '.github/workflows/netlify-deploy-session8.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session8/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: session8/web/package-lock.json
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Netlify
+        run: |
+          cd dist
+          zip -r ../deploy.zip .
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -H "Content-Type: application/zip" \
+               --data-binary @../deploy.zip \
+               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 15eab089-7b3f-4d94-87bc-14d18bdbbb5f
