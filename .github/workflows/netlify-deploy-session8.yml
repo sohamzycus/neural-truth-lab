@@ -1,6 +1,6 @@
 name: Deploy Attention Evolution to Netlify (session8)
 
-# Uses NETLIFY_AUTH_TOKEN (shared with session2/3/4). Set NETLIFY_SITE_ID after first site create.
+# Uses NETLIFY_AUTH_TOKEN (shared with session2/3/4). Prebuilt dist pattern.
 
 on:
   push:
@@ -19,18 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-          cache-dependency-path: session8/web/package-lock.json
-
-      - name: Install and build
+      - name: Verify prebuilt dist
         run: |
-          npm ci --include=dev
-          npm run build
-        env:
-          NODE_ENV: development
+          test -f dist/index.html
+          test -n "$(ls dist/assets/*.js 2>/dev/null)"
 
       - name: Deploy to Netlify
         run: |

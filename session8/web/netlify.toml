@@ -1,6 +1,13 @@
+# Attention Evolution — prebuilt dist (session2/3/4 pattern)
+# Netlify UI: Base directory = session8/web
+# Build verifies committed dist — no npm on Netlify.
+
 [build]
+  command = "test -f dist/index.html && echo 'Prebuilt dist OK'"
   publish = "dist"
-  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
