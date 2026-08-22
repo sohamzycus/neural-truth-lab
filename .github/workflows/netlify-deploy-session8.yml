@@ -31,7 +31,7 @@ jobs:
           curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
                -H "Content-Type: application/zip" \
                --data-binary @../deploy.zip \
-               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
+               "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_NAME/deploys"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: 15eab089-7b3f-4d94-87bc-14d18bdbbb5f
+          NETLIFY_SITE_NAME: attention-evolution-erav5
