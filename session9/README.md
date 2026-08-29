@@ -2,37 +2,56 @@
 
 ## Can we trust a falling loss curve?
 
-This is ERA V5 Session 9: an educational notebook that investigates **what loss actually measures** in language-model training — not how to make the curve look good.
+> **The optimizer succeeded. We gave it the wrong job.**
 
-> We are not trying to make the loss look good. We are trying to prove that the loss **means** what we think it means.
+A language model can produce a beautiful loss curve while learning the wrong task. This notebook treats the loss computation as something to **investigate**, not something to blindly trust.
 
-**Observe the tensors. Read the strings. Challenge the loss.**
+> **Observe the tensors. Read the strings. Challenge the loss.**
 
 ---
 
-## The experiment
+## The question
 
-A small GPT-2 / nanoGPT-style transformer:
+What exactly happens between:
 
-| Hyperparameter | Value |
-|----------------|-------|
-| Vocabulary | 50,257 (GPT-2 BPE via tiktoken) |
-| Block size | 64 |
-| Layers | 4 |
-| Heads | 4 |
-| Embedding dim | 128 |
-| Parameters (tied head) | 7,234,432 |
+```text
+tokens → hidden → logits → loss
+```
 
-**Dataset:** `HuggingFaceFW/fineweb` `sample-10BT` (streamed), tokenized with tiktoken GPT-2. A deterministic **FALLBACK** text bundle is used automatically when Hugging Face is unreachable.
+—and how can we **build evidence** that the objective is correct?
+
+A loss curve only tells us the optimizer is reducing the objective we **supplied**. It does **not** by itself prove that objective is the task we **intended**.
+
+---
+
+## How to read this notebook
+
+Every experiment follows the same forensic pattern:
+
+**CLAIM → TEST → EVIDENCE → CONCLUSION**
+
+For example:
+
+> Claim: the target is the next token.
+
+→ Decode the input and target strings.
+
+→ Compare them side by side.
+
+→ If `"India"` maps to `" is"`, the alignment is plausible.
+
+The notebook deliberately avoids trusting a single number.
 
 ---
 
 ## The core pipeline
 
-```
-tokens → embeddings → causal transformer → hidden states
-    → output head → logits → softmax / log-probabilities
-    → target token → cross-entropy loss → backprop → update
+```text
+tokens (B×T)
+  → Transformer → hidden (B×T×C)
+  → output head → logits (B×T×V)
+  → shift: predictions[:,:-1] vs targets[:,1:]
+  → cross-entropy → scalar loss → backprop → update
 ```
 
 Every major transition is printed, decoded to strings where it matters, and checked independently.
@@ -41,171 +60,285 @@ Every major transition is printed, decoded to strings where it matters, and chec
 
 ## What I verified
 
-| Claim | Test | Evidence | Conclusion |
-|-------|------|----------|------------|
-| Shapes correct | Forward pass shape print | B=2, T=64, C=128, V=50257 | PASS |
-| Shift correct | Decoded input→target table | String alignment matches t+1 | PASS |
-| Padding excluded | Mask vs unmasked CE | 7 → 1 contributing tokens | PASS |
-| Boundary excluded | Pack two docs, mask boundary | Loss 10.8770 → 10.8464 | PASS |
-| Random baseline sane | Untrained CE vs ln(V) | loss=10.39, PPL≈32,494 (4% error vs ln V) | PASS |
-| Tied head saves V×C | Param count diff | Δ=6,432,896 = 50257×128 | PASS |
-| Chunked CE equivalent | Ordinary vs chunked loss | diff=9e-8 | PASS |
-| Chunking reduces peak | Analytical logits bytes | 202MB vs 3.2MB (63×) | PASS |
-| t+2 aligned | String table A→C, B→D… | Explicit alignment shown | PASS |
-| Wrong shift reduces loss | Train backward shift | Final loss 7.68 < correct 7.85 | DEMONSTRATED |
+| Check | Method | Status |
+|---|---|---|
+| Tensor dimensions | Shape inspection | PASS |
+| Target shift | Decoded string pairs | PASS |
+| Padding mask | Valid-target count | PASS |
+| Document boundary | Exact boundary + loss/count | PASS |
+| Uniform baseline | Equal-logit test | PASS |
+| Random init sanity | Actual loss/PPL | PLAUSIBLE |
+| Tied head saves V×C | Parameter count | PASS |
+| Chunked CE equivalence | Numerical loss match | PASS |
+| Chunking peak memory | Analytical/CUDA evidence | PASS |
+| t+2 alignment | String pairs | PASS |
+| Wrong-shift trap | Loss curve + strings | DEMONSTRATED |
 
 ---
 
-## The most important discovery
+## Results
 
-### "The loss was beautiful. The model was wrong."
+> **Dataset note:** Latest clean local verification used the deterministic **FALLBACK** dataset with `FORCE_FALLBACK=1`. The notebook prints `data source`, `FALLBACK used`, `documents`, and `total tokens`. Numbers below are from that run — **not** from FineWeb streaming.
 
-Training with **wrong** alignment (`logits[:,1:]` vs `tokens[:,:-1]`) still produces a **decreasing** loss — and in our run, a **lower** final loss than the correct shift:
+**Run config:** seed=1337, device=mps, PyTorch 2.13.0 (from notebook `torch.__version__` output)
 
-| Training alignment | Final loss (15-step demo) |
-|--------------------|---------------------------|
-| Correct (t+1) | 7.8466 |
-| Wrong (predict past) | 7.6763 |
+### Tensor shapes
+
+B=2, T=64, C=128, V=50257
+
+### Cross entropy (chunked vs ordinary)
+
+| Metric | Value |
+|---|---|
+| Ordinary loss | 10.371709 |
+| Chunked loss | 10.371709 |
+| Absolute difference | 9×10⁻⁸ |
+| Relative difference | 8.76×10⁻⁹ |
+
+### String shift
+
+Decoded table confirms `input[i] → target[i+1]` on `"The capital of India is New Delhi"` — **PASS**
+
+### Padding
+
+7 total target positions → 1 valid after synthetic PAD mask (`token_id=0` is a **lab convention**, not native GPT-2 PAD).
+
+### Document boundary
+
+Loss 10.8770 → 10.8464; contributing targets 12 → 11 (one artificial cross-document prediction removed). The target-count drop is deterministic; loss direction depends on model/data.
+
+### Perplexity — two baselines
+
+| Baseline | Loss | PPL | Status |
+|---|---:|---:|---|
+| **A — Uniform logits** (mathematical) | 10.824905 | 50,257 | PASS |
+| **B — Random init transformer** | 10.3888 | 32,493.9 | PLAUSIBLE |
+
+**Uniform logits:** `loss = ln(V)`, `PPL = exp(loss) = V` — exact mathematical result.
+
+**Random init:** PLAUSIBLE — **loss is ~4.03% below ln(V)**; the resulting PPL is ~32.5K rather than exactly V. A randomly initialized transformer is not required to produce perfectly uniform logits; this check detects gross implementation problems, not exact equality.
+
+### Tied vs untied
+
+7,234,432 vs 13,667,328 parameters — difference **6,432,896 = V×C**
+
+### Chunked cross entropy
+
+Logits tensor for ordinary CE: shape **(N, V)** where **N = B×(T−1) = 16×63 = 1008** positions.
+
+| Estimate | Bytes | Formula |
+|---|---:|---|
+| Ordinary peak | 202,636,224 | 1008 × 50257 × 4 (float32) |
+| Chunked peak (chunk=16) | 3,216,448 | 16 × 50257 × 4 (float32) |
+| Ratio | **63.0×** | |
+
+Labelled **ANALYTICAL LOGIT MEMORY ESTIMATE (CPU/MPS)** — not CUDA allocator measurements.
+
+### t+1 vs t+2 (15-step demonstration)
+
+| Step | t+1 | t+2 | diff |
+|---:|---:|---:|---:|
+| 0 | 10.8361 | 10.8341 | −0.0020 |
+| 3 | 9.1533 | 9.1445 | −0.0088 |
+| 7 | 8.6107 | 8.5822 | −0.0285 |
+| 11 | 8.3612 | 8.3285 | −0.0327 |
+| 15 | 8.0963 | 8.0628 | −0.0334 |
+
+In this short demonstration run, t+2 finished slightly below t+1. This is an observation from this configuration, not a universal property of prediction horizons.
+
+---
+
+## The signature finding
+
+# The optimizer succeeded. We gave it the wrong job.
+
+**Nothing about the tensors is inherently invalid; the error is semantic alignment.**
+
+| Objective | Relationship |
+|---|---|
+| **CORRECT** | context → **future** token |
+| **WRONG** | context → token **already in** context |
+
+| Alignment | Final loss (15 steps) |
+|---|---:|
+| Correct next-token | 7.8466 |
+| Wrong previous-token | **7.6763** |
 
 String forensics on `"Viewing the results"` after wrong-shift training:
 
-| Pos | Input | Model predicts | Correct next |
-|-----|-------|----------------|--------------|
-| 1 | `ing` | ` homophobia` | ` the` |
-| 2 | ` the` | `canon` | ` results` |
+| Input context | Model predicts | Intended next | Wrong objective rewards |
+|---|---|---|---|
+| `'ing'` | `' homophobia'` | `' the'` | `'View'` |
+| `' the'` | `'canon'` | `' results'` | `'ing'` |
 
-The model was rewarded for predicting **context/past tokens**, not the future. **A falling loss curve does not prove the training objective is correct.**
+**Evidence chain:** loss decreases → looks successful → inspect strings → target comes from past context → objective is wrong.
 
 ---
 
-## Loss Truth Triangle
+## Random-target control
+
+Five-step micro-demo on the same backbone:
+
+| Objective | Start | End | Interpretation |
+|---|---:|---:|---|
+| Correct t+1 | 10.641 | 8.319 | Learns useful structure |
+| Wrong previous-token | 10.633 | 8.469 | Learns a valid but unintended objective |
+| Random target | 10.850 | 10.842 | No meaningful structured learning |
+
+The control sharpens the central point: optimization success and task correctness are separate questions. The wrong objective can learn because it is still a coherent objective.
+
+---
+
+## The Loss Truth Triangle
 
 ```
-             LOSS VALUE
-                /\
-               /  \
-              /    \
-             /      \
-    TENSOR SHAPES —— STRING SEMANTICS
+                    LOSS VALUE
+                       /\
+                      /  \
+                     /    \
+            TENSOR SHAPES — STRINGS
 ```
 
-1. **Shapes** — dimensions line up (necessary but insufficient)
-2. **Strings** — we predict the intended next token (catches silent bugs)
-3. **Loss** — scalar behaves as expected (ln(V) baseline, masking, chunking)
-
-All three are required.
+**TRUSTWORTHY LOSS = SHAPES + STRING SEMANTICS + NUMERICAL SANITY**
 
 ---
 
-## Results (latest clean run)
+## What this proves / does not prove
 
-**Run config:** seed=1337, device=mps, PyTorch 2.13.0, Python 3.14.2
+### Perplexity
 
-### Seven numbers panel
+- **Proves:** Uniform-logit baseline gives `loss = ln(V)`, `PPL = V`.
+- **Does not prove:** Every randomly initialized transformer must have PPL exactly equal to V.
 
-1. **Tensor shapes:** B=2, T=64, C=128, V=50257
-2. **String shift:** PASS
-3. **Padding contributing tokens:** 7 → 1
-4. **Document boundary loss:** 10.8770 → 10.8464
-5. **Untrained loss / PPL:** 10.3888 / 32,494 (expected ln(V)≈10.825, V≈50,257)
-6. **Tied vs untied params:** 7,234,432 vs 13,667,328 (Δ=6,432,896)
-7. **CE memory (analytical):** ordinary=202,636,224 bytes, chunked=3,216,448 bytes, ratio=63.0×
+### Padding
 
-### Dual-head experiment (DEMONSTRATION RUN — 15 steps)
+- **Proves:** Masked PAD targets do not contribute to the averaged loss.
+- **Does not prove:** Masking must numerically decrease loss.
 
-| Metric | Value |
-|--------|-------|
-| t+1 loss | 8.0963 |
-| t+2 loss | 8.0628 |
-| Combined | 16.1591 |
-| Gap (t2−t1) | −0.0334 |
+### Document boundary
 
-**Observed:** t+2 was *slightly lower* than t+1 in this short run — not universally harder. Gap depends on data, init, LR, and duration.
+- **Proves:** The artificial cross-document target can be excluded from the loss.
+- **Does not prove:** Packed documents are inherently superior to separate sequences.
 
-### Wrong-shift trap
+### Chunked CE
 
-| Metric | Value |
-|--------|-------|
-| Correct-shift final loss | 7.8466 |
-| Wrong-shift final loss | 7.6763 |
+- **Proves:** Chunked implementation reproduces the same scalar objective while reducing peak vocabulary-logit residency.
+- **Does not prove:** Chunking makes the entire training system use 63× less memory.
 
----
+### t+2
 
-## Memory experiment
+- **Proves:** A second prediction horizon can be implemented and compared.
+- **Does not prove:** t+2 is universally harder than t+1.
 
-Full-vocabulary cross-entropy materializes a `(N, V)` logits matrix. With B=16, T=64, V=50257:
+### Wrong shift
 
-- **Ordinary CE peak (analytical):** 202,636,224 bytes (~193 MB)
-- **Chunked CE peak (chunk=16):** 3,216,448 bytes (~3 MB)
-- **Loss difference:** 0.00000009 (numerically identical)
-
-Chunking changes **peak residency**, not the mathematical objective.
+- **Proves:** Incorrect target alignment can produce decreasing loss while optimizing the wrong task.
+- **Does not prove:** Every incorrect objective will always achieve lower loss.
 
 ---
 
 ## What surprised me
 
-1. **Wrong-shift loss beat correct-shift loss** in our demo — the easier wrong task optimized faster, making the trap more convincing than if wrong-shift had stalled.
-2. **t+2 was not higher than t+1** after 15 steps — the hypothesis "t+2 is always harder" did not hold in this tiny run.
-3. **Perplexity was below V** (32k vs 50k) at init — small-init logits are near-uniform but not perfectly uniform; still within 15% tolerance of ln(V).
+The most striking result: the deliberately wrong previous-token objective achieved a **lower** final loss than correct next-token training (7.6763 vs 7.8466). Nothing crashed. The bug was visible only after inspecting decoded targets.
+
+Also notable: t+2 was **not** higher than t+1 after 15 steps — challenging the intuition that farther prediction horizons should necessarily have higher loss in a short demonstration run.
+
+**Observation ≠ universal law.**
 
 ---
 
-## Reproduce
+## Memory
 
-### Google Colab
+Full-vocabulary CE materializes an **(N, V)** logits tensor where **N = B×(T−1)** for shifted CE.
 
-1. Upload `session9/` or open from GitHub.
-2. Install deps: `pip install torch tiktoken datasets matplotlib`
-3. Run all cells top-to-bottom (~5–15 min on GPU; longer on CPU).
+With B=16, T=64, V=50257: N=1008, ordinary analytical peak = **202,636,224 bytes** (~193 MB); chunked (chunk=16) = **3,216,448 bytes** (~3 MB). Chunking reduces **peak logit residency**, not the mathematical need to score all positions.
 
-FineWeb streaming works on Colab when Hugging Face is reachable. If not, the notebook labels and uses **FALLBACK** automatically.
+---
 
-### Local
+## t+2
+
+This run demonstrated that a second horizon can be trained and compared. It does not establish universal behaviour — only that gap direction depends on configuration, data, and training duration.
+
+---
+
+## Limitations
+
+- **15-step demonstration runs** — mechanism over model quality
+- **Small model** (~7.3M parameters, tied head)
+- **FALLBACK local verification** — latest audited run used `FORCE_FALLBACK=1`, not FineWeb; Colab may stream FineWeb when reachable
+- **MPS analytical memory estimates** — labelled ANALYTICAL LOGIT MEMORY ESTIMATE; not CUDA allocator measurements
+- **Synthetic PAD token** (id=0) for controlled masking — not native GPT-2 PAD
+- **t+2 gap direction** is configuration-dependent
+
+---
+
+## Reproducibility
 
 ```bash
 cd session9
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+
+# 1. Generate notebook from source
+python build_notebook.py
+
+# 2. Execute all cells (clean kernel — no hidden state)
+FORCE_FALLBACK=1 MPLBACKEND=Agg jupyter nbconvert \
+  --to notebook --execute Session_9_Loss_Forensics_Lab.ipynb \
+  --output Session_9_Loss_Forensics_Lab.ipynb \
+  --ExecutePreprocessor.timeout=600
+
+# Or interactively:
 jupyter notebook Session_9_Loss_Forensics_Lab.ipynb
 ```
 
-Bundled `data/tiktoken_cache/` provides GPT-2 BPE files for offline tiktoken (no OpenAI blob download).
-
-Optional: `FORCE_FALLBACK=1` skips Hugging Face entirely for offline runs.
+- Bundled `data/tiktoken_cache/` for offline GPT-2 BPE
+- FineWeb streams when Hugging Face is reachable (omit `FORCE_FALLBACK=1`)
+- `build_notebook.py` **generates** the `.ipynb`; it does **not** execute it
 
 ---
 
 ## Files
 
 | File | Description |
-|------|-------------|
-| `Session_9_Loss_Forensics_Lab.ipynb` | Main notebook (executed, with outputs) |
+|---|---|
+| `Session_9_Loss_Forensics_Lab.ipynb` | Main notebook (executed) |
 | `README.md` | This document |
-| `requirements.txt` | Python dependencies |
-| `data/tiktoken_cache/` | Bundled GPT-2 BPE vocab for offline tiktoken |
-| `build_notebook.py` | Notebook generator (dev helper) |
+| `requirements.txt` | Dependencies |
+| `build_notebook.py` | Notebook generator (source of truth) |
+| `data/tiktoken_cache/` | Bundled GPT-2 BPE vocab |
 
 ---
 
-## What could have gone wrong?
+## Final status
 
-See the notebook's troubleshooting section for perplexity spikes, masking bugs, boundary indices, chunked CE mismatches, and t+2 alignment checks.
-
----
-
-## Final status (verified clean run)
-
-```
+```text
+============================================================
+LOSS FORENSICS LAB — FINAL STATUS
+============================================================
 Tensor shapes                 PASS
 String shift                  PASS
 Padding mask                  PASS
 Document boundary             PASS
-Perplexity sanity             PASS
+Uniform baseline              PASS
+Random-model sanity           PLAUSIBLE
 Tied vs untied                PASS
 Chunked cross entropy         PASS
 t+2 head                      PASS
-Wrong-shift demonstration     PASS
+Wrong-shift demonstration     DEMONSTRATED
 
-LOSS TRUTH TRIANGLE — Shapes + Strings + Loss — VERIFIED
+============================================================
+LOSS TRUTH TRIANGLE
+============================================================
+Shapes + Strings + Numerical Sanity
+                         VERIFIED
+============================================================
+Observe the tensors.
+Read the strings.
+Challenge the loss.
+============================================================
 ```
+
+> A loss is an instrument. Before trusting the reading, verify that the instrument is measuring what you think it is measuring.
+
+> The optimizer can only optimize the objective we give it. The first responsibility of the engineer is to make sure that objective is the one we intended.

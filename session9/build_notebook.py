@@ -17,19 +17,22 @@ cells.append(md("""
 
 ### Can we trust a falling loss curve?
 
-> A hands-on investigation of next-token prediction, masking, perplexity, memory, multi-token prediction, and silent training bugs.
+> **Observe the tensors. Read the strings. Challenge the loss.**
+
+Subtitle: A hands-on investigation of next-token prediction, masking, perplexity, memory, multi-token prediction, and silent training bugs.
 
 ---
 
-🔍 **OBSERVATION**: We are not trying to make the loss look good.
-We are trying to prove that the loss **means** what we think it means.
+🔍 **Central question:** A loss curve only tells us the optimizer is reducing the objective we **supplied**. It does **not** by itself prove that objective is the task we **intended**.
 
-Every major section follows:
-- **WHAT ARE WE DOING?**
-- **HOW DOES IT WORK?**
-- **RUN THE EXPERIMENT**
-- **WHAT DID WE PROVE?**
-- **WHAT THIS DOES NOT PROVE**
+We are not trying to make the loss look good. We are trying to prove the loss **means** what we think it means.
+
+Every major section uses:
+- **WHAT ARE WE DOING?** / **🔍 Forensic Check**
+- **HOW DOES IT WORK?** / **🧠 Why**
+- **RUN THE EXPERIMENT** / **🧪 Experiment**
+- **WHAT DID WE PROVE?** / **✅ Proven**
+- **WHAT THIS DOES NOT PROVE** / **⚠️ Trap**
 """))
 
 # ── Setup ──────────────────────────────────────────────────────────────────
@@ -284,6 +287,116 @@ loss = cross_entropy(
 - `cross_entropy`: how much probability went to the correct target
 """))
 
+# ── Five lines, unpacked ───────────────────────────────────────────────────
+cells.append(md("""
+---
+
+## Section 1b — Five Lines, Unpacked
+
+### 🧠 Why
+Before the full harness runs, unpack the canonical loss computation line by line.
+
+```python
+hidden = model(tokens)
+logits = output_head(hidden)
+
+loss = cross_entropy(
+    logits[:, :-1],
+    tokens[:, 1:]
+)
+```
+
+### The data flow
+
+```
+tokens
+  │  shape = B × T
+  ▼
+Transformer
+  │
+  ▼
+hidden
+  │  shape = B × T × C
+  ▼
+Output head
+  │
+  ▼
+logits
+  │  shape = B × T × V
+  ▼
+shift by one
+  │
+  ├── predictions = positions 0 … T-2  (logits[:, :-1])
+  └── targets     = positions 1 … T-1  (tokens[:, 1:])
+  ▼
+cross entropy  →  one scalar loss
+```
+
+| Symbol | Meaning |
+|--------|---------|
+| **B** | batch size — how many sequences processed together |
+| **T** | sequence length — tokens per sequence |
+| **C** | hidden / embedding width — internal representation size |
+| **V** | vocabulary size — number of possible output tokens |
+
+Each position in `hidden` is a vector summarizing *everything the model has read so far*. The output head turns that vector into **V raw scores (logits)** — one per vocabulary token.
+"""))
+
+# ── Cross entropy from first principles (early) ──────────────────────────
+cells.append(md("""
+---
+
+## Section 1c — Cross-Entropy From First Principles
+
+### 🧪 Experiment (educational — no large model yet)
+
+Before calling `F.cross_entropy`, understand what it measures.
+
+**Tiny vocabulary:** cat, dog, car, tree
+
+If model probabilities are:
+
+| token | prob |
+|-------|------|
+| cat | 0.05 |
+| dog | 0.80 |
+| car | 0.10 |
+| tree | 0.05 |
+
+- Target = **dog** → loss = −log(0.80) → **low** (good)
+- Target = **cat** → loss = −log(0.05) → **high** (bad)
+
+**More probability on the correct answer → lower loss.**
+
+Logits are **raw scores**. Softmax converts logits to probabilities. Cross-entropy uses `log_softmax` internally — you never need to softmax manually during training.
+
+### ✅ Proven
+CE converts probability on the correct class into a training signal.
+
+### ⚠️ Trap
+This does not yet tell us our transformer assigns reasonable probabilities — that comes next.
+"""))
+
+cells.append(code("""
+print("🧪 EXPERIMENT — toy vocabulary cross-entropy")
+vocab_toy = ["cat", "dog", "car", "tree"]
+probs_dog = torch.tensor([0.05, 0.80, 0.10, 0.05])
+probs_cat = torch.tensor([0.05, 0.05, 0.10, 0.80])
+
+loss_dog = -torch.log(probs_dog[1])
+loss_cat = -torch.log(probs_cat[0])
+print(f"Target = dog (p=0.80): loss = {loss_dog.item():.4f}")
+print(f"Target = cat (p=0.05): loss = {loss_cat.item():.4f}")
+
+print()
+print("📐 Logits vs probabilities")
+raw_logits = torch.tensor([2.1, 0.5, -1.0])
+softmax_probs = F.softmax(raw_logits, dim=0)
+print("RAW LOGITS: ", raw_logits.tolist())
+print("SOFTMAX:    ", [round(x, 4) for x in softmax_probs.tolist()])
+print("CE applies log_softmax to logits — logits are NOT probabilities.")
+"""))
+
 # ── Model ──────────────────────────────────────────────────────────────────
 cells.append(md("""
 ---
@@ -445,6 +558,15 @@ explain_shape("flat_labels", flat_labels, [("N", "B*(T-1) targets")])
 loss = F.cross_entropy(flat_logits, flat_labels)
 explain_shape("loss", loss, [("scalar", "single training signal")])
 
+print()
+print("📐 One row of FLAT_LOGITS corresponds to ONE target token in FLAT_LABELS.")
+N_flat = flat_labels.shape[0]
+assert flat_logits.shape == (N_flat, VOCAB_SIZE)
+assert flat_labels.shape == (N_flat,)
+assert shift_logits.shape[2] == VOCAB_SIZE
+assert shift_labels.shape == (tokens.shape[0], tokens.shape[1] - 1)
+pass_fail("Shape assertions", True)
+
 RESULTS["tensor_B"] = B
 RESULTS["tensor_T"] = T
 RESULTS["tensor_C"] = N_EMBD
@@ -457,19 +579,18 @@ pass_fail("Tensor shapes", True)
 cells.append(md("""
 ---
 
-## Section 4 — STRING-LEVEL SHIFT VERIFICATION (Most Important)
+## Section 4 — STRING-LEVEL SHIFT VERIFICATION ⭐ HERO SECTION
 
-### WHAT ARE WE DOING?
-Decode tokens to strings. A human must be able to **read** input → target alignment.
+### 🔍 Forensic Check
+**Question:** Are inputs aligned with the **next** token?
 
-### HOW DOES IT WORK?
-For each position `i`: model at `input[i]` should predict `target[i]` which equals the original token at `i+1`.
+Decode to strings — IDs can look aligned when semantics are wrong. `"India" → " is"` is sensible; `"is" → "India"` is backward.
 
-### WHAT DID WE PROVE?
-The shift matches next-token prediction semantics.
+### ✅ Proven
+String alignment matches `input[i] → target[i+1]`.
 
-### WHAT THIS DOES NOT PROVE
-That training actually optimized this objective (wrong-shift section later).
+### ⚠️ Trap
+Proves harness shift — not that training optimized this objective.
 """))
 
 cells.append(code("""
@@ -479,87 +600,35 @@ demo_ids = tokenizer.encode(demo_text)
 demo_tokens = decode_tokens(tokenizer, demo_ids)
 
 print(f"Source text: {demo_text}")
-print(f"Token count: {len(demo_tokens)}")
 print()
-header = f"{'POS':>4} | {'INPUT TOKEN':<20} | {'TARGET TOKEN':<20}"
+header = f"{'POS':>4} | {'INPUT':<16} | {'TARGET':<16}"
 print(header)
 print("-" * len(header))
-
-shift_ok = True
 for i in range(len(demo_ids) - 1):
-    inp = demo_tokens[i]
-    tgt = demo_tokens[i + 1]
-    print(f"{i:>4} | {inp!r:<20} | {tgt!r:<20}")
+    print(f"{i:>4} | {demo_tokens[i]!r:<16} | {demo_tokens[i+1]!r:<16}")
 
-# Reconstruct target sequence
-reconstructed = demo_tokens[1:]
-expected = decode_tokens(tokenizer, demo_ids[1:])
-shift_ok = reconstructed == expected
-
+shift_ok = demo_tokens[1:] == decode_tokens(tokenizer, demo_ids[1:])
 print()
-print("EXPECTED: input[i] → target[i+1] (original token at position i+1)")
-print(f"ACTUAL:   reconstructed target sequence = original shifted by +1")
-pass_fail("String shift alignment", shift_ok)
+print("Rule: input[i] → target[i+1]")
+print(f"STATUS: {'PASS' if shift_ok else 'FAIL'}")
 EVIDENCE["string_shift"] = "PASS" if shift_ok else "FAIL"
-
-# Shift truth table — correct vs wrong
-print()
-print("🧪 EXPERIMENT — Shift Truth Table (toy sequence)")
-toy = ["The", " cat", " sat", " down"]
-print()
-print("CORRECT (next-token):")
-for i in range(len(toy) - 1):
-    print(f"  {toy[i].strip():>6} → {toy[i+1].strip()}")
+pass_fail("String shift alignment", shift_ok)
 
 print()
-print("WRONG (backward shift):")
-for i in range(1, len(toy)):
-    print(f"  {toy[i].strip():>6} → {toy[i-1].strip()}")
-
+print("=" * 50)
+print("SHIFT TRUTH TABLE")
+print("=" * 50)
+toy_words = ["The", " cat", " sat", " down"]
 print()
-print("⚠️  TRAP: Wrong backward shift still has matching shapes. PyTorch won't throw.")
-print("         Cross-entropy still returns a scalar. Optimizer can still reduce loss.")
-print("         SHAPE CORRECTNESS ≠ TASK CORRECTNESS")
-"""))
-
-# ── Cross entropy from first principles ────────────────────────────────────
-cells.append(md("""
----
-
-## Section 5 — Cross-Entropy From First Principles
-
-### WHAT ARE WE DOING?
-Understand CE before calling `F.cross_entropy`.
-
-### HOW DOES IT WORK?
-If the correct token gets probability `p`, loss = `-log(p)`.
-High probability on correct token → low loss.
-
-PyTorch combines `log_softmax` + `negative log likelihood`.
-
-### WHAT THIS DOES NOT PROVE
-That our model assigns reasonable probabilities yet (random baseline comes next).
-"""))
-
-cells.append(code("""
-print("🧪 EXPERIMENT — toy vocabulary CE")
-vocab_toy = ["cat", "dog", "car", "tree"]
-probs_dog = torch.tensor([0.05, 0.80, 0.10, 0.05])
-probs_cat = torch.tensor([0.05, 0.05, 0.10, 0.80])  # cat at index 0
-
-loss_dog = -torch.log(probs_dog[1])
-loss_cat = -torch.log(probs_cat[0])
-print(f"Correct = dog (p=0.80): loss = {loss_dog.item():.4f}")
-print(f"Correct = cat (p=0.05): loss = {loss_cat.item():.4f}")
-print("✅ PROVEN: CE converts probability on correct class into training signal")
-
+print("CORRECT NEXT-TOKEN OBJECTIVE")
+for i in range(len(toy_words) - 1):
+    print(f"  {toy_words[i]!r:<12} → {toy_words[i+1]!r}")
 print()
-print("📐 SHAPE CHECK — logits vs probabilities")
-raw_logits = torch.tensor([2.1, 0.5, -1.0])
-softmax_probs = F.softmax(raw_logits, dim=0)
-print("RAW LOGITS:", raw_logits.tolist())
-print("SOFTMAX:   ", [round(x, 4) for x in softmax_probs.tolist()])
-print("Logits = raw scores. Softmax = probabilities. CE uses logits internally via log_softmax.")
+print("WRONG PREVIOUS-TOKEN OBJECTIVE")
+for i in range(1, len(toy_words)):
+    print(f"  {toy_words[i]!r:<12} → {toy_words[i-1]!r}")
+print()
+print("⚠️  TRAP: Both have valid shapes, scalar CE, and can train. Only one is next-token.")
 """))
 
 # ── Padding forensics ──────────────────────────────────────────────────────
@@ -568,17 +637,14 @@ cells.append(md("""
 
 ## Section 6 — Padding Forensics
 
-### WHAT ARE WE DOING?
-Padding is artificial. Without masking, pad tokens become training targets.
+### 🧠 Why
+GPT-2 BPE does **not** inherently use token ID 0 as PAD. For this **controlled experiment** we introduce a **synthetic padding convention** so masking can be isolated.
 
-### HOW DOES IT WORK?
-`ignore_index=-100` removes positions from the loss sum/count.
+### ✅ Proven
+Masked padding positions do not contribute to the averaged loss population.
 
-### WHAT DID WE PROVE?
-The number of contributing tokens changes when padding is masked.
-
-### WHAT THIS DOES NOT PROVE
-That masking always lowers loss — averaging population changed.
+### ⚠️ Trap
+Masking changes which targets are averaged — masked loss is **not guaranteed** to be numerically lower.
 """))
 
 cells.append(code("""
@@ -622,16 +688,22 @@ with torch.no_grad():
 
 contrib_before = tgt_raw.numel()
 contrib_after = (tgt_masked != IGNORE).sum().item()
-masked_positions = contrib_before - contrib_after
+padded_positions = contrib_before - contrib_after
 
+print("🧪 Synthetic PAD convention: token_id=0 marks padded positions (not native GPT-2 PAD)")
 print(f"sequence A: {tokenizer.decode(seq_a)}")
 print(f"sequence B (shorter): {tokenizer.decode(seq_b)}")
-print(f"total target positions:     {contrib_before}")
-print(f"real target positions:      {contrib_after}")
-print(f"masked positions:           {masked_positions}")
-print(f"raw loss (no mask):         {raw_loss.item():.4f}")
-print(f"masked loss:                {masked_loss.item():.4f}")
-print("✅ PROVEN: padding no longer contributes to training objective")
+print()
+print(f"total target positions:       {contrib_before}")
+print(f"padded target positions:      {padded_positions}")
+print(f"valid target positions:       {contrib_after}")
+print(f"contributing tokens BEFORE mask: {contrib_before}")
+print(f"contributing tokens AFTER mask:  {contrib_after}")
+print()
+print(f"loss WITHOUT padding mask:    {raw_loss.item():.4f}")
+print(f"loss WITH padding mask:       {masked_loss.item():.4f}")
+print()
+print("Masking changes the averaging population. PAD targets no longer contribute.")
 EVIDENCE["padding"] = "PASS"
 RESULTS["padding_before"] = contrib_before
 RESULTS["padding_after"] = contrib_after
@@ -667,33 +739,42 @@ ids_a = tokenizer.encode(doc_a)
 ids_b = tokenizer.encode(doc_b)
 packed = ids_a + ids_b
 
-boundary_idx = len(ids_a) - 1  # last token of A predicts first of B
-boundary_inp = packed[boundary_idx]
-boundary_tgt = packed[boundary_idx + 1]
+boundary_idx = len(ids_a) - 1
+boundary_pair = (tokenizer.decode([packed[boundary_idx]]), tokenizer.decode([packed[boundary_idx + 1]]))
 
-print(f"DOC A: {doc_a}")
-print(f"DOC B: {doc_b}")
-print(f"Boundary: {tokenizer.decode([boundary_inp])!r} → {tokenizer.decode([boundary_tgt])!r}")
+print(f"DOCUMENT A: {doc_a}")
+print(f"DOCUMENT B: {doc_b}")
+print()
+print("PACKED — artificial cross-document prediction:")
+print(f"  last token of A  →  first token of B")
+print(f"  BOUNDARY: {boundary_pair[0]!r} → {boundary_pair[1]!r}")
+print("  (exists only because we packed two independent documents)")
 
-# Loss on packed sequence
 inp = torch.tensor(packed[:-1], device=DEVICE)
 tgt = torch.tensor(packed[1:], device=DEVICE)
+n_targets = tgt.numel()
 
 with torch.no_grad():
     _, logits = model(inp.unsqueeze(0))
     flat_logits = logits[0]
     loss_before = F.cross_entropy(flat_logits, tgt).item()
-
     tgt_masked = tgt.clone()
     tgt_masked[boundary_idx] = IGNORE
     loss_after = F.cross_entropy(flat_logits, tgt_masked, ignore_index=IGNORE).item()
+    contrib_before = n_targets
+    contrib_after = (tgt_masked != IGNORE).sum().item()
 
-print(f"LOSS BEFORE boundary mask: {loss_before:.4f}")
-print(f"LOSS AFTER boundary mask:  {loss_after:.4f}")
-print("MASK boundary = TRUE — model still reads B; one artificial target excluded")
+print()
+print(f"BEFORE MASK: loss = {loss_before:.4f}")
+print(f"AFTER MASK:  loss = {loss_after:.4f}")
+print(f"CONTRIBUTING TARGETS: before = {contrib_before}, after = {contrib_after}, removed = 1")
+print()
+print("Model still READS document B. We only exclude one artificial target from the loss.")
 EVIDENCE["boundary"] = "PASS"
 RESULTS["boundary_before"] = loss_before
 RESULTS["boundary_after"] = loss_after
+RESULTS["boundary_contrib_before"] = contrib_before
+RESULTS["boundary_contrib_after"] = contrib_after
 pass_fail("Document boundary", True)
 """))
 
@@ -701,22 +782,56 @@ pass_fail("Document boundary", True)
 cells.append(md("""
 ---
 
-## Section 8 — Perplexity Sanity Check
+## Section 8 — Perplexity: Two Baselines
 
-### WHAT ARE WE DOING?
-Before training, a random model should have loss ≈ `ln(V)` and PPL ≈ `V`.
+### Baseline A — Mathematically uniform logits
+If every logit is equal, softmax is uniform: P(token) = 1/V.
 
-For GPT-2: `ln(50257) ≈ 10.825`, `PPL ≈ 50257`.
+Then loss = −log(1/V) = log(V) and perplexity = V.
 
-### HOW DOES IT WORK?
-`PPL = exp(loss)`
+This is the **exact** mathematical baseline.
 
-If this fails, **STOP** — diagnose before training.
+### Baseline B — Actual randomly initialized transformer
+A real model is **not** required to produce exactly uniform logits. Init, embeddings, and architecture introduce non-uniformity.
+
+We check for **gross implementation problems**, not exact equality.
+
+### ✅ Proven (A)
+Uniform logits → loss ≈ ln(V), PPL ≈ V.
+
+### ⚠️ Trap
+Do **not** claim every untrained transformer must have PPL = V exactly.
 """))
 
 cells.append(code("""
-print("🔬 FORENSIC CHECK — untrained perplexity")
+print("🔬 FORENSIC CHECK — perplexity baselines")
+expected_ln_v = math.log(VOCAB_SIZE)
+expected_ppl = VOCAB_SIZE
 
+# ── Baseline A: uniform logits ──
+print("=" * 50)
+print("BASELINE A — uniform logits (mathematical)")
+print("=" * 50)
+n_demo = 256
+uniform_logits = torch.zeros(n_demo, VOCAB_SIZE, device=DEVICE)
+uniform_targets = torch.randint(0, VOCAB_SIZE, (n_demo,), device=DEVICE)
+uniform_loss = F.cross_entropy(uniform_logits, uniform_targets).item()
+uniform_ppl = math.exp(uniform_loss)
+print(f"uniform loss:           {uniform_loss:.6f}")
+print(f"theory log(V):          {expected_ln_v:.6f}")
+print(f"uniform perplexity:     {uniform_ppl:,.1f}")
+print(f"theory V:               {expected_ppl:,}")
+uniform_ok = abs(uniform_loss - expected_ln_v) < 1e-4
+pass_fail("UNIFORM BASELINE", uniform_ok)
+EVIDENCE["uniform_baseline"] = "PASS" if uniform_ok else "FAIL"
+RESULTS["uniform_loss"] = uniform_loss
+RESULTS["uniform_ppl"] = uniform_ppl
+
+# ── Baseline B: actual model ──
+print()
+print("=" * 50)
+print("BASELINE B — randomly initialized transformer")
+print("=" * 50)
 tokens_eval = make_batch(documents, batch_size=4)
 with torch.no_grad():
     _, logits = model(tokens_eval)
@@ -724,28 +839,27 @@ with torch.no_grad():
     shift_labels = tokens_eval[:, 1:].contiguous().view(-1)
     actual_loss = F.cross_entropy(shift_logits, shift_labels).item()
 
-expected_ln_v = math.log(VOCAB_SIZE)
 actual_ppl = math.exp(actual_loss)
-expected_ppl = VOCAB_SIZE
-rel_error = abs(actual_loss - expected_ln_v) / expected_ln_v
+rel_diff = abs(actual_loss - expected_ln_v) / expected_ln_v
 
-print(f"actual loss:      {actual_loss:.4f}")
-print(f"expected ln(V):   {expected_ln_v:.4f}")
-print(f"actual PPL:       {actual_ppl:,.1f}")
-print(f"expected PPL:     {expected_ppl:,}")
-print(f"relative error:   {rel_error:.2%}")
+print(f"actual initial loss:    {actual_loss:.4f}")
+print(f"actual initial PPL:     {actual_ppl:,.1f}")
+print(f"uniform-theory loss:    {expected_ln_v:.4f}")
+print(f"uniform-theory PPL:     {expected_ppl:,}")
+print(f"relative difference:    {rel_diff:.2%}")
 
-TOLERANCE = 0.15  # 15% — small model init variance
-ppl_ok = rel_error < TOLERANCE
-if not ppl_ok:
-    print("❌ FAIL — investigate: vocab size, init, target alignment, reduction, scaling")
-    raise RuntimeError("Perplexity sanity check failed — do not proceed to training")
+# Plausibility — detect gross errors only
+GROSS_LOW, GROSS_HIGH = 0.5, 2.0
+if actual_loss < expected_ln_v * GROSS_LOW or actual_loss > expected_ln_v * GROSS_HIGH:
+    model_status = "REVIEW"
+    print("❌ MODEL INITIALIZATION: extreme value — investigate before training")
+else:
+    model_status = "PLAUSIBLE"
+    print("✅ MODEL INITIALIZATION: PLAUSIBLE (not required to equal ln(V) exactly)")
 
-print("✅ PROVEN: untrained model near random baseline")
-EVIDENCE["perplexity"] = "PASS"
+EVIDENCE["random_model"] = model_status
 RESULTS["untrained_loss"] = actual_loss
 RESULTS["untrained_ppl"] = actual_ppl
-pass_fail("Perplexity sanity", ppl_ok)
 """))
 
 # ── Tied vs untied ─────────────────────────────────────────────────────────
@@ -763,31 +877,37 @@ Additional untied parameters = `V × C`.
 """))
 
 cells.append(code("""
-print("💾 MEMORY CHECK — tied vs untied parameters")
+print("💾 Tied vs untied output head")
+
+print("Embedding matrix:  V × C  (lookup table)")
+print("Output projection: C → V  (weight matrix V × C)")
+print()
+print("Tied:   one V×C matrix reused for input and output")
+print("Untied: second V×C matrix for output only")
+print()
 
 tied_model = GPT(tie_weights=True)
 untied_model = GPT(tie_weights=False)
-
 tied_params = tied_model.count_parameters()
 untied_params = untied_model.count_parameters()
 diff = untied_params - tied_params
 theoretical = VOCAB_SIZE * N_EMBD
 
-emb_params = VOCAB_SIZE * N_EMBD
-print(f"vocab size:              {VOCAB_SIZE}")
-print(f"hidden dimension:        {N_EMBD}")
-print(f"embedding parameters:    {emb_params:,}")
-print(f"tied total:              {tied_params:,}")
-print(f"untied total:            {untied_params:,}")
-print(f"actual difference:       {diff:,}")
-print(f"theoretical V*C:         {theoretical:,}")
+print(f"vocab (V):               {VOCAB_SIZE}")
+print(f"hidden (C):              {N_EMBD}")
+print(f"tied parameters:         {tied_params:,}")
+print(f"untied parameters:       {untied_params:,}")
+print(f"measured difference:     {diff:,}")
+print(f"theoretical V×C:         {theoretical:,}")
 
-assert diff == theoretical, f"Expected {theoretical}, got {diff}"
+assert diff == theoretical
 EVIDENCE["tied_untied"] = "PASS"
 RESULTS["tied_params"] = tied_params
 RESULTS["untied_params"] = untied_params
 RESULTS["param_diff"] = diff
-pass_fail("Tied vs untied (diff == V*C)", diff == theoretical)
+pass_fail("untied - tied == V×C", diff == theoretical)
+print()
+print("🧠 Why it matters: at V=50k+, an untied head adds ~6.4M parameters — significant at scale.")
 """))
 
 # ── Memory / chunked CE ────────────────────────────────────────────────────
@@ -848,13 +968,27 @@ def measure_peak_bytes(fn, *args, **kwargs):
         base = torch.cuda.memory_allocated()
         fn(*args, **kwargs)
         peak = torch.cuda.max_memory_allocated() - base
-        return peak, "cuda_allocator"
+        return peak, "MEASURED CUDA PEAK MEMORY"
     fn(*args, **kwargs)
     return None, "analytical_estimate"
 
 
 print("🧪 EXPERIMENT — ordinary vs chunked CE")
 eval_tokens = make_batch(documents, batch_size=16)
+B_eval, T_eval = eval_tokens.shape[0], eval_tokens.shape[1]
+N_pos = B_eval * (T_eval - 1)
+n_logits = N_pos * VOCAB_SIZE
+bytes_f32 = 4
+print("💾 MEMORY MATH")
+print(f"  B={B_eval}, T={T_eval}, V={VOCAB_SIZE}")
+print(f"  positions N = B×(T-1) = {N_pos}")
+print(f"  full logits ≈ N×V = {n_logits:,} values")
+print(f"  float32 bytes ≈ {n_logits * bytes_f32:,} ({n_logits * bytes_f32 / 1e6:.1f} MB)")
+print()
+print("Ordinary CE: hidden → full (N,V) logits → CE")
+print("Chunked CE:  hidden chunk → small logits → sum → discard → next chunk")
+print()
+
 with torch.no_grad():
     hidden, _ = model(eval_tokens)
     targets = eval_tokens[:, 1:]
@@ -865,9 +999,11 @@ with torch.no_grad():
     chk_loss = chunked_cross_entropy(hidden_shift, weight, targets, chunk_size=16)
 
     abs_diff = abs(ord_loss - chk_loss)
-    print(f"ordinary loss:     {ord_loss:.6f}")
-    print(f"chunked loss:      {chk_loss:.6f}")
-    print(f"absolute diff:     {abs_diff:.8f}")
+    rel_diff = abs_diff / max(abs(ord_loss), 1e-8)
+    print(f"ordinary loss:         {ord_loss:.6f}")
+    print(f"chunked loss:          {chk_loss:.6f}")
+    print(f"absolute difference:   {abs_diff:.8f}")
+    print(f"relative difference:   {rel_diff:.2e}")
 
     N = hidden_shift.shape[0] * hidden_shift.shape[1]
     chunk_size = 16
@@ -877,14 +1013,16 @@ with torch.no_grad():
     )
     if ord_peak is None:
         ord_peak = analytical_logits_bytes(N)
-        ord_method = "analytical_estimate (CPU/MPS)"
+        ord_method = "ANALYTICAL LOGIT MEMORY ESTIMATE (CPU/MPS)"
     if chk_peak is None:
         chk_peak = analytical_logits_bytes(min(chunk_size, N))
-        chk_method = "analytical_estimate (CPU/MPS)"
+        chk_method = "ANALYTICAL LOGIT MEMORY ESTIMATE (CPU/MPS)"
     ratio = ord_peak / max(chk_peak, 1)
-    print(f"ordinary peak:     {ord_peak:,} bytes ({ord_method})")
-    print(f"chunked peak:      {chk_peak:,} bytes ({chk_method})")
-    print(f"memory ratio:      {ratio:.1f}x")
+    print(f"ordinary peak:         {ord_peak:,} bytes ({ord_method})")
+    print(f"chunked peak:          {chk_peak:,} bytes ({chk_method})")
+    print(f"memory ratio:          {ratio:.1f}x")
+    print()
+    print("Chunking reduces peak resident logit memory — not total scores computed.")
 
 EVIDENCE["chunked_ce"] = "PASS"
 RESULTS["ord_ce_loss"] = ord_loss
@@ -920,20 +1058,23 @@ That t+2 must be harder — that's a hypothesis we test.
 
 cells.append(code("""
 print("🔬 FORENSIC CHECK — t+2 alignment")
-letters = ["A", " B", " C", " D", " E"]
-print("Head 1 (t+1):")
-for i in range(len(letters) - 1):
-    print(f"  {letters[i].strip()} → {letters[i+1].strip()}")
-print("Head 2 (t+2):")
-for i in range(len(letters) - 2):
-    print(f"  {letters[i].strip()} → {letters[i+2].strip()}")
-
-# String verification on real tokens
+print("TOKENS: A B C D E")
+print()
+print("Head 1 (t+1):  A→B  B→C  C→D  D→E")
+print("Head 2 (t+2):  A→C  B→D  C→E")
+print()
+print("Tensor slices:")
+print("  head1_logits = logits[:, :-1]   head1_targets = tokens[:, 1:]")
+print("  head2_logits = logits[:, :-2]   head2_targets = tokens[:, 2:]")
+print()
 demo = tokenizer.encode("A B C D E")
 demo_str = decode_tokens(tokenizer, demo)
+print("Decoded strings — Head 1:")
+for i in range(len(demo) - 1):
+    print(f"  {demo_str[i]!r} → {demo_str[i+1]!r}")
+print("Decoded strings — Head 2:")
 for i in range(len(demo) - 2):
-    print(f"  REAL: {demo_str[i]!r} → {demo_str[i+2]!r}")
-
+    print(f"  {demo_str[i]!r} → {demo_str[i+2]!r}")
 EVIDENCE["t2_align"] = "PASS"
 pass_fail("t+2 alignment", True)
 """))
@@ -966,9 +1107,14 @@ opt = torch.optim.AdamW(dual.parameters(), lr=3e-4)
 
 STEPS = 15
 log_steps, loss1_hist, loss2_hist, sum_hist = [], [], [], []
+checkpoint_log = []
+checkpoint_steps = {0, STEPS // 4, STEPS // 2, 3 * STEPS // 4, STEPS}
 
-checkpoints = {0, STEPS // 4, STEPS // 2, 3 * STEPS // 4, STEPS}
-print("Checkpoint diagnostics:")
+batch0 = make_batch(documents, batch_size=4)
+with torch.no_grad():
+    l1, l2, _ = dual.compute_losses(batch0)
+checkpoint_log.append((0, l1.item(), l2.item()))
+
 for step in range(1, STEPS + 1):
     batch = make_batch(documents, batch_size=4)
     l1, l2, total = dual.compute_losses(batch)
@@ -980,8 +1126,13 @@ for step in range(1, STEPS + 1):
         loss1_hist.append(l1.item())
         loss2_hist.append(l2.item())
         sum_hist.append(total.item())
-    if step in checkpoints:
-        print(f"  step {step:3d}: loss1={l1.item():.3f} loss2={l2.item():.3f} gap={l2.item()-l1.item():.3f}")
+    if step in checkpoint_steps:
+        checkpoint_log.append((step, l1.item(), l2.item()))
+
+print("Checkpoint comparison (initial → 25% → 50% → 75% → final):")
+print(f"{'step':>5} {'t+1':>8} {'t+2':>8} {'diff':>8}")
+for step, a, b in checkpoint_log:
+    print(f"{step:>5} {a:>8.4f} {b:>8.4f} {b-a:>8.4f}")
 
 RESULTS["final_loss1"] = loss1_hist[-1]
 RESULTS["final_loss2"] = loss2_hist[-1]
@@ -999,11 +1150,17 @@ plt.savefig("t1_t2_loss.png", dpi=120)
 plt.show()
 
 print()
-print("🔍 OBSERVED RESULT:")
+print("🔍 OBSERVATION (this run):")
 print(f"  final t+1 loss: {RESULTS['final_loss1']:.4f}")
 print(f"  final t+2 loss: {RESULTS['final_loss2']:.4f}")
 print(f"  gap (t2-t1):    {RESULTS['final_loss2']-RESULTS['final_loss1']:.4f}")
-print("🧠 INTERPRETATION: gap depends on data, init, LR, steps — not guaranteed.")
+print()
+print("🧠 INTERPRETATION:")
+print("  A second horizon creates a distinct objective. Gap direction depends on")
+print("  data, init, LR, and training duration — not guaranteed.")
+print()
+print("⚠️ LIMITATION:")
+print("  15-step demonstration does not prove t+2 is universally harder or easier.")
 EVIDENCE["t2_head"] = "PASS"
 """))
 
@@ -1011,18 +1168,24 @@ EVIDENCE["t2_head"] = "PASS"
 cells.append(md("""
 ---
 
-## Section 12 — THE SIGNATURE EXPERIMENT
+## Section 12 — THE SIGNATURE EXPERIMENT ⭐
 
-# "The loss was beautiful. The model was wrong."
+# The loss was beautiful. The model was wrong.
 
-### WHAT ARE WE DOING?
-Train with **wrong** target alignment: `logits[:, 1:]` vs `tokens[:, :-1]` — predicting the **past** instead of the future.
+### Correct objective
+`input[t] → target[t+1]` via `logits[:, :-1]` vs `tokens[:, 1:]`
 
-### HOW DOES IT WORK?
-Shapes still match. Loss decreases. But string forensics reveal the task is wrong.
+### Wrong objective
+`input[t] → target[t-1]` via `logits[:, 1:]` vs `tokens[:, :-1]`
 
-### WHAT DID WE PROVE?
-A falling loss curve is NOT sufficient evidence of correct training.
+### 🔍 Forensic chain
+loss decreases → looks successful → inspect strings → target is past context → **objective is wrong**
+
+### ✅ Demonstrated
+A misaligned objective can produce decreasing loss.
+
+### ⚠️ Trap
+Does not prove every wrong objective always has lower loss.
 """))
 
 cells.append(code("""
@@ -1066,7 +1229,11 @@ plt.show()
 
 print(f"Correct-shift final loss: {RESULTS['correct_final_loss']:.4f}")
 print(f"Wrong-shift final loss:   {RESULTS['wrong_final_loss']:.4f}")
-print("Did we successfully train next-token prediction with wrong shift? NO.")
+print()
+print("# The optimizer succeeded. We gave it the wrong job.")
+print()
+print("The wrong objective is a VALID optimization problem — not a crashed computation.")
+print("The optimizer can reduce it. The loss can look excellent. But it is not next-token prediction.")
 
 # String forensic on wrong model
 print()
@@ -1076,19 +1243,66 @@ test_tokens = decode_tokens(tokenizer, test_ids)
 inp_t = torch.tensor([test_ids], device=DEVICE)
 with torch.no_grad():
     _, logits = wrong_model(inp_t)
-    # wrong alignment: position i predicts token i-1
     for i in range(1, min(4, len(test_ids) - 1)):
-        pred_logits = logits[0, i, :]
-        pred_id = pred_logits.argmax().item()
+        pred_id = logits[0, i, :].argmax().item()
         pred_str = tokenizer.decode([pred_id])
-        input_str = test_tokens[i]
-        correct_next = test_tokens[i + 1]
-        prev_token = test_tokens[i - 1]
-        print(f"  pos {i}: input={input_str!r} model_predicts={pred_str!r} (wrong target={prev_token!r}) correct_next={correct_next!r}")
+        print(f"  INPUT CONTEXT:     {test_tokens[i]!r}")
+        print(f"  MODEL PREDICTION:    {pred_str!r}")
+        print(f"  INTENDED NEXT TOKEN: {test_tokens[i+1]!r}")
+        print(f"  (wrong objective rewards: {test_tokens[i-1]!r})")
+        print()
 
 EVIDENCE["wrong_shift"] = "DEMONSTRATED"
-print()
-print("⚠️  TRAP: Loss fell because model learned an easier wrong task.")
+print("⚠️  TRAP: loss fell because model learned an easier wrong task.")
+"""))
+
+# ── Random target control (optional) ───────────────────────────────────────
+cells.append(md("""
+---
+
+## Section 12b — Random Target Control (conceptual)
+
+Three objectives on the same backbone (5-step micro-demo):
+
+| | Objective |
+|---|-----------|
+| A | Correct next-token |
+| B | Wrong previous-token |
+| C | Random targets |
+
+**Lesson:** Loss decreasing means learning the **supplied** objective — not necessarily the intended one.
+"""))
+
+cells.append(code("""
+print("🧪 MICRO-DEMO — correct vs wrong vs random targets (5 steps)")
+
+def micro_train(mode: str, steps=5):
+    m = GPT(tie_weights=True).to(DEVICE)
+    opt = torch.optim.AdamW(m.parameters(), lr=3e-4)
+    hist = []
+    for _ in range(steps):
+        batch = make_batch(documents, batch_size=4)
+        _, logits = m(batch)
+        if mode == "correct":
+            sl, tl = logits[:, :-1, :], batch[:, 1:]
+        elif mode == "wrong":
+            sl, tl = logits[:, 1:, :], batch[:, :-1]
+        else:
+            sl, tl = logits[:, :-1, :], torch.randint(0, VOCAB_SIZE, batch[:, 1:].shape, device=DEVICE)
+        loss = F.cross_entropy(sl.reshape(-1, VOCAB_SIZE), tl.reshape(-1))
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        hist.append(loss.item())
+    return hist[0], hist[-1]
+
+c0, c1 = micro_train("correct")
+w0, w1 = micro_train("wrong")
+r0, r1 = micro_train("random")
+print(f"  correct:  {c0:.3f} → {c1:.3f}")
+print(f"  wrong:    {w0:.3f} → {w1:.3f}")
+print(f"  random:   {r0:.3f} → {r1:.3f}")
+print("Random targets provide no stable semantic signal — unlike structured wrong shifts.")
 """))
 
 # ── Loss Truth Triangle ────────────────────────────────────────────────────
@@ -1098,19 +1312,52 @@ cells.append(md("""
 ## Section 13 — The Loss Truth Triangle
 
 ```
-             LOSS VALUE
-                /\\
-               /  \\
-              /    \\
-             /      \\
-    TENSOR SHAPES —— STRING SEMANTICS
+                    LOSS VALUE
+                       /\\
+                      /  \\
+                     /    \\
+                    /      \\
+                   /        \\
+                  /          \\
+                 /            \\
+                /              \\
+       TENSOR SHAPES -------- STRINGS
 ```
 
-1. **Tensor shapes** — dimensions line up
-2. **Numerical loss** — valid scalar objective
-3. **String semantics** — scalar matches intended task
+### 1. TENSOR SHAPES — Do dimensions line up?
+### 2. STRINGS — Are we predicting the token we intend?
+### 3. LOSS — Does the numerical objective behave sensibly?
 
-A model can pass shapes + falling loss and still be wrong. The string test catches that.
+> Shapes can be correct. Loss can decrease. The model can still be solving the **wrong task**.
+
+```
+TRUSTWORTHY LOSS = SHAPES + STRING SEMANTICS + NUMERICAL SANITY
+```
+
+A beautiful loss curve is only trustworthy when independently verified.
+"""))
+
+# ── What proves / does not prove ───────────────────────────────────────────
+cells.append(md("""
+---
+
+## What This Proves / Does Not Prove
+
+### Perplexity
+**PROVES:** Uniform-logit baseline matches loss≈ln(V), PPL≈V mathematically.
+**DOES NOT PROVE:** Random init must yield PPL exactly equal to V.
+
+### Padding
+**PROVES:** Masked PAD positions do not contribute to averaged loss.
+**DOES NOT PROVE:** Masking always numerically lowers loss.
+
+### t+2
+**PROVES:** A second horizon can be implemented and optimized.
+**DOES NOT PROVE:** t+2 is universally harder than t+1.
+
+### Wrong shift
+**PROVES:** Misaligned objective can decrease loss while being the wrong task.
+**DOES NOT PROVE:** Every incorrect objective always has lower loss.
 """))
 
 # ── Evidence ledger ────────────────────────────────────────────────────────
@@ -1118,28 +1365,28 @@ cells.append(md("""
 ---
 
 ## Evidence Ledger
-
-| Claim | Evidence | Status |
-|-------|----------|--------|
-| Shapes correct | printed tensor dimensions | see below |
-| Shift correct | decoded strings | see below |
-| Padding excluded | contributing-token count | see below |
-| Boundary excluded | before/after loss | see below |
-| Random baseline | PPL ≈ V | see below |
-| Tied saves V×C | param count | see below |
-| Chunked CE equivalent | loss match | see below |
-| Chunking reduces peak | memory ratio | see below |
-| t+2 aligned | explicit strings | see below |
-| Wrong shift reduces loss | deliberate experiment | see below |
 """))
 
 cells.append(code("""
-print("=" * 60)
-print("EVIDENCE LEDGER")
-print("=" * 60)
-for claim, status in EVIDENCE.items():
-    print(f"  {claim:20s} → {status}")
-print("=" * 60)
+LEDGER = [
+    ("Tensor dimensions correct", "Shape inspection", f"B,T,C,V printed", EVIDENCE.get("shapes", "—")),
+    ("Target shifted correctly", "String alignment", "decoded pairs", EVIDENCE.get("string_shift", "—")),
+    ("Padding excluded", "Mask experiment", f"{RESULTS.get('padding_before','?')}→{RESULTS.get('padding_after','?')} valid", EVIDENCE.get("padding", "—")),
+    ("Boundary excluded", "Boundary experiment", f"loss {RESULTS.get('boundary_before','?')}→{RESULTS.get('boundary_after','?')}", EVIDENCE.get("boundary", "—")),
+    ("Uniform baseline", "Equal-logit test", f"loss≈ln(V)", EVIDENCE.get("uniform_baseline", "—")),
+    ("Random model plausible", "Init check", f"PPL={RESULTS.get('untrained_ppl', 0):,.0f}", EVIDENCE.get("random_model", "—")),
+    ("Tied saves V×C", "Param count", f"Δ={RESULTS.get('param_diff','?')}", EVIDENCE.get("tied_untied", "—")),
+    ("Chunked CE equivalent", "Loss compare", f"diff={RESULTS.get('ce_abs_diff','?')}", EVIDENCE.get("chunked_ce", "—")),
+    ("Chunking lowers peak", "Memory", f"{RESULTS.get('mem_ratio','?')}x", EVIDENCE.get("chunked_ce", "—")),
+    ("t+2 aligned", "String pairs", "explicit", EVIDENCE.get("t2_align", "—")),
+    ("Wrong shift trap", "Deliberate experiment", "loss+strings", EVIDENCE.get("wrong_shift", "—")),
+]
+print("=" * 72)
+print(f"{'Claim':<32} {'Test':<18} {'Evidence':<20} Status")
+print("-" * 72)
+for claim, test, ev, status in LEDGER:
+    print(f"{claim:<32} {test:<18} {ev:<20} {status}")
+print("=" * 72)
 """))
 
 # ── Seven numbers panel ────────────────────────────────────────────────────
@@ -1156,17 +1403,18 @@ print("=" * 60)
 print(f"1. Tensor shapes:           B={RESULTS['tensor_B']}, T={RESULTS['tensor_T']}, C={RESULTS['tensor_C']}, V={RESULTS['tensor_V']}")
 print(f"2. String shift:            {EVIDENCE['string_shift']}")
 print(f"3. Padding tokens:          {RESULTS['padding_before']} → {RESULTS['padding_after']} contributing")
-print(f"4. Boundary loss:           {RESULTS['boundary_before']:.4f} → {RESULTS['boundary_after']:.4f}")
-print(f"5. Untrained loss/PPL:      {RESULTS['untrained_loss']:.4f} / {RESULTS['untrained_ppl']:,.0f}")
-print(f"6. Tied vs untied params:   {RESULTS['tied_params']:,} vs {RESULTS['untied_params']:,} (Δ={RESULTS['param_diff']:,})")
-print(f"7. CE memory:               ord={RESULTS['ord_peak_bytes']:,} chk={RESULTS['chk_peak_bytes']:,} ratio={RESULTS['mem_ratio']:.1f}x")
+print(f"4. Boundary loss/counts:     {RESULTS.get('boundary_before',0):.4f} → {RESULTS.get('boundary_after',0):.4f} ({RESULTS.get('boundary_contrib_before','?')}→{RESULTS.get('boundary_contrib_after','?')} targets)")
+print(f"5. Uniform baseline:        loss={RESULTS.get('uniform_loss',0):.6f} PPL={RESULTS.get('uniform_ppl',0):,.1f}")
+print(f"6. Random model init:        loss={RESULTS.get('untrained_loss',0):.4f} PPL={RESULTS.get('untrained_ppl',0):,.1f} [{EVIDENCE.get('random_model','?')}]")
+print(f"7. Tied vs untied:           {RESULTS.get('tied_params',0):,} vs {RESULTS.get('untied_params',0):,} (Δ={RESULTS.get('param_diff',0):,})")
+print(f"8. CE memory:                ord={RESULTS.get('ord_peak_bytes',0):,} chk={RESULTS.get('chk_peak_bytes',0):,} ratio={RESULTS.get('mem_ratio',0):.1f}x")
 print("--- Part 2: dual head ---")
-print(f"8. t+1 loss:                {RESULTS['final_loss1']:.4f}")
-print(f"9. t+2 loss:                {RESULTS['final_loss2']:.4f}")
-print(f"10. combined loss:          {RESULTS['final_loss_sum']:.4f}")
+print(f"9. t+1 loss:                 {RESULTS.get('final_loss1',0):.4f}")
+print(f"10. t+2 loss:                {RESULTS.get('final_loss2',0):.4f}")
+print(f"11. combined loss:           {RESULTS.get('final_loss_sum',0):.4f}")
 print("--- Part 3: shift trap ---")
-print(f"11. correct-shift loss:     {RESULTS['correct_final_loss']:.4f}")
-print(f"12. wrong-shift loss:       {RESULTS['wrong_final_loss']:.4f}")
+print(f"12. correct-shift loss:      {RESULTS.get('correct_final_loss',0):.4f}")
+print(f"13. wrong-shift loss:        {RESULTS.get('wrong_final_loss',0):.4f}")
 print("=" * 60)
 """))
 
@@ -1200,35 +1448,39 @@ cells.append(md("""
 
 ## SHAPES — Do tensors line up?
 ## STRINGS — Are we predicting the right thing?
-## LOSS — Does the objective behave as expected?
+## LOSS — Does the numerical objective behave as expected?
 
 > A beautiful loss curve is only trustworthy when the computation producing it has been independently verified.
+
+> The optimizer can only optimize the objective we give it.
+> The first responsibility of the engineer is to make sure that objective is the one we intended.
 
 > **Observe the tensors. Read the strings. Challenge the loss.**
 """))
 
 # ── Final status ───────────────────────────────────────────────────────────
 cells.append(code("""
+def status_line(name, key, pass_vals=("PASS", "PLAUSIBLE", "DEMONSTRATED")):
+    s = EVIDENCE.get(key, "FAIL")
+    mark = s if s in pass_vals or s == "PLAUSIBLE" else s
+    return f"{name:30s} {mark}"
+
 print("=" * 60)
 print("LOSS FORENSICS LAB — FINAL STATUS")
 print("=" * 60)
-checks = [
-    ("Tensor shapes", EVIDENCE.get("shapes", "FAIL")),
-    ("String shift", EVIDENCE.get("string_shift", "FAIL")),
-    ("Padding mask", EVIDENCE.get("padding", "FAIL")),
-    ("Document boundary", EVIDENCE.get("boundary", "FAIL")),
-    ("Perplexity sanity", EVIDENCE.get("perplexity", "FAIL")),
-    ("Tied vs untied", EVIDENCE.get("tied_untied", "FAIL")),
-    ("Chunked cross entropy", EVIDENCE.get("chunked_ce", "FAIL")),
-    ("t+2 head", EVIDENCE.get("t2_head", "FAIL")),
-    ("Wrong-shift demonstration", EVIDENCE.get("wrong_shift", "FAIL")),
-]
-for name, status in checks:
-    mark = "PASS" if status in ("PASS", "DEMONSTRATED") else status
-    print(f"{name:30s} {mark}")
+print(status_line("Tensor shapes", "shapes"))
+print(status_line("String shift", "string_shift"))
+print(status_line("Padding mask", "padding"))
+print(status_line("Document boundary", "boundary"))
+print(status_line("Uniform baseline", "uniform_baseline"))
+print(status_line("Random-model sanity", "random_model"))
+print(status_line("Tied vs untied", "tied_untied"))
+print(status_line("Chunked cross entropy", "chunked_ce"))
+print(status_line("t+2 head", "t2_head"))
+print(status_line("Wrong-shift demonstration", "wrong_shift"))
 print()
 print("LOSS TRUTH TRIANGLE")
-print("Shapes + Strings + Loss       VERIFIED")
+print("Shapes + Strings + Numerical Sanity   VERIFIED")
 print("=" * 60)
 print("Observe the tensors.")
 print("Read the strings.")
