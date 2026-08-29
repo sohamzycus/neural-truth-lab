@@ -144,7 +144,29 @@ Labelled **ANALYTICAL LOGIT MEMORY ESTIMATE (CPU/MPS)** — not CUDA allocator m
 | 11 | 8.3612 | 8.3285 | −0.0327 |
 | 15 | 8.0963 | 8.0628 | −0.0334 |
 
+Combined loss (step 15): **16.1591** (= t+1 + t+2 at logging step).
+
+**OBSERVED:** t+2 is slightly lower in this short run.
+
+**NOT PROVEN:** t+2 is generally easier than t+1.
+
 In this short demonstration run, t+2 finished slightly below t+1. This is an observation from this configuration, not a universal property of prediction horizons.
+
+---
+
+## Correct vs wrong objective (decoded strings)
+
+Actual tokenizer output on `"The capital of India is New Delhi"`:
+
+| CORRECT (t → t+1) | WRONG (t → t−1) |
+|---|---|
+| `'The'` → `' capital'` | `' capital'` → `'The'` |
+| `' capital'` → `' of'` | `' of'` → `' capital'` |
+| `' of'` → `' India'` | `' India'` → `' of'` |
+| `' India'` → `' is'` | `' is'` → `' India'` |
+| `' is'` → `' New'` | `' New'` → `' is'` |
+
+Both objectives can have valid tensor shapes, scalar loss, and backpropagation. Only one represents next-token prediction.
 
 ---
 
@@ -257,7 +279,13 @@ With B=16, T=64, V=50257: N=1008, ordinary analytical peak = **202,636,224 bytes
 
 ## t+2
 
-This run demonstrated that a second horizon can be trained and compared. It does not establish universal behaviour — only that gap direction depends on configuration, data, and training duration.
+This run demonstrated that a second horizon can be trained and compared.
+
+**OBSERVED:** t+2 is slightly lower in this short run (8.0628 vs 8.0963 at step 15).
+
+**NOT PROVEN:** t+2 is generally easier than t+1.
+
+Gap direction depends on configuration, data, and training duration — not a universal law.
 
 ---
 

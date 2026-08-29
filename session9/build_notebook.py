@@ -823,6 +823,7 @@ print(f"uniform perplexity:     {uniform_ppl:,.1f}")
 print(f"theory V:               {expected_ppl:,}")
 uniform_ok = abs(uniform_loss - expected_ln_v) < 1e-4
 pass_fail("UNIFORM BASELINE", uniform_ok)
+print("UNIFORM LOGITS: loss = ln(V), PPL = V — exact mathematical baseline")
 EVIDENCE["uniform_baseline"] = "PASS" if uniform_ok else "FAIL"
 RESULTS["uniform_loss"] = uniform_loss
 RESULTS["uniform_ppl"] = uniform_ppl
@@ -856,6 +857,8 @@ if actual_loss < expected_ln_v * GROSS_LOW or actual_loss > expected_ln_v * GROS
 else:
     model_status = "PLAUSIBLE"
     print("✅ MODEL INITIALIZATION: PLAUSIBLE (not required to equal ln(V) exactly)")
+
+print("RANDOM TRANSFORMER: does NOT need PPL exactly equal to V — plausibility/pathology check")
 
 EVIDENCE["random_model"] = model_status
 RESULTS["untrained_loss"] = actual_loss
@@ -1081,6 +1084,10 @@ pass_fail("t+2 alignment", True)
 
 cells.append(code("""
 print("🧪 EXPERIMENT — train t+1 and t+2 heads (DEMONSTRATION RUN)")
+print("Objective: loss1 = CE(predictions t+1, targets t+1)")
+print("           loss2 = CE(predictions t+2, targets t+2)")
+print("           total_loss = loss1 + loss2")
+print("Optimizer step: total_loss.backward() — both heads participate in training.")
 
 class DualHeadGPT(nn.Module):
     def __init__(self):
@@ -1150,18 +1157,48 @@ plt.savefig("t1_t2_loss.png", dpi=120)
 plt.show()
 
 print()
-print("🔍 OBSERVATION (this run):")
 print(f"  final t+1 loss: {RESULTS['final_loss1']:.4f}")
 print(f"  final t+2 loss: {RESULTS['final_loss2']:.4f}")
 print(f"  gap (t2-t1):    {RESULTS['final_loss2']-RESULTS['final_loss1']:.4f}")
 print()
-print("🧠 INTERPRETATION:")
-print("  A second horizon creates a distinct objective. Gap direction depends on")
-print("  data, init, LR, and training duration — not guaranteed.")
+print("OBSERVED:")
+print("  t+2 is slightly lower in this short run.")
 print()
-print("⚠️ LIMITATION:")
-print("  15-step demonstration does not prove t+2 is universally harder or easier.")
+print("NOT PROVEN:")
+print("  t+2 is generally easier than t+1.")
 EVIDENCE["t2_head"] = "PASS"
+"""))
+
+# ── Wrong shift visual ─────────────────────────────────────────────────────
+cells.append(md("""
+---
+
+## Section 12a — Correct vs Wrong Objective (visual)
+
+Before training, compare what each objective rewards.
+
+Both can have valid tensor shapes, scalar loss, and backpropagation.
+Only one represents next-token prediction.
+"""))
+
+cells.append(code("""
+print("📋 OBJECTIVE COMPARISON — decoded strings (actual tokenizer output)")
+shift_demo = "The capital of India is New Delhi"
+shift_ids = tokenizer.encode(shift_demo)
+shift_tokens = decode_tokens(tokenizer, shift_ids)
+print()
+print("CORRECT — token at t → target at t+1")
+for i in range(min(5, len(shift_tokens) - 1)):
+    print(f"  {shift_tokens[i]!r:<16} → {shift_tokens[i+1]!r}")
+print()
+print("WRONG — token at t → target at t−1")
+for i in range(1, min(6, len(shift_tokens))):
+    print(f"  {shift_tokens[i]!r:<16} → {shift_tokens[i-1]!r}")
+print()
+print("Both objectives can have valid tensor shapes.")
+print("Both can produce a scalar loss.")
+print("Both can backpropagate.")
+print("Only one represents next-token prediction.")
 """))
 
 # ── Wrong shift experiment ─────────────────────────────────────────────────
@@ -1389,17 +1426,18 @@ for claim, test, ev, status in LEDGER:
 print("=" * 72)
 """))
 
-# ── Seven numbers panel ────────────────────────────────────────────────────
+# ── Assignment evidence panel ──────────────────────────────────────────────
 cells.append(md("""
 ---
 
-## The Seven Numbers Panel (+ training results)
+## Assignment Evidence Panel
 """))
 
 cells.append(code("""
 print("=" * 60)
-print("SEVEN NUMBERS PANEL")
+print("ASSIGNMENT EVIDENCE PANEL")
 print("=" * 60)
+print("PART 1 — Seven required checks")
 print(f"1. Tensor shapes:           B={RESULTS['tensor_B']}, T={RESULTS['tensor_T']}, C={RESULTS['tensor_C']}, V={RESULTS['tensor_V']}")
 print(f"2. String shift:            {EVIDENCE['string_shift']}")
 print(f"3. Padding tokens:          {RESULTS['padding_before']} → {RESULTS['padding_after']} contributing")
@@ -1407,14 +1445,14 @@ print(f"4. Boundary loss/counts:     {RESULTS.get('boundary_before',0):.4f} → 
 print(f"5. Uniform baseline:        loss={RESULTS.get('uniform_loss',0):.6f} PPL={RESULTS.get('uniform_ppl',0):,.1f}")
 print(f"6. Random model init:        loss={RESULTS.get('untrained_loss',0):.4f} PPL={RESULTS.get('untrained_ppl',0):,.1f} [{EVIDENCE.get('random_model','?')}]")
 print(f"7. Tied vs untied:           {RESULTS.get('tied_params',0):,} vs {RESULTS.get('untied_params',0):,} (Δ={RESULTS.get('param_diff',0):,})")
-print(f"8. CE memory:                ord={RESULTS.get('ord_peak_bytes',0):,} chk={RESULTS.get('chk_peak_bytes',0):,} ratio={RESULTS.get('mem_ratio',0):.1f}x")
-print("--- Part 2: dual head ---")
-print(f"9. t+1 loss:                 {RESULTS.get('final_loss1',0):.4f}")
-print(f"10. t+2 loss:                {RESULTS.get('final_loss2',0):.4f}")
-print(f"11. combined loss:           {RESULTS.get('final_loss_sum',0):.4f}")
-print("--- Part 3: shift trap ---")
-print(f"12. correct-shift loss:      {RESULTS.get('correct_final_loss',0):.4f}")
-print(f"13. wrong-shift loss:        {RESULTS.get('wrong_final_loss',0):.4f}")
+print(f"   CE memory:                ord={RESULTS.get('ord_peak_bytes',0):,} chk={RESULTS.get('chk_peak_bytes',0):,} ratio={RESULTS.get('mem_ratio',0):.1f}x")
+print("PART 2 — Multi-token prediction")
+print(f"8. t+1 loss:                 {RESULTS.get('final_loss1',0):.4f}")
+print(f"9. t+2 loss:                 {RESULTS.get('final_loss2',0):.4f}")
+print(f"10. combined loss:           {RESULTS.get('final_loss_sum',0):.4f}")
+print("PART 3 — Wrong-shift forensic trap")
+print(f"11. correct-shift loss:      {RESULTS.get('correct_final_loss',0):.4f}")
+print(f"12. wrong-shift loss:        {RESULTS.get('wrong_final_loss',0):.4f}")
 print("=" * 60)
 """))
 
