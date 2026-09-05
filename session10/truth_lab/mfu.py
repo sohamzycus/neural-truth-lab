@@ -50,15 +50,30 @@ def hardware_peak_flops(device: str) -> tuple[float, str]:
     """Best-effort peak FLOP/s for MFU denominator."""
     if device == "cuda" and torch.cuda.is_available():
         name = torch.cuda.get_device_name(0)
-        # ponytail: assume FP32 peak ~2x clock * cores; user should treat as estimate
         props = torch.cuda.get_device_properties(0)
-        # Very rough: 2 FLOPs per clock per CUDA core for FP32
         peak = 2.0 * props.multi_processor_count * 128 * props.clock_rate * 1e3
         return peak, f"CUDA {name} (estimated FP32 peak)"
     if device == "mps":
-        # Apple Silicon: order-of-magnitude FP32 peak for M-series
         return 3.5e12, f"MPS / Apple Silicon (estimated FP32 peak, {platform.machine()})"
     return 1.0e11, "CPU (conservative estimate)"
+
+
+def verify_mfu_report(report: MFUReport, rtol: float = 1e-6) -> dict:
+    """Sanity-check MFU arithmetic."""
+    total_flops = report.estimated_flops_per_step * report.steps
+    achieved = total_flops / report.measured_seconds
+    mfu = achieved / report.hardware_peak_flops_per_sec
+    achieved_ok = abs(achieved - report.achieved_flops_per_sec) / max(report.achieved_flops_per_sec, 1e-12) < rtol
+    mfu_ok = abs(mfu - report.mfu) < rtol
+    in_range = 0.0 <= report.mfu <= 1.0
+    return {
+        "achieved_matches_formula": achieved_ok,
+        "mfu_matches_formula": mfu_ok,
+        "mfu_in_valid_range": in_range,
+        "recomputed_achieved": achieved,
+        "recomputed_mfu": mfu,
+        "pass": achieved_ok and mfu_ok and in_range,
+    }
 
 
 def measure_mfu(
@@ -78,10 +93,12 @@ def measure_mfu(
     notes = [
         "MFU is an estimate based on the assumptions documented here.",
         "FLOP count uses analytical transformer approximation (3× forward for train step).",
+        "Formula: achieved_FLOPs/s = (FLOPs_per_step × steps) / measured_seconds",
+        "Formula: MFU = achieved_FLOPs/s / hardware_peak_FLOPs/s",
         peak_note,
+        "40% is not a realistic target for this tiny educational workload.",
     ]
 
-    # Warmup
     for i in range(warmup):
         x, y, m = make_batch(corpus, batch_size, cfg.block_size, cfg.seed + 9000 + i)
         x, y, m = x.to(device), y.to(device), m.to(device)

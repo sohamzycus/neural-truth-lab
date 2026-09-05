@@ -59,6 +59,26 @@ def trace_training_step(
     return trace, grads
 
 
+def pipeline_diagram() -> str:
+    return """```text
+WORDS
+ ↓
+TOKEN IDs
+ ↓
+EMBEDDINGS
+ ↓
+TRANSFORMER
+ ↓
+HIDDEN STATES
+ ↓
+LOGITS
+ ↓
+NEXT-WORD SCORES
+ ↓
+LOSS
+```"""
+
+
 def format_trace_table(trace: TensorTrace) -> str:
     rows = ["| Tensor | Shape | Dimension meaning |", "| --- | --- | --- |"]
     for name, t in trace.as_dict().items():

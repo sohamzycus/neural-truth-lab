@@ -11,57 +11,248 @@
     "n_head": 4,
     "n_embd": 64
   },
+  "tensor_trace": {
+    "trace_text": "input_ids\n  shape = [2, 32]\n  dtype = torch.int64\n  numel = 64\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    \u2192 batch \u00d7 tokens\n\n  sample values:\ntensor([[ 2, 26, 25,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n          0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],\n        [16, 11, 20,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n          0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]],\n       device='mps:0')\n\nembeddings\n  shape = [2, 32, 64]\n  dtype = torch.float32\n  numel = 4096\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (D) = 64\n    \u2192 batch \u00d7 tokens \u00d7 hidden size\n\n  first 8 values: [-2.96492862701416, 0.5359244346618652, 2.1680283546447754, 0.30162501335144043, 2.7368664741516113, -0.06158745288848877, -1.275465488433838, -0.805554986000061]\n\nfinal_hidden\n  shape = [2, 32, 64]\n  dtype = torch.float32\n  numel = 4096\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (D) = 64\n    \u2192 batch \u00d7 tokens \u00d7 hidden size\n\n  first 8 values: [-2.2827818393707275, 0.6144217252731323, 2.361300230026245, 0.22574657201766968, 1.135886788368225, -0.7458516955375671, -1.2224377393722534, -0.6733310222625732]\n\nlogits\n  shape = [2, 32, 33]\n  dtype = torch.float32\n  numel = 2112\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (V) = 33\n    \u2192 batch \u00d7 tokens \u00d7 vocabulary\n\n  first 8 values: [0.5845632553100586, -0.5222676992416382, 0.05670444294810295, 1.0790096521377563, 0.1529574692249298, 0.6427455544471741, -0.8335222601890564, -0.33574649691581726]\n\nshifted_logits\n  shape = [2, 31, 33]\n  dtype = torch.float32\n  numel = 2046\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T-1) = 31\n    dim 2 (V) = 33\n    \u2192 batch \u00d7 shifted tokens \u00d7 vocabulary\n\n  first 8 values: [0.5845632553100586, -0.5222676992416382, 0.05670444294810295, 1.0790096521377563, 0.1529574692249298, 0.6427455544471741, -0.8335222601890564, -0.33574649691581726]\n\ntargets\n  shape = [2, 31]\n  dtype = torch.int64\n  numel = 62\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T-1) = 31\n    \u2192 batch \u00d7 target tokens\n\n  sample values:\ntensor([[26, 25,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n          0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],\n        [11, 20,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,\n          0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]], device='mps:0')\n\nloss\n  shape = []\n  dtype = torch.float32\n  numel = 1\n\n  sample values:\n3.816786527633667\n\nmask\n  shape = [2, 31]\n  dtype = torch.bool\n  numel = 62\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T-1) = 31\n    \u2192 batch \u00d7 valid-target flags\n\n  sample values:\ntensor([[ True,  True,  True, False, False, False, False, False, False, False,\n         False, False, False, False, False, False, False, False, False, False,\n         False, False, False, False, False, False, False, False, False, False,\n         False],\n        [ True,  True,  True, False, False, False, False, False, False, False,\n         False, False, False, False, False, False, False, False, False, False,\n         False, False, False, False, False, False, False, False, False, False,\n         False]], device='mps:0')\n\nhidden_states_layer0\n  shape = [2, 32, 64]\n  dtype = torch.float32\n  numel = 4096\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (D) = 64\n    \u2192 batch \u00d7 tokens \u00d7 hidden size\n\n  first 8 values: [-2.846083402633667, 1.2753655910491943, 3.2203240394592285, 0.14899802207946777, 2.182413101196289, -1.151665449142456, -0.8869645595550537, -0.5851655602455139]\n\nattention_output_layer0\n  shape = [2, 32, 64]\n  dtype = torch.float32\n  numel = 4096\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (D) = 64\n    \u2192 batch \u00d7 tokens \u00d7 hidden size\n\n  first 8 values: [0.051027510315179825, 0.7322119474411011, 0.6470489501953125, -0.38063666224479675, -0.5221789479255676, -0.7236422300338745, 0.4047437310218811, 0.017492713406682014]\n\nmlp_output_layer0\n  shape = [2, 32, 64]\n  dtype = torch.float32\n  numel = 4096\n  Meaning:\n    dim 0 (B) = 2\n    dim 1 (T) = 32\n    dim 2 (D) = 64\n    \u2192 batch \u00d7 tokens \u00d7 hidden size\n\n  first 8 values: [0.0678177997469902, 0.007229212671518326, 0.4052468538284302, 0.2280096709728241, -0.03227442502975464, -0.3664357364177704, -0.01624278724193573, 0.20289671421051025]\n\n\nGradients (parameter tensors):\n\ngrad/token_emb.weight\n  shape = [33, 64]\n  dtype = torch.float32\n  numel = 2112\n\ngrad/pos_emb.weight\n  shape = [32, 64]\n  dtype = torch.float32\n  numel = 2048\n\ngrad/blocks.0.ln1.weight\n  shape = [64]\n  dtype = torch.float32\n  numel = 64\n\ngrad/blocks.0.ln1.bias\n  shape = [64]\n  dtype = torch.float32\n  numel = 64\n\ngrad/blocks.0.attn.qkv.weight\n  shape = [192, 64]\n  dtype = torch.float32\n  numel = 12288\n\ngrad/blocks.0.attn.proj.weight\n  shape = [64, 64]\n  dtype = torch.float32\n  numel = 4096\n\n  ... and 19 more parameter gradients",
+    "table": "| Tensor | Shape | Dimension meaning |\n| --- | --- | --- |\n| input_ids | [2, 32] | batch \u00d7 tokens |\n| embeddings | [2, 32, 64] | batch \u00d7 tokens \u00d7 hidden size |\n| final_hidden | [2, 32, 64] | batch \u00d7 tokens \u00d7 hidden size |\n| logits | [2, 32, 33] | batch \u00d7 tokens \u00d7 vocabulary |\n| shifted_logits | [2, 31, 33] | batch \u00d7 shifted tokens \u00d7 vocabulary |\n| targets | [2, 31] | batch \u00d7 target tokens |\n| loss | [] | single number |\n| mask | [2, 31] | batch \u00d7 valid-target flags |\n| hidden_states_layer0 | [2, 32, 64] | batch \u00d7 tokens \u00d7 hidden size |\n| attention_output_layer0 | [2, 32, 64] | batch \u00d7 tokens \u00d7 hidden size |\n| mlp_output_layer0 | [2, 32, 64] | batch \u00d7 tokens \u00d7 hidden size |",
+    "pipeline": "```text\nWORDS\n \u2193\nTOKEN IDs\n \u2193\nEMBEDDINGS\n \u2193\nTRANSFORMER\n \u2193\nHIDDEN STATES\n \u2193\nLOGITS\n \u2193\nNEXT-WORD SCORES\n \u2193\nLOSS\n```",
+    "sample_sentence": "I pet my cat",
+    "vocab_size": 33,
+    "shapes": {
+      "input_ids": [
+        2,
+        32
+      ],
+      "embeddings": [
+        2,
+        32,
+        64
+      ],
+      "final_hidden": [
+        2,
+        32,
+        64
+      ],
+      "logits": [
+        2,
+        32,
+        33
+      ],
+      "shifted_logits": [
+        2,
+        31,
+        33
+      ],
+      "targets": [
+        2,
+        31
+      ],
+      "loss": [],
+      "mask": [
+        2,
+        31
+      ],
+      "hidden_states_layer0": [
+        2,
+        32,
+        64
+      ],
+      "attention_output_layer0": [
+        2,
+        32,
+        64
+      ],
+      "mlp_output_layer0": [
+        2,
+        32,
+        64
+      ]
+    }
+  },
   "gradient_check": {
     "param_name": "lm_head.weight",
     "index": [
-      7,
-      53
+      20,
+      24
     ],
-    "w": -0.1069822758436203,
-    "epsilon": 0.0001,
-    "finite_diff": -0.896453857421875,
-    "autograd": -0.8946501016616821,
-    "rel_diff": 0.002012101063829787,
-    "verdict": "PASS"
+    "w": -0.05748814344406128,
+    "epsilon": 0.01,
+    "best_epsilon": 0.01,
+    "loss_at_w": 3.482609272003174,
+    "loss_at_w_plus": 3.4738903045654297,
+    "loss_at_w_minus": 3.4913337230682373,
+    "finite_diff": -0.8721709251403809,
+    "autograd": -0.8721856474876404,
+    "abs_diff": 1.4722347259521484e-05,
+    "rel_diff": 1.6879832065489374e-05,
+    "verdict": "PASS",
+    "sweep_table": "| epsilon | finite difference | autograd | abs error | relative error |\n| ---: | ---: | ---: | ---: | ---: |\n| 1e-02 | -0.87217093 | -0.87218565 | 1.472e-05 | 1.688e-05 |\n| 1e-03 | -0.87225437 | -0.87218565 | 6.872e-05 | 7.879e-05 |\n| 1e-04 | -0.87141991 | -0.87218565 | 7.657e-04 | 8.780e-04 |\n| 1e-05 | -0.83446503 | -0.87218565 | 3.772e-02 | 4.325e-02 |\n| 1e-06 | -0.95367432 | -0.87218565 | 8.149e-02 | 8.545e-02 |",
+    "sweep": [
+      {
+        "epsilon": 0.01,
+        "finite_diff": -0.8721709251403809,
+        "autograd": -0.8721856474876404,
+        "abs_error": 1.4722347259521484e-05,
+        "rel_error": 1.6879832065489374e-05
+      },
+      {
+        "epsilon": 0.001,
+        "finite_diff": -0.8722543716430664,
+        "autograd": -0.8721856474876404,
+        "abs_error": 6.872415542602539e-05,
+        "rel_error": 7.878912122454557e-05
+      },
+      {
+        "epsilon": 0.0001,
+        "finite_diff": -0.8714199066162109,
+        "autograd": -0.8721856474876404,
+        "abs_error": 0.0007657408714294434,
+        "rel_error": 0.0008779562856086721
+      },
+      {
+        "epsilon": 1e-05,
+        "finite_diff": -0.8344650268554686,
+        "autograd": -0.8721856474876404,
+        "abs_error": 0.03772062063217174,
+        "rel_error": 0.043248384952019374
+      },
+      {
+        "epsilon": 1e-06,
+        "finite_diff": -0.95367431640625,
+        "autograd": -0.8721856474876404,
+        "abs_error": 0.08148866891860962,
+        "rel_error": 0.0854470625
+      }
+    ],
+    "investigation": null
   },
   "accumulation": {
+    "loss_a": 3.538419008255005,
+    "loss_b": 3.6065404415130615,
     "tokens_a": 10,
     "tokens_b": 100,
-    "loss_a": 3.701906204223633,
-    "loss_b": 3.7373857498168945,
-    "naive_combined": 3.7196459770202637,
-    "correct_combined": 3.7341603365811435,
-    "max_loss_diff": 0.43421410972421803
+    "naive_combined": 3.572479724884033,
+    "correct_combined": 3.6003475839441474,
+    "combined_direct_check": 3.6003479957580566,
+    "combined_matches_formula": true,
+    "max_loss_diff": 0.4622305875474755,
+    "mean_loss_diff": 0.3334047007967125,
+    "final_loss_diff": 0.43450082974000415,
+    "naive_final": 1.7219722867012024,
+    "correct_final": 2.1564731164412065,
+    "plot": "/Users/soham.niyogi/Soham/codebase/erav5/session10/outputs/plots/accumulation_naive_vs_correct.png"
   },
   "grad_norm": {
-    "initial_loss": 3.3760955333709717,
-    "final_loss": 2.580078363418579,
-    "max_grad_norm": 5.389747204219671,
+    "plot": "/Users/soham.niyogi/Soham/codebase/erav5/session10/outputs/plots/loss_and_grad_norm.png",
     "grad_before_loss_event": {
-      "step": 46.0,
-      "grad_norm": 3.920350906774093,
-      "prev_grad_norm": 5.058704688492433,
-      "grad_rel_change": 0.22502870829915672,
-      "loss": 2.9662365913391113,
-      "prev_loss": 2.925107717514038,
-      "loss_rel_change": 0.014060635640463677
-    }
+      "step": 5.0,
+      "grad_norm": 4.2525021614833936,
+      "prev_grad_norm": 5.320354507142587,
+      "grad_rel_change": 0.20071075042567166,
+      "loss": 3.6527647972106934,
+      "prev_loss": 3.6112682819366455,
+      "loss_rel_change": 0.01149084256121624,
+      "learning_rate": 0.0003,
+      "update_norm": 0.050185937968828406,
+      "grad_threshold": 0.15,
+      "loss_threshold": 0.05,
+      "window": 3.0
+    },
+    "gradient_spike": {
+      "step": 43.0,
+      "grad_norm": 5.422376583330757,
+      "local_median_grad_norm": 3.534946763338098,
+      "spike_ratio": 1.5339344398528743,
+      "loss_before": 3.3826115131378174,
+      "loss_at": 2.9907970428466797,
+      "loss_after": 2.7685821056365967,
+      "spike_factor_threshold": 1.5
+    },
+    "detection_rule": {
+      "grad_rel_change_threshold": 0.15,
+      "loss_rel_change_threshold": 0.05,
+      "window": 3
+    },
+    "max_grad_norm_step": 43,
+    "max_grad_norm": 5.422376583330757,
+    "final_loss": 2.5643832683563232,
+    "initial_loss": 3.816786527633667,
+    "final_update_norm": 0.03708973689028248,
+    "optimization_verdict": "PASS"
   },
   "mfu": {
-    "mfu_percent": 0.10421625754427637,
-    "achieved_flops_per_sec": 3647569014.0496726,
-    "hardware_peak_flops_per_sec": 3500000000000.0,
-    "measured_seconds": 0.17484170896932483,
+    "measured_seconds": 0.16605583298951387,
     "steps": 30,
-    "estimated_flops_per_step": 21258240
+    "estimated_flops_per_step": 21258240,
+    "achieved_flops_per_sec": 3840558856.130471,
+    "hardware_peak_flops_per_sec": 3500000000000.0,
+    "mfu": 0.0010973025303229918,
+    "mfu_percent": 0.10973025303229918,
+    "params": 105856,
+    "notes": [
+      "MFU is an estimate based on the assumptions documented here.",
+      "FLOP count uses analytical transformer approximation (3\u00d7 forward for train step).",
+      "Formula: achieved_FLOPs/s = (FLOPs_per_step \u00d7 steps) / measured_seconds",
+      "Formula: MFU = achieved_FLOPs/s / hardware_peak_FLOPs/s",
+      "MPS / Apple Silicon (estimated FP32 peak, arm64)",
+      "40% is not a realistic target for this tiny educational workload."
+    ],
+    "sanity_check": {
+      "achieved_matches_formula": true,
+      "mfu_matches_formula": true,
+      "mfu_in_valid_range": true,
+      "recomputed_achieved": 3840558856.130471,
+      "recomputed_mfu": 0.0010973025303229918,
+      "pass": true
+    }
   },
   "float_repr": {
-    "table_markdown": "| Format | Bits | Represented value | Error |\n| --- | --- | ---: | ---: |\n| FP32 | `00111101110011001100110011001101` | 0.1000000015 | 1.49012e-09 |\n| BF16 | `0011110111001101` | 0.1000976562 | 9.76562e-05 |\n| FP8 E4M3 | `00011101` | 0.1015625 | 0.0015625 |"
+    "value": 0.1,
+    "table_markdown": "| Format | Bits | Represented value | Error |\n| --- | --- | ---: | ---: |\n| FP32 | `00111101110011001100110011001101` | 0.1000000015 | 1.49012e-09 |\n| BF16 | `0011110111001101` | 0.1000976562 | 9.76562e-05 |\n| FP8 E4M3 | `00011101` | 0.1015625 | 0.0015625 |",
+    "precision_comparison": "| Property | FP32 | BF16 | FP8 E4M3 |\n| --- | --- | --- | --- |\n| precision (error on 0.1) | 1.490e-09 | 9.766e-05 | 1.562e-03 |\n| range | very large | very large | smaller |\n| memory / value | 4 bytes | 2 bytes | 1 byte |\n| speed potential | baseline | higher on modern accelerators | highest when supported |\n| training stability | safest | usually fine | needs scaling/range care |",
+    "formats": [
+      {
+        "name": "FP32",
+        "bits": "00111101110011001100110011001101",
+        "sign": 0,
+        "exponent": "01111011",
+        "fraction": "10011001100110011001101",
+        "fields": "0 | 01111011 | 10011001100110011001101",
+        "represented": 0.10000000149011612,
+        "error": 1.4901161138336505e-09
+      },
+      {
+        "name": "BF16",
+        "bits": "0011110111001101",
+        "sign": 0,
+        "exponent": "01111011",
+        "fraction": "1001101",
+        "fields": "0 | 01111011 | 1001101",
+        "represented": 0.10009765625,
+        "error": 9.765624999999445e-05
+      },
+      {
+        "name": "FP8 E4M3",
+        "bits": "00011101",
+        "sign": 0,
+        "exponent": "0011",
+        "fraction": "101",
+        "fields": "0 | 0011 | 101",
+        "represented": 0.1015625,
+        "error": 0.0015624999999999944
+      }
+    ]
+  },
+  "training_sanity": {
+    "params_changed": true,
+    "loss_finite": true,
+    "first_loss": 3.816786527633667,
+    "last_loss": 3.6637089252471924
   },
   "truth_report": {
     "tensor_shapes": "PASS",
     "gradient": "PASS",
     "accumulation": "PASS",
+    "optimization": "PASS",
     "mfu": "PASS",
     "precision": "PASS"
   }

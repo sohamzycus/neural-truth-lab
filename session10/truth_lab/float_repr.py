@@ -120,6 +120,33 @@ def fp8_e4m3_bits(value: float) -> FloatBits:
     )
 
 
+def format_field_bits(row: FloatBits) -> str:
+    """SIGN | EXPONENT | FRACTION layout for teaching."""
+    return f"{row.sign} | {row.exponent_bits} | {row.fraction_bits}"
+
+
+def format_precision_comparison_table() -> str:
+    rows = represent_value(0.1)
+    lines = [
+        "| Property | FP32 | BF16 | FP8 E4M3 |",
+        "| --- | --- | --- | --- |",
+        f"| precision (error on 0.1) | {rows[0].error:.3e} | {rows[1].error:.3e} | {rows[2].error:.3e} |",
+        "| range | very large | very large | smaller |",
+        "| memory / value | 4 bytes | 2 bytes | 1 byte |",
+        "| speed potential | baseline | higher on modern accelerators | highest when supported |",
+        "| training stability | safest | usually fine | needs scaling/range care |",
+    ]
+    return "\n".join(lines)
+
+
+def explain_why_not_exact(value: float = 0.1) -> str:
+    return (
+        f"Decimal {value} is a repeating fraction in base 2, "
+        "like 1/3 is repeating in base 10. "
+        "So the computer stores the nearest representable binary value, not the exact decimal."
+    )
+
+
 def represent_value(value: float) -> List[FloatBits]:
     return [fp32_bits(value), bf16_bits(value), fp8_e4m3_bits(value)]
 

@@ -43,6 +43,29 @@ def per_token_loss(
     return float(ce.mean().item()), n
 
 
+def combined_valid_token_loss(
+    model: TinyGPT,
+    microbatches: List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor]],
+) -> float:
+    """Independent check: one loss over all valid tokens from all microbatches."""
+    model.eval()
+    logits_list, targets_list = [], []
+    with torch.no_grad():
+        for x, y, m in microbatches:
+            logits, _ = model(x, targets=None)
+            shift_logits = logits[:, :-1, :].contiguous()
+            shift_targets = y[:, 1:].contiguous()
+            shift_mask = m[:, 1:].contiguous()
+            flat_logits = shift_logits.view(-1, model.vocab_size)
+            flat_targets = shift_targets.reshape(-1)
+            flat_mask = shift_mask.reshape(-1)
+            logits_list.append(flat_logits[flat_mask])
+            targets_list.append(flat_targets[flat_mask])
+    all_logits = torch.cat(logits_list)
+    all_targets = torch.cat(targets_list)
+    return float(F.cross_entropy(all_logits, all_targets).item())
+
+
 def combine_accumulation(loss_a: float, n_a: int, loss_b: float, n_b: int) -> AccumulationLosses:
     naive = (loss_a + loss_b) / 2
     correct = (loss_a * n_a + loss_b * n_b) / (n_a + n_b)

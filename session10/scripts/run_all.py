@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run tests, experiments, notebook, and README generation."""
+"""Run tests, experiments, notebook, README, and audit."""
 
 import subprocess
 import sys
@@ -22,6 +22,7 @@ def main() -> None:
         "Session_10_Truth_Lab.ipynb", "--output", "Session_10_Truth_Lab.ipynb",
     ])
     run([sys.executable, "scripts/generate_readme.py"])
+    run([sys.executable, "scripts/audit_submission.py"])
     print("All done.")
 
 

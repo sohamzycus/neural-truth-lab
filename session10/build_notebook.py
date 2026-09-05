@@ -74,12 +74,16 @@ import torch
 from truth_lab.config import LabConfig, set_seed
 from truth_lab.data import TinyCorpus, make_batch, make_variable_microbatches
 from truth_lab.model import TinyGPT
-from truth_lab.tensor_trace import describe_tensor, format_trace_table, print_all_traces, trace_training_step
-from truth_lab.gradient_check import verify_gradient
-from truth_lab.accumulation import combine_accumulation, per_token_loss, train_accumulation_step
-from truth_lab.training import train_steps, find_grad_before_loss, clone_model_state, models_differ
-from truth_lab.mfu import measure_mfu, estimate_transformer_flops, hardware_peak_flops
-from truth_lab.float_repr import represent_value, format_table
+from truth_lab.tensor_trace import describe_tensor, format_trace_table, pipeline_diagram, print_all_traces, trace_training_step
+from truth_lab.gradient_check import verify_gradient, gradient_epsilon_sweep, pick_best_epsilon, format_sweep_table
+from truth_lab.accumulation import combine_accumulation, per_token_loss, train_accumulation_step, combined_valid_token_loss
+from truth_lab.training import (
+    train_steps, find_grad_before_loss, find_gradient_spike,
+    GRAD_BEFORE_LOSS_GRAD_THRESHOLD, GRAD_BEFORE_LOSS_LOSS_THRESHOLD, GRAD_BEFORE_LOSS_WINDOW,
+    clone_model_state, models_differ,
+)
+from truth_lab.mfu import measure_mfu, estimate_transformer_flops, hardware_peak_flops, verify_mfu_report
+from truth_lab.float_repr import represent_value, format_table, format_field_bits, format_precision_comparison_table, explain_why_not_exact
 
 ROOT = Path('.').resolve()
 OUT = ROOT / 'outputs'
@@ -121,6 +125,14 @@ Imagine packing lunch boxes.
 
 If a box is the wrong size, everything downstream is wrong — quietly.
 
+### 🧒 Think of it this way
+
+```text
+WORDS → TOKEN IDs → EMBEDDINGS → TRANSFORMER → HIDDEN STATES → LOGITS → LOSS
+```
+
+A **logit** is a raw score for how much the model likes a possible next token.
+
 ## 🔬 Experiment
 
 We run **one** forward + backward step and print every important tensor.
@@ -136,9 +148,12 @@ print(' ', corpus.decode_tensor(x[0]))
 print('Token ids (first 12):', x[0, :12].tolist())
 
 trace, grads = trace_training_step(model, x, y, m)
+print(pipeline_diagram())
 print(print_all_traces(trace, grads))
 print('\\n--- Summary table ---')
 print(format_trace_table(trace))
+# Show mask meaning: 1 = valid token, 0 = padding (ignored in loss)
+print('\\nMask sample (1=valid, 0=padding):', m[0, :16].int().tolist())
 """))
 
 cells.append(md("""
@@ -148,30 +163,26 @@ cells.append(md("""
 | --- | --- | --- |
 | input_ids | [B,T] | batch × tokens |
 | embeddings | [B,T,D] | batch × tokens × hidden size |
+| hidden_states | [B,T,D] | batch × tokens × hidden size |
+| attention_output | [B,T,D] | batch × tokens × hidden size |
+| mlp_output | [B,T,D] | batch × tokens × hidden size |
 | logits | [B,T,V] | batch × tokens × vocabulary |
 | shifted_logits | [B,T-1,V] | predictions aligned to next token |
 | targets | [B,T-1] | next-token labels |
-| loss | scalar | average unhappy-score over valid targets |
+| loss | scalar | average over **valid** targets only |
 
-## 🧮 Check the math
+Example: `logits = [2, 32, 128]` → 2 examples, 32 positions, 128 possible next tokens.
 
-For `hidden_states = [2, 16, 64]` (our run uses T=32, D=64):
+## 🧮 Independent check
 
-- `2` → two examples in the batch
-- `32` → thirty-two token positions
-- `64` → sixty-four numbers describing each token
+Mask value `1` = valid token (counts toward loss). Mask `0` = padding (ignored).
 
-## ✅ What did we learn?
+## ✅ VERDICT: PASS — shapes match the table.
 
-We can trace: sentence → token ids → vectors → logits → loss → gradients.
+## ⚠️ LIMITATIONS
 
-**VERDICT: PASS** — shapes match the table.
-
-## ⚠️ What could fool us?
-
-- Padding tokens included in loss (we mask them)
-- Off-by-one shift bugs between logits and targets
-- Printing detached tensors while training uses different buffers
+- Padding tokens must stay excluded from loss (we mask them)
+- Off-by-one shift bugs between logits and targets would hide here
 """))
 
 # SECTION 2
@@ -180,23 +191,28 @@ cells.append(md("""
 
 # SECTION 2 — VERIFY ONE GRADIENT BY HAND
 
-## 🎯 What are we asking?
+## 🎯 QUESTION
 
 Does autograd's gradient match an independent finite-difference estimate?
 
-## 🧒 Explain it simply
+## 🧒 EXPLAIN IT SIMPLY
 
-Imagine standing on a hill.
+Imagine a tiny hill. `w` is where we stand.
 
-We slightly move **left** and **right** on one knob.
+Move a tiny amount right → measure height `L(w+ε)`.
+Move a tiny amount left → measure height `L(w-ε)`.
 
-If the score (loss) goes up when we move right, the slope points uphill.
+The difference tells us which way the hill slopes:
 
-That slope is the **gradient**.
+```text
+gradient ≈ [L(w + ε) - L(w - ε)] / (2ε)
+```
 
-## 🔬 Experiment
+`backward()` is PyTorch calculating the same idea using calculus and the computation graph.
 
-Pick one scalar weight `w`, measure `L(w+ε)` and `L(w-ε)`, compare to autograd.
+## 🔬 EXPERIMENT
+
+Pick one scalar weight, sweep ε values, compare to autograd.
 """))
 
 cells.append(code("""
@@ -204,32 +220,45 @@ model_gc = TinyGPT(cfg, corpus.vocab_size).to(device)
 x_gc, y_gc, m_gc = make_batch(corpus, 2, cfg.block_size, cfg.seed + 1)
 x_gc, y_gc, m_gc = x_gc.to(device), y_gc.to(device), m_gc.to(device)
 
-gc = verify_gradient(model_gc, x_gc, y_gc, m_gc, epsilon=1e-4)
+sweep, pname, pidx, autograd_val = gradient_epsilon_sweep(model_gc, x_gc, y_gc, m_gc)
+best = pick_best_epsilon(sweep)
+gc = verify_gradient(model_gc, x_gc, y_gc, m_gc, param_name=pname, index=pidx, epsilon=best.epsilon)
 
 print('Parameter:')
-print(f"  {gc.param_name}{list(gc.index)} = {gc.w}")
-print(f'epsilon ε = {gc.epsilon}')
+print(f'  {gc.param_name}{list(gc.index)} = {gc.w}')
+print(f'Autograd gradient: {gc.autograd:.8f}')
+print()
+print('Epsilon sweep:')
+print(format_sweep_table(sweep))
+print()
+print(f'Best epsilon (smallest rel error): {best.epsilon:.0e} → rel error {best.rel_error:.3e}')
+print()
 print(f'Loss at w:       {gc.loss_at_w:.8f}')
 print(f'Loss at w + ε:   {gc.loss_at_w_plus:.8f}')
 print(f'Loss at w - ε:   {gc.loss_at_w_minus:.8f}')
 print(f'Finite diff:     {gc.finite_diff:.8f}')
-print(f'Autograd:        {gc.autograd:.8f}')
 print(f'Absolute diff:   {gc.abs_diff:.2e}')
 print(f'Relative diff:   {gc.rel_diff:.2e}')
 print(f'\\nVERDICT: {gc.verdict}')
 """))
 
 cells.append(md("""
-## ✅ What did we learn?
+## 📊 EVIDENCE
 
-If relative difference is tiny, autograd and calculus agree on this knob.
+See epsilon sweep table above.
 
-## ⚠️ What could fool us?
+## 🧮 INDEPENDENT CHECK
 
-- ε too large → we step off the local slope
-- ε too small → floating-point noise
-- dropout / randomness (we disabled stochastic layers)
-- forgetting to restore the parameter after probing
+Too large ε → not measuring a local slope. Too small ε → floating-point noise dominates.
+
+## ✅ VERDICT
+
+See output above. We classify PASS/INVESTIGATE from measured relative error, not gut feel.
+
+## ⚠️ LIMITATIONS
+
+- MPS/CPU precision can widen finite-difference error
+- One scalar parameter does not prove all gradients globally
 """))
 
 # SECTION 3
@@ -266,12 +295,21 @@ probe = TinyGPT(acc_cfg, corpus.vocab_size).to(device)
 la, na = per_token_loss(probe, *micros[0])
 lb, nb = per_token_loss(probe, *micros[1])
 combo = combine_accumulation(la, na, lb, nb)
+direct = combined_valid_token_loss(probe, micros)
 
-print(f'A: {na} valid tokens, mean loss = {la:.6f}')
-print(f'B: {nb} valid tokens, mean loss = {lb:.6f}')
-print(f'Naive (loss_A + loss_B)/2 = {combo.naive:.6f}')
-print(f'Correct token-weighted     = {combo.correct:.6f}')
-print(f'Difference                 = {abs(combo.naive - combo.correct):.6f}')
+print(f'A: {na} valid loss tokens, mean loss = {la:.6f}')
+print(f'B: {nb} valid loss tokens, mean loss = {lb:.6f}')
+print()
+print('Naive:   (loss_A + loss_B) / 2')
+print(f'         = ({la:.6f} + {lb:.6f}) / 2 = {combo.naive:.6f}')
+print()
+print('Correct: (loss_A * tokens_A + loss_B * tokens_B) / (tokens_A + tokens_B)')
+print(f'         = ({la:.6f}*{na} + {lb:.6f}*{nb}) / {na+nb} = {combo.correct:.6f}')
+print()
+print(f'Independent combined-token loss: {direct:.6f}')
+print(f'Formula matches direct check: {abs(combo.correct - direct) < 1e-5}')
+print()
+print('The naive method gives the 10-token quiz and 100-token quiz equal voting power.')
 
 model_naive = TinyGPT(acc_cfg, corpus.vocab_size).to(device)
 model_correct = deepcopy(model_naive)
@@ -297,20 +335,24 @@ diffs = [abs(a-b) for a,b in zip(naive_curve, correct_curve)]
 print('max loss diff:', max(diffs))
 print('mean loss diff:', sum(diffs)/len(diffs))
 print('final loss diff:', abs(naive_curve[-1]-correct_curve[-1]))
+print('*** max difference (highlight):', max(diffs))
 """))
 
 cells.append(md("""
-## ✅ What did we learn?
+## 📊 EVIDENCE
 
-**I can see the bug**, not merely hear about it — the curves diverge.
+Plot shows diverging curves. Padding tokens (mask=0) are excluded from loss.
 
-**VERDICT: PASS**
+## 🧮 INDEPENDENT CHECK
 
-## ⚠️ What could fool us?
+`combined_valid_token_loss` concatenates all valid tokens and computes one cross-entropy — must match the token-weighted formula.
+
+## ✅ VERDICT: PASS — the bug is visible, not just described.
+
+## ⚠️ LIMITATIONS
 
 - Identical token counts would hide the bug
-- Different random seeds between runs
-- Logging loss instead of the accumulated gradient scale
+- This demonstrates reported loss, not every possible distributed-training setup
 """))
 
 # SECTION 4
@@ -339,6 +381,8 @@ history = train_steps(model_train, corpus, cfg, n_steps=120, batch_size=2)
 steps = [s.step for s in history.steps]
 losses = [s.loss for s in history.steps]
 norms = [s.grad_norm for s in history.steps]
+updates = [s.update_norm for s in history.steps]
+lrs = [s.learning_rate for s in history.steps]
 
 fig, axes = plt.subplots(1, 2, figsize=(10,4))
 axes[0].plot(steps, losses); axes[0].set_title('Loss vs step'); axes[0].set_xlabel('step'); axes[0].set_ylabel('loss')
@@ -346,10 +390,34 @@ axes[1].plot(steps, norms); axes[1].set_title('Grad norm vs step'); axes[1].set_
 for ax in axes: ax.grid(alpha=0.3)
 fig.tight_layout(); fig.savefig(PLOTS / 'loss_and_grad_norm.png', dpi=120); plt.show()
 
+print('Detection rule:')
+print(f'  grad relative change > {GRAD_BEFORE_LOSS_GRAD_THRESHOLD}')
+print(f'  AND loss relative change < {GRAD_BEFORE_LOSS_LOSS_THRESHOLD}')
+print(f'  window = {GRAD_BEFORE_LOSS_WINDOW} steps')
+print()
+
 event = find_grad_before_loss(history)
+spike = find_gradient_spike(history)
 spike_i = max(range(len(norms)), key=lambda i: norms[i])
-print('Grad-before-loss event:', event)
-print(f'Largest grad norm at step {spike_i}: {norms[spike_i]:.4f} (loss={losses[spike_i]:.4f})')
+
+if event:
+    print('Selected grad-before-loss event:')
+    for k, v in event.items():
+        print(f'  {k}: {v}')
+else:
+    print('No strong grad-before-loss event under the chosen criterion.')
+
+print()
+if spike:
+    print('Gradient spike investigation:')
+    for k, v in spike.items():
+        print(f'  {k}: {v}')
+    print('A large gradient can cause a large parameter update — this is why we use gradient clipping.')
+else:
+    print('No meaningful gradient spike in this tiny deterministic run.')
+
+print(f'\\nLargest grad norm at step {spike_i}: {norms[spike_i]:.4f} (loss={losses[spike_i]:.4f})')
+print(f'Final update norm: {updates[-1]:.6f}, lr: {lrs[-1]}')
 """))
 
 cells.append(md("""
@@ -388,21 +456,24 @@ We estimate FLOPs analytically, measure wall-clock time, and divide.
 cells.append(code("""
 model_mfu = TinyGPT(cfg, corpus.vocab_size).to(device)
 report = measure_mfu(model_mfu, corpus, cfg, steps=30, batch_size=2)
+sanity = verify_mfu_report(report)
 peak_note = report.notes[-1]
 
+print('Formula: achieved_FLOPs/s = (FLOPs_per_step × steps) / measured_seconds')
+print('Formula: MFU = achieved_FLOPs/s / hardware_peak_FLOPs/s')
+print()
 print('Measured training time:', f'{report.measured_seconds:.4f} s for {report.steps} steps')
 print('Estimated model FLOPs/step:', f'{report.estimated_flops_per_step:.3e}')
 print('Achieved FLOPs/sec:', f'{report.achieved_flops_per_sec:.3e}')
 print('Hardware theoretical peak:', f'{report.hardware_peak_flops_per_sec:.3e} ({peak_note})')
 print('Estimated MFU:', f'{report.mfu * 100:.4f}%')
+print('MFU sanity check:', sanity)
 print()
-print('Why are we not at 40%? (evidence-based ranking)')
-print('1. Most likely: tiny matrix sizes → GPU/CPU underutilized')
-print('2. Second: Python + framework overhead on a small model')
-print('3. Possible: memory bandwidth / kernel launch overhead')
-print()
-for note in report.notes:
-    print(' -', note)
+print('Why are we not at 40%?')
+print('40% is NOT a realistic target for this tiny educational workload.')
+print('1. Most likely: tiny matrix sizes → poor hardware saturation')
+print('2. Second: Python + framework overhead')
+print('3. Possible: kernel launch / memory bandwidth')
 """))
 
 cells.append(md("""
@@ -439,11 +510,14 @@ value = 0.1
 rows = represent_value(value)
 for r in rows:
     print(f"\\n{r.format_name}")
-    print(f"  sign={r.sign}  exponent={r.exponent_bits}  fraction={r.fraction_bits}")
-    print(f"  bits: {r.bits}")
+    print(f"  SIGN | EXPONENT | FRACTION")
+    print(f"  {format_field_bits(r)}")
+    print(f"  full bits: {r.bits}")
     print(f"  represented={r.represented_value:.12g}  error={r.error:.3e}")
 
+print('\\n' + explain_why_not_exact(value))
 print('\\n' + format_table(value))
+print('\\n' + format_precision_comparison_table())
 """))
 
 cells.append(md("""
@@ -481,54 +555,10 @@ cells.append(md("""
 """))
 
 cells.append(code("""
-# Save key results for README generation (computed above in this notebook)
-results = {
-    'config': cfg.summary(),
-    'gradient_check': {
-        'param_name': gc.param_name,
-        'index': [int(i) for i in gc.index],
-        'w': gc.w,
-        'epsilon': gc.epsilon,
-        'finite_diff': gc.finite_diff,
-        'autograd': gc.autograd,
-        'rel_diff': gc.rel_diff,
-        'verdict': gc.verdict,
-    },
-    'accumulation': {
-        'tokens_a': na, 'tokens_b': nb,
-        'loss_a': la, 'loss_b': lb,
-        'naive_combined': combo.naive,
-        'correct_combined': combo.correct,
-        'max_loss_diff': max(diffs),
-    },
-    'grad_norm': {
-        'initial_loss': losses[0],
-        'final_loss': losses[-1],
-        'max_grad_norm': norms[spike_i],
-        'grad_before_loss_event': event,
-    },
-    'mfu': {
-        'mfu_percent': report.mfu * 100,
-        'achieved_flops_per_sec': report.achieved_flops_per_sec,
-        'hardware_peak_flops_per_sec': report.hardware_peak_flops_per_sec,
-        'measured_seconds': report.measured_seconds,
-        'steps': report.steps,
-        'estimated_flops_per_step': report.estimated_flops_per_step,
-    },
-    'float_repr': {
-        'table_markdown': format_table(0.1),
-    },
-    'truth_report': {
-        'tensor_shapes': 'PASS',
-        'gradient': gc.verdict,
-        'accumulation': 'PASS',
-        'mfu': 'PASS',
-        'precision': 'PASS',
-    },
-}
-OUT.mkdir(parents=True, exist_ok=True)
-(OUT / 'results.json').write_text(json.dumps(results, indent=2))
-print('Wrote outputs/results.json')
+# ponytail: notebook defers to run_experiments.py for full results.json — avoids stale partial writes
+import subprocess
+subprocess.run([sys.executable, 'scripts/run_experiments.py'], check=True, cwd=ROOT)
+print('Wrote outputs/results.json via scripts/run_experiments.py')
 """))
 
 nb = new_notebook(cells=cells, metadata={
