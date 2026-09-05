@@ -1,0 +1,68 @@
+{
+  "config": {
+    "seed": 1337,
+    "device": "mps",
+    "python": "3.14.2",
+    "pytorch": "2.14.0",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "vocab_size": 128,
+    "block_size": 32,
+    "n_layer": 2,
+    "n_head": 4,
+    "n_embd": 64
+  },
+  "gradient_check": {
+    "param_name": "lm_head.weight",
+    "index": [
+      7,
+      53
+    ],
+    "w": -0.1069822758436203,
+    "epsilon": 0.0001,
+    "finite_diff": -0.896453857421875,
+    "autograd": -0.8946501016616821,
+    "rel_diff": 0.002012101063829787,
+    "verdict": "PASS"
+  },
+  "accumulation": {
+    "tokens_a": 10,
+    "tokens_b": 100,
+    "loss_a": 3.701906204223633,
+    "loss_b": 3.7373857498168945,
+    "naive_combined": 3.7196459770202637,
+    "correct_combined": 3.7341603365811435,
+    "max_loss_diff": 0.43421410972421803
+  },
+  "grad_norm": {
+    "initial_loss": 3.3760955333709717,
+    "final_loss": 2.580078363418579,
+    "max_grad_norm": 5.389747204219671,
+    "grad_before_loss_event": {
+      "step": 46.0,
+      "grad_norm": 3.920350906774093,
+      "prev_grad_norm": 5.058704688492433,
+      "grad_rel_change": 0.22502870829915672,
+      "loss": 2.9662365913391113,
+      "prev_loss": 2.925107717514038,
+      "loss_rel_change": 0.014060635640463677
+    }
+  },
+  "mfu": {
+    "mfu_percent": 0.10421625754427637,
+    "achieved_flops_per_sec": 3647569014.0496726,
+    "hardware_peak_flops_per_sec": 3500000000000.0,
+    "measured_seconds": 0.17484170896932483,
+    "steps": 30,
+    "estimated_flops_per_step": 21258240
+  },
+  "float_repr": {
+    "table_markdown": "| Format | Bits | Represented value | Error |\n| --- | --- | ---: | ---: |\n| FP32 | `00111101110011001100110011001101` | 0.1000000015 | 1.49012e-09 |\n| BF16 | `0011110111001101` | 0.1000976562 | 9.76562e-05 |\n| FP8 E4M3 | `00011101` | 0.1015625 | 0.0015625 |"
+  },
+  "truth_report": {
+    "tensor_shapes": "PASS",
+    "gradient": "PASS",
+    "accumulation": "PASS",
+    "mfu": "PASS",
+    "precision": "PASS"
+  }
+}
