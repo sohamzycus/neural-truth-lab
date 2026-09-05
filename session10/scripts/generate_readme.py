@@ -30,6 +30,45 @@ def main() -> None:
 
 > **Can a tiny language model prove that its training loop is doing what we think?**
 
+---
+
+## Submission for Review
+
+| Deliverable | Path / Link |
+| --- | --- |
+| **GitHub repository** | https://github.com/sohamzycus/neural-truth-lab |
+| **Session 10 folder** | [`session10/`](https://github.com/sohamzycus/neural-truth-lab/tree/main/session10) |
+| **Jupyter notebook (primary)** | [`session10/Session_10_Truth_Lab.ipynb`](https://github.com/sohamzycus/neural-truth-lab/blob/main/session10/Session_10_Truth_Lab.ipynb) |
+| **Lab report (this file)** | [`session10/README.md`](https://github.com/sohamzycus/neural-truth-lab/blob/main/session10/README.md) |
+| **Python source** | [`session10/truth_lab/`](https://github.com/sohamzycus/neural-truth-lab/tree/main/session10/truth_lab) |
+| **Automated tests** | [`session10/tests/test_truth_lab.py`](https://github.com/sohamzycus/neural-truth-lab/blob/main/session10/tests/test_truth_lab.py) |
+| **Experiment results** | [`session10/outputs/results.json`](https://github.com/sohamzycus/neural-truth-lab/blob/main/session10/outputs/results.json) |
+| **Plots** | [`session10/outputs/plots/`](https://github.com/sohamzycus/neural-truth-lab/tree/main/session10/outputs/plots) |
+
+### Notebook figures (with captions)
+
+Open the notebook and run all cells. Each major output has a caption cell directly below it:
+
+| Figure | Section | Caption |
+| --- | --- | --- |
+| **Figure 1** | §1 Tensor Truth | Tensor shape trace — every important tensor in one training step |
+| **Table 1** | §2 Gradient Truth | Epsilon sweep — finite difference vs autograd at five ε values |
+| **Figure 2** | §3 Accumulation Truth | Naive vs token-weighted accumulation curves (10 vs 100 tokens) |
+| **Figure 3a/3b** | §4 Optimization Truth | Loss and gradient norm over 120 training steps |
+| **Table 2** | §5 MFU | Independent MFU calculation with documented formulas |
+| **Table 3** | §6 Precision | FP32 / BF16 / FP8 E4M3 bit representation of 0.1 |
+
+### How to reproduce
+
+```bash
+cd session10
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python scripts/run_all.py
+```
+
+---
+
 We don't trust a falling loss curve.
 
 We interrogate:
@@ -180,6 +219,17 @@ MFU sanity check: `{mfu.get('sanity_check', {}).get('pass', True)}`
 **Training choice:** BF16 compute + FP32 master weights for stability. Storage precision and optimizer precision need not match.
 
 **VERDICT:** {tr.get('mfu', 'PASS')} (MFU), {tr.get('precision', 'PASS')} (precision)
+
+---
+
+## Evidence (figures and data)
+
+| Artifact | Description |
+| --- | --- |
+| [`Session_10_Truth_Lab.ipynb`](Session_10_Truth_Lab.ipynb) | Full notebook with **captioned figures** (Figures 1–3, Tables 1–3) |
+| [`outputs/plots/accumulation_naive_vs_correct.png`](outputs/plots/accumulation_naive_vs_correct.png) | **Figure 2** — naive vs token-weighted accumulation |
+| [`outputs/plots/loss_and_grad_norm.png`](outputs/plots/loss_and_grad_norm.png) | **Figure 3** — loss and gradient norm over 120 steps |
+| [`outputs/results.json`](outputs/results.json) | Machine-readable experiment results |
 
 ---
 

@@ -22,6 +22,19 @@ cells = []
 cells.append(md("""
 # ERA V5 Session 10 — Truth Lab
 
+**Submission artifact:** This notebook is the primary deliverable alongside [`README.md`](README.md).
+
+| Item | Location |
+| --- | --- |
+| GitHub repo | https://github.com/sohamzycus/neural-truth-lab |
+| Session folder | `session10/` |
+| This notebook | `session10/Session_10_Truth_Lab.ipynb` |
+| Lab report | `session10/README.md` |
+| Source code | `session10/truth_lab/` |
+| Tests | `session10/tests/test_truth_lab.py` |
+| Evidence JSON | `session10/outputs/results.json` |
+| Plots | `session10/outputs/plots/` |
+
 ## SECTION 0 — THE PROMISE
 
 We are going to build a tiny language model and **interrogate** it.
@@ -157,21 +170,35 @@ print('\\nMask sample (1=valid, 0=padding):', m[0, :16].int().tolist())
 """))
 
 cells.append(md("""
+### 📊 Caption — Figure 1: Tensor shape trace (Section 1)
+
+**What this shows:** One real forward+backward training step on the tiny GPT model.
+
+**How to read it:**
+- `input_ids [B,T]` — batch of token-id sequences (words turned into numbers)
+- `embeddings [B,T,D]` — each token becomes a vector of size `D=64`
+- `logits [B,T,V]` — a raw score for every vocabulary token at every position
+- `mask` — `1` = valid token included in loss, `0` = padding ignored
+
+**Why it matters:** If any box is the wrong size, the whole training loop can fail silently.
+"""))
+
+cells.append(md("""
 ## 📊 Evidence
 
 | Tensor | Shape | Dimension meaning |
 | --- | --- | --- |
-| input_ids | [B,T] | batch × tokens |
-| embeddings | [B,T,D] | batch × tokens × hidden size |
-| hidden_states | [B,T,D] | batch × tokens × hidden size |
-| attention_output | [B,T,D] | batch × tokens × hidden size |
-| mlp_output | [B,T,D] | batch × tokens × hidden size |
-| logits | [B,T,V] | batch × tokens × vocabulary |
+| input_ids | [B,T] | batch x tokens |
+| embeddings | [B,T,D] | batch x tokens x hidden size |
+| hidden_states | [B,T,D] | batch x tokens x hidden size |
+| attention_output | [B,T,D] | batch x tokens x hidden size |
+| mlp_output | [B,T,D] | batch x tokens x hidden size |
+| logits | [B,T,V] | batch x tokens x vocabulary |
 | shifted_logits | [B,T-1,V] | predictions aligned to next token |
 | targets | [B,T-1] | next-token labels |
 | loss | scalar | average over **valid** targets only |
 
-Example: `logits = [2, 32, 128]` → 2 examples, 32 positions, 128 possible next tokens.
+Example: `logits = [2, 32, 128]` means 2 examples, 32 positions, 128 possible next tokens.
 
 ## 🧮 Independent check
 
@@ -240,6 +267,19 @@ print(f'Finite diff:     {gc.finite_diff:.8f}')
 print(f'Absolute diff:   {gc.abs_diff:.2e}')
 print(f'Relative diff:   {gc.rel_diff:.2e}')
 print(f'\\nVERDICT: {gc.verdict}')
+"""))
+
+cells.append(md("""
+### 📊 Caption — Table 1: Epsilon sweep for gradient verification (Section 2)
+
+**What this shows:** Finite-difference gradient estimates at five epsilon (ε) values compared to autograd.
+
+**How to read it:**
+- **Too large ε** (e.g. 1e-2) — we step too far; slope is approximate but often still good
+- **Too small ε** (e.g. 1e-6) — floating-point rounding dominates; error grows
+- **Best ε** — smallest relative error; we use this for the final PASS/INVESTIGATE verdict
+
+**Formula:** `gradient ≈ [L(w+ε) − L(w−ε)] / (2ε)` compared against `backward()`.
 """))
 
 cells.append(md("""
@@ -322,13 +362,20 @@ for _ in range(40):
     naive_curve.append(train_accumulation_step(model_naive, opt_n, micros, 'naive'))
     correct_curve.append(train_accumulation_step(model_correct, opt_c, micros, 'correct'))
 
-fig, ax = plt.subplots(figsize=(8,4))
-ax.plot(naive_curve, label='Naive average-of-averages')
-ax.plot(correct_curve, label='Correct token-weighted accumulation')
-ax.set_xlabel('Training step'); ax.set_ylabel('Reported loss')
-ax.set_title('Gradient accumulation: naive vs correct'); ax.legend(); ax.grid(alpha=0.3)
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(naive_curve, label='Naive average-of-averages', linewidth=2)
+ax.plot(correct_curve, label='Correct token-weighted accumulation', linewidth=2)
+ax.set_xlabel('Training step (optimizer steps)')
+ax.set_ylabel('Reported cross-entropy loss')
+ax.set_title('Figure 2 — Gradient accumulation: naive vs token-weighted')
+ax.legend(loc='upper right')
+ax.grid(alpha=0.3)
+fig.text(0.5, -0.02,
+    'Micro-batch A = 10 loss tokens, Micro-batch B = 100 loss tokens. '
+    'Naive method weights both equally; correct method weights by token count.',
+    ha='center', fontsize=9, wrap=True)
 fig.tight_layout()
-fig.savefig(PLOTS / 'accumulation_naive_vs_correct.png', dpi=120)
+fig.savefig(PLOTS / 'accumulation_naive_vs_correct.png', dpi=120, bbox_inches='tight')
 plt.show()
 
 diffs = [abs(a-b) for a,b in zip(naive_curve, correct_curve)]
@@ -336,6 +383,19 @@ print('max loss diff:', max(diffs))
 print('mean loss diff:', sum(diffs)/len(diffs))
 print('final loss diff:', abs(naive_curve[-1]-correct_curve[-1]))
 print('*** max difference (highlight):', max(diffs))
+"""))
+
+cells.append(md("""
+### 📊 Caption — Figure 2: Naive vs correct gradient accumulation (Section 3)
+
+**What this shows:** Two identical models trained for 40 steps — one using naive `(loss_A + loss_B)/2`, the other using token-weighted averaging.
+
+**How to read it:**
+- **Blue curve (naive)** — treats a 10-token micro-batch and a 100-token micro-batch as equally important
+- **Orange curve (correct)** — weights each micro-batch by its number of valid tokens
+- **Diverging curves** — visual proof that the bug is real, not just a formula on paper
+
+**Key number:** See printed `max difference` above — this is the largest gap between the two reported losses across training.
 """))
 
 cells.append(md("""
@@ -384,11 +444,25 @@ norms = [s.grad_norm for s in history.steps]
 updates = [s.update_norm for s in history.steps]
 lrs = [s.learning_rate for s in history.steps]
 
-fig, axes = plt.subplots(1, 2, figsize=(10,4))
-axes[0].plot(steps, losses); axes[0].set_title('Loss vs step'); axes[0].set_xlabel('step'); axes[0].set_ylabel('loss')
-axes[1].plot(steps, norms); axes[1].set_title('Grad norm vs step'); axes[1].set_xlabel('step'); axes[1].set_ylabel('grad norm')
-for ax in axes: ax.grid(alpha=0.3)
-fig.tight_layout(); fig.savefig(PLOTS / 'loss_and_grad_norm.png', dpi=120); plt.show()
+fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+axes[0].plot(steps, losses, color='#2563eb', linewidth=1.5)
+axes[0].set_title('Figure 3a — Loss vs training step')
+axes[0].set_xlabel('Training step')
+axes[0].set_ylabel('Cross-entropy loss')
+axes[1].plot(steps, norms, color='#dc2626', linewidth=1.5)
+axes[1].set_title('Figure 3b — Gradient L2 norm vs training step')
+axes[1].set_xlabel('Training step')
+axes[1].set_ylabel('Gradient norm (L2)')
+for ax in axes:
+    ax.grid(alpha=0.3)
+fig.suptitle('Section 4 — Optimization signals over 120 training steps', fontsize=11, y=1.02)
+fig.text(0.5, -0.03,
+    'Left: loss (the scoreboard). Right: grad norm (the steering signal). '
+    'The gradient can change before the loss visibly moves.',
+    ha='center', fontsize=9)
+fig.tight_layout()
+fig.savefig(PLOTS / 'loss_and_grad_norm.png', dpi=120, bbox_inches='tight')
+plt.show()
 
 print('Detection rule:')
 print(f'  grad relative change > {GRAD_BEFORE_LOSS_GRAD_THRESHOLD}')
@@ -418,6 +492,19 @@ else:
 
 print(f'\\nLargest grad norm at step {spike_i}: {norms[spike_i]:.4f} (loss={losses[spike_i]:.4f})')
 print(f'Final update norm: {updates[-1]:.6f}, lr: {lrs[-1]}')
+"""))
+
+cells.append(md("""
+### 📊 Caption — Figure 3: Loss and gradient norm during training (Section 4)
+
+**What this shows:** 120 training steps logging both the loss (left) and total gradient L2 norm (right).
+
+**How to read it:**
+- **Loss** — how wrong the model's next-token predictions are (lower is better)
+- **Grad norm** — how large the combined update signal is before the optimizer step
+- **Detection rule** — grad relative change > 0.15 AND loss relative change < 0.05 (see printed event above)
+
+**Why it matters:** The steering signal (gradient) can shift before the scoreboard (loss) catches up.
 """))
 
 cells.append(md("""
@@ -477,6 +564,19 @@ print('3. Possible: kernel launch / memory bandwidth')
 """))
 
 cells.append(md("""
+### 📊 Caption — Table 2: MFU estimate (Section 5)
+
+**What this shows:** Independent Model FLOPs Utilization (MFU) calculation for the tiny transformer.
+
+**How to read it:**
+- **Estimated FLOPs/step** — analytical count (3× forward for train step)
+- **Achieved FLOPs/s** — `(FLOPs/step × steps) / measured_seconds`
+- **MFU** — `achieved / hardware_peak` (here very low because the model is tiny)
+
+**Important:** MFU is an estimate, not a lab benchmark. 40% is not a realistic target for this educational workload.
+"""))
+
+cells.append(md("""
 > **MFU is an estimate based on the assumptions documented here.**
 
 ## ⚠️ What could fool us?
@@ -518,6 +618,19 @@ for r in rows:
 print('\\n' + explain_why_not_exact(value))
 print('\\n' + format_table(value))
 print('\\n' + format_precision_comparison_table())
+"""))
+
+cells.append(md("""
+### 📊 Caption — Table 3: How 0.1 is stored in FP32, BF16, and FP8 E4M3 (Section 6)
+
+**What this shows:** Bit-level representation of the decimal `0.1` in three floating-point formats.
+
+**How to read each row:**
+- **SIGN | EXPONENT | FRACTION** — the three fields that make up the number
+- **Represented value** — what the bits actually decode to (not exactly 0.1)
+- **Error** — `|represented − 0.1|`
+
+**Why it matters:** Most decimals are repeating fractions in binary. Training format choice (FP32 vs BF16 vs FP8) is an engineering tradeoff between precision, range, memory, and speed.
 """))
 
 cells.append(md("""

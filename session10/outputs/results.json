@@ -134,10 +134,10 @@
     "correct_combined": 3.6003475839441474,
     "combined_direct_check": 3.6003479957580566,
     "combined_matches_formula": true,
-    "max_loss_diff": 0.4622305875474755,
-    "mean_loss_diff": 0.3334047007967125,
-    "final_loss_diff": 0.43450082974000415,
-    "naive_final": 1.7219722867012024,
+    "max_loss_diff": 0.46223080429163854,
+    "mean_loss_diff": 0.3334047183394432,
+    "final_loss_diff": 0.43450079993768176,
+    "naive_final": 1.7219723165035248,
     "correct_final": 2.1564731164412065,
     "plot": "/Users/soham.niyogi/Soham/codebase/erav5/session10/outputs/plots/accumulation_naive_vs_correct.png"
   },
@@ -180,13 +180,13 @@
     "optimization_verdict": "PASS"
   },
   "mfu": {
-    "measured_seconds": 0.16605583298951387,
+    "measured_seconds": 0.18170554196694866,
     "steps": 30,
     "estimated_flops_per_step": 21258240,
-    "achieved_flops_per_sec": 3840558856.130471,
+    "achieved_flops_per_sec": 3509783978.4985924,
     "hardware_peak_flops_per_sec": 3500000000000.0,
-    "mfu": 0.0010973025303229918,
-    "mfu_percent": 0.10973025303229918,
+    "mfu": 0.0010027954224281692,
+    "mfu_percent": 0.10027954224281692,
     "params": 105856,
     "notes": [
       "MFU is an estimate based on the assumptions documented here.",
@@ -200,8 +200,8 @@
       "achieved_matches_formula": true,
       "mfu_matches_formula": true,
       "mfu_in_valid_range": true,
-      "recomputed_achieved": 3840558856.130471,
-      "recomputed_mfu": 0.0010973025303229918,
+      "recomputed_achieved": 3509783978.4985924,
+      "recomputed_mfu": 0.0010027954224281692,
       "pass": true
     }
   },
