@@ -1,0 +1,15 @@
+{
+  "execution_mode": "smoke",
+  "steps": 20,
+  "early_step1_abs_diff": 0.0021622677602000095,
+  "early_effect_measured": true,
+  "difference_stops_mattering_step": "NOT_REACHED_WITHIN_WINDOW",
+  "convergence_step_index": null,
+  "absolute_tolerance": 1e-06,
+  "relative_tolerance": 0.0001,
+  "consecutive_steps_required": 3,
+  "final_abs_diff": 0.019661114257884416,
+  "final_rel_diff": 0.0396521167367419,
+  "decision": "NOT_REACHED",
+  "confidence": "LOW"
+}

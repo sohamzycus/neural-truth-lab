@@ -1,0 +1,3 @@
+schedule_type,loss_at_step_200,loss_at_step_300,best_loss,best_step,final_learning_rate,loss_variance,divergence_flag,configuration_hash,execution_mode,comparison_validation_status
+cosine,1.746608853340149,1.4768749475479126,0.8259684443473816,265,3.000792142427973e-05,0.4449153962743875,False,042a16359c1fbf5c,smoke,VALID
+wsd,1.635306477546692,1.392554759979248,0.7608559131622314,265,3.0009854884492555e-05,0.487326310427365,False,042a16359c1fbf5c,smoke,VALID

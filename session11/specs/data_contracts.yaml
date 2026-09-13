@@ -1,0 +1,141 @@
+# Data contracts for Session 11 artifacts
+
+AdamManualRow:
+  required_fields:
+    step: int
+    gradient: float
+    m_t: float
+    v_t: float
+    m_hat_t: float
+    v_hat_t: float
+    signed_step: float
+    updated_weight: float
+    execution_mode: str
+
+ComparisonValidationResult:
+  required_fields:
+    valid: bool
+    status: str  # VALID | INVALID_EXPERIMENT
+    mismatches: list
+    changed_variable: str
+
+LayerRatioRow:
+  required_fields:
+    layer_name: str
+    parameter_shape: list
+    parameter_norm: float
+    gradient_norm: float
+    update_norm: float
+    update_to_weight_ratio: float
+    learning_rate: float
+    warmup_fraction: float
+    schedule_multiplier: float
+    optimizer_step: int
+    execution_mode: str
+
+ScheduleComparisonRow:
+  required_fields:
+    schedule_type: str
+    loss_at_step_200: float
+    loss_at_step_300: float
+    best_loss: float
+    best_step: int
+    final_learning_rate: float
+    loss_variance: float
+    divergence_flag: bool
+    configuration_hash: str
+    comparison_validation_status: str
+    execution_mode: str
+
+LRSweepRow:
+  required_fields:
+    width: int
+    learning_rate: float
+    seed: int
+    optimizer: str
+    schedule: str
+    warmup_steps: int
+    total_steps: int
+    initial_loss: float
+    final_loss: float
+    smoothed_final_loss: float
+    best_loss: float
+    best_step: int
+    divergence_flag: bool
+    nan_flag: bool
+    throughput: float
+    peak_memory_if_available: float
+    configuration_hash: str
+    execution_mode: str
+  constraints:
+    width_must_not_be: 4096  # measured rows forbidden; see METRIC-EXTRAP-001
+
+Width4096Extrapolation:
+  required_fields:
+    width: 4096
+    label: INFERRED
+    proposed_learning_rate: float
+    extrapolation_method: str
+    measured_supporting_points: list
+    confidence: str  # LOW | MEDIUM | HIGH
+    why_confidence_is_limited: str
+    next_validation_sweep: str
+    scaling: str  # MONOTONIC | NON-MONOTONIC_SCALING
+
+EvidenceRecord:
+  required_fields:
+    evidence_id: str
+    experiment_id: str
+    claim_id: str
+    hypothesis: str
+    controls: dict
+    changed_variable: str
+    seed: int
+    model_config: dict
+    optimizer_config: dict
+    schedule_config: dict
+    data_config: dict
+    runtime_config: dict
+    raw_artifacts: list
+    derived_metrics: dict
+    statistical_summary: dict
+    decision: str
+    confidence: str
+    limitations: list
+    reproducibility_command: str
+    git_commit_if_available: str
+    timestamp: str
+    execution_mode: str
+  derived_metrics_schema:
+    each_value_must_include_label: true
+    allowed_labels:
+      - MEASURED
+      - CALCULATED
+      - INFERRED
+      - NOT_REACHED
+      - UNAVAILABLE
+
+DecisionRecord:
+  required_fields:
+    decision_id: str
+    claim_id: str
+    status: str
+    confidence: str
+    rationale: str
+    thresholds_used: dict
+
+READMEGenerationContract:
+  source_artifacts:
+    - outputs/evidence_ledger.jsonl
+    - outputs/adam_manual_verification.md
+    - outputs/bias_correction.json
+    - outputs/layer_ratio_summary.md
+    - outputs/schedule_decision.md
+    - outputs/lr_sweep_decision.md
+  narrative_only_sections:
+    - thesis
+    - installation
+    - spec architecture description
+    - limitations template
+  numeric_sections_must_quote_artifacts: true
+  must_include_execution_mode_banner: true

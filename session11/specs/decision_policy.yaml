@@ -1,0 +1,109 @@
+# DECISION-* policy — no free-form conclusions
+
+claim_statuses:
+  - UNTESTED
+  - SUPPORTED
+  - WEAKLY_SUPPORTED
+  - INCONCLUSIVE
+  - REFUTED
+  - NOT_REACHED
+  - INVALID_EXPERIMENT
+
+forbidden_conclusion_words:
+  - proven
+  - PROVEN
+  - definitely better
+  - always better
+
+claim_decision_map:
+  CLAIM-001:
+    primary_experiment: EXP-ADAM-001
+    supported_if: DECISION-006
+    refuted_if: DECISION-007
+  CLAIM-002:
+    primary_experiment: EXP-BIAS-001
+    supported_if: "early_difference_measured AND (convergence_step MEASURED OR honestly NOT_REACHED)"
+    not_reached_if: "convergence NOT_REACHED_WITHIN_WINDOW is acceptable; do not upgrade to SUPPORTED"
+    note: "Early effect ≠ convergence; report both separately"
+  CLAIM-003:
+    primary_experiment: EXP-RATIO-001
+    supported_if: "warmup_end_step MEASURED"
+    not_reached_if: "stabilization_step NOT_REACHED"
+    note: "Do not claim stabilization SUPPORTED unless METRIC-STAB-001 fires"
+  CLAIM-004:
+    primary_experiment: EXP-SCHEDULE-001
+    invalid_if: DECISION-001
+    supported_if: "DECISION-005 AND comparison VALID"
+    inconclusive_if: "relative_improvement < schedule_comparison.inconclusive_if_relative_diff_below"
+  CLAIM-005:
+    primary_experiment: EXP-LR-001
+    supported_if: "min LR MEASURED at each width in [256,512,1024]"
+    inferred_only: "width 4096 — confidence LOW unless explicitly measured"
+
+rules:
+  - id: DECISION-001
+    condition: controls_invalid
+    status: INVALID_EXPERIMENT
+    confidence: NONE
+
+  - id: DECISION-002
+    condition: result_missing
+    status: NOT_REACHED
+    confidence: NONE
+
+  - id: DECISION-003
+    condition: repeated_runs_disagree
+    status: INCONCLUSIVE
+    confidence: LOW
+    note: "Requires multi-seed replication — not in v1 scope; do not claim SUPPORTED from single seed"
+
+  - id: DECISION-004
+    condition: improvement_small_relative_to_noise
+    status: WEAKLY_SUPPORTED
+    thresholds:
+      relative_improvement: 0.02
+      loss_variance_multiplier: 2.0
+
+  - id: DECISION-005
+    condition: improvement_replicated_and_controlled
+    status: SUPPORTED
+    thresholds:
+      relative_improvement: 0.05
+      controls_valid: true
+
+  - id: DECISION-006
+    condition: manual_vs_pytorch_agree
+    status: SUPPORTED
+    thresholds:
+      max_abs_diff: 1.0e-6
+    confidence: HIGH
+
+  - id: DECISION-007
+    condition: manual_vs_pytorch_disagree
+    status: REFUTED
+    confidence: HIGH
+
+  - id: DECISION-008
+    condition: default
+    status: INCONCLUSIVE
+    confidence: LOW
+
+schedule_comparison:
+  inconclusive_if_relative_diff_below: 0.01
+  must_not_pick_winner_if_inconclusive: true
+  consider:
+    - loss_at_step_200
+    - loss_at_step_300
+    - stability
+    - loss_volatility
+    - reproducibility
+    - compute_budget
+
+lr_sweep:
+  width_4096:
+    label: INFERRED
+    confidence_levels: [LOW, MEDIUM, HIGH]
+    max_confidence_without_measurement: LOW
+    requires_measured_support: true
+    non_monotonic_label: NON-MONOTONIC_SCALING
+    forbidden_in_measured_csv: true

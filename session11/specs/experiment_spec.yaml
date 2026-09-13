@@ -1,0 +1,230 @@
+# EXP-* experiment definitions — validated before execution
+
+experiments:
+  - id: EXP-ADAM-001
+    claim_id: CLAIM-001
+    title: Reproduce Adam by hand
+    hypothesis: Manual scalar Adam matches torch.optim.Adam step-for-step
+    objective: Verify mathematical and implementation correctness independently
+    controls:
+      - fixed scalar weight
+      - fixed gradient sequence
+      - no weight decay
+      - manual implementation must not call PyTorch for manual values
+    independent_variable: none
+    dependent_variables:
+      - m_t
+      - v_t
+      - m_hat_t
+      - v_hat_t
+      - signed_step
+      - updated_weight
+    protocol: |
+      initial_weight=0.5
+      gradients=[0.1,-0.2,0.05,0.3,-0.1]
+      learning_rate=0.001
+      beta1=0.9
+      beta2=0.999
+      epsilon=1e-8
+      weight_decay=0
+      Compare all fields at every step; manual code path independent of PyTorch.
+    acceptance_criteria:
+      max_abs_diff: 1.0e-6
+      independent_manual_implementation: true
+      evidence_record_required: true
+    expected_artifacts:
+      - outputs/adam_manual_table.csv
+      - outputs/adam_manual_table.json
+      - outputs/adam_manual_vs_pytorch.csv
+      - outputs/adam_manual_verification.md
+      - outputs/figures/adam_manual_verification.png
+    reproducibility_command: python scripts/run_adam_verification.py
+    status: UNTESTED
+
+  - id: EXP-BIAS-001
+    claim_id: CLAIM-002
+    title: Bias correction investigation
+    hypothesis: Bias correction produces measurably different updates at early steps
+    objective: Report when bias-corrected and uncorrected trajectories converge OR NOT_REACHED
+    controls:
+      - identical initial_weight=0.5
+      - identical gradient sequence (fixed list, not sampled)
+      - identical optimizer hyperparameters except bias_correction flag
+      - identical precision (float64 scalar)
+    independent_variable: bias_correction
+    dependent_variables:
+      - parameter_trajectory
+      - absolute_difference
+      - relative_difference
+      - update_magnitude
+      - convergence_step
+    protocol: |
+      Full mode: 20 steps.
+      Smoke mode: 10 steps.
+      Gradients: fixed list in experiment module (not RNG).
+      Convergence (METRIC-CONVERGENCE-001):
+        abs_diff = |w_with(t) - w_without(t)|
+        rel_diff = abs_diff / max(|w_with|, |w_without|, 1e-8)
+        converged at t when both below tolerance for consecutive_steps_required.
+      Early effect: abs_diff at step 1 must be > 0 (MEASURED).
+    acceptance_criteria:
+      steps_full: 20
+      steps_smoke: 10
+      convergence_policy:
+        absolute_tolerance: 1.0e-6
+        relative_tolerance: 1.0e-4
+        consecutive_steps_required: 3
+        not_reached_label: NOT_REACHED_WITHIN_WINDOW
+      must_report_early_difference: true
+      must_not_manufacture_convergence: true
+    expected_artifacts:
+      - outputs/bias_correction.json
+      - outputs/figures/bias_correction.png
+    reproducibility_command: python scripts/run_bias_correction.py --mode full
+    status: UNTESTED
+
+  - id: EXP-RATIO-001
+    claim_id: CLAIM-003
+    title: Update-to-weight evidence
+    hypothesis: Per-layer update/weight ratio shows a detectable warmup transition
+    objective: Log ratio from actual parameter delta; detect warmup_end and stabilization or NOT_REACHED
+    controls:
+      - fixed model architecture (TinyGPT)
+      - fixed data seed policy (seed + step)
+      - AdamW optimizer (fixed hyperparameters)
+      - WSD schedule (warmup_steps documented per mode)
+    independent_variable: training_step
+    dependent_variables:
+      - update_to_weight_ratio
+      - warmup_end_step
+      - ratio_before_warmup_end
+      - ratio_after_warmup_end
+      - stabilization_step
+    protocol: |
+      Full: 60 steps, warmup_steps=10, stable_steps=50.
+      Smoke: 15 steps, warmup_steps=3, stable_steps=5.
+      Every trainable layer, every step:
+        update = param_after - param_before
+        update_norm = ||update||_2
+        parameter_norm = ||param_before||_2
+        ratio = update_norm / max(parameter_norm, 1e-8)
+      Warmup end (METRIC-WARMUP-001): first step where warmup_fraction >= 1.0.
+      Stabilization (METRIC-STAB-001): see metric_definitions.yaml.
+      Distinguish: mathematically detected | visually suspected | NOT_REACHED.
+    acceptance_criteria:
+      ratio_uses_actual_update: true
+      must_log_all_trainable_layers: true
+      must_not_use_gradient_norm_as_update: true
+    expected_artifacts:
+      - outputs/layer_update_ratio.csv
+      - outputs/layer_update_ratio.json
+      - outputs/figures/layer_update_ratio.png
+      - outputs/figures/layer_update_ratio_heatmap.png
+      - outputs/layer_ratio_summary.md
+    reproducibility_command: python scripts/run_layer_ratios.py --mode full
+    status: UNTESTED
+
+  - id: EXP-SCHEDULE-001
+    claim_id: CLAIM-004
+    title: Cosine vs WSD
+    hypothesis: Schedule choice affects loss under identical non-schedule controls
+    objective: Controlled comparison at step 200 (official), step 300 (diagnostic)
+    controls:
+      - same model architecture
+      - same initial weights (shared state dict)
+      - same data corpus and batch seed policy
+      - same seed policy (1337)
+      - same optimizer (AdamW) and hyperparameters
+      - same batch_size=2
+      - same grad_accumulation=1
+      - same dtype=float32
+      - same grad_clip=1.0
+      - same weight_decay=0.0
+      - same total_steps
+    independent_variable: schedule_type
+    dependent_variables:
+      - loss_at_step_200
+      - loss_at_step_300
+      - best_loss
+      - best_step
+      - final_learning_rate
+      - loss_variance
+      - divergence_flag
+      - configuration_hash
+      - comparison_validation_status
+    protocol: |
+      Full: total_steps=300, warmup_steps=30, wsd_stable_steps=100, min_lr_ratio=0.1.
+      Smoke: total_steps=30, warmup_steps=5, wsd_stable_steps=10, min_lr_ratio=0.1.
+
+      WSD (defined):
+        steps [0, warmup): lr_mult = (step+1)/warmup_steps
+        steps [warmup, warmup+stable): lr_mult = 1.0
+        steps [warmup+stable, total): cosine decay from 1.0 to min_lr_ratio
+
+      Cosine (defined):
+        steps [0, warmup): lr_mult = (step+1)/warmup_steps
+        steps [warmup, total): cosine decay from 1.0 to min_lr_ratio
+
+      Only schedule_type may differ. comparison_validator must return VALID before decision.
+      Official checkpoint: step index 199 (step 200). Diagnostic: step index 299 (step 300).
+    acceptance_criteria:
+      comparison_must_pass_validator: true
+      comparison_control_fields: all fields in acceptance_criteria.comparison_controls
+      official_checkpoint_step: 200
+      diagnostic_step: 300
+      reject_conclusion_if_invalid: true
+    expected_artifacts:
+      - outputs/schedule_comparison.csv
+      - outputs/schedule_comparison.json
+      - outputs/figures/cosine_vs_wsd_loss.png
+      - outputs/figures/cosine_vs_wsd_lr.png
+      - outputs/schedule_decision.md
+    reproducibility_command: python scripts/run_schedule_comparison.py --mode full
+    status: UNTESTED
+
+  - id: EXP-LR-001
+    claim_id: CLAIM-005
+    title: Width / learning-rate landscape
+    hypothesis: Optimal stable LR depends on model width (measured widths only)
+    objective: Sweep log-spaced LR; report minima; extrapolate width 4096 as INFERRED only
+    controls:
+      - same optimizer (AdamW, fixed betas/eps)
+      - same schedule (WSD, fixed warmup/stable/decay per mode)
+      - same total_steps per run
+      - same seed (1337)
+      - same corpus and batch policy
+    independent_variable: learning_rate_and_width
+    dependent_variables:
+      - smoothed_final_loss
+      - best_loss
+      - divergence_flag
+      - nan_flag
+      - min_lr_per_width
+      - width_4096_extrapolation
+    protocol: |
+      Full: widths [256,512,1024], lr grid 7 points log-spaced [1e-5, 3e-3].
+      Smoke: widths [256], lr grid 3 points [1e-4, 3e-4, 1e-3].
+      Selection (METRIC-LR-001): min smoothed_final_loss among non-diverged, non-NaN runs.
+      Width 4096: MUST NOT appear in lr_sweep.csv as a measured row.
+      Extrapolation section required in lr_sweep_decision.md with label INFERRED.
+    acceptance_criteria:
+      widths_measured: [256, 512, 1024]
+      width_4096_extrapolation_only: true
+      width_4096_forbidden_labels: [MEASURED, CALCULATED]
+      required_extrapolation_fields:
+        - proposed_learning_rate
+        - extrapolation_method
+        - measured_supporting_points
+        - confidence
+        - why_confidence_is_limited
+        - next_validation_sweep
+    expected_artifacts:
+      - outputs/lr_sweep.csv
+      - outputs/lr_sweep.json
+      - outputs/figures/lr_sweep_width_256.png
+      - outputs/figures/lr_sweep_width_512.png
+      - outputs/figures/lr_sweep_width_1024.png
+      - outputs/figures/lr_sweep_combined.png
+      - outputs/lr_sweep_decision.md
+    reproducibility_command: python scripts/run_lr_sweep.py --mode full
+    status: UNTESTED

@@ -1,0 +1,200 @@
+acceptance:
+  global:
+    spec_validation_before_run: true
+    evidence_provenance_chain_required: true
+    numeric_readme_from_artifacts_only: true
+    execution_mode_homogeneous_in_ledger: true
+    single_command_e2e: "python scripts/run_all.py --mode {smoke|full} && python scripts/audit_submission.py"
+
+  novelty:
+    evidence_ledger_jsonl_required: true
+    evidence_ledger_md_required: true
+    comparison_validator_required_for_comparative_claims: true
+    decision_policy_required: true
+    forbidden_status_values: [proven, PROVEN]
+
+  comparison_controls:
+    # METRIC-CONTROL-001 — all must match except allowed_differing_fields
+    required_match:
+      - model
+      - initialization
+      - data
+      - data_order
+      - seed_policy
+      - optimizer
+      - batch_size
+      - grad_accumulation
+      - dtype
+      - grad_clip
+      - weight_decay
+      - total_steps
+    allowed_diff:
+      - schedule
+
+  execution_modes:
+    smoke:
+      must_differ_from_full: true
+      ledger_single_mode: true
+    full:
+      schedule_total_steps: 300
+      bias_steps: 20
+      lr_widths: [256, 512, 1024]
+      lr_grid_points: 7
+    separation_rules:
+      - every artifact includes execution_mode
+      - readme states single execution_mode from ledger
+      - audit fails if ledger contains mixed modes
+      - overwriting outputs without clearing ledger is forbidden in run_all
+
+  EXP-ADAM-001:
+    max_abs_diff_vs_pytorch: 1.0e-6
+    independent_manual_implementation: true
+    raw_artifacts_must_exist: true
+    evidence_record_claim_id: CLAIM-001
+
+  EXP-BIAS-001:
+    steps_full: 20
+    steps_smoke: 10
+    must_report_convergence_or_not_reached: true
+    must_report_early_step1_difference: true
+    must_not_manufacture_convergence: true
+    evidence_record_claim_id: CLAIM-002
+
+  EXP-RATIO-001:
+    must_log_all_trainable_layers: true
+    ratio_uses_update_not_gradient: true
+    must_report_warmup_end_step: true
+    must_report_stabilization_or_not_reached: true
+    evidence_record_claim_id: CLAIM-003
+
+  EXP-SCHEDULE-001:
+    must_validate_controls: true
+    official_comparison_step: 200
+    diagnostic_step: 300
+    reject_decision_if_invalid: true
+    inconclusive_if_relative_diff_below: 0.01
+    evidence_record_claim_id: CLAIM-004
+
+  EXP-LR-001:
+    widths_measured: [256, 512, 1024]
+    width_4096_extrapolation_only: true
+    width_4096_must_not_appear_in_sweep_csv: true
+    extrapolation_required_fields:
+      - proposed_learning_rate
+      - extrapolation_method
+      - measured_supporting_points
+      - confidence
+      - why_confidence_is_limited
+      - next_validation_sweep
+    evidence_record_claim_id: CLAIM-005
+
+  evidence_ledger:
+    every_claim_has_record: true
+    every_decision_has_claim_id: true
+    no_conclusion_without_evidence: true
+    every_record_has_raw_artifacts: true
+    every_record_has_reproducibility_command: true
+    derived_metrics_must_have_label: true
+
+  readme:
+    generated_by: scripts/generate_readme.py
+    must_run_after_experiments: true
+    numeric_values_from:
+      - outputs/*.json
+      - outputs/*.csv
+      - outputs/*.md
+    forbidden: hardcoded_result_tables
+    must_state_execution_mode: true
+
+  audit:
+    all_tests_pass: true
+    no_fake_readme_numbers: true
+    checks:
+      - specification validation
+      - manual Adam verification
+      - bias correction
+      - update-to-weight logging
+      - cosine vs WSD
+      - learning-rate sweep
+      - evidence ledger
+      - tests
+      - README
+      - reproducibility
+
+required_tests:
+  - id: TEST-ADAM-001
+    covers: EXP-ADAM-001
+    name: test_manual_adam_equations
+  - id: TEST-ADAM-002
+    covers: EXP-ADAM-001
+    name: test_manual_vs_pytorch
+  - id: TEST-BIAS-001
+    covers: EXP-BIAS-001
+    name: test_bias_correction_enabled_differs_early
+  - id: TEST-BIAS-002
+    covers: EXP-BIAS-001
+    name: test_bias_correction_disabled
+  - id: TEST-BIAS-003
+    covers: METRIC-CONVERGENCE-001
+    name: test_convergence_detection
+  - id: TEST-SCHED-001
+    covers: EXP-SCHEDULE-001
+    name: test_cosine_schedule
+  - id: TEST-SCHED-002
+    covers: EXP-SCHEDULE-001
+    name: test_wsd_schedule
+  - id: TEST-SCHED-003
+    covers: METRIC-CONTROL-001
+    name: test_valid_controlled_comparison
+  - id: TEST-SCHED-004
+    covers: METRIC-CONTROL-001
+    name: test_invalid_uncontrolled_comparison
+  - id: TEST-RATIO-001
+    covers: METRIC-RATIO-001
+    name: test_update_to_weight_ratio
+  - id: TEST-RATIO-002
+    covers: METRIC-RATIO-001
+    name: test_zero_parameter_norm_handling
+  - id: TEST-RATIO-003
+    covers: METRIC-WARMUP-001
+    name: test_warmup_end_detection
+  - id: TEST-LEDGER-001
+    covers: evidence_ledger
+    name: test_evidence_ledger_record
+  - id: TEST-DECISION-001
+    covers: DECISION-001
+    name: test_decision_invalid_experiment
+  - id: TEST-DECISION-002
+    covers: DECISION-006
+    name: test_decision_supported_adam
+  - id: TEST-SPEC-001
+    covers: global
+    name: test_specs_validate
+  - id: TEST-SMOKE-001
+    covers: execution_modes.smoke
+    name: test_smoke_experiments_complete
+  # Missing from implementation — required by spec after review:
+  - id: TEST-STAB-001
+    covers: METRIC-STAB-001
+    name: test_ratio_stabilization_detection
+    status: REQUIRED_NOT_IMPLEMENTED
+  - id: TEST-LEDGER-002
+    covers: evidence_ledger
+    name: test_all_claims_have_evidence_after_run_all
+    status: REQUIRED_NOT_IMPLEMENTED
+  - id: TEST-README-001
+    covers: readme
+    name: test_readme_numeric_values_match_artifacts
+    status: REQUIRED_NOT_IMPLEMENTED
+  - id: TEST-MODE-001
+    covers: execution_modes.separation_rules
+    name: test_ledger_execution_mode_homogeneous
+    status: REQUIRED_NOT_IMPLEMENTED
+  - id: TEST-LR-001
+    covers: METRIC-EXTRAP-001
+    name: test_width_4096_not_in_sweep_csv
+    status: REQUIRED_NOT_IMPLEMENTED
+  - id: TEST-SCHED-005
+    covers: EXP-SCHEDULE-001
+    name: test_schedule_comparison_rejects_invalid_controls
+    status: REQUIRED_NOT_IMPLEMENTED

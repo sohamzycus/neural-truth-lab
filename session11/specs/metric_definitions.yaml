@@ -1,0 +1,116 @@
+metrics:
+  - id: METRIC-RATIO-001
+    name: update_to_weight_ratio
+    formula: "update_norm / max(parameter_norm, epsilon)"
+    epsilon: 1.0e-8
+    inputs:
+      update_norm: "L2 norm of (param_after - param_before) — MEASURED"
+      parameter_norm: "L2 norm of param_before — MEASURED"
+    forbidden_substitute: gradient_norm
+    notes: Must use actual parameter delta, not gradient norm
+
+  - id: METRIC-CONVERGENCE-001
+    name: bias_correction_convergence_step
+    applies_to: EXP-BIAS-001
+    formula: |
+      At each step t (0-indexed trajectory index):
+        abs_diff[t] = |w_with_bias(t) - w_without_bias(t)|
+        rel_diff[t] = abs_diff[t] / max(|w_with_bias(t)|, |w_without_bias(t)|, 1e-8)
+      First index t such that for steps t..t+consecutive_steps_required-1:
+        abs_diff < absolute_tolerance AND rel_diff < relative_tolerance
+    defaults:
+      absolute_tolerance: 1.0e-6
+      relative_tolerance: 1.0e-4
+      consecutive_steps_required: 3
+    not_reached_value: NOT_REACHED_WITHIN_WINDOW
+    output_label: MEASURED if found, NOT_REACHED if not
+
+  - id: METRIC-CONVERGENCE-002
+    name: bias_early_difference
+    applies_to: EXP-BIAS-001
+    formula: "abs_diff at step 1"
+    acceptance: "must be > 0 to support CLAIM-002 early effect"
+    output_label: MEASURED
+
+  - id: METRIC-SCHEDULE-001
+    name: loss_at_checkpoint
+    applies_to: EXP-SCHEDULE-001
+    official_step: 200
+    official_index: 199
+    diagnostic_step: 300
+    diagnostic_index: 299
+    output_label: MEASURED
+
+  - id: METRIC-LR-001
+    name: smoothed_final_loss
+    applies_to: EXP-LR-001
+    formula: "mean of last 5 finite loss values in run"
+    selection_rule: |
+      Minimum smoothed_final_loss among runs where:
+        nan_flag == false
+        divergence_flag == false
+      Runtime/memory gates documented in limitations if not enforced numerically.
+    output_label: MEASURED
+
+  - id: METRIC-WARMUP-001
+    name: warmup_end_step
+    applies_to: EXP-RATIO-001
+    formula: "first optimizer_step where warmup_fraction >= 1.0"
+    warmup_fraction: "(step + 1) / warmup_steps capped at 1.0"
+    output_label: MEASURED
+    detection_class: mathematically_detected
+
+  - id: METRIC-STAB-001
+    name: ratio_stabilization_step
+    applies_to: EXP-RATIO-001
+    formula: |
+      Let mean_ratio[t] = mean of update_to_weight_ratio across all layers at step t.
+      Search start = warmup_end_step + 1.
+      Window W = 5 consecutive steps.
+      Tolerance = 0.01 (relative to window mean).
+      First step s >= start where for all t in [s, s+W-1]:
+        |mean_ratio[t] - mean(mean_ratio[s:s+W])| / max(mean(mean_ratio[s:s+W]), 1e-8) < Tolerance
+    defaults:
+      window: 5
+      tolerance: 0.01
+      search_start: "warmup_end_step + 1"
+    not_reached_value: NOT_REACHED
+    output_label: MEASURED if found, NOT_REACHED otherwise
+    detection_class: mathematically_detected
+
+  - id: METRIC-CONTROL-001
+    name: comparison_validation
+    applies_to: EXP-SCHEDULE-001
+    required_matching_fields:
+      - model
+      - initialization
+      - data
+      - data_order
+      - seed_policy
+      - optimizer
+      - batch_size
+      - grad_accumulation
+      - dtype
+      - grad_clip
+      - weight_decay
+      - total_steps
+    allowed_differing_fields:
+      - schedule
+    invalid_status: INVALID_EXPERIMENT
+    valid_status: VALID
+
+  - id: METRIC-EXTRAP-001
+    name: width_4096_lr_extrapolation
+    applies_to: EXP-LR-001
+    required_fields:
+      - proposed_learning_rate
+      - extrapolation_method
+      - measured_supporting_points
+      - confidence
+      - why_confidence_is_limited
+      - next_validation_sweep
+    forbidden_without_measurement:
+      width: 4096
+      labels: [MEASURED]
+    default_confidence_without_4096_run: LOW
+    non_monotonic_label: NON-MONOTONIC_SCALING

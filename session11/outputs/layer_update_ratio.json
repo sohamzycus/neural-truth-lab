@@ -1,0 +1,71 @@
+{
+  "n_layers": 25,
+  "n_rows": 1000,
+  "rows": [
+    {
+      "layer_name": "token_emb.weight",
+      "parameter_shape": "[33, 64]",
+      "parameter_norm": 46.13385009765625,
+      "gradient_norm": 0.04826914519071579,
+      "update_norm": 0.0005880327080376446,
+      "update_to_weight_ratio": 1.2746230951739244e-05,
+      "learning_rate": 2.9999999999999997e-05,
+      "warmup_fraction": 0.1,
+      "schedule_multiplier": 0.1,
+      "optimizer_step": 0,
+      "execution_mode": "smoke"
+    },
+    {
+      "layer_name": "pos_emb.weight",
+      "parameter_shape": "[32, 64]",
+      "parameter_norm": 44.932003021240234,
+      "gradient_norm": 0.04742716997861862,
+      "update_norm": 0.0004157866060268134,
+      "update_to_weight_ratio": 9.253685081216231e-06,
+      "learning_rate": 2.9999999999999997e-05,
+      "warmup_fraction": 0.1,
+      "schedule_multiplier": 0.1,
+      "optimizer_step": 0,
+      "execution_mode": "smoke"
+    },
+    {
+      "layer_name": "blocks.0.ln1.weight",
+      "parameter_shape": "[64]",
+      "parameter_norm": 8.0,
+      "gradient_norm": 0.012228073552250862,
+      "update_norm": 0.0002400280354777351,
+      "update_to_weight_ratio": 3.0003504434716888e-05,
+      "learning_rate": 2.9999999999999997e-05,
+      "warmup_fraction": 0.1,
+      "schedule_multiplier": 0.1,
+      "optimizer_step": 0,
+      "execution_mode": "smoke"
+    },
+    {
+      "layer_name": "blocks.0.ln1.bias",
+      "parameter_shape": "[64]",
+      "parameter_norm": 0.0,
+      "gradient_norm": 0.016810767352581024,
+      "update_norm": 0.00023999594850465655,
+      "update_to_weight_ratio": 23999.594850465655,
+      "learning_rate": 2.9999999999999997e-05,
+      "warmup_fraction": 0.1,
+      "schedule_multiplier": 0.1,
+      "optimizer_step": 0,
+      "execution_mode": "smoke"
+    },
+    {
+      "layer_name": "blocks.0.attn.qkv.weight",
+      "parameter_shape": "[192, 64]",
+      "parameter_norm": 7.9970383644104,
+      "gradient_norm": 0.17068687081336975,
+      "update_norm": 0.0033247838728129864,
+      "update_to_weight_ratio": 0.0004157518973035605,
+      "learning_rate": 2.9999999999999997e-05,
+      "warmup_fraction": 0.1,
+      "schedule_multiplier": 0.1,
+      "optimizer_step": 0,
+      "execution_mode": "smoke"
+    }
+  ]
+}

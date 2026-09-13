@@ -1,0 +1,10 @@
+{
+  "execution_mode": "smoke",
+  "n_layers_logged": 25,
+  "warmup_end_step": 9,
+  "warmup_stops_changing_lr_at_step": 9,
+  "ratio_before_warmup_end": 480.0881302223406,
+  "ratio_after_warmup_end": 0.011682573324488823,
+  "stabilization_step": null,
+  "stabilization_rule": "NOT_REACHED"
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "schedule_type": "cosine",
+    "loss_at_step_200": 1.746608853340149,
+    "loss_at_step_300": 1.4768749475479126,
+    "best_loss": 0.8259684443473816,
+    "best_step": 265,
+    "final_learning_rate": 3.000792142427973e-05,
+    "loss_variance": 0.4449153962743875,
+    "divergence_flag": false,
+    "configuration_hash": "042a16359c1fbf5c",
+    "execution_mode": "smoke",
+    "comparison_validation_status": "VALID"
+  },
+  {
+    "schedule_type": "wsd",
+    "loss_at_step_200": 1.635306477546692,
+    "loss_at_step_300": 1.392554759979248,
+    "best_loss": 0.7608559131622314,
+    "best_step": 265,
+    "final_learning_rate": 3.0009854884492555e-05,
+    "loss_variance": 0.487326310427365,
+    "divergence_flag": false,
+    "configuration_hash": "042a16359c1fbf5c",
+    "execution_mode": "smoke",
+    "comparison_validation_status": "VALID"
+  }
+]

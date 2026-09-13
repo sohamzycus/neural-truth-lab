@@ -11,10 +11,13 @@ Monorepo with **independent Netlify sites** (same GitHub repo):
 | `session8/web/` | Attention Evolution (Session 8) | https://attention-evolution-erav5.netlify.app | **`session8/web`** |
 | **`session5/`** | **Mixture & Curriculum Plan (Session 5 assignment)** | — | **docs only** → [`session5/README.md`](session5/README.md) |
 | **`session10/`** | **Truth Lab (Session 10 assignment)** | — | **notebook** → [`session10/README.md`](session10/README.md) |
+| **`session11/`** | **Optimizer Evidence Lab (Session 11 assignment)** | — | **spec-driven lab** → [`session11/README.md`](session11/README.md) |
 
 **Session 5 submission:** open [`session5/README.md`](session5/README.md) and run `cd session5 && python3 scripts/run_all.py`.
 
 **Session 10 submission:** open [`session10/README.md`](session10/README.md) and run `cd session10 && python3 scripts/run_all.py`.
+
+**Session 11 submission:** open [`session11/README.md`](session11/README.md) and run `cd session11 && python3 scripts/run_all.py --mode full`.
 
 **Important:** There is no root `netlify.toml`. Each site must use its own base directory in the Netlify UI.
 

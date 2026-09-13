@@ -1,0 +1,8 @@
+{
+  "execution_mode": "smoke",
+  "loss_cosine_step_200": 1.746608853340149,
+  "loss_wsd_step_200": 1.635306477546692,
+  "model_to_keep": "WSD",
+  "comparison_validation_status": "VALID",
+  "decision": "SUPPORTED"
+}

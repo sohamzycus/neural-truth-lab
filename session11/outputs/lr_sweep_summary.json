@@ -1,0 +1,23 @@
+{
+  "min_lr_by_width": {
+    "256": 0.0007208434242404265,
+    "512": 0.0007208434242404265,
+    "1024": 0.0007208434242404265
+  },
+  "width_4096": {
+    "width": 4096,
+    "label": "INFERRED",
+    "proposed_learning_rate": 0.0007208434242404274,
+    "extrapolation_method": "log-log linear fit on measured minima",
+    "measured_supporting_points": [
+      256,
+      512,
+      1024
+    ],
+    "confidence": "LOW",
+    "why_confidence_is_limited": "Width 4096 not measured; tiny corpus; single seed; CPU only",
+    "next_validation_sweep": "Run width=4096 at proposed LR \u00b1 0.5 dex",
+    "scaling": "MONOTONIC"
+  },
+  "execution_mode": "smoke"
+}
