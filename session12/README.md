@@ -59,7 +59,7 @@ Parameters **replicated**; **gradients and optimizer sharded**. Backward followe
 
 ## 9. ZeRO-3
 
-Parameters, gradients, and optimizer **sharded** at rest. Forward/backward use **all-gather** for full views; backward uses **reduce-scatter**; parameters re-sync with **all-gather**. Communication increases — trade-off is intentional.
+Parameters, gradients, and optimizer **sharded** at rest. The step **all-gathers parameter shards** when the full parameter view is required, **reduce-scatters** gradients back into shards, and **all-gathers parameter shards** again after the local optimizer update (`zero3.py`). Communication increases — trade-off is intentional.
 
 ## 10. Communication
 
