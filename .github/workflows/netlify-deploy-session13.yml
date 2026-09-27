@@ -1,0 +1,61 @@
+name: Deploy Session 13 Reversibility Lab
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'session13/web/interactive-lab/dist/**'
+      - 'session13/web/interactive-lab/netlify.toml'
+      - '.github/workflows/netlify-deploy-session13.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session13/web/interactive-lab
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify prebuilt dist
+        run: test -f dist/index.html && test -f dist/data/results.json
+
+      - name: Resolve or create Netlify site
+        id: site
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          SITE_NAME="reversibility-lab-erav5"
+          export SITE_NAME
+          SITE_ID=$(curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+            "https://api.netlify.com/api/v1/sites" | python3 -c "
+import json,sys,os
+name=os.environ['SITE_NAME']
+sites=json.load(sys.stdin)
+ids=[s['id'] for s in sites if s.get('name')==name]
+print(ids[0] if ids else '')
+")
+          if [ -z "$SITE_ID" ]; then
+            SITE_ID=$(curl -fsS -X POST -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "{\"name\":\"$SITE_NAME\"}" \
+              "https://api.netlify.com/api/v1/sites" | python3 -c "import json,sys; print(json.load(sys.stdin)['id'])")
+          fi
+          echo "site_id=$SITE_ID" >> "$GITHUB_OUTPUT"
+          echo "site_name=$SITE_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy dist to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_ID: ${{ steps.site.outputs.site_id }}
+        run: |
+          cd dist
+          zip -r ../deploy.zip .
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -H "Content-Type: application/zip" \
+               --data-binary @../deploy.zip \
+               "https://api.netlify.com/api/v1/sites/${SITE_ID}/deploys"
+
+      - name: Live URL
+        run: echo "https://${{ steps.site.outputs.site_name }}.netlify.app"
