@@ -1,0 +1,282 @@
+[
+  {
+    "run_id": "baseline_1M_laptop",
+    "status": "ok",
+    "parameter_count": 19755456,
+    "tokens_trained": 1001472,
+    "batch_size": 8,
+    "sequence_length": 256,
+    "grad_accumulation": 1,
+    "training_time_s": 53.1728031670209,
+    "tokens_per_sec": 18834.290094774202,
+    "final_loss": 0.018041599541902542,
+    "min_loss": 0.0010442249476909637,
+    "peak_memory_bytes": 1168965632,
+    "peak_rss_bytes": 584122368,
+    "peak_mps_bytes": 1168965632,
+    "cpu_user_time_s": 7.530779000000001,
+    "cpu_system_time_s": 1.0683539999999998,
+    "memory_label": "mps_driver_allocated_plus_rss",
+    "device": "mps",
+    "dtype": "float32",
+    "reversible_method": "none",
+    "seed": 1337,
+    "timestamp": "2026-09-27T07:59:50.206125+00:00",
+    "notes": [],
+    "loss_history": [
+      {
+        "tokens": 2048,
+        "loss": 4.636312961578369
+      },
+      {
+        "tokens": 104448,
+        "loss": 0.2924050986766815
+      },
+      {
+        "tokens": 206848,
+        "loss": 0.0331713892519474
+      },
+      {
+        "tokens": 309248,
+        "loss": 0.03679490089416504
+      },
+      {
+        "tokens": 411648,
+        "loss": 0.06427276879549026
+      },
+      {
+        "tokens": 514048,
+        "loss": 0.02041064202785492
+      },
+      {
+        "tokens": 616448,
+        "loss": 0.018317166715860367
+      },
+      {
+        "tokens": 718848,
+        "loss": 0.01005676481872797
+      },
+      {
+        "tokens": 821248,
+        "loss": 0.021576428785920143
+      },
+      {
+        "tokens": 923648,
+        "loss": 0.023121044039726257
+      },
+      {
+        "tokens": 1001472,
+        "loss": 0.018041599541902542
+      }
+    ],
+    "reconstruction_error": null,
+    "oom": false,
+    "nan": false,
+    "peak_memory_gb": 1.08868408203125,
+    "peak_rss_gb": 0.54400634765625,
+    "peak_mps_gb": 1.08868408203125,
+    "cpu_time_s": 8.599133
+  },
+  {
+    "run_id": "euler_1M_laptop",
+    "status": "ok",
+    "parameter_count": 19179552,
+    "tokens_trained": 1001472,
+    "batch_size": 8,
+    "sequence_length": 256,
+    "grad_accumulation": 1,
+    "training_time_s": 151.5409791250131,
+    "tokens_per_sec": 6608.588685268028,
+    "final_loss": 3.261837959289551,
+    "min_loss": 1.9813629388809204,
+    "peak_memory_bytes": 1420705792,
+    "peak_rss_bytes": 747503616,
+    "peak_mps_bytes": 1420705792,
+    "cpu_user_time_s": 54.539438000000004,
+    "cpu_system_time_s": 7.102496,
+    "memory_label": "mps_driver_allocated_plus_rss",
+    "device": "mps",
+    "dtype": "float32",
+    "reversible_method": "euler",
+    "seed": 1337,
+    "timestamp": "2026-09-27T08:02:24.190840+00:00",
+    "notes": [],
+    "loss_history": [
+      {
+        "tokens": 2048,
+        "loss": 4.326974391937256
+      },
+      {
+        "tokens": 104448,
+        "loss": 3.666741371154785
+      },
+      {
+        "tokens": 206848,
+        "loss": 4.316964626312256
+      },
+      {
+        "tokens": 309248,
+        "loss": 3.4404330253601074
+      },
+      {
+        "tokens": 411648,
+        "loss": 3.8673341274261475
+      },
+      {
+        "tokens": 514048,
+        "loss": 3.4398744106292725
+      },
+      {
+        "tokens": 616448,
+        "loss": 3.2249186038970947
+      },
+      {
+        "tokens": 718848,
+        "loss": 3.362828016281128
+      },
+      {
+        "tokens": 821248,
+        "loss": 3.033751964569092
+      },
+      {
+        "tokens": 923648,
+        "loss": 2.6427359580993652
+      },
+      {
+        "tokens": 1001472,
+        "loss": 3.261837959289551
+      }
+    ],
+    "reconstruction_error": 4.76837158203125e-07,
+    "oom": false,
+    "nan": false,
+    "peak_memory_gb": 1.3231353759765625,
+    "peak_rss_gb": 0.6961669921875,
+    "peak_mps_gb": 1.3231353759765625,
+    "cpu_time_s": 61.641934000000006
+  },
+  {
+    "run_id": "midpoint_1M_laptop",
+    "status": "ok",
+    "parameter_count": 19179552,
+    "tokens_trained": 1001472,
+    "batch_size": 8,
+    "sequence_length": 256,
+    "grad_accumulation": 1,
+    "training_time_s": 157.62244204099989,
+    "tokens_per_sec": 6353.61302002606,
+    "final_loss": 36.98936080932617,
+    "min_loss": 0.573040783405304,
+    "peak_memory_bytes": 1420705792,
+    "peak_rss_bytes": 755761152,
+    "peak_mps_bytes": 1420705792,
+    "cpu_user_time_s": 55.805253,
+    "cpu_system_time_s": 7.15939,
+    "memory_label": "mps_driver_allocated_plus_rss",
+    "device": "mps",
+    "dtype": "float32",
+    "reversible_method": "midpoint",
+    "seed": 1337,
+    "timestamp": "2026-09-27T08:05:04.573287+00:00",
+    "notes": [],
+    "loss_history": [
+      {
+        "tokens": 2048,
+        "loss": 4.337019443511963
+      },
+      {
+        "tokens": 104448,
+        "loss": 3.275602102279663
+      },
+      {
+        "tokens": 206848,
+        "loss": 223.26597595214844
+      },
+      {
+        "tokens": 309248,
+        "loss": 237.69911193847656
+      },
+      {
+        "tokens": 411648,
+        "loss": 144.80523681640625
+      },
+      {
+        "tokens": 514048,
+        "loss": 7.526119232177734
+      },
+      {
+        "tokens": 616448,
+        "loss": 96.25247955322266
+      },
+      {
+        "tokens": 718848,
+        "loss": 4.279112815856934
+      },
+      {
+        "tokens": 821248,
+        "loss": 47.99113845825195
+      },
+      {
+        "tokens": 923648,
+        "loss": 13.334504127502441
+      },
+      {
+        "tokens": 1001472,
+        "loss": 36.98936080932617
+      }
+    ],
+    "reconstruction_error": 0.12633636593818665,
+    "oom": false,
+    "nan": false,
+    "peak_memory_gb": 1.3231353759765625,
+    "peak_rss_gb": 0.703857421875,
+    "peak_mps_gb": 1.3231353759765625,
+    "cpu_time_s": 62.964643
+  },
+  {
+    "run_id": "max_batch_64",
+    "status": "ok",
+    "parameter_count": 19179552,
+    "tokens_trained": 1015808,
+    "batch_size": 64,
+    "sequence_length": 256,
+    "grad_accumulation": 1,
+    "training_time_s": 149.02007425000193,
+    "tokens_per_sec": 6816.584980999544,
+    "final_loss": 4.2662272453308105,
+    "min_loss": 3.849320650100708,
+    "peak_memory_bytes": 5297324032,
+    "peak_rss_bytes": 809402368,
+    "peak_mps_bytes": 5297324032,
+    "cpu_user_time_s": 9.462175,
+    "cpu_system_time_s": 2.660992,
+    "memory_label": "mps_driver_allocated_plus_rss",
+    "device": "mps",
+    "dtype": "float32",
+    "reversible_method": "euler",
+    "seed": 1337,
+    "timestamp": "2026-09-27T08:07:51.733817+00:00",
+    "notes": [],
+    "loss_history": [
+      {
+        "tokens": 16384,
+        "loss": 4.109596252441406
+      },
+      {
+        "tokens": 835584,
+        "loss": 4.244178295135498
+      },
+      {
+        "tokens": 1015808,
+        "loss": 4.2662272453308105
+      }
+    ],
+    "reconstruction_error": 4.76837158203125e-07,
+    "oom": false,
+    "nan": false,
+    "peak_memory_gb": 4.9335174560546875,
+    "peak_rss_gb": 0.753814697265625,
+    "peak_mps_gb": 4.9335174560546875,
+    "cpu_time_s": 12.123167
+  }
+]
