@@ -107,6 +107,10 @@ All values below are from `results/results.json` (1M-token runs, MPS):
 - Midpoint training instability on the toy corpus with this rev stack.
 - My initial mental model (“reversible ⇒ lower peak at bs=8”) on MPS.
 
+## Netlify hosting
+
+Git-connected deploy: base directory **`session13/web/interactive-lab`** — details in `web/interactive-lab/NETLIFY.md`.
+
 ## Interactive Lab
 
 ```bash

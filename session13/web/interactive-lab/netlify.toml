@@ -1,0 +1,16 @@
+# ERA V5 Session 13 — Reversibility Lab
+# Netlify UI: Base directory = session13/web/interactive-lab
+# Link repo: sohamzycus/neural-truth-lab (branch main)
+
+[build]
+  # Prebuilt dist in git (session2/4 pattern). Rebuild locally: npm run build
+  command = "test -f dist/index.html && test -f dist/data/results.json && echo 'Prebuilt dist OK'"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
