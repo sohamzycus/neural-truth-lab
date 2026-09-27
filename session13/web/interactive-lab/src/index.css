@@ -1,7 +1,6 @@
-
 @import "tailwindcss";
 :root { color-scheme: dark; }
-body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; background: #0a0e14; color: #e6edf3; }
-.lab-grid { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 24px 24px; }
-.tag-actual { background: #1f6feb33; border: 1px solid #1f6feb; color: #79c0ff; }
-.tag-est { background: #d2992233; border: 1px solid #d29922; color: #f0c674; }
+body { margin: 0; font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; background: #07090d; }
+.lab-shell { background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 28px 28px; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: #7dd3fc; }
