@@ -1,5 +1,8 @@
 # ERA V5 Session 13 — Reversibility Lab
 
+**Submission — live demo:** [https://reversibility-lab.netlify.app](https://reversibility-lab.netlify.app)  
+*~20M LM baseline vs reversible blocks (Euler/Midpoint) on Apple MPS — measured tok/s, loss, and memory, with the finding that batch 8→64 mattered more than lower peak memory at batch 8.*
+
 ## The question
 
 Can I trade compute for memory when training a small language model?

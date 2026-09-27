@@ -9,6 +9,7 @@ Monorepo with **independent Netlify sites** (same GitHub repo):
 | `session3/web/` | India-First 40B Report | https://india-40b-erav5.netlify.app | **`session3/web`** |
 | `session4/web/` | Ataavi Corpus Forge | https://ataavi-corpus-forge.netlify.app | **`session4/web`** |
 | `session8/web/` | Attention Evolution (Session 8) | https://attention-evolution-erav5.netlify.app | **`session8/web`** |
+| `session13/web/interactive-lab/` | Reversibility Training Lab (Session 13) | https://reversibility-lab.netlify.app | **`session13/web/interactive-lab`** |
 | **`session5/`** | **Mixture & Curriculum Plan (Session 5 assignment)** | — | **docs only** → [`session5/README.md`](session5/README.md) |
 | **`session10/`** | **Truth Lab (Session 10 assignment)** | — | **notebook** → [`session10/README.md`](session10/README.md) |
 | **`session11/`** | **Optimizer Evidence Lab (Session 11 assignment)** | — | **spec-driven lab** → [`session11/README.md`](session11/README.md) |
@@ -21,6 +22,8 @@ Monorepo with **independent Netlify sites** (same GitHub repo):
 **Session 11 submission:** open [`session11/README.md`](session11/README.md) and run `cd session11 && python3 scripts/run_all.py --mode full`.
 
 **Session 12 submission:** open [`session12/README.md`](session12/README.md) and run `cd session12 && python3 scripts/run_all.py`.
+
+**Session 13 submission:** **Live lab** — [https://reversibility-lab.netlify.app](https://reversibility-lab.netlify.app) (measured baseline vs reversible ~20M LM on MPS; interactive charts + honest batch-scaling takeaway). Details: [`session13/README.md`](session13/README.md).
 
 **Important:** There is no root `netlify.toml`. Each site must use its own base directory in the Netlify UI.
 
