@@ -14,6 +14,7 @@ Monorepo with **independent Netlify sites** (same GitHub repo):
 | **`session10/`** | **Truth Lab (Session 10 assignment)** | — | **notebook** → [`session10/README.md`](session10/README.md) |
 | **`session11/`** | **Optimizer Evidence Lab (Session 11 assignment)** | — | **spec-driven lab** → [`session11/README.md`](session11/README.md) |
 | **`session12/`** | **32-GPU ZeRO Simulator (Session 12 assignment)** | — | **spec-driven lab** → [`session12/README.md`](session12/README.md) |
+| **`session14/`** | **Dense → MoE (Session 14 assignment)** | — | **spec-driven lab** → [`session14/README.md`](session14/README.md) |
 
 **Session 5 submission:** open [`session5/README.md`](session5/README.md) and run `cd session5 && python3 scripts/run_all.py`.
 
@@ -24,6 +25,8 @@ Monorepo with **independent Netlify sites** (same GitHub repo):
 **Session 12 submission:** open [`session12/README.md`](session12/README.md) and run `cd session12 && python3 scripts/run_all.py`.
 
 **Session 13 submission:** **Live lab** — [https://reversibility-lab.netlify.app](https://reversibility-lab.netlify.app) (measured baseline vs reversible ~20M LM on MPS; interactive charts + honest batch-scaling takeaway). Details: [`session13/README.md`](session13/README.md).
+
+**Session 14 submission:** open [`session14/README.md`](session14/README.md) and run `cd session14 && python3 scripts/run_session14.py` (see README for venv setup).
 
 **Important:** There is no root `netlify.toml`. Each site must use its own base directory in the Netlify UI.
 

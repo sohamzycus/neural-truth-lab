@@ -1,0 +1,10 @@
+{
+  "note": "Pre-strengthening baseline preserved before train/eval split and reporting fixes (first successful full run, seed 1337).",
+  "dense_final_eval_loss": 0.03670800104737282,
+  "moe_at_conversion_eval_loss": 0.07706912606954575,
+  "moe_final_eval_loss": 0.03301725164055824,
+  "moe_loss_delta": -0.0440518744289875,
+  "dense_parameters": 599936,
+  "seed": 1337,
+  "acceptance_moe_final_lt_moe_initial": true
+}

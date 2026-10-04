@@ -1,0 +1,6 @@
+{
+  "dense_output_loss": 1.414794921875,
+  "converted_moe_output_loss": 1.847473382949829,
+  "logits_mse": 17.9955997467041,
+  "loss_delta_moe_minus_dense": 0.4326784610748291
+}

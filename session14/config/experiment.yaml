@@ -1,0 +1,27 @@
+experiment:
+  id: session14-dense-to-moe
+  seed: 1337
+
+model:
+  n_layer: 3
+  n_head: 4
+  n_embd: 128
+  block_size: 32
+  tie_weights: true
+  num_experts: 4
+  top_k: 2
+
+training:
+  batch_size: 8
+  learning_rate: 3.0e-3
+  weight_decay: 0.01
+  grad_clip: 1.0
+  warmup_steps: 20
+  log_every: 10
+  dense_steps: 300
+  moe_steps: 300
+  eval_batch_seed: 4242
+
+runtime:
+  device: auto
+  dtype: float32

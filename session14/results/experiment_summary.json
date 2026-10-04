@@ -1,0 +1,61 @@
+{
+  "dense_checkpoint": "results/checkpoints/dense_final.pt",
+  "conversion_checkpoint": "results/checkpoints/moe_at_conversion.pt",
+  "continuation_source": "trained dense checkpoint",
+  "optimizer_reset_at_conversion": true,
+  "optimizer": "AdamW",
+  "learning_rate": 0.003,
+  "seed": 1337,
+  "num_experts": 4,
+  "top_k": 2,
+  "train_split_size": 25,
+  "eval_split_size": 7,
+  "dense_initial_heldout_loss": 11.540719032287598,
+  "dense_final_heldout_loss": 1.414794921875,
+  "moe_training_initial_eval_loss": 1.847473382949829,
+  "moe_training_final_eval_loss": 0.8815802931785583,
+  "moe_loss_delta": -0.9658930897712708,
+  "dense_training_steps": 300,
+  "moe_training_steps": 300,
+  "conversion_fidelity": {
+    "dense_output_loss": 1.414794921875,
+    "converted_moe_output_loss": 1.847473382949829,
+    "logits_mse": 17.9955997467041,
+    "loss_delta_moe_minus_dense": 0.4326784610748291
+  },
+  "parameter_accounting": {
+    "dense_total_parameters": 599936,
+    "moe_total_parameters": 601472,
+    "dense_ffn_parameters": 393216,
+    "dense_ffn_parameters_theory": 393216,
+    "moe_total_expert_parameters": 393216,
+    "moe_total_expert_parameters_theory": 393216,
+    "router_parameters_total": 1536,
+    "router_parameters_per_layer": 512,
+    "active_expert_parameters_per_token": 196608,
+    "active_router_parameters_per_token": 1536,
+    "active_parameters_per_token_total": 198144
+  },
+  "router_initialization": "Router logits are zero-initialized, producing uniform router probabilities at conversion; deterministic Top-K tie-breaking initially routes traffic to the same experts.",
+  "model": {
+    "vocab_size": 33,
+    "n_layer": 3,
+    "n_head": 4,
+    "n_embd": 128,
+    "block_size": 32,
+    "tie_weights": true,
+    "num_experts": 4,
+    "top_k": 2
+  },
+  "training": {
+    "batch_size": 8,
+    "learning_rate": 0.003,
+    "weight_decay": 0.01,
+    "grad_clip": 1.0,
+    "warmup_steps": 20,
+    "log_every": 10,
+    "dense_steps": 300,
+    "moe_steps": 300,
+    "eval_batch_seed": 4242
+  }
+}

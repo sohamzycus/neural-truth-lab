@@ -1,0 +1,15 @@
+{
+  "utilization_per_expert_final": [
+    0.20442708333333334,
+    0.3522135416666667,
+    0.134765625,
+    0.30859375
+  ],
+  "min_utilization": 0.134765625,
+  "max_utilization": 0.3522135416666667,
+  "mean_utilization": 0.25,
+  "utilization_spread": 0.21744791666666669,
+  "active_expert_count_final": 4,
+  "router_entropy_at_conversion": 1.3862943649291992,
+  "router_entropy_at_final_step": 0.8238534132639567
+}
